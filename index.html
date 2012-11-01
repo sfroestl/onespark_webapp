@@ -23,6 +23,15 @@
         <!-- Template for application -->
         <script type="text/x-handlebars" data-template-name="application">
           <h1>One Spark Test App</h1>
+          <hr/>
+          {{outlet navigation}}
+          {{outlet body}}
+        </script>
+
+        <!-- Template for navigation -->
+        <script type="text/x-handlebars" data-template-name="traversal">
+          <p><a {{action goToProjects href=true}}>Projects</a>
+          <p><a {{action goToUsers href=true}}>Users</a>
           {{outlet}}
         </script>
 
@@ -34,6 +43,12 @@
             <li>{{project.title}}</li>
           {{/each}}
           </ul>
+        </script>
+
+        <!-- Template for /users -->
+        <script type="text/x-handlebars" data-template-name="users">
+          <h2>Users:</h2>
+           
         </script>
 
         <!-- Libraries and Ressources -->

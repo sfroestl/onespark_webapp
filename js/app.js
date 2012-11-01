@@ -2,11 +2,36 @@ App = Ember.Application.create();
 
 // Router //////
 App.Router = Ember.Router.extend({
+  enableLogging:  true,
+  goToUsers:  Ember.Route.transitionTo('users'),
+  goToProjects:  Ember.Route.transitionTo('projects'),
+  //goHome:  Ember.Route.transitionTo('index'),
   root: Ember.Route.extend({
     index: Ember.Route.extend({
       route: '/',
-      connectOutlets: function(router){
-        router.get('applicationController').connectOutlet('allProjects', App.Project.findAll());
+      connectOutlets: function(router, context){
+        router.get('applicationController').connectOutlet('navigation', 'traversal');
+      }
+    }),
+    users:  Ember.Route.extend({
+      route: '/users',
+      enter: function ( router ){
+        console.log("The users sub-state was entered.");
+      },
+      connectOutlets: function(router, context){
+        router.get('applicationController').connectOutlet('body', 'users');
+        router.get('applicationController').connectOutlet('navigation', 'traversal');
+      }
+    }),
+    projects:  Ember.Route.extend({
+      route: '/projects',
+      enter: function ( router ){
+        console.log("The projects sub-state was entered.");
+      },
+      connectOutlets: function(router, context){
+        //router.get('applicationController').connectOutlet('allProjects', App.Project.findAll());
+        router.get('applicationController').connectOutlet('body', 'projects', App.Project.findAll());
+        router.get('applicationController').connectOutlet('navigation', 'traversal');
       }
     })
   })
@@ -17,15 +42,28 @@ App.Router = Ember.Router.extend({
 App.ApplicationView = Ember.View.extend({
   templateName: 'application'
 });
-App.AllProjectsView = Ember.View.extend({
+
+App.ProjectsView = Ember.View.extend({
   templateName: 'projects'
+});
+
+App.UsersView = Ember.View.extend({
+  templateName: 'users'
+});
+
+App.TraversalView = Em.View.extend({
+  templateName:  'traversal'
 });
 
 
 // Controllers //////
 App.ApplicationController = Ember.Controller.extend();
 
-App.AllProjectsController = Ember.ArrayController.extend();
+App.ProjectsController = Ember.ArrayController.extend();
+
+App.UsersController = Ember.ArrayController.extend();
+
+App.TraversalController = Em.ObjectController.extend();
 
 // Models ///////
 App.Project = Ember.Object.extend();
