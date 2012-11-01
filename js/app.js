@@ -71,6 +71,10 @@ App.Project.reopenClass({
   allProjects: [],
   findAll: function(){
     console.log(">> Find all Projects")
+    // reset the projects array
+    this.allProjects = []
+
+    // GET all projects
     $.ajax({
       url: 'http://api.onespark.de/api/v1/projects',
       type: 'GET',
