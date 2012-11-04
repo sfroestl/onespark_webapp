@@ -5,22 +5,48 @@ App.Router = Ember.Router.extend({
   enableLogging:  true,
   goToUsers:  Ember.Route.transitionTo('users'),
   goToProjects:  Ember.Route.transitionTo('projects'),
-  //goHome:  Ember.Route.transitionTo('index'),
+
+  //in progress
+  goLoggedIn: Ember.Route.transitionTo('loggedIn'),
+  goLoggedOut: Ember.Route.transitionTo('loggedOut'),
+
   root: Ember.Route.extend({
     index: Ember.Route.extend({
       route: '/',
+        enter: function(router) {
+            var logged = false;/* get from appropriated source... */
+            Ember.run.next(function() {
+                if (logged) {
+                    router.transitionTo('loggedIn');
+                } else {
+                    router.transitionTo('loggedOut');
+                }
+            });
+        }
+    }),
+
+    loggedIn: Ember.Route.extend({
       connectOutlets: function(router, context){
-        router.get('applicationController').connectOutlet('navigation', 'traversal');
+        router.get('applicationController').connectOutlet('session', 'in');
+        router.get('inController').connectOutlet('navigation', 'traversal');
       }
     }),
+
+    loggedOut: Ember.Route.extend({
+      connectOutlets: function(router, context){
+        router.get('applicationController').connectOutlet('session', 'out');
+        //router.get('applicationController').connectOutlet('navigation', 'traversal');
+      }
+    }),
+
     users:  Ember.Route.extend({
       route: '/users',
       enter: function ( router ){
         console.log("The users sub-state was entered.");
       },
       connectOutlets: function(router, context){
-        router.get('applicationController').connectOutlet('body', 'users');
-        router.get('applicationController').connectOutlet('navigation', 'traversal');
+        router.get('inController').connectOutlet('body', 'users');
+        router.get('inController').connectOutlet('navigation', 'traversal');
       }
     }),
     projects:  Ember.Route.extend({
@@ -30,8 +56,8 @@ App.Router = Ember.Router.extend({
       },
       connectOutlets: function(router, context){
         //router.get('applicationController').connectOutlet('allProjects', App.Project.findAll());
-        router.get('applicationController').connectOutlet('body', 'projects', App.Project.findAll());
-        router.get('applicationController').connectOutlet('navigation', 'traversal');
+        router.get('inController').connectOutlet('body', 'projects', App.Project.findAll());
+        router.get('inController').connectOutlet('navigation', 'traversal');
       }
     })
   })
@@ -55,6 +81,14 @@ App.TraversalView = Em.View.extend({
   templateName:  'traversal'
 });
 
+App.OutView = Ember.View.extend({
+  templateName: 'out'
+});
+
+App.InView = Ember.View.extend({
+  templateName: 'in'
+});
+
 
 // Controllers //////
 App.ApplicationController = Ember.Controller.extend();
@@ -64,6 +98,10 @@ App.ProjectsController = Ember.ArrayController.extend();
 App.UsersController = Ember.ArrayController.extend();
 
 App.TraversalController = Em.ObjectController.extend();
+
+App.OutController = Ember.Controller.extend();
+
+App.InController = Ember.Controller.extend();
 
 // Models ///////
 App.Project = Ember.Object.extend();

@@ -24,19 +24,44 @@
         <script type="text/x-handlebars" data-template-name="application">
           <h1>One Spark Test App</h1>
           <hr/>
+          {{outlet session}}
+        </script>
+
+        <!-- Template for out -->
+        <script type="text/x-handlebars" data-template-name="out">
+          <hr /><br />
+          <h1>Logged Out</h1>
+          <span>Login with "test/test"</span><br /><br />
+          <label>Username: </label>{{view Ember.TextField valueBinding="App.OutController.username"}}<br />
+          <label>Password: </label>{{view Ember.TextField valueBinding="App.OutController.password" type="password"}}<br />
+
+          {{#if App.loginController.isError}}
+            <span class="login-error">Error: Invalid username or password.</span><br />
+          {{/if}}
+            
+          <br /><button {{action goLoggedIn href=true}}>Login</button>
+        </script>
+
+        <!-- Template for in -->
+        <script type="text/x-handlebars" data-template-name="in">
+          <hr /><br />
+          <h1>Logged In</h1>
+          <span>Welcome to Onespark!</span><br /><br />
+          <button {{action goLoggedOut href=true}}>Logout</button>
           {{outlet navigation}}
           {{outlet body}}
         </script>
 
         <!-- Template for navigation -->
         <script type="text/x-handlebars" data-template-name="traversal">
+          <hr /><br />
           <p><a {{action goToProjects href=true}}>Projects</a>
           <p><a {{action goToUsers href=true}}>Users</a>
-          {{outlet}}
         </script>
 
         <!-- Template for /projects -->
         <script type="text/x-handlebars" data-template-name="projects">
+          <hr /><br />
           <h2>Projects:</h2>
           <ul>
           {{#each project in controller}}
@@ -47,6 +72,7 @@
 
         <!-- Template for /users -->
         <script type="text/x-handlebars" data-template-name="users">
+          <hr /><br />
           <h2>Users:</h2>
            
         </script>
