@@ -1,5 +1,12 @@
 App = Ember.Application.create();
 
+// Expect credentials
+App.USERNAME = "test";
+App.PASSWORD = "test";
+
+//Session
+var logged = false;
+
 // Router //////
 App.Router = Ember.Router.extend({
   enableLogging:  true,
@@ -7,14 +14,12 @@ App.Router = Ember.Router.extend({
   goToProjects:  Ember.Route.transitionTo('projects'),
 
   //in progress
-  goLoggedIn: Ember.Route.transitionTo('loggedIn'),
   goLoggedOut: Ember.Route.transitionTo('loggedOut'),
 
   root: Ember.Route.extend({
     index: Ember.Route.extend({
       route: '/',
         enter: function(router) {
-            var logged = false;/* get from appropriated source... */
             Ember.run.next(function() {
                 if (logged) {
                     router.transitionTo('loggedIn');
@@ -35,7 +40,13 @@ App.Router = Ember.Router.extend({
     loggedOut: Ember.Route.extend({
       connectOutlets: function(router, context){
         router.get('applicationController').connectOutlet('session', 'out');
-        //router.get('applicationController').connectOutlet('navigation', 'traversal');
+      },
+      goLoggedIn: function(router, evt) {
+        console.log("Try login");
+        router.get('outController').tryLogin();
+        if(logged) {
+          router.transitionTo('loggedIn');
+        }
       }
     }),
 
@@ -55,7 +66,6 @@ App.Router = Ember.Router.extend({
         console.log("The projects sub-state was entered.");
       },
       connectOutlets: function(router, context){
-        //router.get('applicationController').connectOutlet('allProjects', App.Project.findAll());
         router.get('inController').connectOutlet('body', 'projects', App.Project.findAll());
         router.get('inController').connectOutlet('navigation', 'traversal');
       }
@@ -99,9 +109,36 @@ App.UsersController = Ember.ArrayController.extend();
 
 App.TraversalController = Em.ObjectController.extend();
 
-App.OutController = Ember.Controller.extend();
-
 App.InController = Ember.Controller.extend();
+
+App.OutController = Ember.Controller.extend({
+
+  username: '',
+  password: '',
+  isError: false,
+
+  tryLogin: function() {
+    console.log("InController: launched");
+    var username = this.get("username");
+    console.log("Check:" + username);
+    console.log("Check:" + this.get("password"));
+
+    if(this.get('username') === App.USERNAME &&
+       this.get('password') === App.PASSWORD) {
+      this.set('isError', false);
+      this.set('username', '');
+      this.set('password', '');
+      logged = true;
+      console.log("InController: everything ok");
+    } else {
+      this.set('isError', true);
+      logged = false;
+      console.log("InController: wrong username or password");
+    }
+
+    console.log("InController: loggedIn");
+  }
+});
 
 // Models ///////
 App.Project = Ember.Object.extend();

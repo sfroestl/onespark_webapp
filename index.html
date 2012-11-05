@@ -32,14 +32,14 @@
           <hr /><br />
           <h1>Logged Out</h1>
           <span>Login with "test/test"</span><br /><br />
-          <label>Username: </label>{{view Ember.TextField valueBinding="App.OutController.username"}}<br />
-          <label>Password: </label>{{view Ember.TextField valueBinding="App.OutController.password" type="password"}}<br />
+          <label>Username: </label>{{view Ember.TextField placeholder="your username"  valueBinding="App.router.outController.username"}}<br />
+          <label>Password: </label>{{view Ember.TextField placeholder="your password" valueBinding="App.router.outController.password" type="password"}}<br />
 
-          {{#if App.loginController.isError}}
+          {{#if App.router.outController.isError}}
             <span class="login-error">Error: Invalid username or password.</span><br />
           {{/if}}
             
-          <br /><button {{action goLoggedIn href=true}}>Login</button>
+          <br /><button {{action goLoggedIn}}>Login</button>
         </script>
 
         <!-- Template for in -->
