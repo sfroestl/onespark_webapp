@@ -15,6 +15,8 @@ App.Router = Ember.Router.extend({
 
   //in progress
   goLoggedOut: Ember.Route.transitionTo('loggedOut'),
+  goRegister: Ember.Route.transitionTo('loggedOut'),
+
 
   root: Ember.Route.extend({
     index: Ember.Route.extend({
@@ -110,6 +112,25 @@ App.UsersController = Ember.ArrayController.extend();
 App.TraversalController = Em.ObjectController.extend();
 
 App.InController = Ember.Controller.extend();
+
+App.RegisterController = Ember.Controller.extend();
+
+App.RegisterController.registerInformation = Ember.Object.create({
+
+  username: "",
+  password: "",
+  password_confirmation: "",
+  email: "",
+  valid: function() {
+    return !(
+      this.get('username').length > 0 && 
+      this.get('password') == this.get('password_confirmation') && 
+      this.get('password').length > 0 && 
+      this.get('email').length > 0 
+    );
+  }.property("username","password","password_confirmation","email")
+
+});
 
 App.OutController = Ember.Controller.extend({
 
