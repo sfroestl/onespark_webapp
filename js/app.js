@@ -126,10 +126,10 @@ App.RegisterController.registerInformation = Ember.Object.create({
   email: "",
   valid: function() {
     return !(
-      this.get('username').length > 0 && 
-      this.get('password') == this.get('password_confirmation') && 
-      this.get('password').length > 0 && 
-      this.get('email').length > 0 
+      this.get('username').length > 0 &&
+      this.get('password') == this.get('password_confirmation') &&
+      this.get('password').length > 0 &&
+      this.get('email').length > 0
     );
   }.property("username","password","password_confirmation","email")
 
@@ -206,7 +206,7 @@ App.Project.reopenClass({
 
     // GET all projects
     $.ajax({
-      url: 'http://api.onespark.de/api/v1/projects',
+      url: 'http://api.onespark.de/api/v1/user/projects',
       type: 'GET',
       dataType: 'json',
       accept: 'json',
