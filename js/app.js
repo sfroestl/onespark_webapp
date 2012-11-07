@@ -1,9 +1,7 @@
 App = Ember.Application.create();
 
 // Expect credentials
-sessionsusername = "";
-sessionspassword = "";
-
+sessionToken = '';
 //Session
 var logged = false;
 
@@ -59,6 +57,9 @@ App.Router = Ember.Router.extend({
       route: '/users',
       enter: function ( router ){
         console.log("The users sub-state was entered.");
+        if (!logged) {
+          router.transitionTo('loggedOut');
+        }
       },
       connectOutlets: function(router, context){
         router.get('inController').connectOutlet('body', 'users');
@@ -69,6 +70,9 @@ App.Router = Ember.Router.extend({
       route: '/projects',
       enter: function ( router ){
         console.log("The projects sub-state was entered.");
+        if (!logged) {
+          router.transitionTo('loggedOut');
+        }
       },
       connectOutlets: function(router, context){
         router.get('inController').connectOutlet('body', 'projects', App.Project.findAll());
@@ -147,8 +151,10 @@ App.OutController = Ember.Controller.extend({
     console.log("OutController: Check password: " + this.get("password"));
 
     //base64 encoding
-    var base = this.get("username")+':'+this.get("password");
-    var encoded = $.base64.encode(base);
+    //base = this.get("username")+':'+this.get("password");
+    //encoded = $.base64.encode(base);
+    console.log("Base64: " + encodeBase64(this.get("username"), this.get("password")));
+    var basicAuth = encodeBase64(this.get("username"), this.get("password"));
 
     $.ajax({
       async: false,
@@ -156,7 +162,7 @@ App.OutController = Ember.Controller.extend({
       type: 'GET',
       dataType: 'json',
       accept: 'json',
-      headers: {'Authorization': encoded},
+      headers: {'Authorization': basicAuth},
       context: this,
 
       statusCode: {
@@ -180,6 +186,9 @@ App.OutController = Ember.Controller.extend({
           console.log ("OutController: logged: " +  logged);
         } else {
           logged = true;
+          sessionToken = basicAuth;
+          //$.cookie('sessionToken', basicAuth);
+          //console.log("Cookie: " + $.cookie("sessionToken"));
           this.set('isError', false);
           this.set('username', '');
           this.set('password', '');
@@ -200,9 +209,9 @@ App.Project = Ember.Object.extend();
 App.Project.reopenClass({
   allProjects: [],
   findAll: function(){
-    console.log(">> Find all Projects")
+    console.log(">> Find all Projects");
     // reset the projects array
-    this.allProjects = []
+    this.allProjects = [];
 
     // GET all projects
     $.ajax({
@@ -211,7 +220,8 @@ App.Project.reopenClass({
       dataType: 'json',
       accept: 'json',
       // Basic auth for bob:testbob
-      headers: {'Authorization': 'Basic Ym9iOnRlc3Rib2I='},
+      //headers: {'Authorization': 'Basic Ym9iOnRlc3Rib2I='},
+      headers: {'Authorization': sessionToken},
       context: this,
       success: function(data) {
         console.log ("Response recieved!");
@@ -224,5 +234,11 @@ App.Project.reopenClass({
     return this.allProjects;
   }
 });
+
+function encodeBase64(user, pw) {
+  var base = user + ':' + pw;
+  var encoded = $.base64.encode(base);
+  return encoded;
+}
 
 App.initialize();
