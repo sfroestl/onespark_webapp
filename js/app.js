@@ -1,8 +1,8 @@
 App = Ember.Application.create();
 
 // Expect credentials
-App.USERNAME = "test";
-App.PASSWORD = "test";
+sessionsusername = "";
+sessionspassword = "";
 
 //Session
 var logged = false;
@@ -47,7 +47,10 @@ App.Router = Ember.Router.extend({
         console.log("Try login");
         router.get('outController').tryLogin();
         if(logged) {
+          console.log("Router: Logged: " + logged);
           router.transitionTo('loggedIn');
+        } else {
+          console.log("Router: Logged: " + logged);
         }
       }
     }),
@@ -139,25 +142,56 @@ App.OutController = Ember.Controller.extend({
   isError: false,
 
   tryLogin: function() {
-    console.log("InController: launched");
-    var username = this.get("username");
-    console.log("Check:" + username);
-    console.log("Check:" + this.get("password"));
+    console.log("OutController: Launched");
+    console.log("OutController: Check username: " + this.get("username"));
+    console.log("OutController: Check password: " + this.get("password"));
 
-    if(this.get('username') === App.USERNAME &&
-       this.get('password') === App.PASSWORD) {
-      this.set('isError', false);
-      this.set('username', '');
-      this.set('password', '');
-      logged = true;
-      console.log("InController: everything ok");
-    } else {
-      this.set('isError', true);
-      logged = false;
-      console.log("InController: wrong username or password");
-    }
+    //base64 encoding
+    var base = this.get("username")+':'+this.get("password");
+    var encoded = $.base64.encode(base);
 
-    console.log("InController: loggedIn");
+    $.ajax({
+      async: false,
+      url: 'http://api.onespark.de/api/v1/user',
+      type: 'GET',
+      dataType: 'json',
+      accept: 'json',
+      headers: {'Authorization': encoded},
+      context: this,
+
+      statusCode: {
+        200: function() {
+          console.log ("OutController: Statuscode: 200");
+          //logged = true;
+        },
+        401: function() {
+          console.log ("OutController: Statuscode: 401");
+          //logged = false;
+        },
+        500: function() {
+          console.log ("OutController: Statuscode: 500");
+        }
+      },
+
+      success: function(data) {
+        if(data == null) {
+          logged = false;
+          this.set('isError', true);
+          console.log ("OutController: logged: " +  logged);
+        } else {
+          logged = true;
+          this.set('isError', false);
+          this.set('username', '');
+          this.set('password', '');
+          console.log ("OutController: logged: " +  logged);
+        }
+        console.log ("OutController: Response recieved!");
+        console.log ("OutController: response: " + data);
+        
+        //do data stuff
+
+      }
+    });
   }
 });
 
