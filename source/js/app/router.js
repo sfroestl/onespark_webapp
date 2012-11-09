@@ -1,0 +1,2 @@
+/* router */
+alert('test');
