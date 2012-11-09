@@ -1,5 +1,5 @@
 
-//=require ../libs/ember/ember-1.0.pre.js
+//=require ../libs/ember/ember-1.0.0-pre.2.js
 //=require ./init.js
 //=require_tree ./helpers
 //=require_tree ./model
