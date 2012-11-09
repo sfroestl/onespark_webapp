@@ -4,7 +4,7 @@
 module HandlebarSupport
   class << self
     def registered(app)
-		::Rack::Mime::MIME_TYPES['.hb'] = 'script/x-handlebars'
+		::Rack::Mime::MIME_TYPES['.hb'] = 'text/x-handlebars'
     end
     alias :included :registered
   end
@@ -43,6 +43,8 @@ activate :handlebar_support
 # with_layout :admin do
 #   page "/admin/*"
 # end
+
+
 ignore "/js/app/*"
 ignore "/templates/*"
 
