@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/heygrady/compass-h5bp.git
+  revision: 0deb786d08ddf174b628bd5bc6754304568eea25
+  specs:
+    compass-h5bp (0.1.0)
+      compass
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -103,5 +110,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  compass-h5bp!
   middleman (~> 3.0.6)
   therubyracer
