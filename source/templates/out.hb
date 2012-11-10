@@ -1,4 +1,4 @@
-<hr /><br />
+<br />
 
 <h1>Logged Out</h1>
 <h2>Login with "bob/testbob"</h2>
