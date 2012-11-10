@@ -29,9 +29,12 @@ App.User.reopenClass({
       return false;
     }
   },
+
   // registers the user by validating his token via API
   // sets the sessionUser
+  // returns TRUE or FALSE
   registerSessionUser: function(basicAuth) {
+    var registerBool= false;
     if(!basicAuth) {
       basicAuth = this.getSessionToken();
     }
@@ -47,6 +50,7 @@ App.User.reopenClass({
 
       error: function(jqXHR, textStatus){
         console.log ("--> ERROR");
+        registerBool = false;
       },
 
       success: function(data) {
@@ -56,8 +60,11 @@ App.User.reopenClass({
         console.log ("--> Success: 200");
         console.log("--> SignIn " + this.signedIn);
         console.log("--> User " + data.username + " is logged in.");
+        registerBool = true;
       }
     });
+
+      return registerBool;
   },
 
   // Returns the sessionUser

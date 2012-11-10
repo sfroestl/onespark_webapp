@@ -13,7 +13,7 @@ App.OutController = Ember.Controller.extend({
 
     //usermodel api call
     if(!App.User.registerSessionUser(basicAuth)) {
-      console.log("--> User is not registrated")
+      console.log("--> User is not registered!")
       this.set('isError', true);
     }
   }
