@@ -1,4 +1,5 @@
 App.OutController = Ember.Controller.extend({
+  isError: false,
   username: '',
   password: '',
 
@@ -11,7 +12,9 @@ App.OutController = Ember.Controller.extend({
     var basicAuth = encodeBase64(this.get("username"), this.get("password"));
 
     //usermodel api call
-    App.User.registerSessionUser(basicAuth);
-
+    if(!App.User.registerSessionUser(basicAuth)) {
+      console.log("--> User is not registrated")
+      this.set('isError', true);
+    }
   }
 });

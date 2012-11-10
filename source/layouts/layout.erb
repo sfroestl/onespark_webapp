@@ -7,7 +7,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title><%= data.page.title || "Onespark" %></title>
+    <title><%= data.page.title || "One Spark" %></title>
 
     <%= stylesheet_link_tag "style" %>
     <%= javascript_include_tag  "libs/modernizr-2.6.1.min.js" %>
@@ -17,25 +17,25 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
-        
+
     <%= yield %>
 
-<% sitemap.resources(true).find_all {|x| x.path =~ %r{^templates/}}.each do |template| 
+<% sitemap.resources(true).find_all {|x| x.path =~ %r{^templates/}}.each do |template|
 		name = template.metadata['name'] || File.basename(template.path,template.ext) %>
 <script type="<%=template.mime_type%>" <%unless name=="index"%>data-template-name="<%=name%>"<%end%>>
-<%= template.render %> 
+<%= template.render %>
 </script>
 <% end %>
 
 
     <!--<%= javascript_include_tag  "//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>-->
-    
+
     <!--<script>window.jQuery || document.write('<script src="js/libs/jquery/jquery-1.7.2.js"><\/script>')</script>-->
     <%= javascript_include_tag  "libs/jquery/jquery-1.7.2.js" %>
     <%= javascript_include_tag  "libs/handlebars/handlebars-1.0.0.beta.6" %>
     <!--<%= javascript_include_tag  "libs/ember/ember-1.0.pre.2" %>-->
     <%= javascript_include_tag  "app" %>
-    
+
   </body>
 
 </html>

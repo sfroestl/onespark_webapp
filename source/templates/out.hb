@@ -6,7 +6,7 @@
 <label>Password: </label>{{view Ember.TextField placeholder="your password" valueBinding="App.router.outController.password" type="password"}}<br />
 
 {{#if App.router.outController.isError}}
-<span class="login-error">Error: Invalid username or password.</span><br />
+<span class="error">Error: Invalid username or password.</span><br />
 {{/if}}
 
 <br /><button {{action goLoggedIn}}>Login</button>
