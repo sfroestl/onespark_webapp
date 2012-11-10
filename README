@@ -1,0 +1,11 @@
+This is a refactored Version of the Onespark Webapp found at
+https://github.com/sfroestl/onespark_webapp
+
+Install dependencies:
+bundle install
+
+Launch development server:
+middleman
+
+Build static page:
+middleman build
