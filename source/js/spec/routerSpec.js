@@ -1,16 +1,7 @@
 describe("The router", function(){
 
-    var router = null;
+    var router = App.Router.create();
 
-    App = Ember.Application.create();
-
-    beforeEach(function(){
-        router = App.Router.create();
-    });
-
-    afterEach(function(){
-        router = null;
-    });
 
     it("Should be defined", function(){
         expect(router).toBeDefined();

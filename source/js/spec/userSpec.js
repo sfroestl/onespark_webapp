@@ -2,7 +2,7 @@ describe( "The user model", function () {
 
 	var user = null;
 
-    App = Ember.Application.create();
+    //App = Ember.Application.create();
 
     beforeEach(function(){
         user = App.User.create();
