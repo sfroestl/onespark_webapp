@@ -60,10 +60,11 @@ App.Router = Ember.Router.extend({
     loggedOut: Ember.Route.extend({
       connectOutlets: function(router, context){
         router.get('applicationController').connectOutlet('session', 'out');
+        router.get('outController').connectOutlet('login', 'loginForm');
       },
       goLoggedIn: function(router, evt) {
         console.log("Try login");
-        router.get('outController').login();
+        router.get('loginFormController').login();
         console.log("Session: " + App.User.signedIn);
         if(App.User.signedIn) {
           router.transitionTo('loggedIn');

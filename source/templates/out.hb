@@ -2,15 +2,11 @@
 
 <h1>Logged Out</h1>
 <h2>Login with "bob/testbob"</h2>
-<label>Username: </label>{{view Ember.TextField placeholder="your username"  valueBinding="App.router.outController.username"}}<br />
-<label>Password: </label>{{view Ember.TextField placeholder="your password" valueBinding="App.router.outController.password" type="password"}}<br />
+{{ outlet login }}
 
 {{#if App.router.outController.isError}}
 <span class="error">Error: Invalid username or password.</span><br />
 {{/if}}
-
-<br /><button {{action goLoggedIn}}>Login</button>
-
 
 
 <h2> ...or register a new Onespark-User</h2>
