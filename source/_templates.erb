@@ -1,0 +1,7 @@
+<% sitemap.resources(true).find_all {|x| x.path =~ %r{^templates/}}.each do |template|
+		name = template.metadata['name'] || File.basename(template.path,template.ext) %>
+<!-- Template from <%= template.path %> -->
+<script type="<%=template.mime_type%>" <%unless name=="index"%>data-template-name="<%=name%>"<%end%>>
+<%= template.render %>
+</script>
+<%end%>
