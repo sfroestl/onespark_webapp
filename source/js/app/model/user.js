@@ -1,6 +1,7 @@
 //= require ../../libs/jquery/jquery.cookie.js
 App.User = Ember.Object.extend();
 App.User.reopenClass({
+//App.User = Ember.Object.extend({
   sessionUser: null,
 
   signedIn: false,
