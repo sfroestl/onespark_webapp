@@ -9,10 +9,3 @@ DS.AuthenticatedRESTAdapter = DS.RESTAdapter.extend({
   }
 });
 
-App.store = DS.Store.create({
-  revision: 7,
-  adapter: DS.AuthenticatedRESTAdapter.create({
-	url: 'http://api.onespark.de/api/v1/user',
-    bulkCommit: false
-  })
-});

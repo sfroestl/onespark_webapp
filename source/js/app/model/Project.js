@@ -1,7 +1,8 @@
 App.Project = DS.Model.extend({
     title: DS.attr('string'),
     desc: DS.attr('string'),
-    due_date: DS.attr('date')
+    owner: DS.attr('string')
+//    due_date: DS.attr('date')
 });
 /*
 App.Project = Ember.Object.extend();
