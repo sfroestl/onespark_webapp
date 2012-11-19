@@ -54,6 +54,14 @@ App.Session = Ember.Object.extend({
 	  this.get("state").send("navigateAround");
   },
   
+  // Helper methods to speed things up
+  login: function(user,pw) {
+    this.setProperties({username:user,password:pw});
+  },
+  logout: function() {
+	this.setProperties({username:null,password:null});
+  },
+  
   _autoLogin: function() {
 	  console.log("executing auto-login");
 	  if (this.get("sessionToken"))

@@ -11,20 +11,28 @@ App.Router = Ember.Router.extend({
 	loginController.set("oldPosition",router.get("currentPath"));
 	router.transitionTo("root.login");
   },
-
+  goLoggedOut: function(router, evt) {
+    router.transitionTo('root.index');
+    App.session.logout();
+  },
   root: Ember.Route.extend({
 
 	
 	
     index: Ember.Route.extend({
 		
-	connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('navigation', 'traversal'); },
-      route: '/',
+	  connectOutlets: function(router, context){
+		router.get('applicationController').connectOutlet('navigation', 'traversal');
+		router.get('accountController').set("content",App.session);
+		router.get('applicationController').connectOutlet('footer','account');
+		
+	  },
+        route: '/'
     }),
 	login:  Ember.Route.extend({
 	  route: '/login',
 	  enter: function ( router ){ console.log("The login sub-state was entered."); },
-	  connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('body', 'login'); },
+	  connectOutlets: function(router, context){router.get('applicationController').connectOutlet('body', 'login'); },
 	  goLoggedIn: function(router, context) { router.get('loginController').login(); }
 	}),
 	users:  Ember.Route.extend({
