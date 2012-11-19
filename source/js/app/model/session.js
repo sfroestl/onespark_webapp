@@ -24,7 +24,7 @@ App.Session = Ember.Object.extend({
 		successfulRequest: function(manager) {manager.transitionTo(manager.currentPath);},//Nothing here, since a sucessful request tells nothing about the validity of credentials. Maybe none are needed.
 		navigateAround: function(manager) {manager.transitionTo(manager.currentPath);},//Nothing here, since a sucessful request tells nothing about the validity of credentials. Maybe none are needed.
 		unauthorizedRequest: Ember.State.transitionTo('stranger.unauthorized.rejected'),//Mark credentials as invalid.
-		login: Ember.State.transitionTo('candidate')//untested credentials
+		login: Ember.State.transitionTo('candidate'),//untested credentials
 	}),
 
   sessionStatus: function() {
@@ -49,6 +49,9 @@ App.Session = Ember.Object.extend({
   },
   successfulRequest: function() {
 	  this.get("state").send("successfulRequest");
+  },
+  navigateAround: function() {
+	  this.get("state").send("navigateAround");
   },
   
   _autoLogin: function() {

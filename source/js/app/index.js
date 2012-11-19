@@ -12,3 +12,6 @@ App.initialize();
 App.session.addObserver("needsLogin", function(){
 	if (App.session.get("needsLogin")) App.router.send("unauthorizedRequest");
 });
+App.router.addObserver("currentPath", function(){
+	App.session.navigateAround();
+});
