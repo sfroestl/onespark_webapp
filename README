@@ -9,3 +9,6 @@ middleman
 
 Build static page:
 middleman build
+
+Test URI with jasmine
+http://localhost:4567/SpecRunner.html
