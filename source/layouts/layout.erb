@@ -40,7 +40,8 @@
 		  revision: 7,
 		  adapter: DS.AuthenticatedRESTAdapter.create({
 			url: '<%= data.page.app_url || 'http://api.onespark.de/api/v1'%>',
-			bulkCommit: false
+			bulkCommit: false,
+			session: App.session
 		  })
 		});
 	</script>
