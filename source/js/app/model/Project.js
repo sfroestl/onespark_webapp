@@ -25,5 +25,26 @@ App.Project.reopenClass({
       }
     });
     return this.allProjects;
+  },
+  find:  function(id){
+    console.log(">> Find single Project");
+    this.singleProject = [];
+
+    //GET single Project
+    $.ajax({
+      url: 'http://api.onespark.de/api/v1/user/projects/'+id,
+      type: 'GET',
+      dataType: 'json',
+      accept: 'json',
+      headers: {'Authorization': App.User.getSessionToken()},
+      context: this,
+      success: function(data){
+        console.log ("Response recieved!");
+        console.log ("response: " + JSON.stringify(data, null, 4));
+        this.singleProject = data;
+      }
+
+    });
+    return this.singleProject;
   }
 });
