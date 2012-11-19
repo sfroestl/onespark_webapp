@@ -6,7 +6,11 @@ App.Router = Ember.Router.extend({
 
   //in progress
   // goRegister: Ember.Route.transitionTo('loggedOut'),
-
+  unauthorizedRequest: function(router) {
+	var loginController = router.get('loginController');
+	loginController.set("oldPosition",router.get("currentPath"));
+	router.transitionTo("root.login");
+  },
 
   root: Ember.Route.extend({
 
@@ -17,7 +21,12 @@ App.Router = Ember.Router.extend({
 	connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('navigation', 'traversal'); },
       route: '/',
     }),
-
+	login:  Ember.Route.extend({
+	  route: '/login',
+	  enter: function ( router ){ console.log("The login sub-state was entered."); },
+	  connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('body', 'login'); },
+	  goLoggedIn: function(router, context) { router.get('loginController').login(); }
+	}),
 	users:  Ember.Route.extend({
 	  route: '/users',
 	  enter: function ( router ){ console.log("The users sub-state was entered."); },
