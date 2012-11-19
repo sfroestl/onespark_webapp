@@ -14,11 +14,16 @@ App.Project.reopenClass({
       accept: 'json',
       // Basic auth for bob:testbob
       //headers: {'Authorization': 'Basic Ym9iOnRlc3Rib2I='},
-      headers: {'Authorization': App.User.getSessionToken()},
+      headers: {'Authorization': App.session.get("sessionToken")},
       context: this,
+      error: function(jqXHR, textStatus){
+        console.log ("--> ERROR");
+        App.session.unauthorizedRequest();
+      },
       success: function(data) {
         console.log ("Response recieved!");
         console.log ("response: " + JSON.stringify(data, null, 4));
+        App.session.successfulRequest();
         data.forEach(function(project){
           this.allProjects.addObject(App.Project.create(project))
         }, this)

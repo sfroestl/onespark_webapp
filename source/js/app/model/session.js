@@ -72,7 +72,7 @@ App.Session = Ember.Object.extend({
 		$.removeCookie("sessionToken")
   }.observes("sessionToken"),
 
-  _findUser: function() {
+  /*_findUser: function() {
     this.set("sessionUser",null);
     basicAuth = this.get("sessionToken");
     console.log("reading current user");
@@ -81,7 +81,7 @@ App.Session = Ember.Object.extend({
       type: 'GET',
       dataType: 'json',
       accept: 'json',
-      headers: {'Authorization': basicAuth},
+      headers: {'Authorization': this.get("sessionToken")},
       context: this,
 
       error: function(jqXHR, textStatus){
@@ -97,7 +97,7 @@ App.Session = Ember.Object.extend({
         console.log("--> User " + data.username + " is logged in.");
       }
     });	  
-  }.observes("sessionToken")
+  }.observes("sessionToken")*/
 
 });
 App.session = App.Session.create();
