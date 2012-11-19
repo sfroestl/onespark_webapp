@@ -27,6 +27,7 @@ App.Router = Ember.Router.extend({
         router.get('applicationController').connectOutlet('session', 'in');
         router.get('inController').connectOutlet('navigation', 'traversal');
         router.get('inController').set('sessionUser', App.User.getSessionUser());
+        router.get('inController').connectOutlet('footer','account');
       },
       goLoggedOut: function(router, evt) {
         console.log("Try logout");
@@ -43,6 +44,7 @@ App.Router = Ember.Router.extend({
           connectOutlets: function(router, context){
           router.get('inController').connectOutlet('body', 'users');
           router.get('inController').connectOutlet('navigation', 'traversal');
+          router.get('inController').connectOutlet('footer','account');
          }
         }),
         projects:  Ember.Route.extend({
@@ -56,6 +58,7 @@ App.Router = Ember.Router.extend({
             connectOutlets: function(router, context){
               router.get('inController').connectOutlet('body', 'projects', App.Project.findAll());
               router.get('inController').connectOutlet('navigation', 'traversal');
+              router.get('inController').connectOutlet('footer','account');
             }
           }),
           singleproject: Ember.Route.extend({
@@ -74,6 +77,7 @@ App.Router = Ember.Router.extend({
             connectOutlets:  function(router, aProject){
               router.get('inController').connectOutlet('body', 'project', aProject);
               router.get('inController').connectOutlet('navigation', 'traversal');
+              router.get('inController').connectOutlet('footer','account');
             }
           })
         })

@@ -2,3 +2,4 @@
 <button {{action goLoggedOut}}>Logout</button>
 {{outlet navigation}}
 {{outlet body}}
+{{outlet footer}}
