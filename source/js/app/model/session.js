@@ -43,10 +43,6 @@ App.Session = Ember.Object.extend({
 	  return encodeBase64(this.get("username"), this.get("password"));
   }.property('username','password'),
   
-  contructor: function() {
-	  //this.set("sessionToken",$.cookie("sessionToken"));
-	  //TODO: load from cookie
-  },
   
   unauthorizedRequest: function() {
 	  this.get("state").send("unauthorizedRequest");
@@ -104,3 +100,4 @@ App.Session = Ember.Object.extend({
 
 });
 App.session = App.Session.create();
+App.session.setProperties(decodeBase64Credentials($.cookie("sessionToken")));
