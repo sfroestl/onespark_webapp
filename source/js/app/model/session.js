@@ -25,6 +25,7 @@ App.Session = Ember.Object.extend({
 		navigateAround: function(manager) {manager.transitionTo(manager.currentPath);},//Nothing here, since a sucessful request tells nothing about the validity of credentials. Maybe none are needed.
 		unauthorizedRequest: Ember.State.transitionTo('stranger.unauthorized.rejected'),//Mark credentials as invalid.
 		login: Ember.State.transitionTo('candidate'),//untested credentials
+		logout: Ember.State.transitionTo('stranger.guest')
 	}),
 
   sessionStatus: function() {
@@ -66,8 +67,8 @@ App.Session = Ember.Object.extend({
 	  console.log("executing auto-login");
 	  if (this.get("sessionToken"))
 		this.get("state").send("login");
-	/*  else
-	    this.get("state").send("logout")*/ //TODO
+	  else
+	    this.get("state").send("logout")
   }.observes("sessionToken"),
   
   // creates a cookie with sessionToken
@@ -81,6 +82,7 @@ App.Session = Ember.Object.extend({
 
   _findUser: function() {
 	ses = this;
+	if (!ses.get("sessionToken")) return; //don't request when not logged in
     Ember.run.next( function() {
 		ses.set("sessionUser",null);
 		basicAuth = ses.get("sessionToken");
