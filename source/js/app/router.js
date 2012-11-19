@@ -29,7 +29,7 @@ App.Router = Ember.Router.extend({
 	  index: Ember.Route.extend({
 		route: '/',
 		enter: function ( router ){ console.log("The projects sub-state was entered."); },
-		connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('body', 'projects', App.Project.findAll()); }
+		connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('navigation', 'traversal'); router.get('applicationController').connectOutlet('body', 'projects', App.Project.findAll()); }
 	  }),
 	  singleproject: Ember.Route.extend({
 		route: '/projects/:id',

@@ -19,6 +19,7 @@ App.Project.reopenClass({
       error: function(jqXHR, textStatus){
         console.log ("--> ERROR");
         App.session.unauthorizedRequest();
+        
       },
       success: function(data) {
         console.log ("Response recieved!");
@@ -32,6 +33,7 @@ App.Project.reopenClass({
     return this.allProjects;
   },
   find:  function(id){
+    
     console.log(">> Find single Project");
     this.singleProject = [];
 

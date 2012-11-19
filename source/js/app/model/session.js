@@ -72,32 +72,35 @@ App.Session = Ember.Object.extend({
 		$.removeCookie("sessionToken")
   }.observes("sessionToken"),
 
-  /*_findUser: function() {
-    this.set("sessionUser",null);
-    basicAuth = this.get("sessionToken");
-    console.log("reading current user");
-    $.ajax({
-      url: 'http://api.onespark.de/api/v1/user',
-      type: 'GET',
-      dataType: 'json',
-      accept: 'json',
-      headers: {'Authorization': this.get("sessionToken")},
-      context: this,
+  _findUser: function() {
+	ses = this;
+    Ember.run.next( function() {
+		ses.set("sessionUser",null);
+		basicAuth = ses.get("sessionToken");
+		console.log("reading current user");
+		$.ajax({
+		  url: 'http://api.onespark.de/api/v1/user',
+		  type: 'GET',
+		  dataType: 'json',
+		  accept: 'json',
+		  headers: {'Authorization': ses.get("sessionToken")},
+		  context: ses,
 
-      error: function(jqXHR, textStatus){
-        console.log ("--> ERROR");
-        this.unauthorizedRequest();
-      },
+		  error: function(jqXHR, textStatus){
+			console.log ("--> ERROR");
+			this.unauthorizedRequest();
+		  },
 
-      success: function(data) {
-        // store session
-        this.set("sessionUser",data);
-        this.successfulRequest();
-        console.log ("--> Success: 200");
-        console.log("--> User " + data.username + " is logged in.");
-      }
-    });	  
-  }.observes("sessionToken")*/
+		  success: function(data) {
+			// store session
+			this.set("sessionUser",data);
+			this.successfulRequest();
+			console.log ("--> Success: 200");
+			console.log("--> User " + data.username + " is logged in.");
+		  }
+		});
+	});
+  }.observes("sessionToken")
 
 });
 App.session = App.Session.create();
