@@ -15,3 +15,6 @@
 
 #Geany Project Files
 *.geany
+
+#DS-Store
+*.DS_Store
