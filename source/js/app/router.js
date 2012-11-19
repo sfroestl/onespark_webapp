@@ -46,13 +46,13 @@ App.Router = Ember.Router.extend({
 	  index: Ember.Route.extend({
 		route: '/',
 		enter: function ( router ){ console.log("The projects sub-state was entered."); },
-		connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('navigation', 'traversal'); router.get('applicationController').connectOutlet('body', 'projects', App.Project.findAll()); }
+		connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('navigation', 'traversal'); router.get('applicationController').connectOutlet('body', 'projects', App.store.findAll(App.Project)); }
 	  }),
 	  singleproject: Ember.Route.extend({
 		route: '/projects/:id',
 		enter: function(router){ console.log("The singleproject sub-state was entered."); },
 		deserialize:  function(router, context){
-		  return App.Project.find( context.id );
+		  return App.store.find(App.Project, context.id );
 		},
 		serialize:  function(router, context){
 		  return {

@@ -62,7 +62,14 @@ App.Session = Ember.Object.extend({
   logout: function() {
 	this.setProperties({username:null,password:null});
   },
-  
+
+  insertAuthenticationInRequest: function(data) {
+	token = this.get("sessionToken");
+	if (!token) return data;
+	data.headers || (data.headers = {});
+    data.headers['Authorization'] = token;
+    return data;
+  },  
   _autoLogin: function() {
 	  console.log("executing auto-login");
 	  if (this.get("sessionToken"))
@@ -79,6 +86,9 @@ App.Session = Ember.Object.extend({
 	else
 		$.removeCookie("sessionToken")
   }.observes("sessionToken"),
+
+
+
 
   _findUser: function() {
 	ses = this;
