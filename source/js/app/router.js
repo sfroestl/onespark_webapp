@@ -13,7 +13,7 @@ App.Router = Ember.Router.extend({
 	
 	
     index: Ember.Route.extend({
-	  	enter: function(router) { router.set('applicationController.content', App.session); },
+		
 	connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('navigation', 'traversal'); },
       route: '/',
     }),
