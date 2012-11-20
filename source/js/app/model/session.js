@@ -6,8 +6,8 @@ App.Session = Ember.Object.extend({
     SessionUserRaw: null,
 
   signedIn: function() {
-	  return !!this.get("sessionUser");
-  }.property('sessionUser'),
+	  return !!this.get("sessionUser.isLoaded");
+  }.property('sessionUser.isLoaded'),
 
   sessionToken: function() {
 	  return encodeBase64(this.get("username"), this.get("password"));
