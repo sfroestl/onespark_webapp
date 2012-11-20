@@ -1,0 +1,1 @@
+  <h1><a {{action goToProjectNavi href=true}}>{{title}}</a></h1>
