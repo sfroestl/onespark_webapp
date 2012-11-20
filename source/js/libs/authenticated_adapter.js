@@ -4,7 +4,11 @@ DS.AuthenticatedRESTAdapter = DS.Adapter.extend({
   bulkCommit: false,
 
   session: null,
+  ajaxRequestCache: [],
+  
   serializer: DS.RESTSerializer,
+
+
 
   shouldCommit: function(record) {
     if (record.isCommittingBecause('attribute') || record.isCommittingBecause('belongsTo')) {
@@ -285,11 +289,20 @@ DS.AuthenticatedRESTAdapter = DS.Adapter.extend({
     hash.dataType = 'json';
     hash.contentType = 'application/json; charset=utf-8';
     hash.context = this;
-
+	var handlingSession = this.get("session");
     if (hash.data && type !== 'GET') {
       hash.data = JSON.stringify(hash.data);
     }
-
+    
+    if (handlingSession) handlingSession.insertAuthenticationInRequest(hash);
+    hash.error = function(jqXHR, textStatus, errorThrown) {
+		console.log(jqXHR);
+		if (textStatus=="error" && handlingSession)  {//Seems like an authentication Problem
+			handlingSession.unauthorizedRequest();
+			this.get("ajaxRequestCache").addObject(hash);
+		}
+	};
+	
     jQuery.ajax(hash);
   },
 
