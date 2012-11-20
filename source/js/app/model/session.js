@@ -59,7 +59,7 @@ App.Session = Ember.Object.extend({
 
 		  error: function(jqXHR, textStatus){
 			console.log ("--> ERROR");
-			this.unauthorizedRequest();
+			App.router.send("unauthorizedRequest");
 		  },
 
 		  success: function(data) {
@@ -67,8 +67,7 @@ App.Session = Ember.Object.extend({
 			this.set("sessionUserRaw",data);
 			var id = data.auth_user.id;
 			console.log("id"+id);
-			//this.set("sessionUser",App.store.find(App.User,id));
-			this.set("sessionUser",Ember.Object.create({username:"wurst"}));
+			this.set("sessionUser",App.store.find(App.User,id));
 			App.router.send("loginComplete");
 			console.log ("--> Success: 200");
 			console.log("--> User " + data.username + " is logged in.");

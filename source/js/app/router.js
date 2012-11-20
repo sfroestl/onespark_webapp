@@ -27,7 +27,7 @@ App.Router = Ember.Router.extend({
 		route: '/',
 		enter: function ( router ){ console.log("The projects sub-state was entered."); 
 		Ember.run.next(function() {
-                if (App.User.isSignedIn()) {
+                if (App.session.get('signedIn')) {
                     router.transitionTo('loggedIn');
                 } else {
                     router.transitionTo('loggedOut.login');
@@ -100,10 +100,10 @@ App.Router = Ember.Router.extend({
 		loggingIn:  Ember.Route.extend({
 		  enter: function ( router ){ console.log("The logginIn-state was entered."); },
 		  connectOutlets: function(router, context){router.get('applicationController').connectOutlet('body', 'loggingIn');
-		  router.get('accountController').set("content",App.session);},
-		  loginComplete: Ember.Route.transitionTo('root.loggedIn'),
-		  unauthorizedRequest: Ember.Route.transitionTo('login')
-		})
+		  router.get('accountController').set("content",App.session);}
+		}),
+		loginComplete: Ember.Route.transitionTo('root.loggedIn'),
+		unauthorizedRequest: Ember.Route.transitionTo('login')
 	 })
 // =======
 // 			//router.get('applicationController').connectOutlet('body2', 'empty'),
