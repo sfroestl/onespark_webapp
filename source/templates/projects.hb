@@ -1,5 +1,4 @@
-<hr /><br />
-<h2>Projects:</h2>
+<h2>Owned Projects:</h2>
 	<ul>
 		{{#each project in controller}}
 			{{#with project}}
@@ -9,3 +8,5 @@
      		{{/with}}
 		{{/each}}
 	</ul>
+
+	<h2>Contributed Projects:</h2>
