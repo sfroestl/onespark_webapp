@@ -2,7 +2,7 @@
 App.Router = Ember.Router.extend({
   enableLogging:  true,
   goToUsers:  Ember.Route.transitionTo('users'),
-  goToProjects:  Ember.Route.transitionTo('projects.index'),
+  goToProjects:  Ember.Route.transitionTo('root.index'),
 
   //in progress
   // goRegister: Ember.Route.transitionTo('loggedOut'),
@@ -17,36 +17,16 @@ App.Router = Ember.Router.extend({
   },
   root: Ember.Route.extend({
 
-	
-	
-    index: Ember.Route.extend({
-		
-	  connectOutlets: function(router, context){
-		router.get('applicationController').connectOutlet('navigation', 'traversal');
-		router.get('accountController').set("content",App.session);
-		router.get('applicationController').connectOutlet('footer','account');
-		
-	  },
-        route: '/'
-    }),
-	login:  Ember.Route.extend({
-	  route: '/login',
-	  enter: function ( router ){ console.log("The login sub-state was entered."); },
-	  connectOutlets: function(router, context){router.get('applicationController').connectOutlet('body', 'login'); },
-	  goLoggedIn: function(router, context) { router.get('loginController').login(); }
-	}),
-	users:  Ember.Route.extend({
-	  route: '/users',
-	  enter: function ( router ){ console.log("The users sub-state was entered."); },
-	  connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('body', 'users'); }
-	}),
-	projects:  Ember.Route.extend({
-	  showProject:  Ember.Route.transitionTo('projects.singleproject'),
-	  route: '/projects',
-	  index: Ember.Route.extend({
+  	showProject:  Ember.Route.transitionTo('root.singleproject'),
+
+  	index: Ember.Route.extend({
 		route: '/',
 		enter: function ( router ){ console.log("The projects sub-state was entered."); },
-		connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('navigation', 'traversal'); router.get('applicationController').connectOutlet('body', 'projects', App.store.findAll(App.Project)); }
+		connectOutlets: function(router, context){ 
+			router.get('applicationController').connectOutlet('body', 'projects', App.store.findAll(App.Project)); 
+			router.get('accountController').set("content",App.session);
+			router.get('applicationController').connectOutlet('footer','account');
+		}
 	  }),
 	  singleproject: Ember.Route.extend({
 		route: '/projects/:id',
@@ -62,8 +42,17 @@ App.Router = Ember.Router.extend({
 		connectOutlets:  function(router, aProject){
 		  router.get('applicationController').connectOutlet('body', 'project', aProject);
 		}
-	  })
+	  }),
+	login:  Ember.Route.extend({
+	  route: '/login',
+	  enter: function ( router ){ console.log("The login sub-state was entered."); },
+	  connectOutlets: function(router, context){router.get('applicationController').connectOutlet('body', 'login'); },
+	  goLoggedIn: function(router, context) { router.get('loginController').login(); }
+	}),
+	users:  Ember.Route.extend({
+	  route: '/users',
+	  enter: function ( router ){ console.log("The users sub-state was entered."); },
+	  connectOutlets: function(router, context){ router.get('applicationController').connectOutlet('body', 'users'); }
 	})
-        
   })
 });
