@@ -1,0 +1,1 @@
+App.ProjecttitleController = Em.ObjectController.extend();

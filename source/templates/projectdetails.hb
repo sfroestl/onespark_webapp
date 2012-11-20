@@ -1,4 +1,3 @@
-  <h1>{{title}}</h1>
   <table border="0">
   <tr><td>ID:</td><td>{{id}}</td></tr>
   <tr><td>Description:</td><td>{{desc}}</td></tr>
