@@ -298,7 +298,7 @@ DS.AuthenticatedRESTAdapter = DS.Adapter.extend({
     hash.error = function(jqXHR, textStatus, errorThrown) {
 		console.log(jqXHR);
 		if (textStatus=="error" && handlingSession)  {//Seems like an authentication Problem
-			handlingSession.unauthorizedRequest();
+			App.router.send("unauthorizedRequest");
 			this.get("ajaxRequestCache").addObject(hash);
 		}
 	};
