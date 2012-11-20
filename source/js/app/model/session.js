@@ -1,6 +1,9 @@
 //= require ../../libs/jquery/jquery.cookie.js
 App.Session = Ember.Object.extend({
-	
+	username: null,
+	password: null,
+	sessionUser: null,
+    SessionUserRaw: null,
 	state: Ember.StateManager.create({
 		initialState: 'stranger.guest',
 		enableLogging: true, //debug
@@ -10,9 +13,14 @@ App.Session = Ember.Object.extend({
 				}),        
 				unauthorized: Ember.State.create({ //credentials were required, but ..
 					unknown: Ember.State.create(),        //user hasn't provided them yet
-					rejected: Ember.State.create()       //the given were rejected
+					rejected: Ember.State.create(),       //the given were rejected
+					forced: Ember.State.create({		//the login is enforced
+						logout: Ember.State.transitionTo('stranger.unauthorized.forced'),
+						navigateAround: Ember.State.transitionTo('stranger.unauthorized.forced')
+					})       
 				}),
-				navigateAround: Ember.State.transitionTo('guest')
+				navigateAround: Ember.State.transitionTo('guest'),
+				enforceLogin: Ember.State.transitionTo('stranger.unauthorized.forced')
 		}),
 		candidate: Ember.State.create({			//we got credentials, but haven't used them yet
 			successfulRequest: Ember.State.transitionTo('member') // Credentials seem to word
@@ -25,7 +33,8 @@ App.Session = Ember.Object.extend({
 		navigateAround: function(manager) {manager.transitionTo(manager.currentPath);},//Nothing here, since a sucessful request tells nothing about the validity of credentials. Maybe none are needed.
 		unauthorizedRequest: Ember.State.transitionTo('stranger.unauthorized.rejected'),//Mark credentials as invalid.
 		login: Ember.State.transitionTo('candidate'),//untested credentials
-		logout: Ember.State.transitionTo('stranger.guest')
+		logout: Ember.State.transitionTo('stranger.guest'),
+		enforceLogin: function(manager) {manager.transitionTo(manager.currentPath);} //keep path if already logged in
 	}),
 
   sessionStatus: function() {
@@ -35,11 +44,9 @@ App.Session = Ember.Object.extend({
 	  return !this.get("sessionStatus").startsWith('stranger.');
   }.property('sessionStatus'),
   needsLogin: function() {
+	  console.log("needs login is now"+this.get("sessionStatus").startsWith('stranger.unauthorized.'));
 	  return this.get("sessionStatus").startsWith('stranger.unauthorized.');
   }.property('sessionStatus'),
-  username: null,
-  password: null,
-  sessionUser: null,
   sessionToken: function() {
 	  return encodeBase64(this.get("username"), this.get("password"));
   }.property('username','password'),
@@ -62,7 +69,10 @@ App.Session = Ember.Object.extend({
   logout: function() {
 	this.setProperties({username:null,password:null});
   },
-
+  enforceLogin: function() {
+	this.get("state").send("enforceLogin");
+  },
+  
   insertAuthenticationInRequest: function(data) {
 	token = this.get("sessionToken");
 	if (!token) return data;
@@ -112,7 +122,10 @@ App.Session = Ember.Object.extend({
 
 		  success: function(data) {
 			// store session
-			this.set("sessionUser",data);
+			this.set("sessionUserRaw",data);
+			var id = data.auth_user.id;
+			console.log("id"+id);
+			this.set("sessionUser",App.store.find(App.User,id));
 			this.successfulRequest();
 			console.log ("--> Success: 200");
 			console.log("--> User " + data.username + " is logged in.");
