@@ -1,8 +1,8 @@
 // Router //////
 App.Router = Ember.Router.extend({
   enableLogging:  true,
-  goToUsers:  Ember.Route.transitionTo('users'),
   goToProjects:  Ember.Route.transitionTo('root.index'),
+  goToProfile: Ember.Route.transitionTo('user.profile'),
 
   
   //in progress
@@ -93,8 +93,32 @@ App.Router = Ember.Router.extend({
 
 		 })*/
 		// 		  })
-	  }),
+	  	}),
+
+		//Userview, user kapselt alle unteren Userviews (Profile, Edit, ...)
+		user:  Ember.Route.extend({
+			route: '/user',
+			enter: function ( router ){
+	            	console.log("The user state was entered.");
+	        },
+	        connectOutlets: function(router, context){
+	            router.get('applicationController').connectOutlet('body', 'user');
+	            router.get('userController').connectOutlet('navigation', 'traversal');
+	        },
+	        //Profilansicht
+		   	profile:  Ember.Route.extend({
+	          	route: '/profile',
+	          	enter: function ( router ){
+	            	console.log("The profile sub-state was entered.");
+	          	},
+	          	connectOutlets: function(router, context){
+	            	router.get('userController').connectOutlet('userbody', 'profile');      
+	          	}
+	        })
+	   	})
 	}),	  
+
+	//ausgeloggter Status
 	loggedOut:  Ember.Route.extend({
 		login:  Ember.Route.extend({
 		  route: '/login',
@@ -106,6 +130,7 @@ App.Router = Ember.Router.extend({
 		},
 		  goLoggedIn: function(router, context) { router.get('loginController').login(); router.transitionTo('loggingIn');}
 		}),
+		//pending Status, während eingeloggt wird und der ajax Aufruf die Antwort zurückliefert
 		loggingIn:  Ember.Route.extend({
 		  enter: function ( router ){ console.log("The logginIn-state was entered."); },
 		  connectOutlets: function(router, context){
@@ -115,7 +140,9 @@ App.Router = Ember.Router.extend({
 		  	router.get('accountController').set("content",App.session);
 		  }
 		}),
+		//Wechsel in eingeloggten (loggedIn) Status
 		loginComplete: Ember.Route.transitionTo('root.loggedIn'),
+		//Wechsel in ausgeloggten (loggedOut.login) Status
 		unauthorizedRequest: Ember.Route.transitionTo('login')
 	 })
   })
