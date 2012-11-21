@@ -4,3 +4,7 @@
 
 <button {{action goLoggedIn}}>Login</button>
 
+<a {{action goToRegister href=true}}>Register</a>
+
+
+

@@ -2,11 +2,7 @@
 App.Router = Ember.Router.extend({
   enableLogging:  true,
   goToProjects:  Ember.Route.transitionTo('root.index'),
-  goToProfile: Ember.Route.transitionTo('user.profile'),
-
   
-  //in progress
-  // goRegister: Ember.Route.transitionTo('loggedOut'),
   /*unauthorizedRequest: function(router) {
 	var loginController = router.get('loginController');
 	loginController.set("oldPosition",router.get("currentPath"));
@@ -115,11 +111,22 @@ App.Router = Ember.Router.extend({
 	            	router.get('userController').connectOutlet('userbody', 'profile');      
 	          	}
 	        })
-	   	})
+	   	}),
+	   	goToProfile: Ember.Route.transitionTo('user.profile')
 	}),	  
 
 	//ausgeloggter Status
 	loggedOut:  Ember.Route.extend({
+		register: Ember.Route.extend({
+			route: '/register',
+		  	enter: function ( router ){ console.log("The register sub-state was entered."); },
+		  	connectOutlets: function(router, context){
+			  	router.get('applicationController').connectOutlet('body', 'register');
+			  	router.get('applicationController').connectOutlet('body2', 'empty');
+				router.get('applicationController').connectOutlet('body3', 'empty'); 
+			},
+	        goToLogin: Ember.Route.transitionTo('loggedOut.login'),
+		}),
 		login:  Ember.Route.extend({
 		  route: '/login',
 		  enter: function ( router ){ console.log("The login sub-state was entered."); },
@@ -128,7 +135,8 @@ App.Router = Ember.Router.extend({
 		  	router.get('applicationController').connectOutlet('body2', 'empty');
 			router.get('applicationController').connectOutlet('body3', 'empty'); 
 		},
-		  goLoggedIn: function(router, context) { router.get('loginController').login(); router.transitionTo('loggingIn');}
+		  	goLoggedIn: function(router, context) { router.get('loginController').login(); router.transitionTo('loggingIn');},
+		  	goToRegister: Ember.Route.transitionTo('loggedOut.register')
 		}),
 		//pending Status, während eingeloggt wird und der ajax Aufruf die Antwort zurückliefert
 		loggingIn:  Ember.Route.extend({
