@@ -38,9 +38,12 @@ App.Router = Ember.Router.extend({
   	loggedIn: Ember.Route.extend({
 		route: '/',
 		connectOutlets: function(router, context){ 
-			router.get('applicationController').connectOutlet('body', 'projects', App.store.findAll(App.Project)); 
-			router.get('applicationController').connectOutlet('body2', 'empty');
-			router.get('applicationController').connectOutlet('body3', 'empty');
+			//router.get('applicationController').connectOutlet('body', 'projects', App.store.findAll(App.Project)); 
+			router.get('applicationController').connectOutlet('body', 'projects'); 
+			router.get('projectsController').connectOutlet('ownedProjects', 'ownedProjects', App.User.ownedProjects);
+			router.get('projectsController').connectOutlet('contribProjects', 'contribProjects', App.User.collaboratedProjects);
+			//router.get('applicationController').connectOutlet('body2', 'empty');
+			//router.get('applicationController').connectOutlet('body3', 'empty');
 			router.get('applicationController').connectOutlet('footer','account',App.session);
 		},
 

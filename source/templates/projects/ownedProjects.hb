@@ -1,4 +1,4 @@
-<h2>Owned Projects:</h2>
+<h2>Your own Projects</h2>
 	<ul>
 		{{#each project in controller}}
 			{{#with project}}
@@ -8,5 +8,3 @@
      		{{/with}}
 		{{/each}}
 	</ul>
-
-	<h2>Contributed Projects:</h2>
