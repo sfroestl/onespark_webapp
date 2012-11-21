@@ -32,6 +32,7 @@ describe("The router", function(){
         it("should have an loggedOut route", function(){
             expect(root.get("loggedOut")).toBeDefined();
         });
+        
 
         describe("its index route", function(){
             var indexRoute = null;
@@ -50,38 +51,35 @@ describe("The router", function(){
                 loggedInRoute = root.get("loggedIn").create();
             });
 
-	        it("should have an users route", function(){
-	            expect(loggedInRoute.get("users")).toBeDefined();
-	        });
-
-	       	it("should have an projects route", function(){
-	            expect(loggedInRoute.get("projects")).toBeDefined();
+	        it("should have an user route", function(){
+	            expect(loggedInRoute.get("user")).toBeDefined();
 	        });
 
 	       	it("should have an logout function", function(){
 	            expect(loggedInRoute.goLoggedOut).toBeDefined();
 	        });
 
-	       	describe("its users route", function(){
-	            var usersRoute = null;
+	       	describe("its user route", function(){
+	            var userRoute = null;
 	            beforeEach(function(){
-	                usersRoute = loggedInRoute.get("users").create();
+	                userRoute = loggedInRoute.get("user").create();
 	            });
 
-	            it ("should have route of /users", function(){
-	                expect(usersRoute.get("route")).toEqual("/users");
-	            });
-        	});
-
-	       	describe("its projects route", function(){
-	            var projectsRoute = null;
-	            beforeEach(function(){
-	                projectsRoute = loggedInRoute.get("projects").create();
+	            it ("should have route of /user", function(){
+	                expect(userRoute.get("route")).toEqual("/user");
 	            });
 
-	            it ("should have route of /projects", function(){
-	                expect(projectsRoute.get("route")).toEqual("/projects");
-	            });
+                describe("its profile route", function(){
+                    var profileRoute = null;
+                    beforeEach(function(){
+                        profileRoute = userRoute.get("profile").create();
+                    });
+
+                    it ("should have route of /profile", function(){
+                        expect(profileRoute.get("route")).toEqual("/profile");
+                    });   
+                });
+
         	});
         });
 
@@ -91,10 +89,16 @@ describe("The router", function(){
 				loggedOutRoute = root.get("loggedOut").create();
 			});
 
-			it("should have an login function", function(){
-	            expect(loggedOutRoute.goLoggedIn).toBeDefined();
-	        });
+            describe("its login route", function(){
+                var loginRoute = null;
+                beforeEach(function(){
+                    loginRoute = loggedOutRoute.get("login").create();
+                });
+
+    			it("should have an login function", function(){
+    	            expect(loginRoute.goLoggedIn).toBeDefined();
+    	        });
+            });
 		});
     });
-
 });

@@ -12,10 +12,6 @@ App.Router = Ember.Router.extend({
 	loginController.set("oldPosition",router.get("currentPath"));
 	router.transitionTo("root.login");
   },*/
-  goLoggedOut: function(router, evt) {
-    router.transitionTo('root.index');
-    App.session.logout();
-  },
 
   root: Ember.Route.extend({
 
@@ -46,6 +42,10 @@ App.Router = Ember.Router.extend({
 			//router.get('applicationController').connectOutlet('body3', 'empty');
 			router.get('applicationController').connectOutlet('footer','account',App.session);
 		},
+		goLoggedOut: function(router, evt) {
+	        router.transitionTo('root.index');
+    		App.session.logout();
+	    },
 
 	  singleproject: Ember.Route.extend({
 	  		 	goToProjectNavi: Ember.Route.transitionTo('root.index'),
