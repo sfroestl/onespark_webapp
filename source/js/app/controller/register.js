@@ -1,6 +1,6 @@
-/*in progress
-App.RegisterController = Ember.Controller.extend();
 
+App.RegisterController = Ember.Controller.extend();
+/*in progress
 App.RegisterController.registerInformation = Ember.Object.create({
 
   username: "",
