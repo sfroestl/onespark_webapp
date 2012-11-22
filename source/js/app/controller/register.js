@@ -13,10 +13,10 @@ App.RegisterController = Ember.Controller.extend({
     console.log("OutController: Check password: " + this.get("password"));
     console.log("OutController: Check password_confirmation: " + this.get("password_confirmation"));
 
-    //var user = App.store.createRecord(App.User,  { username: this.get("username"), email: this.get("email"), password: this.get("password"), password_confirmation: this.get("password_confirmation")});
-    //App.store.commit();
+    var user = App.store.createRecord(App.User,  { username: this.get("username"), email: this.get("email"), password: this.get("password"), password_confirmation: this.get("password_confirmation")});
+    App.store.commit();
 
-    $.ajax({
+    /*$.ajax({
       async: true,
       url: 'http://api.onespark.de/api/v1/users',
       type: 'POST',
@@ -34,7 +34,7 @@ App.RegisterController = Ember.Controller.extend({
         console.log ("--> Success: 200");
 
       }
-    });
+    });*/
 
 
 
