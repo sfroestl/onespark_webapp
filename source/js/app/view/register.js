@@ -1,4 +1,6 @@
 App.RegisterView = Ember.View.extend({
   tagName: "form",
-  templateName: 'register'
+  templateName: 'register',
+  
+  userBinding: 'App.User'
 });
