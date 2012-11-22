@@ -27,6 +27,7 @@ App.Router = Ember.Router.extend({
             });
         },
     }),
+
   	loggedIn: Ember.Route.extend({
 		route: '/',
 		connectOutlets: function(router, context){ 
@@ -34,8 +35,6 @@ App.Router = Ember.Router.extend({
 			router.get('applicationController').connectOutlet('body', 'projects'); 
 			router.get('projectsController').connectOutlet('ownedProjects', 'ownedProjects', App.get("session.sessionUser.ownedProjects"));
 			router.get('projectsController').connectOutlet('contribProjects', 'contribProjects', App.get("session.sessionUser.collaboratedProjects"));
-			//router.get('applicationController').connectOutlet('body2', 'empty');
-			//router.get('applicationController').connectOutlet('body3', 'empty');
 			router.get('applicationController').connectOutlet('footer','account',App.session);
 		},
 		goLoggedOut: function(router, evt) {
@@ -43,53 +42,80 @@ App.Router = Ember.Router.extend({
     		App.session.logout();
 	    },
 
-	  singleproject: Ember.Route.extend({
-	  		 	goToProjectNavi: Ember.Route.transitionTo('root.index'),
-	 			//goToProjectOverview: Ember.Route.transitionTo('projectOverview'),
-		// goToProjectTasks: Ember.Route.transitionTo('root.singleproject.projectTasks'),
-		// goToProjectPostings: Ember.Route.transitionTo('root.singleproject.projectPostings'),
-		// goToProjectContributors: Ember.Route.transitionTo('root.singleproject.projectContributors'),
-		// goToProjectEdit: Ember.Route.transitionTo('root.singleproject.projectEdit'),
-		 //goToProjectTrash: Ember.Route.transitionTo('projectTrash'),
-		route: '/projects/:id',
-		enter: function(router){ console.log("The singleproject sub-state was entered."); },
-		deserialize:  function(router, context){
-		  return App.store.find(App.Project, context.id );
-		},
-		serialize:  function(router, context){
-		  return {
-			id: context.id
-		  }
-		},
-		connectOutlets:  function(router, aProject){
-		  router.get('applicationController').connectOutlet('body', 'projecttitle', aProject);
-		  router.get('applicationController').connectOutlet('body2', 'projectnavi');
-		  router.get('applicationController').connectOutlet('body3', 'empty');
-		  router.get('accountController').set("content",App.session);
-		  router.get('applicationController').connectOutlet('footer','account');
-		},
+	 	singleproject: Ember.Route.extend({
+			route: '/projects/:id',
+			enter: function(router){ console.log("The singleproject sub-state was entered."); },
+			// deserialize:  function(router, context){
+			//   return App.store.find(App.Project, context.id );
+			// },
+			// serialize:  function(router, context){
+			//   return {
+			// 	id: context.id
+			//   }
+			// },
+			connectOutlets:  function(router, aProject){
+			  router.get('applicationController').connectOutlet('body', 'project', aProject);
+			  router.get('accountController').set("content",App.session);
+			  router.get('applicationController').connectOutlet('footer','account');
+			},
 
-		// projectOverview: Ember.Route.extend({
-		// 	console.log("The ProjectOverview sub-state was entered.");
-		// }),
+			projectOverview: Ember.Route.extend({
+				route: '/overview',
+				enter: function ( router ){
+		            	console.log("The ProjectOverview sub-state was entered.");
+		        },
+			}),
 
-		// projectTasks: Ember.Route.extend({}),
+			projectTasks: Ember.Route.extend({
+				route: '/tasks',
+				enter: function ( router ){
+		            	console.log("The ProjectTasks sub-state was entered.");
+		        },
+			}),
 
-		// projectPostings: Ember.Route.extend({}),
+			projectPostings: Ember.Route.extend({
+				route: '/postings',
+				enter: function ( router ){
+		            	console.log("The ProjectPostings sub-state was entered.");
+		        },
+			}),
 
-		// projectFiles: Ember.Route.extend({}),
+			projectFiles: Ember.Route.extend({
+				route: '/files',
+				enter: function ( router ){
+		            	console.log("The ProjectFiles sub-state was entered.");
+		        },
+			}),
 
-		// projectContributors: Ember.Route.extend({}),
+			projectContributors: Ember.Route.extend({
+				route: '/contributors',
+				enter: function ( router ){
+		            	console.log("The ProjectContributors sub-state was entered.");
+		        },
+			}),
 
-		// projectEdit: Ember.Route.extend({}),
+			projectEdit: Ember.Route.extend({
+				route: '/edit',
+				enter: function ( router ){
+		            	console.log("The ProjectEdit sub-state was entered.");
+		        },
+			}),
 
-/*		 projectTrash: Ember.Route.extend({
-		 	route: '/trash',
-		 	enter: function (router){console.log("The project-trash sub-sub-state was entered.")}
+			projectTrash: Ember.Route.extend({
+				route: '/trash',
+				enter: function ( router ){
+		            	console.log("The ProjectTrash sub-state was entered.");
+		        },
+			}),
 
-		 })*/
-		// 		  })
-	  	}),
+		}),
+		goToProjectOverview: Ember.Route.transitionTo('singleproject.projectOverview'),
+		goToProjectTasks: Ember.Route.transitionTo('singleproject.projectTasks'),
+		goToProjectPostings: Ember.Route.transitionTo('singleproject.projectPostings'),
+		goToProjectFiles: Ember.Route.transitionTo('singleproject.projectFiles'),
+		goToProjectContributors: Ember.Route.transitionTo('singleproject.projectContributors'),
+		goToProjectEdit: Ember.Route.transitionTo('singleproject.projectEdit'),
+		goToProjectTrash: Ember.Route.transitionTo('singleproject.projectTrash'),
 
 		//Userview, user kapselt alle unteren Userviews (Profile, Edit, ...)
 		user:  Ember.Route.extend({
@@ -113,8 +139,8 @@ App.Router = Ember.Router.extend({
 	        })
 	   	}),
 	   	goToProfile: Ember.Route.transitionTo('user.profile')
-	}),	  
-
+   	}),
+ 
 	//ausgeloggter Status
 	loggedOut:  Ember.Route.extend({
 		register: Ember.Route.extend({
@@ -152,6 +178,6 @@ App.Router = Ember.Router.extend({
 		loginComplete: Ember.Route.transitionTo('root.loggedIn'),
 		//Wechsel in ausgeloggten (loggedOut.login) Status
 		unauthorizedRequest: Ember.Route.transitionTo('login')
-	 })
+	})
   })
 });

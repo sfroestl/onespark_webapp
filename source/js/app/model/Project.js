@@ -1,9 +1,13 @@
 App.Project = DS.Model.extend({
     title: DS.attr('string'),
     desc: DS.attr('string'),
-    owner: DS.attr('string')
-//    due_date: DS.attr('date')
+    owner: DS.attr('string'),
+    due_date: DS.attr('date'),
+    //contributors: DS.hasMany('App.User'),
+    //tasks: DS.hasMany('App.Task')
 });
+
+
 /*
 App.Project = Ember.Object.extend();
 App.Project.reopenClass({
