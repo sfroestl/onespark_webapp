@@ -65,5 +65,11 @@ App.Project.reopenClass({
     });
     return this.singleProject;
   }
+=======
+    owner: DS.belongsTo('App.User'),
+    contributors: DS.hasMany('App.User')
 });
-*/
+DS.AuthenticatedRESTAdapter.map('App.Project', {
+	contributors: { key: 'contributor_ids' }
+>>>>>>> 5012ac3a8daac7634dac9c43203cb8e213b94c5f
+});*/

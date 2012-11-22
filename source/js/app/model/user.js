@@ -1,6 +1,8 @@
 App.User = DS.Model.extend({
     username: DS.attr('string'),
     email: DS.attr('string'),
+    password: DS.attr('string'),
+    password_confirmation: DS.attr('string'),
     ownedProjects: DS.hasMany('App.Project'),
     collaboratedProjects:DS.hasMany('App.Project'),
     profile: DS.belongsTo('App.Profile')
