@@ -1,6 +1,6 @@
 
 //=require ../libs/ember/ember-1.0.0-pre.2.js
-//=require ../libs/ember-data-rev7.js
+//=require ../libs/ember-data-rev8.js
 //=require ../libs/authenticated_adapter.js
 //=require ./init.js
 //=require_tree ./helpers
