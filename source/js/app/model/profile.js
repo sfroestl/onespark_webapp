@@ -4,7 +4,7 @@ App.Profile = DS.Model.extend({
     city: DS.attr('string'),
     about: DS.attr('string'),
     avatar_url: DS.attr('string'),
-    user_id: DS.attr('string'),
+    user_id: DS.attr('number'),
 
     user: DS.belongsTo('App.User')
 });

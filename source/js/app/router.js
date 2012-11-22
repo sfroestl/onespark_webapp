@@ -125,6 +125,9 @@ App.Router = Ember.Router.extend({
 			  	router.get('applicationController').connectOutlet('body2', 'empty');
 				router.get('applicationController').connectOutlet('body3', 'empty'); 
 			},
+			goRegister: function(router, evt) {
+        		router.get('registerController').register();
+     		},
 	        goToLogin: Ember.Route.transitionTo('loggedOut.login'),
 		}),
 		login:  Ember.Route.extend({
