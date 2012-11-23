@@ -2,14 +2,6 @@ App.ProjectsView = Ember.View.extend({
   templateName: 'projects'
 });
 
-App.ContribProjectsView = Ember.View.extend({
-  templateName: 'contribProjects'
-});
-
-App.OwnedProjectsView = Ember.View.extend({
-  templateName: 'ownedProjects'
-});
-
 App.ProjectView = Ember.View.extend({
   templateName: 'project'
 });

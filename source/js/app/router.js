@@ -39,9 +39,9 @@ App.Router = Ember.Router.extend({
 
 		connectOutlets: function(router, context){ 		
 			router.get('applicationController').connectOutlet('topNavi', 'topNavi');
+			router.get('projectsController').set('ownedProjects', App.get("session.sessionUser.ownedProjects"));
+			router.get('projectsController').set('collaboratedProjects', App.get("session.sessionUser.collaboratedProjects"));
 			router.get('applicationController').connectOutlet('body', 'projects'); 
-			router.get('projectsController').connectOutlet('ownedProjects', 'ownedProjects', App.get("session.sessionUser.ownedProjects"));
-			router.get('projectsController').connectOutlet('contribProjects', 'contribProjects', App.get("session.sessionUser.collaboratedProjects"));
 			router.get('applicationController').connectOutlet('footer','account',App.session);
 
 		},
@@ -57,6 +57,7 @@ App.Router = Ember.Router.extend({
 
 	 	singleproject: Ember.Route.extend({
 			route: '/projects/:id',
+			modelType: 'App.Project',
 			enter: function(router){ 
 				console.log("The singleproject sub-state was entered.");
 			},

@@ -1,8 +1,7 @@
-App.ProjectsController = Ember.ArrayController.extend();
-
-App.OwnedProjectsController = Ember.ArrayController.extend();
-
-App.ContribProjectsController = Ember.ArrayController.extend();
+App.ProjectsController = Ember.Controller.extend({
+		ownedProjects: null,
+		contributedProjects: null
+});
 
 App.ProjectController =  Ember.ObjectController.extend();
 
