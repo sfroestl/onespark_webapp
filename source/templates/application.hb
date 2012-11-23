@@ -1,5 +1,4 @@
 {{ App.session.sessionStatus }}
+{{outlet topNavi}}
 {{outlet body}}
-{{outlet body2}}
-{{outlet body3}}
 {{outlet footer}}

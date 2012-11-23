@@ -1,7 +1,4 @@
 <div>
-<span><a {{!action showProject href=true}}>{{title}}</a></span><br/>
-{{! eigenes outtlet/template/state... anlegen, zum zurückkehren}}
-
 <span><a {{action goToProjectOverview href=true}}>overview</a></span><br/>
 <span><a {{action goToProjectTasks href=true}}>tasks</a></span><br/>
 <span><a {{action goToProjectPostings href=true}}>postings</a></span><br/>

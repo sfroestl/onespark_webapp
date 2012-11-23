@@ -2,6 +2,7 @@
 App.Router = Ember.Router.extend({
   enableLogging:  true,
   goToProjects:  Ember.Route.transitionTo('root.index'),
+
   
   /*unauthorizedRequest: function(router) {
 	var loginController = router.get('loginController');
@@ -12,13 +13,15 @@ App.Router = Ember.Router.extend({
   root: Ember.Route.extend({
 
   	showProject:  Ember.Route.transitionTo('loggedIn.singleproject'),
+  	goToSearch: Ember.Route.transitionTo('loggedIn.search'),
 
   	index: Ember.Route.extend({
 		
 		
 		route: '/',
-		enter: function ( router ){ console.log("The projects sub-state was entered."); 
-		Ember.run.next(function() {
+		enter: function ( router ){ 
+			console.log("The projects sub-state was entered."); 
+			Ember.run.next(function() {
                 if (App.session.get('signedIn')) {
                     router.transitionTo('loggedIn');
                 } else {
@@ -30,21 +33,33 @@ App.Router = Ember.Router.extend({
 
   	loggedIn: Ember.Route.extend({
 		route: '/',
-		connectOutlets: function(router, context){ 
-			//router.get('applicationController').connectOutlet('body', 'projects', App.store.findAll(App.Project)); 
+		enter: function(router){
+			console.log("The loggedIn sub-state was entered."); 
+		},
+
+		connectOutlets: function(router, context){ 		
+			router.get('applicationController').connectOutlet('topNavi', 'topNavi');
 			router.get('applicationController').connectOutlet('body', 'projects'); 
 			router.get('projectsController').connectOutlet('ownedProjects', 'ownedProjects', App.get("session.sessionUser.ownedProjects"));
 			router.get('projectsController').connectOutlet('contribProjects', 'contribProjects', App.get("session.sessionUser.collaboratedProjects"));
 			router.get('applicationController').connectOutlet('footer','account',App.session);
+
 		},
 		goLoggedOut: function(router, evt) {
 	        router.transitionTo('root.index');
     		App.session.logout();
 	    },
 
+	    search: Ember.Route.extend({
+	    	route: '/search',
+	    	enter: function(router){ console.log("The Search sub-state was entered."); },
+	    }),
+
 	 	singleproject: Ember.Route.extend({
 			route: '/projects/:id',
-			enter: function(router){ console.log("The singleproject sub-state was entered."); },
+			enter: function(router){ 
+				console.log("The singleproject sub-state was entered.");
+			},
 			// deserialize:  function(router, context){
 			//   return App.store.find(App.Project, context.id );
 			// },
@@ -53,7 +68,13 @@ App.Router = Ember.Router.extend({
 			// 	id: context.id
 			//   }
 			// },
+			exit: function(router){
+				//Inhalt von topNaviController leeren, damit Inhalt von Navigation neu geladen wird
+      			router.get('topNaviController').set('content', null)
+    		},
+
 			connectOutlets:  function(router, aProject){
+			  router.get('applicationController').connectOutlet('topNavi', 'topNavi',aProject);
 			  router.get('applicationController').connectOutlet('body', 'project', aProject);
 			  router.get('accountController').set("content",App.session);
 			  router.get('applicationController').connectOutlet('footer','account');
@@ -121,7 +142,7 @@ App.Router = Ember.Router.extend({
 		user:  Ember.Route.extend({
 			route: '/user',
 			enter: function ( router ){
-	            	console.log("The user state was entered.");
+	            console.log("The user state was entered.");
 	        },
 	        connectOutlets: function(router, context){
 	            router.get('applicationController').connectOutlet('body', 'user');
@@ -148,8 +169,8 @@ App.Router = Ember.Router.extend({
 		  	enter: function ( router ){ console.log("The register sub-state was entered."); },
 		  	connectOutlets: function(router, context){
 			  	router.get('applicationController').connectOutlet('body', 'register');
-			  	router.get('applicationController').connectOutlet('body2', 'empty');
-				router.get('applicationController').connectOutlet('body3', 'empty'); 
+			 //  	router.get('applicationController').connectOutlet('body2', 'empty');
+				// router.get('applicationController').connectOutlet('body3', 'empty'); 
 			},
 			goRegister: function(router, evt) {
         		router.get('registerController').register();
@@ -161,8 +182,8 @@ App.Router = Ember.Router.extend({
 		  enter: function ( router ){ console.log("The login sub-state was entered."); },
 		  connectOutlets: function(router, context){
 		  	router.get('applicationController').connectOutlet('body', 'login');
-		  	router.get('applicationController').connectOutlet('body2', 'empty');
-			router.get('applicationController').connectOutlet('body3', 'empty'); 
+		 //  	router.get('applicationController').connectOutlet('body2', 'empty');
+			// router.get('applicationController').connectOutlet('body3', 'empty'); 
 		},
 		  	goLoggedIn: function(router, context) { router.get('loginController').login(); router.transitionTo('loggingIn');},
 		  	goToRegister: Ember.Route.transitionTo('loggedOut.register')
@@ -172,8 +193,8 @@ App.Router = Ember.Router.extend({
 		  enter: function ( router ){ console.log("The logginIn-state was entered."); },
 		  connectOutlets: function(router, context){
 		  	router.get('applicationController').connectOutlet('body', 'loggingIn');
-		  	router.get('applicationController').connectOutlet('body2', 'empty');
-			router.get('applicationController').connectOutlet('body3', 'empty');
+		 //  	router.get('applicationController').connectOutlet('body2', 'empty');
+			// router.get('applicationController').connectOutlet('body3', 'empty');
 		  	router.get('accountController').set("content",App.session);
 		  }
 		}),
