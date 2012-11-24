@@ -39,6 +39,7 @@ App.Router = Ember.Router.extend({
 
 		goLoggedOut: function(router, evt) {
 			router.get('loginController').set('password', ""); //reset password
+			router.get('applicationController').disconnectOutlet('topNavi'); //removes topnavi outlet
 			router.transitionTo('root.index');
 			App.session.logout();
 		},
