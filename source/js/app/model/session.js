@@ -46,9 +46,8 @@ App.Session = Ember.Object.extend({
 	ses = this;
 	ses.set("sessionUser",null);
 	if (!ses.get("sessionToken")) return; //don't request when not logged in
-    Ember.run.next( function() {
+//    Ember.run.next( function() {
 		basicAuth = ses.get("sessionToken");
-		console.log("reading current user");
 		$.ajax({
 		  url: 'http://api.onespark.de/api/v1/user',
 		  type: 'GET',
@@ -66,13 +65,10 @@ App.Session = Ember.Object.extend({
 			// store session
 			this.set("sessionUserRaw",data);
 			var id = data.auth_user.id;
-			console.log("id"+id);
 			this.set("sessionUser",App.store.find(App.User,id));
 			App.router.send("loginComplete");
-			console.log ("--> Success: 200");
-			console.log("--> User " + data.username + " is logged in.");
 		  }
-		});
+//		});
 	});
   }.observes("sessionToken")
 
