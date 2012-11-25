@@ -15,7 +15,7 @@ App.User = DS.Model.extend({
 		   return this.get("username");
 	}.property('profile.forename','profile.surname','username'),
     displayAvatarUrl: function() {
-	  return this.get("profile.avatarURL") || "noavatar.png";
+	  return this.get("profile.avatarURL") || imagePath("noavatar.png");
 	}.property('profile.avatarURL')
 });
 DS.AuthenticatedRESTAdapter.map('App.User', {
