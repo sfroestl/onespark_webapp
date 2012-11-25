@@ -12,7 +12,7 @@ App.Router = Ember.Router.extend({
 
   root: Ember.Route.extend({
 
-  	showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
+  	
   	goToSearch: Ember.Route.transitionTo('loggedIn.search'),
 
   	index: Ember.Route.extend({
@@ -62,7 +62,9 @@ App.Router = Ember.Router.extend({
 					router.get('applicationController').connectOutlet('footer','account',App.session);
 
 				},
+				showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
 			}),
+	
 		 	singleproject: Ember.Route.extend({
 				route: '/:project_id',
 				modelType: 'App.Project',
@@ -74,6 +76,7 @@ App.Router = Ember.Router.extend({
 					route: '/',
 					connectOutlets:  function(router, aProject){
 					  router.get('applicationController').connectOutlet('topNavi', 'topNavi', aProject);
+					  console.log("tools for " + aProject);
 					  router.get('applicationController').connectOutlet('body', 'tools', aProject);
 					  router.get('applicationController').connectOutlet('footer', 'account',App.session);
 					}
@@ -108,6 +111,7 @@ App.Router = Ember.Router.extend({
 
 				projectContributors: Ember.Route.extend({
 					route: '/contributors',
+					toolName: 'Contributors',
 					enter: function ( router ){
 			            	console.log("The ProjectContributors sub-state was entered.");
 			        },
@@ -126,15 +130,21 @@ App.Router = Ember.Router.extend({
 			            	console.log("The ProjectTrash sub-state was entered.");
 			        },
 				}),
-
+				goToTool: function(router, context) {
+					
+					var c = context.contexts;
+					c[0] = c[0].get('path'); //the first object is the Route Object of the chosen tool
+					//console.log(c);
+					//Call the transitionTo mehtod of the Router
+					//note that router.transitionTo actually retrieves the function
+					//apply needs two parameters:
+					//the first is the calling context, e.g. router.transitionTo.apply(a) is like writing a.transitionTo()
+					//the second is an array of parameters:
+					//	first is the target state
+					//	second is the ember router context, given to connectOutlets in target state
+					router.transitionTo.apply(router,c);
+				}
 			}),
-			goToProjectOverview: Ember.Route.transitionTo('singleproject.projectOverview'),
-			goToProjectTasks: Ember.Route.transitionTo('singleproject.projectTasks'),
-			goToProjectPostings: Ember.Route.transitionTo('singleproject.projectPostings'),
-			goToProjectFiles: Ember.Route.transitionTo('singleproject.projectFiles'),
-			goToProjectContributors: Ember.Route.transitionTo('singleproject.projectContributors'),
-			goToProjectEdit: Ember.Route.transitionTo('singleproject.projectEdit'),
-			goToProjectTrash: Ember.Route.transitionTo('singleproject.projectTrash'),
 		}),
 		//Userview, user kapselt alle unteren Userviews (Profile, Edit, ...)
 		user:  Ember.Route.extend({

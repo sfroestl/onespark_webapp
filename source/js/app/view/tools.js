@@ -14,5 +14,19 @@ App.ToolView = Ember.View.extend({
 });
 
 App.ToolsView = Ember.View.extend({
-  templateName: 'tools'
+  templateName: 'tools',
+  availableTools: function() {
+	  console.log("detecting tools");
+	  var state = App.get('router.currentState');
+	  while (!state.get("goToTool")) {	//find a state (searching up to root) with a toolName-Property
+	    var p = state.get("parentState");
+	    if (p)
+			state = p;
+		else
+			return null;
+	  }
+	  return state.get("childStates").filter(function(item){
+		  return !!item.get('toolName');
+	  });
+  }.property('App.router.currentState')
 });
