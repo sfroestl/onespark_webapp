@@ -12,7 +12,7 @@ App.Router = Ember.Router.extend({
 
   root: Ember.Route.extend({
 
-  	showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject'),
+  	showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
   	goToSearch: Ember.Route.transitionTo('loggedIn.search'),
 
   	index: Ember.Route.extend({
@@ -70,14 +70,14 @@ App.Router = Ember.Router.extend({
 					//Inhalt von topNaviController leeren, damit Inhalt von Navigation neu geladen wird
 	      			router.get('topNaviController').set('content', null)
 	    		},
-
-				connectOutlets:  function(router, aProject){
-				  router.get('applicationController').connectOutlet('topNavi', 'topNavi', aProject);
-				  router.get('applicationController').connectOutlet('body', 'project', aProject);
-				  router.get('accountController').set("content", App.session);
-				  router.get('applicationController').connectOutlet('footer', 'account');
-				},
-
+				tools: Ember.Route.extend({
+					route: '/',
+					connectOutlets:  function(router, aProject){
+					  router.get('applicationController').connectOutlet('topNavi', 'topNavi', aProject);
+					  router.get('applicationController').connectOutlet('body', 'tools', aProject);
+					  router.get('applicationController').connectOutlet('footer', 'account',App.session);
+					}
+				}),
 				projectOverview: Ember.Route.extend({
 					route: '/overview',
 					enter: function ( router ){
