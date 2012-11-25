@@ -1,7 +1,7 @@
 // Router //////
 App.Router = Ember.Router.extend({
   enableLogging:  true,
-  goToProjects:  Ember.Route.transitionTo('root.index'),
+  goToProjects:  Ember.Route.transitionTo('root.loggedIn.projects.index'),
 
 
   /*unauthorizedRequest: function(router) {
@@ -31,6 +31,10 @@ App.Router = Ember.Router.extend({
     }),
 
   	loggedIn: Ember.Route.extend({
+		
+		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
+		
+		
 		search: Ember.Route.extend({
 			route: '/search',
 		}),
@@ -43,6 +47,7 @@ App.Router = Ember.Router.extend({
 		},
 
 		projects: Ember.Route.extend({
+
 			route: '/projects',
 			index: Ember.Route.extend({
 				route: '/',
@@ -54,21 +59,23 @@ App.Router = Ember.Router.extend({
 					router.get('applicationController').connectOutlet('footer','account',App.session);
 
 				},
-				showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
 			}),
 	
 		 	singleproject: Ember.Route.extend({
+				
 				route: '/:project_id',
 				modelType: 'App.Project',
+				connectOutlets: function(router, context){
+					router.get('applicationController').connectOutlet('topNavi', 'topNavi',context);
+				},
 				exit: function(router){
 					//Inhalt von topNaviController leeren, damit Inhalt von Navigation neu geladen wird
 	      			router.get('topNaviController').set('content', null)
 	    		},
 				tools: Ember.Route.extend({
 					route: '/',
-					connectOutlets:  function(router, aProject){
-					  router.get('applicationController').connectOutlet('topNavi', 'topNavi', aProject);
-					  console.log("tools for " + aProject);
+					connectOutlets:  function(router){
+					  var aProject = router.get('topNaviController.content');
 					  router.get('applicationController').connectOutlet('body', 'tools', aProject);
 					  router.get('applicationController').connectOutlet('footer', 'account',App.session);
 					}
@@ -93,10 +100,9 @@ App.Router = Ember.Router.extend({
 					route: '/contributors',
 					toolName: 'Contributors',
 			        connectOutlets: function(router,project) {
-						router.get('applicationController').connectOutlet('topNavi', 'topNavi',project);
-						router.get('applicationController').connectOutlet('body', 'tool',project);
-						router.get('toolController').connectOutlet('tool-body', 'contributors'/*,project.get("contributors")*/);
-						router.get('applicationController').connectOutlet('footer','account',App.session);
+						var aProject = router.get('topNaviController.content');
+						router.get('applicationController').connectOutlet('body', 'tool',aProject);
+						router.get('toolController').connectOutlet('tool-body', 'contributors',aProject.get("contributors"));
 					}
 				}),
 
