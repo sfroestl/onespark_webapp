@@ -115,6 +115,12 @@ App.Router = Ember.Router.extend({
 					enter: function ( router ){
 			            	console.log("The ProjectContributors sub-state was entered.");
 			        },
+			        connectOutlets: function(router,project) {
+						router.get('applicationController').connectOutlet('topNavi', 'topNavi',project);
+						router.get('applicationController').connectOutlet('body', 'tool',project);
+						router.get('toolController').connectOutlet('tool-body', 'contributors'/*,project.get("contributors")*/);
+						router.get('applicationController').connectOutlet('footer','account',App.session);
+					}
 				}),
 
 				projectEdit: Ember.Route.extend({
@@ -134,7 +140,6 @@ App.Router = Ember.Router.extend({
 					
 					var c = context.contexts;
 					c[0] = c[0].get('path'); //the first object is the Route Object of the chosen tool
-					//console.log(c);
 					//Call the transitionTo mehtod of the Router
 					//note that router.transitionTo actually retrieves the function
 					//apply needs two parameters:
@@ -143,7 +148,8 @@ App.Router = Ember.Router.extend({
 					//	first is the target state
 					//	second is the ember router context, given to connectOutlets in target state
 					router.transitionTo.apply(router,c);
-				}
+				},
+				goToTools: Ember.Route.transitionTo("singleproject.tools")
 			}),
 		}),
 		//Userview, user kapselt alle unteren Userviews (Profile, Edit, ...)
