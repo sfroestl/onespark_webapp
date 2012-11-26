@@ -82,6 +82,12 @@ App.Router = Ember.Router.extend({
 				}),
 				projectOverview: Ember.Route.extend({
 					route: '/overview',
+					toolName: 'overview',
+			        connectOutlets: function(router,project) {
+						var aProject = router.get('topNaviController.content');
+						router.get('applicationController').connectOutlet('body', 'tool',aProject);
+						router.get('toolController').connectOutlet('tool-body', 'projectOverview',aProject);
+					}
 				}),
 
 				projectTasks: Ember.Route.extend({

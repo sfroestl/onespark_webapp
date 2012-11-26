@@ -5,6 +5,8 @@ App.ProjectsController = Ember.Controller.extend({
 
 App.ProjectController =  Ember.ObjectController.extend();
 
+App.ProjectOverviewController = Ember.ObjectController.extend();
+
 //App.ProjectDetailsController = Em.ObjectController.extend();
 
 //App.ProjectnaviController = Em.ObjectController.extend();

@@ -2,7 +2,9 @@ App.ProjectsView = Ember.View.extend({
   templateName: 'projects'
 });
 
-
+App.ProjectOverviewView = Ember.View.extend({
+	templateName: 'projectOverview'
+})
 // App.ProjectdetailsView = Em.View.extend({
 //   templateName:  'projectdetails'
 // });
