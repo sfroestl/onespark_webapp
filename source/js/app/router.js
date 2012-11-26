@@ -146,7 +146,11 @@ App.Router = Ember.Router.extend({
 		   	profile:  Ember.Route.extend({
 	          	route: '/profile',
 	          	connectOutlets: function(router, context){
+	          		router.get('profileController').set('user', App.get("session.sessionUser"));
 	            	router.get('userController').connectOutlet('userbody', 'profile');
+	          	},
+	          	enter: function(router){ 
+	          		router.get('profileController').enterProfile();
 	          	}
 	        })
 	   	}),
