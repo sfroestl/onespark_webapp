@@ -6,7 +6,7 @@
 		<label>description: </label>{{view Ember.TextField valueBinding="description"}}
 		<br/>
 
-		<label>due date: </label>{{view Ember.TextField valueBinding="dueDate" type="date"}}
+		<label>due date (month-day-year): </label>{{view Ember.TextField valueBinding="dueDate" type="date"}}
 		<br/>
 
 		<button {{action goSave}}>save</button>

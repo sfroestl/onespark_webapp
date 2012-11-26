@@ -7,6 +7,7 @@ App.NewProjectController = Ember.Controller.extend({
     save: function() {
     
     var project = App.store.createRecord(App.Project,  { title: this.get("title"), desc: this.get("description"), owner: this.get("owner"), dueDate: this.get("dueDate")});
+    App.get('session.sessionUser.ownedProjects').addObject(project);
     App.store.commit();
 	}
 });
