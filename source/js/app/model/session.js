@@ -3,7 +3,7 @@ App.Session = Ember.Object.extend({
 	username: null,
 	password: null,
 	sessionUser: null,
-    SessionUserRaw: null,
+    sessionUserId: null,
 
   signedIn: function() {
 	  return !!this.get("sessionUser.isLoaded");
@@ -12,6 +12,7 @@ App.Session = Ember.Object.extend({
   sessionToken: function() {
 	  return encodeBase64(this.get("username"), this.get("password"));
   }.property('username','password'),
+  
   
   // Helper methods to speed things up
   login: function(user,pw) {
@@ -31,22 +32,28 @@ App.Session = Ember.Object.extend({
   },  
   
   // creates a cookie with sessionToken
-  _storeAsCookie: function(basicAuth) {
+  _storeCredentialsAsCookie: function() {
     var token = this.get("sessionToken");
     if (token)
 		$.cookie("sessionToken", token)
 	else
 		$.removeCookie("sessionToken")
   }.observes("sessionToken"),
+  
+  _storeUserIdAsCookie: function() {
+    var token = this.get("sessionUserId");
+    if (token)
+		$.cookie("sessionUserId", token)
+	else
+		$.removeCookie("sessionUserId")
+  }.observes("sessionUserId"),
 
 
 
-
-  _findUser: function() {
+  _findUserId: function() {
 	ses = this;
-	ses.set("sessionUser",null);
+	ses.set("sessionUserId",null);
 	if (!ses.get("sessionToken")) return; //don't request when not logged in
-//    Ember.run.next( function() {
 		basicAuth = ses.get("sessionToken");
 		$.ajax({
 		  url: 'http://api.onespark.de/api/v1/user',
@@ -63,15 +70,24 @@ App.Session = Ember.Object.extend({
 
 		  success: function(data) {
 			// store session
-			this.set("sessionUserRaw",data);
+			ses.set("sessionUserId",data.auth_user.id);
 			var id = data.auth_user.id;
-			this.set("sessionUser",App.store.find(App.User,id));
 			App.router.send("loginComplete");
 		  }
-//		});
 	});
-  }.observes("sessionToken")
+  }.observes("sessionToken"),
 
+  _loadSessionUser: function() {
+	var id = this.get("sessionUserId");
+  	this.set("sessionUser",id ? App.store.find(App.User,id) : null);
+  }.observes("sessionUserId")
 });
 App.session = App.Session.create();
-App.session.setProperties(decodeBase64Credentials($.cookie("sessionToken")));
+var restoreLogin =Ember.Object.create({
+	username: null,
+	password: null,
+	sessionUserId: null
+});
+restoreLogin.setProperties(decodeBase64Credentials($.cookie("sessionToken")));
+restoreLogin.set("sessionUserId",$.cookie("sessionUserId"));
+App.session.setProperties(restoreLogin);
