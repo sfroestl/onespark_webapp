@@ -21,7 +21,7 @@ App.User = DS.Model.extend({
 DS.AuthenticatedRESTAdapter.map('App.User', {
 	ownedProjects: { key: 'owned_project_ids' },
 	collaboratedProjects: { key: 'collaborated_project_ids' },
-	profile: {embedded: true}
+	profile: {key: 'profile_id'}
 });
 
 
