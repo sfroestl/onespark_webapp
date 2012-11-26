@@ -1,4 +1,4 @@
-App.UserController = Ember.ObjectController.extend({
-	content: Ember.Object.create(),
-    myBinding: "App.router.applicationController"
+App.UserController = Ember.Controller.extend({
+	//content: Ember.Object.create(),
+    //myBinding: "App.router.applicationController"
 });
