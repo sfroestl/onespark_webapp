@@ -33,7 +33,7 @@ App.Router = Ember.Router.extend({
   	loggedIn: Ember.Route.extend({
 		
 		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
-		
+		goToNewProject: Ember.Route.transitionTo('loggedIn.projects.newProject'),
 		
 		search: Ember.Route.extend({
 			route: '/search',
@@ -59,6 +59,17 @@ App.Router = Ember.Router.extend({
 					router.get('applicationController').connectOutlet('footer','account',App.session);
 
 				},
+			}),
+
+			newProject: Ember.Route.extend({
+				route: '/new',
+				connectOutlets: function(router, context){
+					router.get('applicationController').connectOutlet('body', 'newProject');
+				},
+				goSave: function(router, evt) {
+        			router.get('newProjectController').save();
+        			router.transitionTo('projects.index');
+     			},
 			}),
 	
 		 	singleproject: Ember.Route.extend({
