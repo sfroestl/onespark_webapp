@@ -146,26 +146,38 @@ App.Router = Ember.Router.extend({
 				goToTools: Ember.Route.transitionTo("singleproject.tools")
 			}),
 		}),
+
 		//Userview, user kapselt alle unteren Userviews (Profile, Edit, ...)
 		user:  Ember.Route.extend({
 			route: '/user',
 	        connectOutlets: function(router, context){
 	            router.get('applicationController').connectOutlet('body', 'user');
-	            router.get('userController').connectOutlet('navigation', 'traversal');
+	            router.get('userController').connectOutlet('navigation', 'account');
 	        },
 	        //Profilansicht
 		   	profile:  Ember.Route.extend({
 	          	route: '/profile',
 	          	connectOutlets: function(router, context){
-	          		router.get('profileController').set('user', App.get("session.sessionUser"));
+	          		router.set('profileController.user', App.get("session.sessionUser"));
 	            	router.get('userController').connectOutlet('userbody', 'profile');
-	          	},
-	          	enter: function(router){ 
-	          		router.get('profileController').enterProfile();
 	          	}
-	        })
+	        }),
+	       	//Update Profil
+			updateprofile:  Ember.Route.extend({
+		        route: '/edit',
+		        connectOutlets: function(router, context){
+		          	router.set('profileController.user', App.get("session.sessionUser"));
+		          	//router.set('userController.profile', App.get("session.sessionUser.profile"));
+		           	router.get('userController').connectOutlet('userbody', 'update_profile');
+		        },
+		       	goUpdate: function(router, evt) {
+        			router.get('userController').update();
+        			router.transitionTo('user.profile');
+     			}
+		    }),
+	        goToUpdateProfile: Ember.Route.transitionTo('updateprofile')
 	   	}),
-	   	goToProfile: Ember.Route.transitionTo('user.profile')
+		goToProfile: Ember.Route.transitionTo('user.profile')
    	}),
 
 	//ausgeloggter Status

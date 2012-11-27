@@ -9,7 +9,7 @@
 <td><a {{action goToProfile href=true}}>User Profile</a></td>
 <td>ContactsLink</td>
 <td>MessagesLink</td>
-<button {{action goLoggedOut}}>Logout</button>
+<td><button {{action goLoggedOut}}>Logout</button></td>
 </tr>
 </table>
 {{/if}}
