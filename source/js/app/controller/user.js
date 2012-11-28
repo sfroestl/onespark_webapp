@@ -45,7 +45,7 @@ App.UserController = Ember.Controller.extend({
 
 		//old fashioned
 		$.ajax({
-	      async: false,
+	      async: true,
 	      url: 'http://api.onespark.de/api/v1/user',
 	      type: 'DELETE',
 	      dataType: 'json',
