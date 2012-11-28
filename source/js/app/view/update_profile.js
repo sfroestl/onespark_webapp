@@ -1,3 +1,4 @@
 App.Update_profileView = Ember.View.extend({
-  templateName: 'update_profile'
+	tagName: "form",
+ 	templateName: 'update_profile'
 });
