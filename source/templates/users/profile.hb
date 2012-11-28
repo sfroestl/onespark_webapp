@@ -11,3 +11,4 @@
 </table>
 
 <a {{action goToUpdateProfile href=true}}>edit profile</a>
+<a {{action goToDeleteMe href=true}}>delete account</a>

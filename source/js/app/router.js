@@ -41,6 +41,8 @@ App.Router = Ember.Router.extend({
 
 		goLoggedOut: function(router, evt) {
 			router.get('loginController').set('password', ""); //reset password
+			
+			//toDo: fix topNavi in right position
 			router.get('applicationController').disconnectOutlet('topNavi'); //removes topnavi outlet
 			router.transitionTo('root.index');
 			App.session.logout();
@@ -175,7 +177,21 @@ App.Router = Ember.Router.extend({
         			router.transitionTo('user.profile');
      			}
 		    }),
-	        goToUpdateProfile: Ember.Route.transitionTo('updateprofile')
+		   	//Delete Profil
+			deleteme:  Ember.Route.extend({
+		        route: '/delete',
+		        connectOutlets: function(router, context){
+		          	router.get('userController').connectOutlet('userbody', 'delete_user');
+		        },
+		       	goDelete: function(router, evt) {
+        			router.get('userController').deleteMe();
+        			//router.transitionTo('root.index');
+					//App.session.logout();
+     			},
+     			afterDelete: Ember.Route.transitionTo('loggedOut.login')
+		    }),
+	        goToUpdateProfile: Ember.Route.transitionTo('updateprofile'),
+	        goToDeleteMe: Ember.Route.transitionTo('deleteme')
 	   	}),
 		goToProfile: Ember.Route.transitionTo('user.profile')
    	}),
