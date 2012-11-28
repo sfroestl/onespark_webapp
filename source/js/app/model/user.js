@@ -15,8 +15,8 @@ App.User = DS.Model.extend({
 		   return this.get("username");
 	}.property('profile.forename','profile.surname','username'),
     displayAvatarUrl: function() {
-	  return this.get("profile.avatarURL") || imagePath("noavatar.png");
-	}.property('profile.avatarURL')
+	  return this.get("profile.avatarUrl") || imagePath("noavatar.png");
+	}.property('profile.avatarUrl')
 });
 DS.AuthenticatedRESTAdapter.map('App.User', {
 	ownedProjects: { key: 'owned_project_ids' },
