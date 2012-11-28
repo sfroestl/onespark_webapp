@@ -40,10 +40,7 @@ App.Router = Ember.Router.extend({
 		}),
 
 		goLoggedOut: function(router, evt) {
-			router.get('loginController').set('password', ""); //reset password
-			
-			//toDo: fix topNavi in right position
-			router.get('applicationController').disconnectOutlet('topNavi'); //removes topnavi outlet
+			router.get('loginController').set('password', ""); //reset password		
 			router.transitionTo('root.index');
 			App.session.logout();
 		},
@@ -154,7 +151,7 @@ App.Router = Ember.Router.extend({
 			route: '/user',
 	        connectOutlets: function(router, context){
 	            router.get('applicationController').connectOutlet('body', 'user');
-	            router.get('userController').connectOutlet('navigation', 'account');
+	            //router.get('userController').connectOutlet('navigation', 'account');
 	        },
 	        //Profilansicht
 		   	profile:  Ember.Route.extend({
@@ -198,6 +195,9 @@ App.Router = Ember.Router.extend({
 
 	//ausgeloggter Status
 	loggedOut:  Ember.Route.extend({
+		connectOutlets: function(router, context){
+			 router.get('applicationController').disconnectOutlet('topNavi');
+		},
 		register: Ember.Route.extend({
 			route: '/register',
 		  	connectOutlets: function(router, context){

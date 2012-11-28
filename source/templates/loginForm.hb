@@ -1,10 +1,17 @@
-<label>Username: </label>{{view Ember.TextField placeholder="your username"  valueBinding="username"}}<br/>
+<h1>Sign in</h1>
 
-<label>Password: </label>{{view Ember.TextField placeholder="your password" valueBinding="password" type="password"}}<br />
+<label>Username: </label><br/>
+{{view Ember.TextField valueBinding="username"}}<br/>
 
-<button {{action goLoggedIn}}>Login</button>
+<label>Password: </label><br/>
+{{view Ember.TextField valueBinding="password" type="password"}}<br/><br/>
 
-<a {{action goToRegister href=true}}>Register</a>
+<!--
+{{#unless App.router.userController.isError}}
+<span class="success">Success: Account deleted.</span><br />
+{{/unless}}-->
+
+<button {{action goLoggedIn}}>Login</button><a {{action goToRegister href=true}}>Register</a>
 
 
 

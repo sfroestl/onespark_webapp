@@ -10,6 +10,10 @@ App.LoginController = Ember.Controller.extend(
 	console.log(this);
     console.log("Base64: " + encodeBase64(this.get("username"), this.get("password")));
 	App.session.login(this.get("username"),this.get("password"));
+
+  this.set('username', '');
+  this.set('password', '');
+
 	return this.get("oldPosition");
   }
 });
