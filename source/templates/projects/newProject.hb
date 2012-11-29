@@ -1,13 +1,18 @@
-<h1>new project</h1>		
+<h1><legend>{{#if content.id}}Edit{{else}}new{{/if}} project</legend></h1>	
 
-		<label>title: </label>{{view Ember.TextField valueBinding="title"}}
-		<br/>
-
-		<label>description: </label>{{view Ember.TextField valueBinding="description"}}
-		<br/>
-
-		<label>due date (month-day-year): </label>{{view Ember.TextField valueBinding="dueDate" type="date"}}
-		<br/>
-
+<table>
+	<tr>
+		<td>title:</td>
+		<td>{{view Ember.TextField valueBinding="title" id="title"}}</td>
+	</tr>
+	<tr>
+		<td>description:</td>
+		<td>{{{view Ember.TextField valueBinding="description"}}</td>
+	</tr>	
+	<tr>
+		<td>due date (month-day-year):</td>
+		<td>{{view Ember.TextField valueBinding="dueDate" type="date"}}</td>
+	</tr>	
+</table>
 		<button {{action goSave}}>save</button>
 
