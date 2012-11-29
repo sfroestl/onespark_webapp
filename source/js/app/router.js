@@ -164,10 +164,12 @@ App.Router = Ember.Router.extend({
 	       	//Update Profil
 			updateprofile:  Ember.Route.extend({
 		        route: '/edit',
+		        enter: function(router){
+					router.get('userController').loadContent();
+	    		},
 		        connectOutlets: function(router, context){
 		          	router.set('profileController.user', App.get("session.sessionUser"));
-		          	//router.set('userController.profile', App.get("session.sessionUser.profile"));
-		           	router.get('userController').connectOutlet('userbody', 'update_profile');
+		          	router.get('userController').connectOutlet('userbody', 'update_profile');
 		        },
 		       	goUpdate: function(router, evt) {
         			router.get('userController').update();

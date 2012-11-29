@@ -1,12 +1,6 @@
 App.UserController = Ember.Controller.extend({
 
 	//update profile
-	/*
-	surname: null,
-	city: null,
-	about: null,
-	forename: null,
-	*/
 	surname: '',
 	city: '',
 	about: '',
@@ -15,7 +9,15 @@ App.UserController = Ember.Controller.extend({
 	//delete account
 	password_conf: '',
 
+	//messages
 	isError: false,
+
+	loadContent: function() {
+		this.surname = App.get("session.sessionUser.profile.surname");
+		this.forename = App.get("session.sessionUser.profile.forename");
+		this.city = App.get("session.sessionUser.profile.city");
+		this.about = App.get("session.sessionUser.profile.about");
+	},
 
 	update: function() {
 		var profile = App.get("session.sessionUser.profile");
