@@ -90,6 +90,25 @@ App.Router = Ember.Router.extend({
 					  router.get('applicationController').connectOutlet('footer', 'account',App.session);
 					}
 				}),
+
+				editProject: Em.Route.extend({
+			          route: 'edit',
+
+			          cancelEdit: function(router) {
+			            router.transitionTo('projects.index');
+			          },
+
+			          connectOutlets: function(router) {
+			            var contactController = router.get('contactController');
+			            contactController.connectOutlet('editContact', contactController.get('content'));
+			            router.get('editContactController').enterEditing();
+			          },
+
+			          exit: function(router) {
+			            router.get('editContactController').exitEditing();
+			          }
+        		}),
+
 				projectOverview: Ember.Route.extend({
 					route: '/overview',
 					toolName: 'overview',
@@ -97,7 +116,17 @@ App.Router = Ember.Router.extend({
 						var aProject = router.get('topNaviController.content');
 						router.get('applicationController').connectOutlet('body', 'tool',aProject);
 						router.get('toolController').connectOutlet('tool-body', 'projectOverview',aProject);
-					}
+					},
+
+					goDelete: function(router, evt){
+						router.get('projectOverviewController').deleteProject(App.store.find(App.Project, evt.context.id));
+						var deleteTrue = router.get('projectOverviewController.projectDeleteCommitted');
+						console.log(deleteTrue);
+						if(deleteTrue){
+							router.transitionTo('projects.index');
+						}
+					},
+
 				}),
 
 				projectTasks: Ember.Route.extend({

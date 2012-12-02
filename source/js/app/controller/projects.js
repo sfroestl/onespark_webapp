@@ -5,7 +5,23 @@ App.ProjectsController = Ember.Controller.extend({
 
 App.ProjectController =  Ember.ObjectController.extend();
 
-App.ProjectOverviewController = Ember.ObjectController.extend();
+App.ProjectOverviewController = Ember.ObjectController.extend({
+
+	projectDeleteCommitted : false,
+
+	deleteProject: function(projectToDelete) {
+			this.projectDeleteCommitted = false;
+
+			var confirmResult = confirm("Delete project "+projectToDelete.get('title')+" ?");
+
+			if (confirmResult){
+				this.projectDeleteCommitted = true;
+				var project = projectToDelete;	
+				project.deleteRecord();
+				App.store.commit();
+			}
+	}
+});
 
 //App.ProjectDetailsController = Em.ObjectController.extend();
 
