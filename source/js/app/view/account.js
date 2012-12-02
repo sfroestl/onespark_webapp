@@ -1,3 +1,9 @@
 App.AccountView = Ember.View.extend({
-  templateName: 'account'
+  templateName: 'account',
+});
+
+App.FadeInView = Ember.View.extend({
+    didInsertElement: function(){
+        this.$().hide().show();
+    }
 });

@@ -10,7 +10,11 @@
 {{view Ember.TextField valueBinding="password" type="password"}}<br/>
 
 <label>Password Confirmation: </label><br/>
-{{view Ember.TextField valueBinding="password_confirmation" type="password"}}<br /><br/>
+{{view Ember.TextField valueBinding="password_confirmation" type="password"}}<br />
+
+{{#if App.router.registerController.isError}}
+<span class="error">{{error_msg}}</span><br />
+{{/if}}<br/>
 	
 <button {{action goRegister}}>Register</button>
 <a {{action goToLogin href=true}}>Back to login</a>

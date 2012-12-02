@@ -63,6 +63,7 @@ App.UserController = Ember.Controller.extend({
 
 	      success: function(data) {
 	      	this.set('isError', false);
+	      	this.set('password_conf', '');
 	        console.log ("--> Success: 200");
 	        App.session.logout();
 	        App.router.send("afterDelete");

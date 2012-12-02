@@ -1,15 +1,18 @@
 {{#if signedIn }}
 <hr/>
 <table>
-<tr>
+	<tr>
+    	<td><a {{action clickMeToToggleDetail target="controller"}}><img {{bindAttr src="App.session.sessionUser.displayAvatarUrl"}} alt="Profile"></a></td>
 
-<td>UserPic</td>
-<td>{{ sessionUser.username }}</td>
-<td>##</td>
-<td><a {{action goToProfile href=true}}>User Profile</a></td>
-<td>ContactsLink</td>
-<td>MessagesLink</td>
-<td><button {{action goLoggedOut}}>Logout</button></td>
-</tr>
+
+    {{#if isDetailViewable}}
+        {{#view App.FadeInView contentBinding="this"}}
+			<td><a {{action goToProfile href=true}}>User Profile</a></td>
+			<td>ContactsLink</td>
+			<td>MessagesLink</td>
+			<td><button {{action goLoggedOut}}>Logout</button></td>
+        {{/view}}
+    {{/if}}
+    </tr>
 </table>
 {{/if}}
