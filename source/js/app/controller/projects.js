@@ -7,8 +7,6 @@ App.ProjectController =  Ember.ObjectController.extend();
 
 App.ProjectOverviewController = Ember.ObjectController.extend({
 
-	projectDeleteCommitted : false,
-
 	// deleteProject: function(projectToDelete) {
 
 	// 		//console.log(projectToDelete.get('id'));
@@ -26,12 +24,10 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 	// }
 
 	deleteProject: function(projectToDelete){
-		//projectId = projectToDelete.id;
-		project = projectToDelete.id;
+		project = projectToDelete;
 
-		var base64 = encodeBase64(App.get("session.sessionUser.username"), this.password_conf);
-
-		var confirmResult = confirm("Delete project "+projectToDelete.get('title')+" ?");
+		var base64 = encodeBase64(App.get("session.username"), App.get('session.password'));
+		var confirmResult = confirm("Delete project \""+projectToDelete.get('title')+"\" ?");
 
 		if (confirmResult){
 			//old fashioned
@@ -51,12 +47,9 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 		      // },
 
 		      success: function(data) {
-		      	this.set('projectDeleteCommitted', true);
-		      	//this.set('password_conf', '');
-		        console.log ("--> Success: 200");
-		        //App.session.logout();
+		        console.log ("--> Success: 200 - Message: "+data.message);
 		        App.get('session.sessionUser.ownedProjects').removeObject(project);
-		        App.router.send("projects.index");
+		        App.router.send("goProjectsIndex");
 		      }
 		    })
 		}
