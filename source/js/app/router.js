@@ -184,8 +184,8 @@ App.Router = Ember.Router.extend({
 			route: '/user',
 	        connectOutlets: function(router, context){
 	            router.get('applicationController').connectOutlet('body', 'user');
-	            router.get('applicationController').connectOutlet('topNavi', 'account');
-	            router.get('applicationController').disconnectOutlet('footer');
+	            router.get('applicationController').connectOutlet('footer', 'account');
+	            router.get('applicationController').disconnectOutlet('topNavi');
 	        },
 	        //Profilansicht
 		   	profile:  Ember.Route.extend({
