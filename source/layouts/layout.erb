@@ -41,8 +41,24 @@
 		  adapter: DS.AuthenticatedRESTAdapter.create({
 			url: '<%= data.page.app_url || 'http://api.onespark.de/api/v1'%>',
 			bulkCommit: false,
-			session: App.session
-		  })
+			session: App.session,
+            // serializer: DS.Serializer.create({
+            //   // `post` becomes `postId`. By default, the RESTAdapter's
+            //   // serializer adds `_id` to the decamelized name.
+            //   keyForBelongsTo: function(type, name) {
+            //     console.log(type);
+            //     console.log(name);
+            //     return this.keyForAttributeName(type, name) + "_id";
+            //   },
+
+            //   // `firstName` stays as `firstName`. By default, the
+            //   // RESTAdapter's serializer decamelizes name.
+            //   keyForAttributeName: function(type, name) {
+            //     return name;
+            //   }
+            // })
+		  }),
+ 
 		});
 	</script>
     <%= yield %>

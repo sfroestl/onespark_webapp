@@ -31,10 +31,6 @@ App.Router = Ember.Router.extend({
     }),
 
   	loggedIn: Ember.Route.extend({
-
-  		enter: function(router) {
-  			router.get('accountController').set('isDetailViewable', false); //hides account navigation
-  		},
 		
 		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
 		goToNewProject: Ember.Route.transitionTo('loggedIn.projects.newProject'),
@@ -123,7 +119,8 @@ App.Router = Ember.Router.extend({
 					},
 
 					goDelete: function(router, evt){
-						router.get('projectOverviewController').deleteProject(App.store.find(App.Project, evt.context.id));
+						//router.get('projectOverviewController').deleteProject(App.store.find(App.Project, evt.context.id));
+						router.get('projectOverviewController').deleteProject(evt.context);
 						var deleteTrue = router.get('projectOverviewController.projectDeleteCommitted');
 						console.log(deleteTrue);
 						if(deleteTrue){
@@ -184,8 +181,7 @@ App.Router = Ember.Router.extend({
 			route: '/user',
 	        connectOutlets: function(router, context){
 	            router.get('applicationController').connectOutlet('body', 'user');
-	            router.get('applicationController').connectOutlet('topNavi', 'account');
-	            router.get('applicationController').disconnectOutlet('footer');
+	            //router.get('userController').connectOutlet('navigation', 'account');
 	        },
 	        //Profilansicht
 		   	profile:  Ember.Route.extend({
@@ -245,15 +241,12 @@ App.Router = Ember.Router.extend({
 	        goToLogin: Ember.Route.transitionTo('loggedOut.login'),
 		}),
 		login:  Ember.Route.extend({
-		  	route: '/login',
-		  	connectOutlets: function(router, context){
-		  		router.get('applicationController').connectOutlet('body', 'login');
-			},
-		  	goLoggedIn: function(router, context) { 
-		  		router.get('loginController').login(); 
-		  		//router.transitionTo('loggingIn');
-			},
-			goToRegister: Ember.Route.transitionTo('loggedOut.register')
+		  route: '/login',
+		  connectOutlets: function(router, context){
+		  	router.get('applicationController').connectOutlet('body', 'login');
+		},
+		  	goLoggedIn: function(router, context) { router.get('loginController').login(); router.transitionTo('loggingIn');},
+		  	goToRegister: Ember.Route.transitionTo('loggedOut.register')
 		}),
 		//pending Status, während eingeloggt wird und der ajax Aufruf die Antwort zurückliefert
 		loggingIn:  Ember.Route.extend({
