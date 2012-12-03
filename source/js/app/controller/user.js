@@ -9,8 +9,11 @@ App.UserController = Ember.Controller.extend({
 	//delete account
 	password_conf: '',
 
-	//messages
-	isError: false,
+	error_msg: '',
+  	isError: false,
+
+  	isSuccess: false,
+  	success_msg: '',
 
 	loadContent: function() {
 		this.surname = App.get("session.sessionUser.profile.surname");
@@ -27,10 +30,8 @@ App.UserController = Ember.Controller.extend({
 		profile.set("about", this.about);
     	App.store.commit();
 
-    	this.set('surname', '');
-    	this.set('forename', '');
-    	this.set('city', '');
-    	this.set('about', '');
+    	this.set('isSuccess', true);
+    	this.set('success_msg', 'Profile successfully updated.');
 	},
 	deleteMe: function() {
 		
@@ -56,8 +57,9 @@ App.UserController = Ember.Controller.extend({
 	      context: this,
 
 	      error: function(jqXHR, textStatus){
-	      	this.set('isError', true);
+	      	App.router.userController.set('isError', true);
 	      	this.set('password_conf', '');
+	      	App.router.userController.set('error_msg', 'Invalid password.');
 	        console.log ("--> ERROR");
 	      },
 
@@ -66,8 +68,31 @@ App.UserController = Ember.Controller.extend({
 	      	this.set('password_conf', '');
 	        console.log ("--> Success: 200");
 	        App.session.logout();
+
+	        App.router.loginController.set("success_msg","Account successfully deleted.");
+	        App.router.loginController.set("isSuccess",true);
 	        App.router.send("afterDelete");
 	      }
 	    });
-	}
+	},
+
+	/* ### Exit Helper ### */
+
+  	//Reset Notifications
+  	resetMsg: function() {
+	    this.set('isError', false);
+	    this.set('error_msg', '');
+
+	    this.set('isSuccess', false);
+	    this.set('success_msg', '');
+  	},
+
+  	//Reset Text Fields
+  	resetFields: function() {
+	    this.set('forename', '');
+	    this.set('password_cnf', '');
+	    this.set('city', '');
+	    this.set('about', '');
+	    this.set('surname', '');
+  	}
 });

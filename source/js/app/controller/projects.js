@@ -24,34 +24,40 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 	// }
 
 	deleteProject: function(projectToDelete){
-		project = projectToDelete;
+		if (App.get("session.sessionUserId")==projectToDelete.get('owner.id')){
+			var project = projectToDelete;
 
-		var base64 = encodeBase64(App.get("session.username"), App.get('session.password'));
-		var confirmResult = confirm("Delete project \""+projectToDelete.get('title')+"\" ?");
+			var base64 = encodeBase64(App.get("session.username"), App.get('session.password'));
+			var confirmResult = confirm("Delete project \""+projectToDelete.get('title')+"\" ?");
 
-		if (confirmResult){
 			//old fashioned
-			$.ajax({
-		      async: true,
-		      url: 'http://api.onespark.de/api/v1/projects/'+project.id,
-		      type: 'DELETE',
-		      dataType: 'json',
-		      accept: 'json',
-		      headers: {'Authorization': base64},
-		      context: this,
+			if(confirmResult){
+				$.ajax({
+			      async: true,
+			      url: 'http://api.onespark.de/api/v1/projects/'+project.id,
+			      type: 'DELETE',
+			      dataType: 'json',
+			      accept: 'json',
+			      headers: {'Authorization': base64},
+			      context: this,
 
-		      // error: function(jqXHR, textStatus){
-		      // 	this.set('isError', true);
-		      // 	this.set('password_conf', '');
-		      //   console.log ("--> ERROR");
-		      // },
+			      // error: function(jqXHR, textStatus){
+			      // 	this.set('isError', true);
+			      // 	this.set('password_conf', '');
+			      //   console.log ("--> ERROR");
+			      // },
 
-		      success: function(data) {
-		        console.log ("--> Success: 200 - Message: "+data.message);
-		        App.get('session.sessionUser.ownedProjects').removeObject(project);
-		        App.router.send("goProjectsIndex");
-		      }
-		    })
+			      success: function(data) {
+			        console.log ("--> Success: 200 - Message: "+data.message);
+			        App.get('session.sessionUser.ownedProjects').removeObject(project);
+			        App.router.send("goProjectsIndex");
+			      }
+			    })
+			}
+
+		}
+		else{
+			alert("You have no permission to delete this project");
 		}
 	}
 });

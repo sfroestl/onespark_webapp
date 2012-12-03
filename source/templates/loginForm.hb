@@ -6,10 +6,9 @@
 <label>Password: </label><br/>
 {{view Ember.TextField valueBinding="password" type="password"}}<br/><br/>
 
-<!--
-{{#unless App.router.userController.isError}}
-<span class="success">Success: Account deleted.</span><br />
-{{/unless}}-->
+{{#if App.router.loginController.isSuccess}}
+<span class="success">{{App.router.loginController.success_msg}}</span><br />
+{{/if}}<br/>
 
 <button {{action goLoggedIn}}>Login</button><a {{action goToRegister href=true}}>Register</a>
 
