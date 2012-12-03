@@ -85,3 +85,5 @@ App.RegisterController = Ember.Controller.extend({
     this.set('password_confirmation', '');
   }
 });
+
+  

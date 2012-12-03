@@ -1,4 +1,4 @@
-describe("TheregisterControllerontroller", function(){
+describe("The RegisterController", function(){
 
 	beforeEach(function(){
        registerController = App.RegisterController.create();
@@ -45,7 +45,7 @@ describe("TheregisterControllerontroller", function(){
 			expect(registerController.isError).toEqual(true);
 		});
 
-		it(" should run for empty invalid emails", function(){
+		it(" should run for invalid emails", function(){
 			expect(registerController.isError).toEqual(false);
 
 			registerController.set("username", "karl");
@@ -59,7 +59,7 @@ describe("TheregisterControllerontroller", function(){
 			expect(registerController.isError).toEqual(true);
 		});
 
-		it(" should run for empty too short passwords", function(){
+		it(" should run for too short passwords", function(){
 			expect(registerController.isError).toEqual(false);
 
 			registerController.set("username", "karl");
@@ -76,13 +76,17 @@ describe("TheregisterControllerontroller", function(){
 
 	describe( "its registration with ajax mock", function () {  
 		it(" should run for valid input", function(){
-			spyOn($, "ajax");
-		    register("karl1", "karl1@gmx.de", "asdasd", "asdasd");
+			spyOn($, "ajax").andCallFake(function(options) {
+        		options.success();
+    		});
+    		var callback = jasmine.createSpy();
+		    register("karl1", "karl1@gmx.de", "asdasd", "asdasd", callback);
     		expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("/users");
+    		expect(callback).toHaveBeenCalled();
 		});
 	});
 
-	describe( "its registration as integration test with real ajax", function () {  
+	describe( "its registration as integration test", function () {  
 		it(" should run for valid input", function(){
 			spyOn($, "ajax");
 
@@ -95,18 +99,20 @@ describe("TheregisterControllerontroller", function(){
             App.store.commit();
 		    
     		expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("http://api.onespark.de/api/v1/users");
+    		expect($.ajax.mostRecentCall.args[0]["type"]).toEqual("POST");
+    		expect($.ajax.mostRecentCall.args[0]["dataType"]).toEqual("json");
 		});
 	});
 });
 
-
 //mock for ajax backend connection
-function register(username, email, password, password_confirmation) {
+function register(username, email, password, password_confirmation, callback) {
     $.ajax({
         type: "POST",
         url: "/users",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: {"user":{"username":username,"email":email,"password":password,"password_confirmation":password_confirmation}}
+        data: {"user":{"username":username,"email":email,"password":password,"password_confirmation":password_confirmation}},
+        success: callback
     });
 }
