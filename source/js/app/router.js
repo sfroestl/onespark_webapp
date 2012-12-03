@@ -148,7 +148,7 @@ App.Router = Ember.Router.extend({
 			        connectOutlets: function(router,project) {
 						var aProject = router.get('topNaviController.content');
 						router.get('applicationController').connectOutlet('body', 'tool',aProject);
-						router.get('toolController').connectOutlet('tool-body', 'contributors',aProject.get("contributors"));
+						router.get('toolController').connectOutlet('tool-body', 'contributors',aProject);
 					}
 				}),
 
@@ -181,7 +181,8 @@ App.Router = Ember.Router.extend({
 			route: '/user',
 	        connectOutlets: function(router, context){
 	            router.get('applicationController').connectOutlet('body', 'user');
-	            //router.get('userController').connectOutlet('navigation', 'account');
+	            router.get('applicationController').connectOutlet('footer', 'account');
+	            router.get('applicationController').disconnectOutlet('topNavi');
 	        },
 	        //Profilansicht
 		   	profile:  Ember.Route.extend({
