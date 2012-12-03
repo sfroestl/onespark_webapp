@@ -184,8 +184,8 @@ App.Router = Ember.Router.extend({
 			route: '/user',
 	        connectOutlets: function(router, context){
 	            router.get('applicationController').connectOutlet('body', 'user');
-	            router.get('applicationController').connectOutlet('topNavi', 'account');
-	            router.get('applicationController').disconnectOutlet('footer');
+	            router.get('applicationController').connectOutlet('footer', 'account');
+	            router.get('applicationController').disconnectOutlet('topNavi');
 	        },
 	        //Profilansicht
 		   	profile:  Ember.Route.extend({
@@ -243,6 +243,10 @@ App.Router = Ember.Router.extend({
         		router.get('registerController').register();
      		},
 	        goToLogin: Ember.Route.transitionTo('loggedOut.login'),
+	        exit: function(router){
+				router.get('registerController').resetMsg();
+				router.get('registerController').resetFields();
+	    	},
 		}),
 		login:  Ember.Route.extend({
 		  	route: '/login',
