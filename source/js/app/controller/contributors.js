@@ -1,2 +1,2 @@
-App.ContributorsController = Ember.ArrayController.extend({
+App.ContributorsController = Ember.ObjectController.extend({
 });

@@ -118,7 +118,7 @@ App.Router = Ember.Router.extend({
 			        connectOutlets: function(router,project) {
 						var aProject = router.get('topNaviController.content');
 						router.get('applicationController').connectOutlet('body', 'tool',aProject);
-						router.get('toolController').connectOutlet('tool-body', 'contributors',aProject.get("contributors"));
+						router.get('toolController').connectOutlet('tool-body', 'contributors',aProject);
 					}
 				}),
 
