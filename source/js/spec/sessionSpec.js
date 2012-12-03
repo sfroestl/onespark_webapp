@@ -20,12 +20,20 @@ describe( "The session model", function () {
 		expect(session.insertAuthenticationInRequest).toBeDefined();
 	});
 
-	it("should have a _storeAsCookie function", function(){
-		expect(session._storeAsCookie).toBeDefined();
+	it("should have a _storeCredentialsAsCookie function", function(){
+		expect(session._storeCredentialsAsCookie).toBeDefined();
 	});
 
-	it("should have a _findUser function", function(){
-		expect(session._findUser).toBeDefined();
+	it("should have a _storeUserIdAsCookie function", function(){
+		expect(session._storeUserIdAsCookie).toBeDefined();
+	});
+
+	it("should have a _findUserId function", function(){
+		expect(session._findUserId).toBeDefined();
+	});
+
+	it("should have a _loadSessionUser function", function(){
+		expect(session._loadSessionUser).toBeDefined();
 	});
 
 	describe( "The logged out user", function () {  

@@ -243,6 +243,10 @@ App.Router = Ember.Router.extend({
         		router.get('registerController').register();
      		},
 	        goToLogin: Ember.Route.transitionTo('loggedOut.login'),
+	        exit: function(router){
+				router.get('registerController').resetMsg();
+				router.get('registerController').resetFields();
+	    	},
 		}),
 		login:  Ember.Route.extend({
 		  	route: '/login',
