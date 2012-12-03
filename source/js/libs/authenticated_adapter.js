@@ -8,7 +8,7 @@ DS.AuthenticatedRESTAdapter = DS.RESTAdapter.extend({
     var errorCallback = function(jqXHR, textStatus, errorThrown) {
 		console.log(jqXHR);
 		if (textStatus=="error" && handlingSession)  {//Seems like an authentication Problem
-			App.router.send("unauthorizedRequest");
+			//App.router.send("unauthorizedRequest");
 		}
 	};
     if (hash.error) {	//is there allready an error handling
