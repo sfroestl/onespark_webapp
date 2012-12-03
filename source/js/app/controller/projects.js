@@ -32,6 +32,7 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 
 			//old fashioned
 			if(confirmResult){
+				var fm = App.FlashMessage.create({text: "Deleting Project '" + projectToDelete.get('title')+"'",removable:false});
 				$.ajax({
 			      async: true,
 			      url: 'http://api.onespark.de/api/v1/projects/'+project.id,
@@ -41,15 +42,15 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 			      headers: {'Authorization': base64},
 			      context: this,
 
-			      // error: function(jqXHR, textStatus){
-			      // 	this.set('isError', true);
-			      // 	this.set('password_conf', '');
-			      //   console.log ("--> ERROR");
-			      // },
+			      error: function(jqXHR, textStatus){
+			        console.log ("--> ERROR");
+			        fm.setProperties({removable: true, text: textStatus});
+			      },
 
 			      success: function(data) {
 			        console.log ("--> Success: 200 - Message: "+data.message);
 			        App.get('session.sessionUser.ownedProjects').removeObject(project);
+			        fm.setProperties({removable: true, text: data.message});
 			        App.router.send("goProjectsIndex");
 			      }
 			    })
