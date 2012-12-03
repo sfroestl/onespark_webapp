@@ -1,7 +1,6 @@
 App.Project = DS.Model.extend({
     title: DS.attr('string'),
     desc: DS.attr('string'),
-    owner: DS.attr('string'),
     dueDate: DS.attr('date'),
     owner: DS.belongsTo('App.User'),
     coworkers: DS.hasMany('App.ProjectCoworker'),
