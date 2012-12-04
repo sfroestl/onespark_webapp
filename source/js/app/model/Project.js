@@ -4,6 +4,9 @@ App.Project = DS.Model.extend({
     dueDate: DS.attr('date'),
     owner: DS.belongsTo('App.User'),
     coworkers: DS.hasMany('App.ProjectCoworker'),
+    flashMessageName: function() {
+		return "project \""+this.get("title")+"\"";
+	}.property("title"),
     contributors: function() {
 		return this.get('coworkers').map(function(item, index, self) {
 			return item.get('user');

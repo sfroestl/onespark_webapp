@@ -16,7 +16,8 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 
 			if (confirmResult){
 				this.projectDeleteCommitted = true;
-				var project = projectToDelete;	
+				var project = projectToDelete;
+				showFlashMessageFor(project);
 				project.deleteRecord();
 				App.store.commit();
 			}
