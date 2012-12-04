@@ -6,7 +6,6 @@ App.FlashMessage = Ember.Object.extend({
 		this.hide();	
 	},
     buttonText:"ok",
-    removable:true,
     init: function() {
 		App.flashMessages.addObject(this);
 	},
@@ -20,7 +19,9 @@ App.ModelFlashMessage = App.FlashMessage.extend({
 	type: function() {
 		return this.get('content.stateForCSS');
 	}.property('content.stateForCSS'),
-    objectName: "object",
+    objectName: function() {
+			return this.get("content.flashMessageName")|| "object";
+	}.property("content.flashMessageName"),
     buttonAction: function() {
 	  if (!this.get("content.isValid")) App.router.send(this.get("editAction"),this.get("content"));
 	  if (this.get("content.isError")) {
@@ -54,4 +55,17 @@ App.ModelFlashMessage = App.FlashMessage.extend({
 	}.property("actionText","content.isValid","actionPlanningText"),
 });
 
+function showFlashMessageFor(obj,additionalProperties) {
+		removeExistingFlashMessagesOf(obj);
+		x= App.ModelFlashMessage.create(additionalProperties || {});
+		x.set("content",obj);
+}
+//remove ModelFlashMessage for obj
+//TODO find error
+function removeExistingFlashMessagesOf(obj) {
+		App.set("flashMessages",App.get("flashMessages").filter( function(item) { 
+			var cont = item.get("content");
+			return !cont || cont==obj;
+		}));
+}
 App.flashMessages = [];
