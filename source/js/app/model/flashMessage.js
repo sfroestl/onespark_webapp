@@ -37,8 +37,8 @@ App.ModelFlashMessage = App.FlashMessage.extend({
 	  return "ok";
 	}.property("content.isValid","content.isError","content.isSaving"),
     actionName: function() {
-		return this.get("content.isDeleted") ? "deleting" : "saving";
-	}.property("content.isDeleted"),
+		return this.get("content.isDeleted") ? "deleting" : this.get("content.isNew") ? "adding" : "saving";
+	}.property("content.isDeleted","content.isNew"), 
     actionText: function() {
 		return this.get("actionName")+" "+ this.get("objectName");
 	}.property("actionName","objectName"),
