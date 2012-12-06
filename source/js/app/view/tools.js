@@ -1,5 +1,6 @@
 App.ToolView = Ember.View.extend({
   templateName: 'tool',
+  classNames: ['tool'],
   currentToolName: function() {
 	  var state = App.get('router.currentState');
 	  while (!state.get("toolName")) {	//find a state (searching up to root) with a toolName-Property
@@ -15,6 +16,7 @@ App.ToolView = Ember.View.extend({
 
 App.ToolsView = Ember.View.extend({
   templateName: 'tools',
+  classNames: ['tools'],
   availableTools: function() {
 	  var state = App.get('router.currentState');
 	  while (!state.get("goToTool")) {	//find a state (searching up to root) with a toolName-Property

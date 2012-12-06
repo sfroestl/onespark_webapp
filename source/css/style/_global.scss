@@ -1,0 +1,17 @@
+/* Global Styles */
+body {
+	// margin-left:auto;
+	// margin-right:auto;
+	// width: 320px;
+	// height:480px;
+	color: $os-black;
+	background-color: $os-white;
+	overflow-y: scroll;
+	position:absolute;
+	width:100%;
+}
+html {
+	font-family: $os-sans;
+	background-color: $os-white;
+}
+
