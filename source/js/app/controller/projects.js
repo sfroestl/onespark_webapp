@@ -1,6 +1,6 @@
 App.ProjectsController = Ember.Controller.extend({
 		ownedProjects: null,
-		contributedProjects: null
+		collaboratedProjects: null
 });
 
 App.ProjectController =  Ember.ObjectController.extend();
