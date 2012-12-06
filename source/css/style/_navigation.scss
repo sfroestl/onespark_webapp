@@ -1,0 +1,103 @@
+/* Navbar General*/
+.nav-bar{
+	width:100%;
+	text-transform: lowercase;
+	height: 47px;
+	* {	
+		padding: 8px 0;
+		cursor: pointer;
+		overflow: hidden;
+		img{
+			margin-top: -8px;
+			display:block;
+			height: 31px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+	}
+	.button-left{
+		text-align:center;
+		display: block;
+		float:left;
+		height: 31px;
+		width: 9.125%;
+		padding-left: 3%;
+		padding-right: 1.5%;
+	}
+	.button-center{
+		font-family: $os-serif;
+		font-size: $nav-head;
+		text-decoration:none;
+		display: block;
+		float: left;
+		height:31px;
+		padding-left: 1.5%;
+		padding-right: 1.5%;
+		width: 69.75%;
+
+	}
+	.button-right{
+		text-align:center;
+		display: block;
+		float: right;
+		height: 31px;
+		width: 9.125%;
+		padding-right: 3%;
+		padding-left: 1.5%;
+	}
+}
+
+/* Tool Nav */
+.tool-nav{
+	position:fixed;
+	top:47px;
+	background-color: $os-grey;
+	color: $os-black;
+	*{
+		&:hover{
+			background-color: $os-darkgrey;
+		}
+		&:active{
+			background-color: $os-red;
+		}
+	}
+	.back-button{
+		// border-right: solid 1px $os-darkblack;
+	}
+	.tools-button {
+		color: $os-black;
+	}
+	.context-button{
+	}
+}
+
+/* Project Nav */
+.project-nav {
+	position:fixed;
+	top:0px;
+	color: $os-white;
+	background-color: $os-black;
+	*{
+		&:hover{
+			background-color: $os-darkblack;
+		}
+		&:active{
+			background-color: $os-red;
+		}
+	}
+
+	.home-button{
+		img {
+			// border-right: solid 1px $os-darkblack;
+		}
+
+	}
+	.projects-button {
+		color: $os-white;
+	}
+	.search-button{
+		img{
+			// border-left: solid 1px $os-darkblack;
+		}
+	}
+}
