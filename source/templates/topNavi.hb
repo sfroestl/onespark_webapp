@@ -1,10 +1,14 @@
-<span><a {{action goToProjects href=true}}>Home</a></span>
-<span>
+<a class="home-button button-left" {{action goToProjects href=true}}>
+	<img src="/images/icon-os.png" alt="Home" />
+</a>
+
 {{#if content}}
-	<i><a {{action showProject href=true}}>{{title}}</a></i>
+<a class="projects-button button-center" {{action showProject href=true}}>{{title}}</a>
 {{else}}
-	all projects
+<a class="projects-button button-center" {{action goToProjects href=true}}>all projects</a>
 {{/if}}
-</span>
-<span><a {{action goToSearch href=true}}>search</a><span><br/>
+
+<a class="search-button button-right"{{action goToSearch href=true}}>
+	<img src="/images/icon-search.png" alt="Search" />
+</a>
 {{!outlet search}}

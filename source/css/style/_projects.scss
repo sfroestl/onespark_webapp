@@ -1,0 +1,43 @@
+.projects{
+	margin-top:47px;
+	background-color: $os-white;
+	a {
+		font-family: $os-serif;
+		font-size: $nav-head;
+		display:block;
+		overflow:hidden;
+		height:31px;
+		padding: 8px 0 8px 15.125%;
+		color: $os-black;
+		text-decoration:none;
+		&:hover{
+			background-color: $os-mediumgrey;
+		}
+		&:active{
+			background-color: $os-red;
+		}
+	}
+	h2{
+		padding:0;
+		margin:0;
+		padding-left:15.125%;
+		color: $os-darkgrey;
+		border: 1px solid $os-grey;
+		border-left:none;
+		border-right:none;
+		font-weight:normal;
+		font-size: .8em;
+	}
+	ul{
+		margin:0;
+		padding:0;
+		li {
+			padding:0;
+			margin:0;
+			list-style-type:none;
+			a{	
+
+			}
+		}
+	}
+}

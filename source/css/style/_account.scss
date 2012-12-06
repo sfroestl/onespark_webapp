@@ -1,0 +1,33 @@
+.account{
+	min-width: 10.625%;
+	padding-left:1.5%;
+	background-color: $os-red;
+	position:fixed;
+	bottom: 8px;
+	right: 0;
+	td{	
+		padding: 0 1.5%;
+		min-width:9.125%;
+	}
+	.account-image{
+		img{
+			height: 31px;
+			padding: 8px 0;
+			margin-left: auto;
+			margin-right:auto;
+		}
+		display:block;
+		height: 47px;
+		float:left;
+	}
+	.account-tool{
+		height:47px;
+		background-color:$os-black;
+		a{	
+			color: $os-white;
+			display:block;
+			height:47px;
+			float:left;
+		}
+	}
+}
