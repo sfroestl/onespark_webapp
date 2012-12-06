@@ -1,11 +1,25 @@
 App.User = DS.Model.extend({
+	//simple attributes
     username: DS.attr('string'),
     email: DS.attr('string'),
     password: DS.attr('string'),
     password_confirmation: DS.attr('string'),
+    //Relations
     ownedProjects: DS.hasMany('App.Project'),
-    collaboratedProjects:DS.hasMany('App.Project'),
     profile: DS.belongsTo('App.Profile'),
+    projectCoworkers:DS.hasMany('App.ProjectCoworker'),
+    //computed Relation
+    collaboratedProjects: [],
+    _updateCollaboratedProjects: function() {
+		this.get("collaboratedProjects").clear();
+		this.get("collaboratedProjects").addObjects(this.get("projectCoworkers").map(function(item){
+			return item.get("project");
+		}));
+	}.observes("projectCoworkers.@each.project"),
+	
+	//Computed Properties
+	
+	//Displayed Name
     displayName: function() {
 	  var forename = this.get("profile.forename");
 	  var surname = this.get("profile.surname");
@@ -14,13 +28,22 @@ App.User = DS.Model.extend({
 	  else
 		   return this.get("username");
 	}.property('profile.forename','profile.surname','username'),
+	//URL of displayed Avatar
     displayAvatarUrl: function() {
 	  return this.get("profile.avatarUrl") || imagePath("noavatar.png");
-	}.property('profile.avatarUrl')
+	}.property('profile.avatarUrl'),
+	
+	//functions
+	matchesSearch: function(word) {
+		word = word.toLowerCase();
+		return (this.get("username").toLowerCase().indexOf(word)!=-1) ||
+		(this.get("email").toLowerCase().indexOf(word)!=-1) ||
+		(this.get("displayName").toLowerCase().indexOf(word)!=-1);
+	}
 });
 DS.AuthenticatedRESTAdapter.map('App.User', {
 	ownedProjects: { key: 'owned_project_ids' },
-	collaboratedProjects: { key: 'collaborated_project_ids' },
+	projectCoworkers: { key: 'project_coworker_ids' },
 	profile: {key: 'profile_id'}
 });
 
