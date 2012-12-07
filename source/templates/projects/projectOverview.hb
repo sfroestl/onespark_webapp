@@ -13,8 +13,8 @@
 		<td>{{owner.displayName}}</td>
 	</tr>
 	<tr>
-		<td>due date:</td>
-		<td>{{dueDate}}</td>
+		<td>due:</td>
+		<td>{{view "App.FriendlyTimeView" timeBinding="dueDate"}}</td>
 	</tr>
 </table>
 {{view App.UserListView title="Contributors" usersBinding="controller.content.contributors"}}
