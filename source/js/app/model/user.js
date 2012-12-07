@@ -9,10 +9,9 @@ App.User = DS.Model.extend({
     profile: DS.belongsTo('App.Profile'),
     projectCoworkers:DS.hasMany('App.ProjectCoworker'),
     //computed Relation
-    collaboratedProjects: [],
+    collaboratedProjects: null,
     _updateCollaboratedProjects: function() {
-		this.get("collaboratedProjects").clear();
-		this.get("collaboratedProjects").addObjects(this.get("projectCoworkers").map(function(item){
+		this.set("collaboratedProjects.[]",this.get("projectCoworkers").map(function(item){
 			return item.get("project");
 		}));
 	}.observes("projectCoworkers.@each.project"),
@@ -39,6 +38,10 @@ App.User = DS.Model.extend({
 		return (this.get("username").toLowerCase().indexOf(word)!=-1) ||
 		(this.get("email").toLowerCase().indexOf(word)!=-1) ||
 		(this.get("displayName").toLowerCase().indexOf(word)!=-1);
+	},
+	init: function() {
+	  this._super(); //do this first
+	  this.set("collaboratedProjects",[]);
 	}
 });
 DS.AuthenticatedRESTAdapter.map('App.User', {
