@@ -9,7 +9,7 @@ App.Project = DS.Model.extend({
 	}.property("title"),
     contributors: function() {
 		return this.get('coworkers').map(function(item, index, self) {
-			return item.get('user');
+			return App.CoworkerOfProject.create({projectCoworker: item});
 		});
 	}.property('coworkers','coworkers.[]','coworkers.@each.user')
     //tasks: DS.hasMany('App.Task')
