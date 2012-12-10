@@ -132,7 +132,12 @@ App.Router = Ember.Router.extend({
 					},
 
 					goDelete: function(router, evt){
-						router.get('projectOverviewController').deleteProject(evt.context);
+						router.get('projectOverviewController').deleteProject(App.store.find(App.Project, evt.context.id));
+						var deleteTrue = router.get('projectOverviewController.projectDeleteCommitted');
+						console.log(deleteTrue);
+						if(deleteTrue){
+							router.transitionTo('projects.index');
+						}
 					},
 
 					goProjectsIndex: Ember.Route.transitionTo('projects.index'),
