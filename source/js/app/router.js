@@ -34,9 +34,19 @@ App.Router = Ember.Router.extend({
 		
 		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
 		goToNewProject: Ember.Route.transitionTo('loggedIn.projects.newProject'),
-		
+		goToUserProfile: Ember.Route.transitionTo('user.profile'),
+		goToUserContacts: Ember.Route.transitionTo('user.contacts'),
+		goToUserMessages: Ember.Route.transitionTo('user.messages'),
 		search: Ember.Route.extend({
 			route: '/search',
+		}),
+
+		account: Ember.Route.extend({
+			route: '/account',
+			connectOutlets: function(router, context){
+				router.get('accountController').connectOutlet('body', 'user');
+				router.get('applicationController').disconnectOutlet('topNavi');
+			},
 		}),
 
 		goLoggedOut: function(router, evt) {
@@ -177,7 +187,6 @@ App.Router = Ember.Router.extend({
 			route: '/user',
 	        connectOutlets: function(router, context){
 	            router.get('applicationController').connectOutlet('body', 'user');
-	            router.get('applicationController').connectOutlet('footer', 'account');
 	            router.get('applicationController').disconnectOutlet('topNavi');
 	        },
 	        //Profilansicht
@@ -223,6 +232,20 @@ App.Router = Ember.Router.extend({
 					router.get('userController').resetMsg();
 					router.get('userController').resetFields();
 	    		}
+		    }),
+		    //Contacts
+		    contacts: Ember.Route.extend({
+		    	route: '/contacts',
+		    	connectOutlets:function(router, context){
+		    		router.get('userController').connectOutlet('userbody', 'userContacts');
+		    	}
+		    }),
+		    //Messages
+		    messages: Ember.Route.extend({
+		    	route: '/messages',
+		    	connectOutlets:function(router, context){
+		    		router.get('userController').connectOutlet('userbody', 'userMessages');
+		    	}
 		    }),
 	        goToUpdateProfile: Ember.Route.transitionTo('updateprofile'),
 	        goToDeleteMe: Ember.Route.transitionTo('deleteme')
