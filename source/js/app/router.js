@@ -179,9 +179,8 @@ App.Router = Ember.Router.extend({
 							router.get('newContributorController').set("project",aProject);
 						},
 						cancel: Ember.Route.transitionTo("projectContributors.index"),
-						goSave: function(router, evt) {
-							router.get('newContributorController').save();
-							router.transitionTo('projectContributors.index');
+						createContributor: function(router, evt) {
+							router.get('newContributorController').save(evt.contexts[0],evt.contexts[1]); //no transition, so batch-adding is possible
 						},						
 					})
 				}),
