@@ -4,7 +4,7 @@
 		{{#with user}}
 				<li {{bindAttr class="stateForCSS"}}>
          			{{#if isLoaded}}
-						<img {{bindAttr src="displayAvatarUrl"}}> <a {{action showUser this }}> {{displayName}}</a> 
+						<img {{bindAttr src="displayAvatarUrl"}}> <a {{action clickedUser this }}> {{displayName}}</a> 
          			{{else}}
 						Loading...
          			{{/if}}

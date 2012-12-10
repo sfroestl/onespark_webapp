@@ -18,8 +18,8 @@
 
 
     <%= javascript_include_tag  "libs/modernizr-2.6.1.min.js" %>
-    
-    
+
+
 
   </head>
 
@@ -31,38 +31,19 @@
 
 <%= partial 'templates' %>
 
-    
+
     <%= javascript_include_tag  "libs/jquery/jquery-1.7.2.js" %>
     <%= javascript_include_tag  "libs/handlebars/handlebars-1.0.0.beta.6" %>
     <%= javascript_include_tag  "app" %>
     <script type="text/javascript">
-		App.store = DS.Store.create({
-		  revision: 8,
-		  adapter: DS.AuthenticatedRESTAdapter.create({
+		App.set("session.adapter", DS.AuthenticatedRESTAdapter.create({
 			url: '<%= data.page.app_url || 'http://api.onespark.de/api/v1'%>',
 			bulkCommit: false,
-			session: App.session,
-            // serializer: DS.Serializer.create({
-            //   // `post` becomes `postId`. By default, the RESTAdapter's
-            //   // serializer adds `_id` to the decamelized name.
-            //   keyForBelongsTo: function(type, name) {
-            //     console.log(type);
-            //     console.log(name);
-            //     return this.keyForAttributeName(type, name) + "_id";
-            //   },
-
-            //   // `firstName` stays as `firstName`. By default, the
-            //   // RESTAdapter's serializer decamelizes name.
-            //   keyForAttributeName: function(type, name) {
-            //     return name;
-            //   }
-            // })
-		  }),
- 
-		});
+			session: App.session
+		  }));
 	</script>
     <%= yield %>
-    
+
   </body>
 
 </html>

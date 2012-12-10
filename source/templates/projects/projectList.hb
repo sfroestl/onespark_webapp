@@ -4,7 +4,7 @@
 		{{#with project}}
 				<li {{bindAttr class="stateForCSS"}}>
          			{{#if isLoaded}}
-						<a {{action showProject this href=true}}> {{title}} {{#if dueDate}}| {{dueDate}}{{/if}}</a> 
+						<a {{action showProject this href=true}}>{{title}}{{#if dueDate}} (due {{view "App.FriendlyTimeView" timeBinding="dueDate"}}){{/if}}</a>
          			{{else}}
 						Loading..
          			{{/if}}

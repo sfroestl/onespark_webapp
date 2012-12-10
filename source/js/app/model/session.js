@@ -4,7 +4,9 @@ App.Session = Ember.Object.extend({
 	password: null,
 	sessionUser: null,
     sessionUserId: null,
-
+    adapter:null,
+	store: null,
+	
   signedIn: function() {
 	  return !!this.get("sessionUser.isLoaded");
   }.property('sessionUser.isLoaded'),
@@ -31,6 +33,19 @@ App.Session = Ember.Object.extend({
     return data;
   },  
   
+  recreateStore: function() {
+	var adapter = this.get("adapter");
+	if (!adapter) {
+		store = null;
+		return;
+	}
+	adapter.set("session",this);
+	this.set("store",DS.Store.create({
+		  revision: 9,
+		  adapter:adapter
+	}));
+  }.observes("adapter","sessionToken"),
+  
   // creates a cookie with sessionToken
   _storeCredentialsAsCookie: function() {
     var token = this.get("sessionToken");
@@ -53,10 +68,11 @@ App.Session = Ember.Object.extend({
   _findUserId: function() {
 	ses = this;
 	ses.set("sessionUserId",null);
+	if (!ses.get("adapter")) return; //don't request without adapter
 	if (!ses.get("sessionToken")) return; //don't request when not logged in
 		basicAuth = ses.get("sessionToken");
 		$.ajax({
-		  url: 'http://api.onespark.de/api/v1/user',
+		  url: ses.get("adapter.url")+"/user",
 		  type: 'GET',
 		  dataType: 'json',
 		  accept: 'json',
@@ -75,14 +91,17 @@ App.Session = Ember.Object.extend({
 			App.router.send("loginComplete");
 		  }
 	});
-  }.observes("sessionToken"),
+  }.observes("sessionToken","adapter"),
 
   _loadSessionUser: function() {
 	var id = this.get("sessionUserId");
-  	this.set("sessionUser",id ? App.store.find(App.User,id) : null);
-  }.observes("sessionUserId")
+	var store = this.get("store");
+  	this.set("sessionUser",(id && store) ? store.find(App.User,id) : null);
+  }.observes("sessionUserId","store"),
+  
 });
-App.session = App.Session.create();
+App.set("session",App.Session.create());
+
 var restoreLogin =Ember.Object.create({
 	username: null,
 	password: null,

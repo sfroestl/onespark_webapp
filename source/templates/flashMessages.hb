@@ -1,8 +1,8 @@
 {{#each message in App.flashMessages }}
   <li {{bindAttr class="message.type"}}>
     {{message.text}} 
-    {{#if message.removable}}
-      <a {{action "hide" on="click" target="message"}}>[x]</a>
+    {{#if message.buttonText}}
+      <button {{action "buttonAction" on="click" target="message"}}>{{message.buttonText}}</button>
     {{/if}}
   </li>
 {{/each}}

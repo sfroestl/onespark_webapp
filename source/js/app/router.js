@@ -14,7 +14,10 @@ App.Router = Ember.Router.extend({
 
   	
   	goToSearch: Ember.Route.transitionTo('loggedIn.search'),
-
+		//Wechsel in eingeloggten (loggedIn) Status
+		loginComplete: Ember.Route.transitionTo('root.loggedIn.projects.index'),
+		//Wechsel in ausgeloggten (loggedOut.login) Status
+		unauthorizedRequest: Ember.Route.transitionTo('root.loggedOut.login'),
   	index: Ember.Route.extend({
 
 
@@ -141,11 +144,31 @@ App.Router = Ember.Router.extend({
 				projectContributors: Ember.Route.extend({
 					route: '/contributors',
 					toolName: 'Contributors',
-			        connectOutlets: function(router,project) {
-						var aProject = router.get('topNaviController.content');
-						router.get('applicationController').connectOutlet('body', 'tool',aProject);
-						router.get('toolController').connectOutlet('tool-body', 'contributors',aProject);
-					}
+					
+					index: Ember.Route.extend({
+						route: '/',
+						connectOutlets: function(router,project) {
+							var aProject = router.get('topNaviController.content');
+							router.get('applicationController').connectOutlet('body', 'tool',aProject);
+							router.get('toolController').connectOutlet('tool-body', 'contributors',aProject);
+						},
+					}),
+					goToNewContributor: Ember.Route.transitionTo("projectContributors.newContributor"),
+					newContributor: Ember.Route.extend({
+						route: '/add',
+						contextMenu: 'add Contributor',
+						connectOutlets: function(router,project) {
+							var aProject = router.get('topNaviController.content');
+							router.get('applicationController').connectOutlet('body', 'tool',aProject);
+							router.get('toolController').connectOutlet('tool-body', 'newContributor');
+							router.get('newContributorController').set("project",aProject);
+						},
+						cancel: Ember.Route.transitionTo("projectContributors.index"),
+						goSave: function(router, evt) {
+							router.get('newContributorController').save();
+							router.transitionTo('projectContributors.index');
+						},						
+					})
 				}),
 
 				projectEdit: Ember.Route.extend({
@@ -158,7 +181,8 @@ App.Router = Ember.Router.extend({
 				goToTool: function(router, context) {
 					
 					var c = context.contexts;
-					c[0] = c[0].get('path'); //the first object is the Route Object of the chosen tool
+					c[0] = c[0].get('path') + (c[0].get("isLeaf") ? "" : ".index"); //the first object is the Route Object of the chosen tool
+					//if it's not a leaf, append .index to the path
 					//Call the transitionTo mehtod of the Router
 					//note that router.transitionTo actually retrieves the function
 					//apply needs two parameters:
@@ -270,10 +294,6 @@ App.Router = Ember.Router.extend({
 		  	router.get('accountController').set("content",App.session);
 		  }
 		}),
-		//Wechsel in eingeloggten (loggedIn) Status
-		loginComplete: Ember.Route.transitionTo('root.loggedIn.projects.index'),
-		//Wechsel in ausgeloggten (loggedOut.login) Status
-		unauthorizedRequest: Ember.Route.transitionTo('login')
 	})
   })
 });
