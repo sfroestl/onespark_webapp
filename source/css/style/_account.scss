@@ -1,33 +1,47 @@
 .account{
-	min-width: 10.625%;
-	padding-left:1.5%;
-	background-color: $os-red;
+	width:100%;
 	position:fixed;
-	bottom: 8px;
-	right: 0;
-	td{	
-		padding: 0 1.5%;
-		min-width:9.125%;
-	}
-	.account-image{
+	padding-left:0%;
+	bottom: 0;
+	right: -86.375%;
+	background-color:$os-grey;
+	.account-button{
+		opacity: 1;
+		cursor: pointer;
+		background-color: $os-grey;
+		border-right: 1px solid $os-lightgrey;
+		&:hover{
+			background-color: $os-lightgrey;
+		}
+		&:active{
+			background-color: $os-darkgrey;
+		}
 		img{
+			
+			display:block;
 			height: 31px;
-			padding: 8px 0;
+			margin: 6px 0;
+			padding: 0;
 			margin-left: auto;
 			margin-right:auto;
+			border: 2px solid $os-white;
 		}
+		padding: 0 1.5% 0 1.5%;
 		display:block;
 		height: 47px;
+		width: 9.125%;
 		float:left;
 	}
 	.account-tool{
+		padding: 0 1.5%;
 		height:47px;
-		background-color:$os-black;
-		a{	
-			color: $os-white;
-			display:block;
-			height:47px;
-			float:left;
+		color: $os-black;
+		border-right: 1px solid $os-lightgrey;
+		display:block;
+		height:47px;
+		float:left;
+		&:hover{
+			background-color:$os-lightgrey;
 		}
 	}
 }

@@ -4,6 +4,9 @@ App.AccountController =  Ember.ObjectController.extend({
     	this.set('isDetailViewable', !this.get('isDetailViewable'));
     	if(!this.get('isDetailViewable')) {	
         	App.router.send("goToProjects");
+        } else if (this.get('isDetailViewable')){
+        	
+       
         }
     }
 });
