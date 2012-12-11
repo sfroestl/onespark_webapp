@@ -32,6 +32,12 @@ App.User = DS.Model.extend({
 	  return this.get("profile.avatarUrl") || imagePath("noavatar.png");
 	}.property('profile.avatarUrl'),
 	
+	forenameOrUsername: function() {
+	  	return this.get("profile.forename") || this.get("username");
+	}.property('profile.forename','username'),
+	surnameOrUsername: function() {
+	  	return this.get("profile.surname") || this.get("username");
+	}.property('profile.surname','username'),	
 	//functions
 	matchesSearch: function(word) {
 		word = word.toLowerCase();
