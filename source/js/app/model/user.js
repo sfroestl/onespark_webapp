@@ -41,9 +41,13 @@ App.User = DS.Model.extend({
 	//functions
 	matchesSearch: function(word) {
 		word = word.toLowerCase();
-		return (this.get("username").toLowerCase().indexOf(word)!=-1) ||
-		(this.get("email").toLowerCase().indexOf(word)!=-1) ||
-		(this.get("displayName").toLowerCase().indexOf(word)!=-1);
+		
+		var username = this.get("username");
+		var email = this.get("email");
+		var displayName = this.get("displayName");
+		return (!!username && (username.toLowerCase().indexOf(word)!=-1)) ||
+		(!!email && email.toLowerCase().indexOf(word)!=-1) ||
+		(!!displayName && displayName.toLowerCase().indexOf(word)!=-1);
 	},
 	init: function() {
 	  this._super(); //do this first
