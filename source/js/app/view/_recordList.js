@@ -1,7 +1,7 @@
 App.RecordListView = Ember.View.extend({
   //set these
   title: "List",  
-  content: null,
+  records: null,
   noRecords: "No records to display.",
   noMatchingRecords: "No record matches your search.",  
   sortings: [Ember.Object.create({name:"none",sortProperties:[]})],

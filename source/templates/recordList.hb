@@ -17,7 +17,7 @@
 {{/if}}
 
 <ul class="record-list">
-	{{#each record in view.sortedRecords}}
+	{{#each record in view.records}}
 		{{#with record}}
 				<li {{bindAttr class="stateForCSS"}}>
          			{{#if isLoaded}}
