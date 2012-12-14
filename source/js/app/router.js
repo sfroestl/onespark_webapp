@@ -223,11 +223,7 @@ App.Router = Ember.Router.extend({
 	          	connectOutlets: function(router, context){
 	          		router.set('profileController.user', App.get("session.sessionUser"));
 	            	router.get('userController').connectOutlet('userbody', 'profile');
-	          	},
-	          	exit: function(router){
-					router.get('userController').resetMsg();
-					router.get('userController').resetFields();
-	    		}
+	          	}
 	        }),
 	       	//Update Profil
 			updateprofile:  Ember.Route.extend({
@@ -244,7 +240,7 @@ App.Router = Ember.Router.extend({
         			router.transitionTo('user.profile');
      			}
 		    }),
-		   	//Delete Profil
+		   	//Delete Account
 			deleteme:  Ember.Route.extend({
 		        route: '/delete',
 		        connectOutlets: function(router, context){
@@ -252,14 +248,8 @@ App.Router = Ember.Router.extend({
 		        },
 		       	goDelete: function(router, evt) {
         			router.get('userController').deleteMe();
-        			//router.transitionTo('root.index');
-					//App.session.logout();
      			},
-     			afterDelete: Ember.Route.transitionTo('loggedOut.login'),
-     			exit: function(router){
-					router.get('userController').resetMsg();
-					router.get('userController').resetFields();
-	    		}
+     			afterDelete: Ember.Route.transitionTo('loggedOut.login')
 		    }),
 		    //Contacts
 		    contacts: Ember.Route.extend({
@@ -294,11 +284,7 @@ App.Router = Ember.Router.extend({
 			goRegister: function(router, evt) {
         		router.get('registerController').register();
      		},
-	        goToLogin: Ember.Route.transitionTo('loggedOut.login'),
-	        exit: function(router){
-				router.get('registerController').resetMsg();
-				router.get('registerController').resetFields();
-	    	}
+	        goToLogin: Ember.Route.transitionTo('loggedOut.login')
 		}),
 		login:  Ember.Route.extend({
 		  	route: '/login',
@@ -309,10 +295,7 @@ App.Router = Ember.Router.extend({
 		  		router.get('loginController').login(); 
 		  		//router.transitionTo('loggingIn');
 			},
-			goToRegister: Ember.Route.transitionTo('loggedOut.register'),
-			exit: function(router){
-				router.get('loginController').resetMsg();
-	    	}
+			goToRegister: Ember.Route.transitionTo('loggedOut.register')
 		}),
 		//pending Status, während eingeloggt wird und der ajax Aufruf die Antwort zurückliefert
 		loggingIn:  Ember.Route.extend({

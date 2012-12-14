@@ -9,12 +9,6 @@ App.UserController = Ember.Controller.extend({
 	//delete account
 	password_conf: '',
 
-	error_msg: '',
-  	isError: false,
-
-  	isSuccess: false,
-  	success_msg: '',
-
 	loadContent: function() {
 		this.surname = App.get("session.sessionUser.profile.surname");
 		this.forename = App.get("session.sessionUser.profile.forename");
@@ -30,8 +24,7 @@ App.UserController = Ember.Controller.extend({
 		profile.set("about", this.about);
     	App.store.commit();
 
-    	this.set('isSuccess', true);
-    	this.set('success_msg', 'Profile successfully updated.');
+    	App.FlashMessage.create({text:"Profile successfully updated."});
 	},
 	deleteMe: function() {
 		
@@ -57,42 +50,18 @@ App.UserController = Ember.Controller.extend({
 	      context: this,
 
 	      error: function(jqXHR, textStatus){
-	      	App.router.userController.set('isError', true);
 	      	this.set('password_conf', '');
-	      	App.router.userController.set('error_msg', 'Invalid password.');
+	      	App.FlashMessage.create({text:"Invalid password."});     	
 	        console.log ("--> ERROR");
 	      },
 
 	      success: function(data) {
-	      	this.set('isError', false);
 	      	this.set('password_conf', '');
 	        console.log ("--> Success: 200");
 	        App.session.logout();
-
-	        App.router.loginController.set("success_msg","Account successfully deleted.");
-	        App.router.loginController.set("isSuccess",true);
+	        App.FlashMessage.create({text:"Account successfully deleted."});  
 	        App.router.send("afterDelete");
 	      }
 	    });
-	},
-
-	/* ### Exit Helper ### */
-
-  	//Reset Notifications
-  	resetMsg: function() {
-	    this.set('isError', false);
-	    this.set('error_msg', '');
-
-	    this.set('isSuccess', false);
-	    this.set('success_msg', '');
-  	},
-
-  	//Reset Text Fields
-  	resetFields: function() {
-	    this.set('forename', '');
-	    this.set('password_cnf', '');
-	    this.set('city', '');
-	    this.set('about', '');
-	    this.set('surname', '');
-  	}
+	}
 });

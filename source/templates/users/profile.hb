@@ -10,9 +10,5 @@
   <tr><td>About:</td><td>{{user.profile.about}}</td></tr>
 </table>
 
-{{#if App.router.userController.isSuccess}}
-<span class="success">{{App.router.userController.success_msg}}</span><br />
-{{/if}}<br/>
-
 <a {{action goToUpdateProfile href=true}}>edit profile</a>
 <a {{action goToDeleteMe href=true}}>delete account</a>
