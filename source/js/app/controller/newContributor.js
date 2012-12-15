@@ -19,3 +19,13 @@ App.NewContributorController = Ember.Controller.extend({
 		App.store.commit();
 	}
 });
+App.EditContributorsController = Ember.ArrayController.extend({
+    possiblePermissions: [Ember.Object.create({name:"Reader",id:1}), Ember.Object.create({name:"Writer",id:2}), Ember.Object.create({name:"Admin",id:3})],
+    filterText:"",
+    removeAsContributor: function(user) {
+		var coworker = user.get("projectCoworker");
+		showFlashMessageFor(coworker);
+		coworker.deleteRecord();
+		App.store.commit();
+	}
+});
