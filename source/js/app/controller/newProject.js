@@ -5,9 +5,12 @@ App.NewProjectController = Ember.Controller.extend({
     dueDate: null,
 
     save: function() {
-		var title = this.get("title");
+		var newtitle = this.get("title");
+		var newdesc = this.get("description");
+		var newowner = this.get("owner");
+		var newduedate = new Date(this.get("dueDate"));
 
-		var project = App.store.createRecord(App.Project,  { title: title, desc: this.get("description"), owner: this.get("owner"), dueDate: this.get("dueDate")});
+		var project = App.store.createRecord(App.Project,  { title: newtitle, desc: newdesc, owner: newowner, dueDate: newduedate});
 		showFlashMessageFor(project);
 		App.get('session.sessionUser.ownedProjects').addObject(project);
     

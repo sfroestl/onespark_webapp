@@ -24,7 +24,10 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 			}
 		}
 		else{
-			alert("You have no permission to delete this project");
+			var fm = App.FlashMessage.create({
+				text: "You have no permission to delete this project"
+			})
+			App.router.transitionTo('projects.index');
 		}
 	}
 });
