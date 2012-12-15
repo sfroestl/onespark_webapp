@@ -10,7 +10,7 @@
 		<td>{{{view Ember.TextField valueBinding="description"}}</td>
 	</tr>	
 	<tr>
-		<td>due date (month-day-year):</td>
+		<td>due date (Year-Month-Day):</td>
 		<td>{{view Ember.TextField valueBinding="dueDate" type="date"}}</td>
 	</tr>	
 </table>
