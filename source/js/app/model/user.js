@@ -33,10 +33,12 @@ App.User = DS.Model.extend({
 	}.property('profile.avatarUrl'),
 	
 	forenameOrUsername: function() {
-	  	return this.get("profile.forename") || this.get("username");
+	  	var name= this.get("profile.forename") || this.get("username");
+	  	return name && name.toLowerCase();
 	}.property('profile.forename','username'),
 	surnameOrUsername: function() {
-	  	return this.get("profile.surname") || this.get("username");
+	  	var name= this.get("profile.surname") || this.get("username");
+	  	return name && name.toLowerCase();
 	}.property('profile.surname','username'),	
 	//functions
 	matchesSearch: function(word) {
