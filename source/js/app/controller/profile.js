@@ -46,9 +46,5 @@ App.ProfileController = Ember.Controller.extend({
 	        App.router.send("afterDelete");
 	      }
 	    });
-	},
-
-	resetFields: function() {
-		this.set('password_conf', '');
 	}
 });

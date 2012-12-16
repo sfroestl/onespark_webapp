@@ -1,26 +1,19 @@
 App.ProfileView = Ember.View.extend({
   templateName: 'profile',
-    isUpdateProfile: false,
     isDeleteAccount: false,
+    isDisabled: true,
     tagName: "form",
-    goToUpdateProfile: function() {
-        this.set('isUpdateProfile', !this.get('isUpdateProfile'));
-        if(this.isDeleteAccount) {
-        	 this.set('isDeleteAccount', !this.get('isDeleteAccount'));
-        }
-    },
     goToDeleteMe: function() {
         this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
-        if(this.isUpdateProfile) {
-        	 this.set('isUpdateProfile', !this.get('isUpdateProfile'));
+        if(!this.isDisabled){
+        	this.set('isDisabled', !this.get('isDisabled')); 
         }
-    }
-});
-
-App.UpdateProfileView= Ember.View.extend({
-	tagName: "form",
-    didInsertElement: function(){
-    	$('body,html').animate({ scrollTop: $('body').height() }, 'slow');
+    },
+    edit: function() {
+        this.toggleProperty('isDisabled');
+        if(this.isDeleteAccount){
+        	this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
+        }
     }
 });
 
@@ -28,5 +21,5 @@ App.DeleteAccountView= Ember.View.extend({
 	tagName: "form",
     didInsertElement: function(){
     	$('body,html').animate({ scrollTop: $('body').height() }, 'slow');
-    }	
+    },
 });
