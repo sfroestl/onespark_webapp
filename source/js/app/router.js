@@ -135,15 +135,6 @@ App.Router = Ember.Router.extend({
 						router.get('applicationController').connectOutlet('body', 'tool',aProject);
 						router.get('toolController').connectOutlet('tool-body', 'projectOverview',aProject);
 					},
-
-					goDelete: function(router, evt){
-						router.get('projectOverviewController').deleteProject(App.store.find(App.Project, evt.context.id));
-					},
-
-					//goEdit
-
-					//goProjectsIndex: Ember.Route.transitionTo('projects.index'),
-
 				}),
 
 				projectTasks: Ember.Route.extend({
@@ -227,7 +218,21 @@ App.Router = Ember.Router.extend({
 
 				projectTrash: Ember.Route.extend({
 					route: '/trash',
+					toolName: 'trash',
+					connectOutlets: function(router,project) {
+						var aProject = router.get('topNaviController.content');
+						if(App.get("session.sessionUserId")==aProject.get("owner.id")){
+							router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
+						}
+						else{
+							var fm = App.FlashMessage.create({
+								text: "You have no permission to delete this project"
+							})
+
+						}
+					}
 				}),
+
 				goToTool: function(router, context) {
 					
 					var c = context.contexts;
@@ -260,36 +265,14 @@ App.Router = Ember.Router.extend({
 	          		router.set('profileController.user', App.get("session.sessionUser"));
 	            	router.get('userController').connectOutlet('maincontent', 'profile');
 	          	},
-		       	//Update Profil
-				updateprofile:  Ember.Route.extend({
-			        route: '/edit',
-			        enter: function(router){
-						router.get('profileController').loadContent();
-						//$('body,html').animate({ scrollTop: $('body').height() }, 800);
-		    		},
-			        connectOutlets: function(router, context){
-			          	router.set('profileController.user', App.get("session.sessionUser"));
-			          	router.get('profileController').connectOutlet('subcontent', 'update_profile');
-			        },
-			       	goUpdate: function(router, evt) {
-	        			router.get('profileController').update();
-	        			router.transitionTo('user.profile');
-	     			}
-			    }),
-			   	//Delete Account
-				deleteme:  Ember.Route.extend({
-			        route: '/delete',
-			        connectOutlets: function(router, context){
-			          	router.get('profileController').connectOutlet('subcontent', 'delete_user');
-			        },
-			       	goDelete: function(router, evt) {
-	        			router.get('profileController').deleteMe();
-	     			},
-	     			afterDelete: Ember.Route.transitionTo('loggedOut.login'),
-	     			exit: function(router) {
-						router.get('profileController').resetFields();
-					}
-		        })
+	          	goUpdate: function(router, evt) {
+	        		router.get('profileController').update();
+	        		//router.get('profileController.view').goToUpdateProfile();
+	     		},
+	     		goDelete: function(router, evt) {
+	        		router.get('profileController').deleteMe();
+	     		},
+	     		afterDelete: Ember.Route.transitionTo('loggedOut.login')
 		    }),
 		    //Contacts
 		    contacts: Ember.Route.extend({

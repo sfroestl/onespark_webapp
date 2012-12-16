@@ -1,14 +1,25 @@
 App.ProfileView = Ember.View.extend({
   templateName: 'profile',
-    isDetailViewable: true,
-    clickMeToToggleDetail: function() {
-        this.set('isDetailViewable', !this.get('isDetailViewable'));
-        console.log(this.isDetailViewable); 
+    isDeleteAccount: false,
+    isDisabled: true,
+    tagName: "form",
+    goToDeleteMe: function() {
+        this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
+        if(!this.isDisabled){
+        	this.set('isDisabled', !this.get('isDisabled')); 
+        }
+    },
+    edit: function() {
+        this.toggleProperty('isDisabled');
+        if(this.isDeleteAccount){
+        	this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
+        }
     }
 });
-/*
-App.FadeInView = Ember.View.extend({
+
+App.DeleteAccountView= Ember.View.extend({
+	tagName: "form",
     didInsertElement: function(){
-        this.$().hide().show();
-    }
-});*/
+    	$('body,html').animate({ scrollTop: $('body').height() }, 'slow');
+    },
+});

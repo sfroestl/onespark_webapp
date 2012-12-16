@@ -20,5 +20,4 @@
 {{view App.UserListView title="Contributors" usersBinding="controller.content.contributors"}}
 
 </div>
-<button {{action goDelete content}}>delete</button><br/><br/>
 

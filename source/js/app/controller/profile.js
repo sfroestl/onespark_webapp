@@ -1,30 +1,12 @@
 App.ProfileController = Ember.Controller.extend({
 	user: null,
 
-	//update profile
-	surname: '',
-	city: '',
-	about: '',
-	forename: '',
-
 	//delete account
-	password_conf: '',
-
-	loadContent: function() {
-		this.surname = App.get("session.sessionUser.profile.surname");
-		this.forename = App.get("session.sessionUser.profile.forename");
-		this.city = App.get("session.sessionUser.profile.city");
-		this.about = App.get("session.sessionUser.profile.about");
-	},
+	password_conf: '',	
 
 	update: function() {
 		var profile = App.get("session.sessionUser.profile");
-		profile.set("surname", this.surname);
-		profile.set("forename", this.forename);
-		profile.set("city", this.city);
-		profile.set("about", this.about);
     	App.store.commit();
-
     	App.FlashMessage.create({text:"Profile successfully updated."});
 	},
 	deleteMe: function() {
@@ -64,9 +46,5 @@ App.ProfileController = Ember.Controller.extend({
 	        App.router.send("afterDelete");
 	      }
 	    });
-	},
-
-	resetFields: function() {
-		this.set('password_conf', '');
 	}
 });
