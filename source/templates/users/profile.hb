@@ -12,3 +12,15 @@
 
 <a {{action goToUpdateProfile href=true}}>edit profile</a>
 <a {{action goToDeleteMe href=true}}>delete account</a>
+
+
+
+    <a {{action clickMeToToggleDetail target="view"}}>Trigger me</a>
+    
+    {{#if isDetailViewable}}      
+            Dieser Text sollte erscheinen    
+    {{/if}}
+
+    
+
+{{outlet subcontent}}
