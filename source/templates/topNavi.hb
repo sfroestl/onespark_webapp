@@ -8,6 +8,7 @@
 <a class="projects-button button-center" {{action goToProjects href=true}}>all projects</a>
 {{/if}}
 
+
 <a class="search-button button-right"{{action goToSearch href=true}}>
 	<img src="/images/icon-search.png" alt="Search" />
 </a>

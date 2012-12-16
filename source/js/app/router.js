@@ -296,7 +296,7 @@ App.Router = Ember.Router.extend({
 	//ausgeloggter Status
 	loggedOut:  Ember.Route.extend({
 		connectOutlets: function(router, context){
-			 router.get('applicationController').disconnectOutlet('topNavi');
+			 router.get('applicationController').connectOutlet('topNavi', 'brand' );
 		},
 		register: Ember.Route.extend({
 			route: '/register',

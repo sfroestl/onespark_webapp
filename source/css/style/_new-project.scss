@@ -1,3 +1,54 @@
 .new-project {
-	margin-top:47px;
+	margin:0;
+	padding:0 0 2em 0;
+	background-color: $os-white;
+	h1{
+		margin:0;
+		padding:8px 0 8px 15.125% ;
+		font-family: $os-serif;
+		font-size: $nav-head;
+		font-weight: normal;
+	}
+	fieldset{
+		margin: 1em 3% 1em 15.125%;
+	}
+	label, input[type="text"], input[type="date"], textarea{
+		display:block;
+		width: 100%;
+	}
+	input[type="text"], input[type="date"], textarea{
+		margin-left: -1.5%;
+		padding: 8px 1.5%;
+		background-color: $os-lightgrey;
+		border:none;
+		// @include insetshadow( 1px, 2px);
+	}
+	label {
+		font-size: .9em;
+	}
+	button{
+		font-weight:bold;
+		text-transform:uppercase;
+		font-size: .7em;
+		border:none;
+		color: $os-white;
+		background-color: $os-black;
+		padding: 10px 20px;
+		@include rounded( 5px);
+		// @include shadow( 1px, 3px);
+		&:hover{
+			background-color:$os-black;
+		}
+		&:active{
+			background-color:$os-black;
+		}
+	}
+	.btn-cancel{
+		margin-left: -1.5%;
+		background-color: $os-red;
+
+	}
+	.btn-submit{
+		background-color: $os-blue;
+	}
 }
