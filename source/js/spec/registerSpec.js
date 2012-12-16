@@ -12,77 +12,61 @@ describe("The RegisterController", function(){
         expect(registerController).toBeDefined();
     });
 
-   	it("should have a register function", function(){
+    it("should register function", function(){
 		expect(registerController.register).toBeDefined();
 	});
 
-	describe( "its validation", function () {  
-		it(" should run for password missmatch", function(){
-			expect(registerController.isError).toEqual(false);
+   	it("should isEmptyValidation function", function(){
+		expect(registerController.isEmptyValidation).toBeDefined();
+	});
 
+	it("should have a matchPwValidation function", function(){
+		expect(registerController.matchPwValidation).toBeDefined();
+	});
+
+	it("should have a pwLengthValidation function", function(){
+		expect(registerController.pwLengthValidation).toBeDefined();
+	});
+
+	it("should have a isEmailValid function", function(){
+		expect(registerController.isEmailValid).toBeDefined();
+	});
+
+	describe( "its validation", function () {  
+		
+		it(" should run for password missmatch", function(){
 			registerController.set("username", "karl");
 			registerController.set("email", "karl@gmx.de");
 			registerController.set("password", "aasdasd");
 			registerController.set("password_confirmation", "asdasd");
-
-			registerController.register();
-
-			expect(registerController.error_msg).toEqual("Your passwords don't match.");
-			expect(registerController.isError).toEqual(true);
+			expect(registerController.matchPwValidation()).toEqual(true);
 		});
 
 		it(" should run for empty textfields", function(){
-			expect(registerController.isError).toEqual(false);
-
 			registerController.set("username", "");
 			registerController.set("email", "karl@gmx.de");
 			registerController.set("password", "asdasd");
 			registerController.set("password_confirmation", "asdasd");
 
-			registerController.register();
-
-			expect(registerController.error_msg).toEqual("Fill up everything.");
-			expect(registerController.isError).toEqual(true);
+			expect(registerController.isEmptyValidation()).toEqual(true);
 		});
 
 		it(" should run for invalid emails", function(){
-			expect(registerController.isError).toEqual(false);
-
 			registerController.set("username", "karl");
 			registerController.set("email", "karlgmx.de");
 			registerController.set("password", "asdasd");
 			registerController.set("password_confirmation", "asdasd");
 
-			registerController.register();
-
-			expect(registerController.error_msg).toEqual("Invalid Email address.");
-			expect(registerController.isError).toEqual(true);
+			expect(registerController.isEmailValid()).toEqual(true);
 		});
 
 		it(" should run for too short passwords", function(){
-			expect(registerController.isError).toEqual(false);
-
 			registerController.set("username", "karl");
 			registerController.set("email", "karl@gmx.de");
 			registerController.set("password", "asd");
 			registerController.set("password_confirmation", "asd");
 
-			registerController.register();
-
-			expect(registerController.error_msg).toEqual("Password to short.");
-			expect(registerController.isError).toEqual(true);
-		});
-	});
-
-	describe( "its registration with ajax mock", function () {  
-		it(" should run for valid input", function(){
-			spyOn($, "ajax").andCallFake(function(options) {
-        		options.success();
-    		});
-    		var callback = jasmine.createSpy();
-		    register("karl1", "karl1@gmx.de", "asdasd", "asdasd", callback);
-    		expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("/users");
-    		expect(callback).toHaveBeenCalled();
+			expect(registerController.pwLengthValidation()).toEqual(true);
 		});
 	});
 
@@ -90,13 +74,15 @@ describe("The RegisterController", function(){
 		it(" should run for valid input", function(){
 			spyOn($, "ajax");
 
-			//registerController.set("username", "karl1");
-			//registerController.set("email", "karl1@gmx.de");
-			//registerController.set("password", "asdasd");
-			//registerController.set("password_confirmation", "asdasd");
+			registerController.set("username", "karloooos1");
+			registerController.set("email", "karlooooos1@gmx.de");
+			registerController.set("password", "asdasd");
+			registerController.set("password_confirmation", "asdasd");
 
-		   	var user = App.store.createRecord(App.User,  { username: "karl1", email: "karl1@gmx.de", password: "asdasd", password_confirmation: "asdasd"});
-            App.store.commit();
+			registerController.register();
+
+		   	//var user = App.store.createRecord(App.User,  { username: "karl3", email: "karl3@gmx.de", password: "asdasd", password_confirmation: "asdasd"});
+            //App.store.commit();
 		    
     		expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("http://api.onespark.de/api/v1/users");
     		expect($.ajax.mostRecentCall.args[0]["type"]).toEqual("POST");
@@ -104,15 +90,3 @@ describe("The RegisterController", function(){
 		});
 	});
 });
-
-//mock for ajax backend connection
-function register(username, email, password, password_confirmation, callback) {
-    $.ajax({
-        type: "POST",
-        url: "/users",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: {"user":{"username":username,"email":email,"password":password,"password_confirmation":password_confirmation}},
-        success: callback
-    });
-}
