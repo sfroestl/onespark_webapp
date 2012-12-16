@@ -12,7 +12,9 @@ App.Router = Ember.Router.extend({
 
   root: Ember.Route.extend({
 
-  	
+  	goBack: function() {
+		window.history.back();
+	},
   	goToSearch: Ember.Route.transitionTo('loggedIn.search'),
 		//Wechsel in eingeloggten (loggedIn) Status
 		loginComplete: Ember.Route.transitionTo('root.loggedIn.projects.index'),
