@@ -38,6 +38,7 @@ App.Router = Ember.Router.extend({
   	loggedIn: Ember.Route.extend({
 		
 		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
+		//showTask: Ember.Route.transitionTo('loggedIn.projects.singleproject.)
 		goToNewProject: Ember.Route.transitionTo('loggedIn.projects.newProject'),
 		goToUserProfile: Ember.Route.transitionTo('user.profile'),
 		goToUserContacts: Ember.Route.transitionTo('user.contacts'),
@@ -109,6 +110,7 @@ App.Router = Ember.Router.extend({
 					}
 				}),
 
+			// Von wem ist das editProject? Kann das weg?
 				editProject: Em.Route.extend({
 			          route: 'edit',
 
@@ -140,13 +142,26 @@ App.Router = Ember.Router.extend({
 				projectTasks: Ember.Route.extend({
 					route: '/tasks',
 					toolName: 'tasks',
-					connectOutlets: function(router,project) {
-						var aProject = router.get('topNaviController.content');
-						router.get('applicationController').connectOutlet('body', 'tool');
-						router.get('tasksController').set('tasks', aProject.get("tasks"));
-						router.get('toolController').connectOutlet('tool-body', 'tasks');
-					}
 
+					index: Ember.Route.extend({
+						route: '/',
+						connectOutlets: function(router,project) {
+							var aProject = router.get('topNaviController.content');
+							router.get('applicationController').connectOutlet('body', 'tool');
+							router.get('tasksController').set('tasks', aProject.get("tasks"));
+							router.get('toolController').connectOutlet('tool-body', 'tasks');
+						}
+					}),
+					goToSingleTask: Ember.Route.transitionTo("projectTasks.singletask"),
+
+					singletask: Ember.Route.extend({
+						route: '/:id',
+						toolName: 'Task',	//irgendwie Tasktitel einfügen					
+						connectOutlets: function(router,task) {
+							//router.get('toolController').set('toolName', task);
+							router.get('toolController').connectOutlet('tool-body', 'singleTask',task);
+						}
+					})
 				}),
 
 				projectPostings: Ember.Route.extend({
