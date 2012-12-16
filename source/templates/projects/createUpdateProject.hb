@@ -1,4 +1,9 @@
-<h1><legend>{{#if content.id}}Edit{{else}}new{{/if}} project</legend></h1>	
+{{#if updateFlag}}
+<h1><legend>Edit project</legend></h1>
+{{/if}}
+{{#if createFlag}}
+<h1><legend>New project</legend></h1>
+{{/if}}	
 
 <table>
 	<tr>
@@ -14,8 +19,11 @@
 		<td>{{view Ember.TextField valueBinding="dueDate" type="date"}}</td>
 	</tr>	
 </table>
-{{#if content.id}}<button {{action goUpdate content}}>save Changes</button>
-{{else}}<button {{action goCreate}}>create</button>
+{{#if updateFlag}}
+<button {{action goUpdate content}}>save Changes</button>
+{{/if}}
+{{#if createFlag}}
+<button {{action goCreate}}>create</button>
 {{/if}}
 		
 

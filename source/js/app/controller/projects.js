@@ -30,12 +30,16 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 });
 
 App.CreateUpdateProjectController = Ember.Controller.extend({
+	createFlag: false,
+	updateFlag: false,
+
     title: null,
     description: null,
     owner: App.get('session.sessionUser'),
     dueDate: null,
 
     create: function() {
+    	console.log(this.createFlag);
 		var newtitle = this.get("title");
 		var newdesc = this.get("description");
 		var newowner = this.get("owner");
@@ -46,6 +50,7 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 		App.get('session.sessionUser.ownedProjects').addObject(project);
     
 		App.store.commit();
+		//this.set("createFlag", false);
 	},
 
 	fill: function(projectToEdit){
@@ -57,6 +62,12 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 			}
 	},
 
+	empty: function(){
+		this.title = null;
+		this.description = null;
+		this.dueDate= null;
+	},
+
 	update: function(projectToEdit){
 		var project = projectToEdit;
 		project.set("title", this.title);
@@ -64,11 +75,17 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 		var date = new Date(this.dueDate);
 		project.set("dueDate", date);
 		App.store.commit();
+		//this.set("updateFlag", false);
 
     	var fm = App.FlashMessage.create({
 			text: "Project was updated"
-		})
+		});
 
+		
+		// console.log(this.content);
+  //   	this.set("content", null);
+  //   	console.log(this.content);
     	App.router.transitionTo('projects.index');
+
 	}
 });

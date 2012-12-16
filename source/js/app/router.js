@@ -76,6 +76,9 @@ App.Router = Ember.Router.extend({
 			newProject: Ember.Route.extend({
 				route: '/new',
 				connectOutlets: function(router, context){
+					router.get('createUpdateProjectController').empty();
+					router.get('createUpdateProjectController').set("createFlag", true);
+					router.get('createUpdateProjectController').set("updateFlag", false);
 					router.get('applicationController').connectOutlet('body', 'createUpdateProject');
 				},
 				goCreate: function(router, evt) {
@@ -203,6 +206,8 @@ App.Router = Ember.Router.extend({
 						var aProject = router.get('topNaviController.content');
 						if(App.get("session.sessionUserId")==aProject.get("owner.id")){
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
+							router.get('createUpdateProjectController').set("updateFlag", true);
+							router.get('createUpdateProjectController').set("createFlag", false);
 							router.get('createUpdateProjectController').fill(aProject);
 							router.get('toolController').connectOutlet('tool-body', 'createUpdateProject',aProject);
 						}
