@@ -169,6 +169,7 @@ App.Router = Ember.Router.extend({
 						},
 					}),
 					goToNewContributor: Ember.Route.transitionTo("projectContributors.newContributor"),
+					goToEditContributors: Ember.Route.transitionTo("projectContributors.editContributors"),
 					newContributor: Ember.Route.extend({
 						route: '/add',
 						contextMenu: 'add Contributor',
@@ -181,6 +182,19 @@ App.Router = Ember.Router.extend({
 						cancel: Ember.Route.transitionTo("projectContributors.index"),
 						createContributor: function(router, evt) {
 							router.get('newContributorController').save(evt.contexts[0],evt.contexts[1]); //no transition, so batch-adding is possible
+						},						
+					}),
+					editContributors: Ember.Route.extend({
+						route: '/edit',
+						contextMenu: 'edit Contributors',
+						connectOutlets: function(router,project) {
+							var aProject = router.get('topNaviController.content');
+							router.get('applicationController').connectOutlet('body', 'tool',aProject);
+							router.get('toolController').connectOutlet('tool-body', 'editContributors',aProject.get("contributors"));
+						},
+						cancel: Ember.Route.transitionTo("projectContributors.index"),
+						removeAsContributor: function(router, evt) {
+							router.get('editContributorsController').removeAsContributor(evt.contexts[0]); //no transition, so batch-adding is possible
 						},						
 					})
 				}),
