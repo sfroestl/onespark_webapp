@@ -2,6 +2,7 @@
 {{#if view.showFilter}}
   {{view Ember.TextField valueBinding="view.filter"}}
 {{/if}}
+{{#if view.filteredUsers}}
 <ul class="user-list">
 	{{#each user in view.filteredUsers}}
 		{{#with user}}
@@ -19,3 +20,8 @@
 		{{/with}}
 	{{/each}}
 </ul>
+{{/if}}
+{{#unless view.filteredUsers}}
+  {{#if view.users}}<p>{{view.noFilteredUsers}}</p>{{/if}}
+  {{#unless view.users}}<p>{{view.noUsers}}</p>{{/unless}}
+{{/unless}}

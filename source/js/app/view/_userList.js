@@ -4,7 +4,11 @@ App.UserListView = Ember.View.extend({
   controls: null,
   users: [],
   filter: "",
-  showFilter: false,
+  noUsers: "No users to display",
+  noFilteredUsers: "No user matches your search.",
+  showFilter: function() {
+	  return this.get("users.length")>4;
+  }.property("users.length"),
   filteredUsers: function() {
 	  var filter = this.get("filter");
 	  var users = this.get("users");
