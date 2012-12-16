@@ -2,12 +2,16 @@ App.ProfileController = Ember.Controller.extend({
 	user: null,
 
 	//delete account
-	password_conf: '',	
+	password_conf: '',
+
+	isDeleteAccount: false,
+    isDisabled: true,	
 
 	update: function() {
 		var profile = App.get("session.sessionUser.profile");
     	App.store.commit();
     	App.FlashMessage.create({text:"Profile successfully updated."});
+    	this.set('isDisabled', true);
 	},
 	deleteMe: function() {
 		
@@ -46,5 +50,17 @@ App.ProfileController = Ember.Controller.extend({
 	        App.router.send("afterDelete");
 	      }
 	    });
-	}
+	},
+	goToDeleteMe: function() {
+        this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
+        if(!this.isDisabled){
+        	this.set('isDisabled', !this.get('isDisabled')); 
+    	}
+    },
+    edit: function() {
+        this.toggleProperty('isDisabled');
+        if(this.isDeleteAccount){
+        	this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
+        }
+    }
 });

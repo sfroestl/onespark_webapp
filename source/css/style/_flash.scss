@@ -1,0 +1,26 @@
+.flash{
+	z-index: 2;
+	margin:0;
+	padding:0;
+	position: fixed;
+	bottom: 0;
+	left:0;
+	list-style: none;
+	li{
+		background-color: $os-white;
+		border: 1px solid $os-black;
+		margin: 0;
+		margin-right: 15.125%;
+		min-height: 31px;
+		padding: 8px;
+	}
+	.error{
+		border: 1px solid $os-red;
+		color: $os-red;
+	}
+	button{
+		padding: 5px;
+		margin: 0;
+		background-color: $os-black;
+	}
+}

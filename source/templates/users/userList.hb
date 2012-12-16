@@ -1,6 +1,7 @@
-<h2>{{view.title}}
+<h2 class="list-head">
+{{view.title}}
 {{#if view.sortingRelevant}}
- (sorted by
+ <span class="sort-btn">sorted by
  {{#if view.sortingChangable}}
  {{view Ember.Select
        contentBinding="view.sortings"
@@ -11,9 +12,10 @@
  {{#unless view.sortingChangable}}
  {{view.currentSorting.name}}
  {{/unless}}
- )
+ </span>
 {{/if}}
 </h2>
+
 {{#if view.showFilter}}
   {{view Ember.TextField valueBinding="view.filter"}}
 {{/if}}
@@ -21,16 +23,36 @@
 <ul class="user-list">
 	{{#each user in view.sortedUsers}}
 		{{#with user}}
-				<li {{bindAttr class="stateForCSS"}}>
-         			{{#if isLoaded}}
-         			    {{#if view.controls}}
-						<img {{bindAttr src="displayAvatarUrl"}}>{{displayName}} {{view view.controls userBinding="user"}}
+				<li {{!bindAttr class="stateForCSS"}} class="tool-elem clearfix">
+         	{{#if isLoaded}}
+            <a {{action clickedUser this }}> 
+         		{{#if view.controls}}
+            <span class="elem-image">
+						  <img {{bindAttr src="displayAvatarUrl"}} >
+            </span>
+            <span class="elem-desc">
+              {{displayName}}
+            </span>
+            {{view view.controls userBinding="user"}}
 						{{else}}
-						<img {{bindAttr src="displayAvatarUrl"}}> <a {{action clickedUser this }}> {{displayName}}</a>					
-						{{/if}}
-         			{{else}}
-						Loading...
-         			{{/if}}
+            <span class="elem-image">
+						  <img {{bindAttr src="displayAvatarUrl"}}> 
+            </span>
+            <span class="elem-desc">
+              {{displayName}}
+            </span>
+            </a>					
+					  {{/if}}
+         	{{else}}
+						<a>
+              <span class="elem-image">
+              <img src="/images/icon-load.gif">
+              </span>
+              <span class="elem-desc">
+              loading
+              </span>
+            </a>
+         	{{/if}}
          		</li>      		
 		{{/with}}
 	{{/each}}

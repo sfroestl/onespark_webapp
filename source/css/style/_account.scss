@@ -1,17 +1,18 @@
 .account{
+	z-index: 3;
 	width:100%;
 	position:fixed;
 	padding-left:0%;
 	bottom: 0;
 	right: -86.375%;
 	background-color:$os-grey;
+	@include shadow(0px, 3px);
+	@include gradient($os-lightgrey, $os-grey);
 	.account-button{
-		opacity: 1;
 		cursor: pointer;
-		background-color: $os-grey;
-		border-right: 1px solid $os-lightgrey;
+		border-right: 1px solid $os-mediumgrey;
 		&:hover{
-			background-color: $os-lightgrey;
+			background-color: $os-mediumgrey;
 		}
 		&:active{
 			background-color: $os-darkgrey;
@@ -36,12 +37,12 @@
 		padding: 0 1.5%;
 		height:47px;
 		color: $os-black;
-		border-right: 1px solid $os-lightgrey;
+		border-right: 1px solid $os-mediumgrey;
 		display:block;
 		height:47px;
 		float:left;
 		&:hover{
-			background-color:$os-lightgrey;
+			background-color:$os-mediumgrey;
 		}
 	}
 }

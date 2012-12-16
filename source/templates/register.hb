@@ -1,16 +1,25 @@
-<h1>Register</h1>
+<h1 class="headline">Register</h1>
 
-<label>Username: </label><br/>
-{{view Ember.TextField valueBinding="username"}}<br/>
+<fieldset>
+<label for="username">Username: </label>
+{{view Ember.TextField valueBinding="username" id="username"}}
+</fieldset>
 
-<label>Email: </label><br/>
-{{view Ember.TextField valueBinding="email"}}<br/>
+<fieldset>
+<label for="email">Email</label>
+{{view Ember.TextField valueBinding="email" id="email"}}
+</fieldset>
 
-<label>Password: </label><br/>
-{{view Ember.TextField valueBinding="password" type="password"}}<br/>
+<fieldset>
+<label for="password">Password</label>
+{{view Ember.TextField valueBinding="password" type="password" id="password"}}
+</fieldset>
+<fieldset>
+<label for="password-conf">Password Confirmation</label>
+{{view Ember.TextField valueBinding="password_confirmation" type="password" id="password-conf"}}
+</fieldset>
 
-<label>Password Confirmation: </label><br/>
-{{view Ember.TextField valueBinding="password_confirmation" type="password"}}<br />
-	
-<button {{action goRegister}}>Register</button>
+<fieldset>
+<button {{action goRegister}} class="btn-register">Register</button>
+</fieldset>
 <a {{action goToLogin href=true}}>Back to login</a>

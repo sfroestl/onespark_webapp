@@ -1,3 +1,8 @@
-<div><a {{action goToNewProject href=true}} class="new-project-button">add project</a></div>
-{{view App.ProjectListView title="Owned Projects" projectsBinding="controller.ownedProjects"}}
-{{view App.ProjectListView title="Contributed Projects" projectsBinding="controller.collaboratedProjects"}}
+<a {{action goToNewProject href=true}} class="new-project-button project-elem clearfix">
+	<span class="add-img"><img src="/images/icon-add.png"></span>
+	<span class="add-txt">add project</span>
+</a>
+
+
+{{view App.ProjectListView title="Your own Projects" projectsBinding="controller.ownedProjects"}}
+{{view App.ProjectListView title="Projects you contribute to" projectsBinding="controller.collaboratedProjects"}}
