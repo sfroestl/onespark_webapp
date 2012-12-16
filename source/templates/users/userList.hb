@@ -1,4 +1,3 @@
-
 <h2>{{view.title}}
 {{#if view.sortingRelevant}}
  (sorted by

@@ -1,1 +1,8 @@
-{{view App.UserListView usersBinding="controller.possibleUsers" userBinding="controller.user" controlsBinding="App.NewContributorControlsView" filterBinding="controller.filter"}}
+{{view App.UserListView
+  title="Add contributors"
+  usersBinding="controller.possibleUsers"
+  controlsBinding="App.NewContributorControlsView"
+  filterBinding="controller.filter"
+  noUsers="You already have added everybody to the project."
+  noFilteredUsers="Your search doesn't matches any of your contacts."
+}}
