@@ -10,17 +10,35 @@
   <tr><td>About:</td><td>{{user.profile.about}}</td></tr>
 </table>
 
-<a {{action goToUpdateProfile href=true}}>edit profile</a>
-<a {{action goToDeleteMe href=true}}>delete account</a>
-
-
-
-    <a {{action clickMeToToggleDetail target="view"}}>Trigger me</a>
+<a {{action goToUpdateProfile href=true target="view"}}>edit profile</a>
+<a {{action goToDeleteMe href=true target="view"}}>delete account</a>
     
-    {{#if view.isDetailViewable}}      
-            Dieser Text sollte erscheinen    
+    {{#if view.isUpdateProfile}}   
+    	{{#view App.UpdateProfileView}}   
+			<h2>Update Profile:</h2>
+
+			<table border="0">
+			  <tr><td>Forename:</td><td>{{view Ember.TextField valueBinding="user.profile.forename"}}</td></tr>
+			  <tr><td>Surname:</td><td>{{view Ember.TextField valueBinding="user.profile.surname"}}</td></tr>
+			  <tr><td>City:</td><td>{{view Ember.TextField valueBinding="user.profile.city"}}</td></tr>
+			  <tr><td>About:</td><td>{{view Ember.TextField valueBinding="user.profile.about"}}</td></tr>
+			</table>
+
+			<button {{action goUpdate}}>Send</button>
+
+			<br /><br /><br />
+       	{{/view}}   
     {{/if}}
 
-    
+    {{#if view.isDeleteAccount}}   
+    	{{#view App.DeleteAccountView}}   
+			<h2>Delete Account:</h2>
 
-{{outlet subcontent}}
+			<p>Password Confirmation:</p>
+			<p>{{view Ember.TextField valueBinding="password_conf" type="password"}}</p>
+
+			<button {{action goDelete}}>Send</button>
+
+			<br /><br /><br />
+       	{{/view}}   
+    {{/if}}

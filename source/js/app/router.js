@@ -238,36 +238,14 @@ App.Router = Ember.Router.extend({
 	          		router.set('profileController.user', App.get("session.sessionUser"));
 	            	router.get('userController').connectOutlet('maincontent', 'profile');
 	          	},
-		       	//Update Profil
-				updateprofile:  Ember.Route.extend({
-			        route: '/edit',
-			        enter: function(router){
-						router.get('profileController').loadContent();
-						//$('body,html').animate({ scrollTop: $('body').height() }, 800);
-		    		},
-			        connectOutlets: function(router, context){
-			          	router.set('profileController.user', App.get("session.sessionUser"));
-			          	router.get('profileController').connectOutlet('subcontent', 'update_profile');
-			        },
-			       	goUpdate: function(router, evt) {
-	        			router.get('profileController').update();
-	        			router.transitionTo('user.profile');
-	     			}
-			    }),
-			   	//Delete Account
-				deleteme:  Ember.Route.extend({
-			        route: '/delete',
-			        connectOutlets: function(router, context){
-			          	router.get('profileController').connectOutlet('subcontent', 'delete_user');
-			        },
-			       	goDelete: function(router, evt) {
-	        			router.get('profileController').deleteMe();
-	     			},
-	     			afterDelete: Ember.Route.transitionTo('loggedOut.login'),
-	     			exit: function(router) {
-						router.get('profileController').resetFields();
-					}
-		        })
+	          	goUpdate: function(router, evt) {
+	        		router.get('profileController').update();
+	        		//router.get('profileController.view').goToUpdateProfile();
+	     		},
+	     		goDelete: function(router, evt) {
+	        		router.get('profileController').deleteMe();
+	     		},
+	     		afterDelete: Ember.Route.transitionTo('loggedOut.login')
 		    }),
 		    //Contacts
 		    contacts: Ember.Route.extend({
