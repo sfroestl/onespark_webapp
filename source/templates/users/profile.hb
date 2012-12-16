@@ -17,7 +17,7 @@
 
     <a {{action clickMeToToggleDetail target="view"}}>Trigger me</a>
     
-    {{#if isDetailViewable}}      
+    {{#if view.isDetailViewable}}      
             Dieser Text sollte erscheinen    
     {{/if}}
 
