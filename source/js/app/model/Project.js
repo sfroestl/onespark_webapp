@@ -11,12 +11,13 @@ App.Project = DS.Model.extend({
 		return this.get('coworkers').map(function(item, index, self) {
 			return App.CoworkerOfProject.create({projectCoworker: item});
 		});
-	}.property('coworkers','coworkers.[]','coworkers.@each.user')
-    //tasks: DS.hasMany('App.Task')
+	}.property('coworkers','coworkers.[]','coworkers.@each.user'),
+    tasks: DS.hasMany('App.Task')
 
 });
 DS.AuthenticatedRESTAdapter.map('App.Project', {
   owner: {key: 'owner_id'},
 	coworkers: { key: 'project_coworker_ids' },
-	dueDate: { key: 'due_date'}
+	dueDate: { key: 'due_date'},
+    tasks: { key: 'task_ids'}
 });
