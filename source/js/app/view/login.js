@@ -1,4 +1,5 @@
 App.LoginView = Ember.View.extend({
   tagName: "form",
-  templateName: 'loginForm'
+  templateName: 'loginForm',
+  classNames: ['login-form']
 });

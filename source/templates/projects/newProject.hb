@@ -1,18 +1,19 @@
-<h1><legend>{{#if content.id}}Edit{{else}}new{{/if}} project</legend></h1>	
-
-<table>
-	<tr>
-		<td>title:</td>
-		<td>{{view Ember.TextField valueBinding="title" id="title"}}</td>
-	</tr>
-	<tr>
-		<td>description:</td>
-		<td>{{{view Ember.TextField valueBinding="description"}}</td>
-	</tr>	
-	<tr>
-		<td>due date (Year-Month-Day):</td>
-		<td>{{view Ember.TextField valueBinding="dueDate" type="date"}}</td>
-	</tr>	
-</table>
-		<button {{action goSave}}>save</button>
-
+<h1>{{#if content.id}}Edit{{else}}new{{/if}} project</h1>	
+<form>
+	<fieldset>
+	<label for="title">title</label>
+	{{view Ember.TextField valueBinding="title" id="title"}}
+	</fieldset>
+	<fieldset>
+	<label for="description">description</label>
+	{{{view Ember.TextArea valueBinding="description" id="description"}}
+	</fieldset>
+	<fieldset>
+	<label for="due-date">due date (Year-Month-Day):</label>
+	{{view Ember.TextField valueBinding="dueDate" type="date" id="due-date"}}
+	</fieldset>
+	<fieldset>
+	<button {{action goToProjects}} class="btn-cancel">cancel</button>
+	<button {{action goSave}} class="btn-submit">create Project</button>
+	</fieldset>
+</form>

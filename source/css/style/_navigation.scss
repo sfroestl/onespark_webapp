@@ -77,9 +77,11 @@
 	top:0px;
 	color: $os-white;
 	background-color: $os-black;
+	// @include shadow(1px, 3px);
+	// @include gradient($os-black, $os-darkblack);
 	*{
 		&:hover{
-			background-color: $os-darkblack;
+			background-color: black;
 		}
 		&:active{
 			background-color: $os-red;
@@ -87,8 +89,9 @@
 	}
 
 	.home-button{
+		outline-right: solid 1px $os-darkblack;
 		img {
-			// border-right: solid 1px $os-darkblack;
+			
 		}
 
 	}
