@@ -1,10 +1,26 @@
-<h2>{{view.title}}</h2>
+
+<h2>{{view.title}}
+{{#if view.sortingRelevant}}
+ (sorted by
+ {{#if view.sortingChangable}}
+ {{view Ember.Select
+       contentBinding="view.sortings"
+       valueBinding="view.currentSorting"
+       optionValuePath="content"
+       optionLabelPath="content.name"}}
+ {{/if}}
+ {{#unless view.sortingChangable}}
+ {{view.currentSorting.name}}
+ {{/unless}}
+ )
+{{/if}}
+</h2>
 {{#if view.showFilter}}
   {{view Ember.TextField valueBinding="view.filter"}}
 {{/if}}
 {{#if view.filteredUsers}}
 <ul class="user-list">
-	{{#each user in view.filteredUsers}}
+	{{#each user in view.sortedUsers}}
 		{{#with user}}
 				<li {{bindAttr class="stateForCSS"}}>
          			{{#if isLoaded}}
