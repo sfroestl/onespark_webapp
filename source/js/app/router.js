@@ -133,15 +133,6 @@ App.Router = Ember.Router.extend({
 						router.get('applicationController').connectOutlet('body', 'tool',aProject);
 						router.get('toolController').connectOutlet('tool-body', 'projectOverview',aProject);
 					},
-
-					goDelete: function(router, evt){
-						router.get('projectOverviewController').deleteProject(App.store.find(App.Project, evt.context.id));
-					},
-
-					//goEdit
-
-					//goProjectsIndex: Ember.Route.transitionTo('projects.index'),
-
 				}),
 
 				projectTasks: Ember.Route.extend({
@@ -225,7 +216,21 @@ App.Router = Ember.Router.extend({
 
 				projectTrash: Ember.Route.extend({
 					route: '/trash',
+					toolName: 'trash',
+					connectOutlets: function(router,project) {
+						var aProject = router.get('topNaviController.content');
+						if(App.get("session.sessionUserId")==aProject.get("owner.id")){
+							router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
+						}
+						else{
+							var fm = App.FlashMessage.create({
+								text: "You have no permission to delete this project"
+							})
+
+						}
+					}
 				}),
+
 				goToTool: function(router, context) {
 					
 					var c = context.contexts;

@@ -3,30 +3,25 @@ App.ProjectsController = Ember.Controller.extend({
 		collaboratedProjects: null
 });
 
-App.ProjectController =  Ember.ObjectController.extend();
+App.ProjectController =  Ember.ObjectController.extend({
+	deleteProject: function(projectToDelete) {
+		var confirmResult = confirm("Delete project \""+projectToDelete.get('title')+"\" ?");
+
+		if(confirmResult){
+			var project = projectToDelete;
+			showFlashMessageFor(project);
+			project.deleteRecord();
+			App.store.commit();
+			App.router.transitionTo('projects.index');
+		}
+		else{
+			App.router.transitionTo('projects.singleproject');
+		}
+	}
+});
 
 App.ProjectOverviewController = Ember.ObjectController.extend({
 
-	deleteProject: function(projectToDelete) {
-		if (App.get("session.sessionUserId")==projectToDelete.get('owner.id')){
-
-			var confirmResult = confirm("Delete project "+projectToDelete.get('title')+" ?");
-
-			if(confirmResult){
-				var project = projectToDelete;
-				showFlashMessageFor(project);
-				project.deleteRecord();
-				App.store.commit();
-				App.router.transitionTo('projects.index');
-			}
-		}
-		else{
-			var fm = App.FlashMessage.create({
-				text: "You have no permission to delete this project"
-			})
-			App.router.transitionTo('projects.index');
-		}
-	}
 });
 
 App.CreateUpdateProjectController = Ember.Controller.extend({
@@ -50,7 +45,6 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 		App.get('session.sessionUser.ownedProjects').addObject(project);
     
 		App.store.commit();
-		//this.set("createFlag", false);
 	},
 
 	fill: function(projectToEdit){
@@ -75,17 +69,11 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 		var date = new Date(this.dueDate);
 		project.set("dueDate", date);
 		App.store.commit();
-		//this.set("updateFlag", false);
 
     	var fm = App.FlashMessage.create({
 			text: "Project was updated"
 		});
 
-		
-		// console.log(this.content);
-  //   	this.set("content", null);
-  //   	console.log(this.content);
-    	App.router.transitionTo('projects.index');
-
+    	App.router.transitionTo('projects.singleproject.projectOverview');
 	}
 });
