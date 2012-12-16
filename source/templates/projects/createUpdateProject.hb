@@ -18,13 +18,12 @@
 	{{view Ember.TextField valueBinding="dueDate" type="date" id="due-date"}}
 	</fieldset>
 	<fieldset>
-	<button {{action goToProjects}} class="btn-cancel">cancel</button>
-	
+	<button {{action goBack}} class="btn-cancel">cancel</button>
 	{{#if updateFlag}}
 	<button {{action goUpdate content}} class="btn-submit">save Changes</button>
 	{{/if}}
 	{{#if createFlag}}
-	<button {{action goSave}} class="btn-submit">create Project</button>
+	<button {{action goCreate}} class="btn-submit">create Project</button>
 	{{/if}}
 	</fieldset>
 </form>
