@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
 	color: $os-black;
-	background-color: $os-lightgrey;
+	background-color: $os-white;
 	overflow-y: scroll;
 	position:absolute;
 	width:100%;
@@ -32,5 +32,58 @@ button{
 	}
 	&:active{
 		background-color:$os-black;
+	}
+}
+.list-head{
+		overflow:hidden;
+		margin:0;
+		padding: 8px 0 8px 15.125%;
+		color: $os-darkgrey;
+		background-color: $os-lightgrey;
+		font-weight:normal;
+		font-size: .9em;
+
+		.list-sort-btn{
+			max-width: 35%;
+			text-decoration:none;
+			display:block;
+			float:right;
+			margin: -8px 0 -8px 0;
+			height:31px;
+			padding:4px 1.5% 4px 8px;
+			line-height: 31px;
+			font-family: $os-sans;
+			font-size: .8em;
+			color: $os-darkgrey;
+			background-color: $os-grey;
+			&:hover{
+				background-image:none;
+				background-color: $os-mediumgrey;
+			}
+			&:active{
+				background-image:none;
+				background-color: $os-mediumgrey;
+			}
+		}
+	}
+.sort-btn{
+	text-decoration:none;
+	display:block;
+	float:right;
+	margin: -8px 0 -8px 0;
+	height:31px;
+	padding:4px 1.5% 4px 8px;
+	line-height: 31px;
+	font-family: $os-sans;
+	font-size: .8em;
+	color: $os-darkgrey;
+	background-color: $os-grey;
+	&:hover{
+		background-image:none;
+		background-color: $os-mediumgrey;
+	}
+	&:active{
+		background-image:none;
+		background-color: $os-mediumgrey;
 	}
 }

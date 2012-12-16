@@ -1,5 +1,62 @@
 .tool{
 	margin-top:47px;
-	padding-top:8px;
 	width: 100%;
+	ul{
+		margin:0;
+		padding:0;
+		li {
+			padding:0;
+			margin:0;
+			list-style-type:none;
+		}
+	}
+
+	.tool-elem{
+		cursor:pointer;
+		padding: 8px 0;
+		display:block;
+		background-color:$os-white;
+		.elem-image {
+			height:31px;
+			text-align:center;
+			display: block;
+			float:left;
+			height: 31px;
+			width: 9.125%;
+			padding-left: 3%;
+			padding-right: 1.5%;
+		}
+		.elem-desc{
+			font-family: $os-serif;
+			font-size: $nav-head;
+			text-decoration:none;
+			display: block;
+			float: left;
+			height:31px;
+			padding-left: 1.5%;
+			padding-right: 1.5%;
+		}
+		a {
+			display:block;
+			overflow:hidden;
+			height:31px;
+			color: $os-black;
+			text-decoration:none;
+			&:active{
+				color: $os-darkred;
+				background-color: $os-red;
+			}
+			&:hover{
+				color: $os-darkred;
+			}
+			.project-due-date{
+				padding:4px 8px;
+				margin: 2px 1.5% 2px 0px;
+				font-family: $os-sans;
+				color: $os-darkgrey;
+				font-size: .5em;
+			}
+		}
+	}
+
 }

@@ -1,3 +1,5 @@
+<a {{action "goToNewContributor" href="true"}}>Hinzufügen</a>
+<a {{action "goToEditContributors" href="true"}}>Bearbeiten</a>
 {{#if view.showSearch}}
 <p>Search {{view Ember.TextField valueBinding="controller.filterText"}}</p>
 {{/if}}
@@ -29,5 +31,4 @@
   noUsers="This project doesn't have any viewer."
   noFilteredUsers="Your search didn't match any contributor."}}
 {{/if}}
-<a {{action "goToNewContributor" href="true"}}>Hinzufügen</a>
-<a {{action "goToEditContributors" href="true"}}>Bearbeiten</a>
+
