@@ -251,50 +251,51 @@ App.Router = Ember.Router.extend({
 	          	route: '/profile',
 	          	connectOutlets: function(router, context){
 	          		router.set('profileController.user', App.get("session.sessionUser"));
-	            	router.get('userController').connectOutlet('userbody', 'profile');
-	          	}
-	        }),
-	       	//Update Profil
-			updateprofile:  Ember.Route.extend({
-		        route: '/edit',
-		        enter: function(router){
-					router.get('userController').loadContent();
-	    		},
-		        connectOutlets: function(router, context){
-		          	router.set('profileController.user', App.get("session.sessionUser"));
-		          	router.get('userController').connectOutlet('userbody', 'update_profile');
-		        },
-		       	goUpdate: function(router, evt) {
-        			router.get('userController').update();
-        			router.transitionTo('user.profile');
-     			}
-		    }),
-		   	//Delete Account
-			deleteme:  Ember.Route.extend({
-		        route: '/delete',
-		        connectOutlets: function(router, context){
-		          	router.get('userController').connectOutlet('userbody', 'delete_user');
-		        },
-		       	goDelete: function(router, evt) {
-        			router.get('userController').deleteMe();
-     			},
-     			afterDelete: Ember.Route.transitionTo('loggedOut.login'),
-     			exit: function(router) {
-					router.get('userController').resetFields();
-				}
+	            	router.get('userController').connectOutlet('maincontent', 'profile');
+	          	},
+		       	//Update Profil
+				updateprofile:  Ember.Route.extend({
+			        route: '/edit',
+			        enter: function(router){
+						router.get('profileController').loadContent();
+						//$('body,html').animate({ scrollTop: $('body').height() }, 800);
+		    		},
+			        connectOutlets: function(router, context){
+			          	router.set('profileController.user', App.get("session.sessionUser"));
+			          	router.get('profileController').connectOutlet('subcontent', 'update_profile');
+			        },
+			       	goUpdate: function(router, evt) {
+	        			router.get('profileController').update();
+	        			router.transitionTo('user.profile');
+	     			}
+			    }),
+			   	//Delete Account
+				deleteme:  Ember.Route.extend({
+			        route: '/delete',
+			        connectOutlets: function(router, context){
+			          	router.get('profileController').connectOutlet('subcontent', 'delete_user');
+			        },
+			       	goDelete: function(router, evt) {
+	        			router.get('profileController').deleteMe();
+	     			},
+	     			afterDelete: Ember.Route.transitionTo('loggedOut.login'),
+	     			exit: function(router) {
+						router.get('profileController').resetFields();
+					}
+		        })
 		    }),
 		    //Contacts
 		    contacts: Ember.Route.extend({
 		    	route: '/contacts',
 		    	connectOutlets:function(router, context){
-		    		router.get('userController').connectOutlet('userbody', 'userContacts');
+		    		router.get('userController').connectOutlet('maincontent', 'userContacts');
 		    	}
 		    }),
 		    //Messages
 		    messages: Ember.Route.extend({
 		    	route: '/messages',
 		    	connectOutlets:function(router, context){
-		    		router.get('userController').connectOutlet('userbody', 'userMessages');
+		    		router.get('userController').connectOutlet('maincontent', 'userMessages');
 		    	}
 		    }),
 	        goToUpdateProfile: Ember.Route.transitionTo('updateprofile'),

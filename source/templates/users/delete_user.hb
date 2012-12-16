@@ -4,3 +4,5 @@
 <p>{{view Ember.TextField valueBinding="password_conf" type="password"}}</p>
 
 <button {{action goDelete}}>Send</button>
+
+<br /><br /><br />
