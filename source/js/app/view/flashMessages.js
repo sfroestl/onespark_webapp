@@ -1,4 +1,5 @@
 App.FlashMessagesView = Ember.View.extend({
   tagName: "ul",
-  templateName: 'flashMessages'
+  templateName: 'flashMessages',
+  classNames:['flash']
 });

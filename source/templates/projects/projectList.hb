@@ -1,4 +1,4 @@
-<div class="project-list-head">
+<div class="project-list-head list-head">
 	{{view.title}}
 	<a href="" class="project-list-sort-btn">sort by: last changes</a>
 </div>
