@@ -1,12 +1,19 @@
-<h1>Sign in</h1>
+<h1 class="headline">Sign in</h1>
 
-<label>Username: </label><br/>
-{{view Ember.TextField valueBinding="username"}}<br/>
+<fieldset>
+	<label for="username">Username</label>
+	{{view Ember.TextField valueBinding="username" id="username"}}
+</fieldset>
 
-<label>Password: </label><br/>
-{{view Ember.TextField valueBinding="password" type="password"}}<br/><br/>
+<fieldset>
+	<label for="password">Password</label>
+	{{view Ember.TextField valueBinding="password" type="password" id="password"}}
+</fieldset>
 
-<button {{action goLoggedIn}}>Login</button><a {{action goToRegister href=true}}>Register</a>
+<fieldset>
+	<button {{action goLoggedIn}} class="btn-login">Login</button>
+</fieldset>
+<a {{action goToRegister href=true}}>Register</a>
 
 
 
