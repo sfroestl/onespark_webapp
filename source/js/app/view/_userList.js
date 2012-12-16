@@ -21,7 +21,7 @@ App.UserListView = Ember.View.extend({
 	  });
   }.property("filter","users.[]"),
   sortings: [
-    Ember.Object.create({name:"forename",sortProperties:["fornameOrUsername"]}),
+    Ember.Object.create({name:"forename",sortProperties:["forenameOrUsername"]}),
     Ember.Object.create({name:"surname",sortProperties:["surnameOrUsername"]}),
   ],
   sortedUsers: null,
