@@ -1,1 +1,1 @@
-{{view App.UserListView usersBinding="controller.content" controlsBinding="App.EditContributorsControlsView" filterBinding="controller.filterText" showFilter=true}}
+{{view App.UserListView usersBinding="controller.content.contributors" controlsBinding="App.EditContributorsControlsView" filterBinding="controller.filterText"}}

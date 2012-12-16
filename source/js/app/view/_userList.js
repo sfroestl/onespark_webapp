@@ -4,7 +4,11 @@ App.UserListView = Ember.View.extend({
   controls: null,
   users: [],
   filter: "",
-  showFilter: false,
+  noUsers: "No users to display",
+  noFilteredUsers: "No user matches your search.",
+  showFilter: function() {
+	  return this.get("users.length")>4;
+  }.property("users.length"),
   filteredUsers: function() {
 	  var filter = this.get("filter");
 	  var users = this.get("users");
@@ -12,7 +16,7 @@ App.UserListView = Ember.View.extend({
 	  var searchWords = filter.w();
 	  return users.filter(function(user){
         return searchWords.every(function(search){
-		  return user.matchesSearch(search);
+		  return user.get("matchesSearch").call(user,search);
 	    }); 
 	  });
   }.property("filter","users.[]"),

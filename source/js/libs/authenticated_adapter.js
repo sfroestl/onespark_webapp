@@ -22,10 +22,6 @@ DS.AuthenticatedRESTAdapter = DS.RESTAdapter.extend({
 	}
 		
     return DS.RESTAdapter.prototype.ajax.call(this,url, type, hash);
-  },
-  
-  findMany: function(store, type, ids) { //temporary fix using the single request model
-	  DS.Adapter.prototype.findMany.call(this,store, type, ids);
   }
 });
 

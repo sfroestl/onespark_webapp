@@ -76,10 +76,13 @@ App.Router = Ember.Router.extend({
 			newProject: Ember.Route.extend({
 				route: '/new',
 				connectOutlets: function(router, context){
-					router.get('applicationController').connectOutlet('body', 'newProject');
+					router.get('createUpdateProjectController').empty();
+					router.get('createUpdateProjectController').set("createFlag", true);
+					router.get('createUpdateProjectController').set("updateFlag", false);
+					router.get('applicationController').connectOutlet('body', 'createUpdateProject');
 				},
-				goSave: function(router, evt) {
-        			router.get('newProjectController').save();
+				goCreate: function(router, evt) {
+        			router.get('createUpdateProjectController').create();
         			router.transitionTo('projects.index');
      			},
 			}),
@@ -130,18 +133,6 @@ App.Router = Ember.Router.extend({
 						router.get('applicationController').connectOutlet('body', 'tool',aProject);
 						router.get('toolController').connectOutlet('tool-body', 'projectOverview',aProject);
 					},
-
-					goDelete: function(router, evt){
-						router.get('projectOverviewController').deleteProject(App.store.find(App.Project, evt.context.id));
-						var deleteTrue = router.get('projectOverviewController.projectDeleteCommitted');
-						console.log(deleteTrue);
-						if(deleteTrue){
-							router.transitionTo('projects.index');
-						}
-					},
-
-					goProjectsIndex: Ember.Route.transitionTo('projects.index'),
-
 				}),
 
 				projectTasks: Ember.Route.extend({
@@ -201,11 +192,45 @@ App.Router = Ember.Router.extend({
 
 				projectEdit: Ember.Route.extend({
 					route: '/edit',
+					toolName: 'edit',
+			        connectOutlets: function(router,project) {
+						var aProject = router.get('topNaviController.content');
+						if(App.get("session.sessionUserId")==aProject.get("owner.id")){
+							router.get('applicationController').connectOutlet('body', 'tool',aProject);
+							router.get('createUpdateProjectController').set("updateFlag", true);
+							router.get('createUpdateProjectController').set("createFlag", false);
+							router.get('createUpdateProjectController').fill(aProject);
+							router.get('toolController').connectOutlet('tool-body', 'createUpdateProject',aProject);
+						}
+						else{
+							var fm = App.FlashMessage.create({
+								text: "You have no permission to edit this project"
+							})
+
+						}
+					},
+					goUpdate: function(router, evt){
+						router.get('createUpdateProjectController').update(App.store.find(App.Project, evt.context.id));
+					}
 				}),
 
 				projectTrash: Ember.Route.extend({
 					route: '/trash',
+					toolName: 'trash',
+					connectOutlets: function(router,project) {
+						var aProject = router.get('topNaviController.content');
+						if(App.get("session.sessionUserId")==aProject.get("owner.id")){
+							router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
+						}
+						else{
+							var fm = App.FlashMessage.create({
+								text: "You have no permission to delete this project"
+							})
+
+						}
+					}
 				}),
+
 				goToTool: function(router, context) {
 					
 					var c = context.contexts;
