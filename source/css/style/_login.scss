@@ -1,5 +1,18 @@
-.login-form{
-	margin-top:-47px;
+.brand {
+	padding: 1em 0 1em 15.125%;
+	margin:0;
+	margin-top: -47px;
+	background-color: $os-white;
+	h1 {
+		font-family: $os-serif;
+		font-size: $nav-head;
+		font-weight: normal;
+		color: $os-red;
+		margin: 0;
+	}
+	border-bottom: 1px solid $os-lightgrey;
+}
+.login-form, .register-form{
 	background-color: $os-white;
 	fieldset{
 		margin: 1em 3% 1em 15.125%;
@@ -17,7 +30,7 @@
 	label {
 		font-size: .9em;
 	}
-	.btn-login{
+	.btn-login, .btn-register{
 		background-color: $os-blue;
 		&:hover{
 			background-color: $os-black;
@@ -31,5 +44,5 @@
 		color: $os-darkgrey;
 		margin-left:15.125%;
 	}
-	padding-bottom: 2em;
+	padding: 2em 0;
 }

@@ -34,3 +34,31 @@ button{
 		background-color:$os-black;
 	}
 }
+form{
+	background-color: $os-white;
+fieldset{
+		margin: 1em 3% 1em 15.125%;
+	}
+	button, label, input, input[type="text"], input[type="date"], textarea{
+		display:block;
+		width: 96.46539%;
+	}
+	input[type="text"], input[type="date"], input, textarea{
+		padding: 8px;
+		background-color: $os-lightgrey;
+		border:none;
+		// @include insetshadow( 1px, 2px);
+	}
+	label {
+		font-size: .9em;
+	}
+	.btn-login{
+		background-color: $os-blue;
+		&:hover{
+			background-color: $os-black;
+		}
+		&:active{
+			background-color: $os-black;
+		}
+	}
+}
