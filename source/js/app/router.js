@@ -278,14 +278,14 @@ App.Router = Ember.Router.extend({
 		    contacts: Ember.Route.extend({
 		    	route: '/contacts',
 		    	connectOutlets:function(router, context){
-		    		router.get('userController').connectOutlet('maincontent', 'userContacts');
+		    		router.get('userController').connectOutlet('maincontent', 'contacts');
 		    	}
 		    }),
 		    //Messages
 		    messages: Ember.Route.extend({
 		    	route: '/messages',
 		    	connectOutlets:function(router, context){
-		    		router.get('userController').connectOutlet('maincontent', 'userMessages');
+		    		router.get('userController').connectOutlet('maincontent', 'messages');
 		    	}
 		    }),
 	        goToUpdateProfile: Ember.Route.transitionTo('updateprofile'),
