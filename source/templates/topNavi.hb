@@ -2,14 +2,10 @@
 	<img src="/images/icon-os.png" alt="Home" />
 </a>
 
-{{#if title}}
+{{#if content}}
 <a class="projects-button button-center" {{action showProject href=true}}>{{title}}</a>
 {{else}}
-	{{#if title}}
-	<a class="projects-button button-center" {{action goToProjects href=true}}>add project</a>
-	{{else}}
-	<a class="projects-button button-center" {{action goToProjects href=true}}>all projects</a>
-	{{/if}}
+<a class="projects-button button-center" {{action goToProjects href=true}}>all projects</a>
 {{/if}}
 
 
