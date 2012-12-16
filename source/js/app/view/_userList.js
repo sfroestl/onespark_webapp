@@ -20,4 +20,26 @@ App.UserListView = Ember.View.extend({
 	    }); 
 	  });
   }.property("filter","users.[]"),
+  sortings: [
+    Ember.Object.create({name:"forename",sortProperties:["forenameOrUsername"]}),
+    Ember.Object.create({name:"surname",sortProperties:["surnameOrUsername"]}),
+  ],
+  sortedUsers: null,
+  
+  currentSorting: null,
+  sortingChangable: function() {
+	  return this.get("sortings.length")>1;
+  }.property("sortings.length"),  
+  sortingRelevant: function() {
+	  return this.get("sortingChangable") && this.get("filteredUsers.length")>1 ;
+  }.property("filteredUsers.length","sortingChangable"),
+  init: function() {
+	this._super();
+	this.set("sortedUsers",Ember.ArrayProxy.create(Ember.SortableMixin,{
+		view:this,
+		contentBinding:"view.filteredUsers",
+		sortPropertiesBinding:"view.currentSorting.sortProperties",
+	}));
+	this.set("currentSorting",this.get("sortings.0"));
+  }
 });

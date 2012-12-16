@@ -12,7 +12,9 @@ App.Router = Ember.Router.extend({
 
   root: Ember.Route.extend({
 
-  	
+  	goBack: function() {
+		window.history.back();
+	},
   	goToSearch: Ember.Route.transitionTo('loggedIn.search'),
 		//Wechsel in eingeloggten (loggedIn) Status
 		loginComplete: Ember.Route.transitionTo('root.loggedIn.projects.index'),
@@ -181,7 +183,7 @@ App.Router = Ember.Router.extend({
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
-							router.get('toolController').connectOutlet('tool-body', 'editContributors',aProject.get("contributors"));
+							router.get('toolController').connectOutlet('tool-body', 'editContributors',aProject);
 						},
 						cancel: Ember.Route.transitionTo("projectContributors.index"),
 						removeAsContributor: function(router, evt) {
