@@ -2,6 +2,7 @@ App.ProfileView = Ember.View.extend({
   templateName: 'profile',
     isUpdateProfile: false,
     isDeleteAccount: false,
+    tagName: "form",
     goToUpdateProfile: function() {
         this.set('isUpdateProfile', !this.get('isUpdateProfile'));
         if(this.isDeleteAccount) {
@@ -17,12 +18,14 @@ App.ProfileView = Ember.View.extend({
 });
 
 App.UpdateProfileView= Ember.View.extend({
+	tagName: "form",
     didInsertElement: function(){
     	$('body,html').animate({ scrollTop: $('body').height() }, 'slow');
     }
 });
 
 App.DeleteAccountView= Ember.View.extend({
+	tagName: "form",
     didInsertElement: function(){
     	$('body,html').animate({ scrollTop: $('body').height() }, 'slow');
     }	
