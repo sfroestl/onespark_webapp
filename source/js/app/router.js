@@ -190,7 +190,7 @@ App.Router = Ember.Router.extend({
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
-							router.get('toolController').connectOutlet('tool-body', 'editContributors',aProject);
+							router.get('toolController').connectOutlet('tool-body', 'editContributors',aProject.get("contributors"));
 						},
 						cancel: Ember.Route.transitionTo("projectContributors.index"),
 						removeAsContributor: function(router, evt) {
