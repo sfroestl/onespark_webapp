@@ -4,7 +4,8 @@ App.ProjectCoworker = DS.Model.extend({
     user: DS.belongsTo('App.User'),
     //tasks: DS.hasMany('App.Task')
     flashMessageName: function() {
-		return this.get("user.displayName")+" as coworker";
+		var dn = this.get("user.displayName");
+		return dn ? dn+" as coworker" : "coworker";
 	}.property("user.displayName"),
 	
 });
