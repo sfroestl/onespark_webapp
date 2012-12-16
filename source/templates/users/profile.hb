@@ -5,21 +5,21 @@
 	  <tr><td>Username:</td><td>{{user.username}}</td></tr>
 	  <tr><td>Email:</td><td>{{user.email}}</td></tr>
 
-	  <tr><td>Forename:</td><td>{{view Ember.TextField disabledBinding="view.isDisabled" valueBinding="user.profile.forename"}}</td></tr>
-	  <tr><td>Surname:</td><td>{{view Ember.TextField disabledBinding="view.isDisabled" valueBinding="user.profile.surname"}}</td></tr>
-	  <tr><td>City:</td><td>{{view Ember.TextField disabledBinding="view.isDisabled" valueBinding="user.profile.city"}}</td>
-	  <tr><td>About:</td><td>{{view Ember.TextField disabledBinding="view.isDisabled" valueBinding="user.profile.about"}}</td></tr>
+	  <tr><td>Forename:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.forename"}}</td></tr>
+	  <tr><td>Surname:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.surname"}}</td></tr>
+	  <tr><td>City:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.city"}}</td>
+	  <tr><td>About:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.about"}}</td></tr>
 </table>
 
-{{#unless view.isDisabled}}
+{{#unless isDisabled}}
 	<button {{action goUpdate}}>Send</button>
 {{/unless}}
 <br />
 
-<a href="#"{{action edit target="view"}}>edit</a> 
-<a href="#"{{action goToDeleteMe target="view"}}>delete account</a>
+<a href="#"{{action edit target="controller"}}>edit</a> 
+<a href="#"{{action goToDeleteMe target="controller"}}>delete account</a>
 
-{{#if view.isDeleteAccount}}   
+{{#if isDeleteAccount}}   
    	{{#view App.DeleteAccountView}}   
 		<h2>Delete Account:</h2>
 
