@@ -22,4 +22,3 @@
 </div>
 <button {{action goDelete content}}>delete</button><br/><br/>
 
-

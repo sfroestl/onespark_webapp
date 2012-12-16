@@ -7,20 +7,17 @@ App.ProjectController =  Ember.ObjectController.extend();
 
 App.ProjectOverviewController = Ember.ObjectController.extend({
 
-	projectDeleteCommitted : false,
-
 	deleteProject: function(projectToDelete) {
 		if (App.get("session.sessionUserId")==projectToDelete.get('owner.id')){
-			this.projectDeleteCommitted = false;
 
 			var confirmResult = confirm("Delete project "+projectToDelete.get('title')+" ?");
 
 			if(confirmResult){
-				this.projectDeleteCommitted = true;
 				var project = projectToDelete;
 				showFlashMessageFor(project);
 				project.deleteRecord();
 				App.store.commit();
+				App.router.transitionTo('projects.index');
 			}
 		}
 		else{
@@ -32,13 +29,17 @@ App.ProjectOverviewController = Ember.ObjectController.extend({
 	}
 });
 
-App.NewProjectController = Ember.Controller.extend({
+App.CreateUpdateProjectController = Ember.Controller.extend({
+	createFlag: false,
+	updateFlag: false,
+
     title: null,
     description: null,
     owner: App.get('session.sessionUser'),
     dueDate: null,
 
-    save: function() {
+    create: function() {
+    	console.log(this.createFlag);
 		var newtitle = this.get("title");
 		var newdesc = this.get("description");
 		var newowner = this.get("owner");
@@ -49,5 +50,42 @@ App.NewProjectController = Ember.Controller.extend({
 		App.get('session.sessionUser.ownedProjects').addObject(project);
     
 		App.store.commit();
+		//this.set("createFlag", false);
+	},
+
+	fill: function(projectToEdit){
+			this.title = projectToEdit.get("title");
+			this.description = projectToEdit.get("desc");
+			var date = projectToEdit.get("dueDate");
+			if(date!=null){
+				this.dueDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+			}
+	},
+
+	empty: function(){
+		this.title = null;
+		this.description = null;
+		this.dueDate= null;
+	},
+
+	update: function(projectToEdit){
+		var project = projectToEdit;
+		project.set("title", this.title);
+		project.set("desc", this.description);
+		var date = new Date(this.dueDate);
+		project.set("dueDate", date);
+		App.store.commit();
+		//this.set("updateFlag", false);
+
+    	var fm = App.FlashMessage.create({
+			text: "Project was updated"
+		});
+
+		
+		// console.log(this.content);
+  //   	this.set("content", null);
+  //   	console.log(this.content);
+    	App.router.transitionTo('projects.index');
+
 	}
 });
