@@ -267,7 +267,7 @@ App.Router = Ember.Router.extend({
 	          	},
 	          	goUpdate: function(router, evt) {
 	        		router.get('profileController').update();
-	        		//router.get('profileController.view').goToUpdateProfile();
+	        		//router.get('profileController.view').edit();
 	     		},
 	     		goDelete: function(router, evt) {
 	        		router.get('profileController').deleteMe();
@@ -278,6 +278,7 @@ App.Router = Ember.Router.extend({
 		    contacts: Ember.Route.extend({
 		    	route: '/contacts',
 		    	connectOutlets:function(router, context){
+		    		router.get('contactsController').set('contacts', App.get("session.sessionUser.contacts"));
 		    		router.get('userController').connectOutlet('maincontent', 'contacts');
 		    	}
 		    }),
@@ -287,9 +288,7 @@ App.Router = Ember.Router.extend({
 		    	connectOutlets:function(router, context){
 		    		router.get('userController').connectOutlet('maincontent', 'messages');
 		    	}
-		    }),
-	        goToUpdateProfile: Ember.Route.transitionTo('updateprofile'),
-	        goToDeleteMe: Ember.Route.transitionTo('deleteme')
+		    })
 	   	}),
 		goToProfile: Ember.Route.transitionTo('user.profile')
    	}),
