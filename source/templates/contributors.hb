@@ -1,27 +1,33 @@
 {{#if view.showSearch}}
 <p>Search {{view Ember.TextField valueBinding="controller.filterText"}}</p>
 {{/if}}
-{{view App.UserListView 
-  title="Contributors"
-  usersBinding="controller.writers"
-  filterBinding="controller.filterText"
-  showFilter=false
-  noUsers="This project doesn't have any contributors."
-  noFilteredUsers="Your search doesn't matches any contributor."}}
-{{view App.UserListView 
-  title="Administrators"
+
+{{#if controller.admins}}
+{{view App.UserListView
+  title="Admins"
   usersBinding="controller.admins"
   filterBinding="controller.filterText"
   showFilter=false
-  noUsers="This project doesn't have any adminstrators."
-  noFilteredUsers="Your search doesn't matches any admin."}}
-{{view App.UserListView 
-  title="Observators"
+  noUsers="This project doesn't have any admins."
+  noFilteredUsers="Your search didn't match any contributor."}}
+{{/if}}
+{{#if controller.writers}}
+{{view App.UserListView
+  title="Writers"
+  usersBinding="controller.writers"
+  filterBinding="controller.filterText"
+  showFilter=false
+  noUsers="This project doesn't have any worker."
+  noFilteredUsers="Your search didn't match any contributor."}}
+{{/if}}
+{{#if controller.readers}}
+{{view App.UserListView
+  title="Viewers"
   usersBinding="controller.readers"
   filterBinding="controller.filterText"
   showFilter=false
-  noUsers="This project doesn't have any observators."
-  noFilteredUsers="Your search doesn't matches any observator."}}
-  
+  noUsers="This project doesn't have any viewer."
+  noFilteredUsers="Your search didn't match any contributor."}}
+{{/if}}
 <a {{action "goToNewContributor" href="true"}}>Hinzufügen</a>
 <a {{action "goToEditContributors" href="true"}}>Bearbeiten</a>
