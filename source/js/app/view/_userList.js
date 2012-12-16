@@ -12,7 +12,7 @@ App.UserListView = Ember.View.extend({
 	  var searchWords = filter.w();
 	  return users.filter(function(user){
         return searchWords.every(function(search){
-		  return user.matchesSearch(search);
+		  return user.get("matchesSearch").call(user,search);
 	    }); 
 	  });
   }.property("filter","users.[]"),
