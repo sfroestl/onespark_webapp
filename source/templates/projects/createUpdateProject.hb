@@ -14,5 +14,8 @@
 		<td>{{view Ember.TextField valueBinding="dueDate" type="date"}}</td>
 	</tr>	
 </table>
-		<button {{action goSave}}>save</button>
+{{#if content.id}}<button {{action goUpdate content}}>save Changes</button>
+{{else}}<button {{action goCreate}}>create</button>
+{{/if}}
+		
 
