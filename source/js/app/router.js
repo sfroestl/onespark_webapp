@@ -295,7 +295,10 @@ App.Router = Ember.Router.extend({
 	     		goDelete: function(router, evt) {
 	        		router.get('profileController').deleteMe();
 	     		},
-	     		afterDelete: Ember.Route.transitionTo('loggedOut.login')
+	     		afterDelete: Ember.Route.transitionTo('loggedOut.login'),
+	     		exit: function(router) {
+			        router.get('profileController').resetFields();
+			    }
 		    }),
 		    //Contacts
 		    contacts: Ember.Route.extend({
