@@ -62,5 +62,10 @@ App.ProfileController = Ember.Controller.extend({
         if(this.isDeleteAccount){
         	this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
         }
+    },
+    resetFields: function() {
+        this.set('password_conf', '');
+        this.set('isDisabled', true);
+        this.set('isDeleteAccount', false);
     }
 });
