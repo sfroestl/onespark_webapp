@@ -5,7 +5,7 @@ App.Task = DS.Model.extend({
     project: DS.belongsTo('App.Project'),
     completed: DS.attr('boolean'),
     completedAt: DS.attr('date'),
-    //completedBy: DS.belongsTo('App.User'), //User-Model müsste noch completed-projects enthalten, oder? hasMany
+    completedBy: DS.belongsTo('App.User'), //User-Model müsste noch completed-projects enthalten, oder? hasMany
                                              // server-seitig?
     estimatedHours: DS.attr('number'),
     workedHours: DS.attr('number'),
@@ -22,4 +22,5 @@ DS.AuthenticatedRESTAdapter.map('App.Task', {
     // comments: {key: 'comment_ids'}
     creator: { key: 'creator_id'},
     worker: { key: 'worker_id'},
+    completedBy: { key: 'completed_by'},
 });

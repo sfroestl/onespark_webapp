@@ -29,15 +29,13 @@
 
 {{#if completed}}
 	<tr>
-		<td>completed:</td>
-		<td>true</td>
+		<td>completed by:</td>
+		<td>{{completedBy.displayName}}</td>
 	</tr>
-	{{#if completedAt}}
 	<tr>
 		<td>completed at:</td>
 		<td>{{view "App.FriendlyTimeView" timeBinding="completedAt"}}</td>
 	</tr>
-	{{/if}}
 {{else}}
 	<tr>
 		<td>completed:</td>
