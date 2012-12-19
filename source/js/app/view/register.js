@@ -11,7 +11,7 @@ App.RegisterView = Ember.View.extend({
             if(ele.val().length != 0) { 
 	            if(ele.val().length < 3) {
 	                jVal.errors = true;
-	                App.FlashMessage.create({text:"Username too short."});
+	                App.FlashMessage.create({text:"Username " + ele.val() + " is too short."});
 	                //$('#username').addClass("error");  
 	            } else {
 	            	//$('#username').addClass("success");
@@ -48,7 +48,7 @@ App.RegisterView = Ember.View.extend({
         'pwMatch' : function() {
             var ele1 = $('#password'); 
             var ele2 = $('#password-conf'); 
-            if(ele1.val().length != 0 && ele2.val().length != 0) {
+            if(ele1.val().length > 5 && ele2.val().length > 5) {
 	            if(ele1.val() != ele2.val()) {
 	                jVal.errors = true;
 	                App.FlashMessage.create({text:"Your passwords don't match."});
