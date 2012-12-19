@@ -2,8 +2,8 @@
 
 <table border="0">
 	  <tr><td><img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile"></td></tr>
-	  <tr><td>Username:</td><td>{{user.username}}</td></tr>
-	  <tr><td>Email:</td><td>{{user.email}}</td></tr>
+	  <tr><td>Username:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.username"}}</td></tr>
+	  <tr><td>Email:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.email"}}</td></tr>
 
 	  <tr><td>Forename:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.forename"}}</td></tr>
 	  <tr><td>Surname:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.surname"}}</td></tr>

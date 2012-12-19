@@ -8,6 +8,8 @@ App.ProfileController = Ember.Controller.extend({
     isDisabled: true,	
 
 	update: function() {
+		var user = App.get("session.sessionUser");
+
 		var profile = App.get("session.sessionUser.profile");
     	App.store.commit();
     	App.FlashMessage.create({text:"Profile successfully updated."});
