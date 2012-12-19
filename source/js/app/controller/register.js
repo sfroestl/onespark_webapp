@@ -5,8 +5,38 @@ App.RegisterController = Ember.Controller.extend({
   email: '',
   password: '',
   password_confirmation: '',
-  registered: false,
+  register: function() {
+    var emptyArray = new Array(this.get("username"), this.get("email"), this.get("password"), this.get("password_confirmation"));
+    var pw = this.get("password");
+    var username = this.get("username");
+    if(isEmptyValidation(emptyArray) && matchPwValidation(this.get("password"), this.get("password_confirmation")) && pwLengthValidation(this.get("password")) && isEmailValid(this.get("email")) && usernameLength(this.get("username"))) {  
+      $.ajax({
+            async: true,
+            url: 'http://api.onespark.de/api/v1/users',
+            type: 'POST',
+            dataType: 'json',
+            accept: 'json',
+            data: {user: { username: this.get("username"), email: this.get("email"), password: this.get("password"), password_confirmation: this.get("password_confirmation") }},
 
+            error: function(jqXHR, textStatus){
+
+              var dec = JSON.parse(jqXHR.responseText);
+              console.log ("--> ERROR");
+              if(dec.errors!=null) {
+                error_msg = "Username and email have already been taken.";
+                App.FlashMessage.create({text:error_msg});
+              }
+            },
+
+            success: function(data) {
+              console.log ("--> Success: 200");
+              App.FlashMessage.create({text:"Your sign up was successfull."});
+              App.session.login(username,pw);
+            }
+          });
+    }
+  },
+  /*
   register: function() {
     var emptyArray = new Array(this.get("username"), this.get("email"), this.get("password"), this.get("password_confirmation"));
     if(isEmptyValidation(emptyArray) && matchPwValidation(this.get("password"), this.get("password_confirmation")) && pwLengthValidation(this.get("password")) && isEmailValid(this.get("email")) && usernameLength(this.get("username"))) {  
@@ -35,22 +65,11 @@ App.RegisterController = Ember.Controller.extend({
         } else {
             App.FlashMessage.create({text:"Your sign up was successfull."});
             App.session.login(this.get("username"),this.get("password"));
-            //this.set("registered", true);
-            //console.log(this.get("registered"));
         }
       });    
     }
   },
-
-    _callbackTransitionlogin: function() {
-            console.log("hallo observer");
-            if(this.get("registered")) {
-              console.log("Router true");
-              App.session.login(this.get("username"),this.get("password"));
-            }else {
-              console.log("Router false");
-            }
-          }.observes("registered"),
+  */
 
   /* ### Reset TextFields ### */
 
