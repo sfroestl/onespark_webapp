@@ -20,6 +20,6 @@
 </fieldset>
 
 <fieldset>
-<button {{action goRegister}} class="btn-register">Register</button>
+<button {{action goRegister}} id="send" class="btn-register">Register</button>
 </fieldset>
 <a {{action goToLogin href=true}}>Back to login</a>
