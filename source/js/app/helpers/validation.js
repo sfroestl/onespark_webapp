@@ -16,7 +16,6 @@ function checkEmail(email) {
         return false;
       }
     }
-    console.log("testest");
     return true
   }
 

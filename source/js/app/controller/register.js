@@ -5,6 +5,7 @@ App.RegisterController = Ember.Controller.extend({
   email: '',
   password: '',
   password_confirmation: '',
+  registered: false,
 
   register: function() {
     var emptyArray = new Array(this.get("username"), this.get("email"), this.get("password"), this.get("password_confirmation"));
@@ -29,16 +30,27 @@ App.RegisterController = Ember.Controller.extend({
                 error_msg = "Email " + user.get("errors").email + ".";
               }
               App.FlashMessage.create({text:error_msg});
-
             }
         //if user is not dirty
         } else {
             App.FlashMessage.create({text:"Your sign up was successfull."});
-            App.router.send("goToLogin");
+            App.session.login(this.get("username"),this.get("password"));
+            //this.set("registered", true);
+            //console.log(this.get("registered"));
         }
       });    
     }
   },
+
+    _callbackTransitionlogin: function() {
+            console.log("hallo observer");
+            if(this.get("registered")) {
+              console.log("Router true");
+              App.session.login(this.get("username"),this.get("password"));
+            }else {
+              console.log("Router false");
+            }
+          }.observes("registered"),
 
   /* ### Reset TextFields ### */
 
@@ -47,5 +59,7 @@ App.RegisterController = Ember.Controller.extend({
     this.set('email', '');
     this.set('password', '');
     this.set('password_confirmation', '');
+
+    this.set('registered', false);
   }
 });

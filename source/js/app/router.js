@@ -290,7 +290,6 @@ App.Router = Ember.Router.extend({
 	          	},
 	          	goUpdate: function(router, evt) {
 	        		router.get('profileController').update();
-	        		//router.get('profileController.view').edit();
 	     		},
 	     		goDelete: function(router, evt) {
 	        		router.get('profileController').deleteMe();
@@ -330,7 +329,7 @@ App.Router = Ember.Router.extend({
 			  	router.get('applicationController').connectOutlet('body', 'register');
 			},
 			goRegister: function(router, evt) {
-        		router.get('registerController').register();
+					router.get('registerController').register();
      		},
 	        goToLogin: Ember.Route.transitionTo('loggedOut.login'),
 	        exit: function(router) {
