@@ -14,7 +14,7 @@
 	{{{view Ember.TextArea valueBinding="description" id="description"}}
 	</fieldset>
 	<fieldset>
-	<label for="due-date">due date (Year-Month-Day):</label>
+	<label for="due-date">due date (YYYY-MM-DD):</label>
 	{{view Ember.TextField valueBinding="dueDate" type="date" id="due-date"}}
 	</fieldset>
 	<fieldset>

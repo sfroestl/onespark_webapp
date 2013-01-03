@@ -79,11 +79,18 @@ App.Router = Ember.Router.extend({
 			newProject: Ember.Route.extend({
 				route: '/new',
 				connectOutlets: function(router, context){
-					router.get('createUpdateProjectController').empty();
 					router.get('createUpdateProjectController').set("createFlag", true);
 					router.get('createUpdateProjectController').set("updateFlag", false);
 					router.get('applicationController').connectOutlet('body', 'createUpdateProject');
 				},
+				exit: function(router){
+      				router.get('createUpdateProjectController').set("title", null);
+      				router.get('createUpdateProjectController').set("description", null);
+      				router.get('createUpdateProjectController').set("owner", null);
+      				router.get('createUpdateProjectController').set("dueDate", null);
+    			},
+
+
 				goCreate: function(router, evt) {
         			router.get('createUpdateProjectController').create();
         			router.transitionTo('projects.index');
@@ -109,25 +116,6 @@ App.Router = Ember.Router.extend({
 					  router.get('applicationController').connectOutlet('footer', 'account',App.session);
 					}
 				}),
-
-			// Von wem ist das editProject? Kann das weg?
-				editProject: Em.Route.extend({
-			          route: 'edit',
-
-			          cancelEdit: function(router) {
-			            router.transitionTo('projects.index');
-			          },
-
-			          connectOutlets: function(router) {
-			            var contactController = router.get('contactController');
-			            contactController.connectOutlet('editContact', contactController.get('content'));
-			            router.get('editContactController').enterEditing();
-			          },
-
-			          exit: function(router) {
-			            router.get('editContactController').exitEditing();
-			          }
-        		}),
 
 				projectOverview: Ember.Route.extend({
 					route: '/overview',
@@ -234,6 +222,13 @@ App.Router = Ember.Router.extend({
 
 						}
 					},
+					exit: function(router){
+	      				router.get('createUpdateProjectController').set("title", null);
+	      				router.get('createUpdateProjectController').set("description", null);
+	      				router.get('createUpdateProjectController').set("owner", null);
+	      				router.get('createUpdateProjectController').set("dueDate", null);
+	    			},
+
 					goUpdate: function(router, evt){
 						router.get('createUpdateProjectController').update(App.store.find(App.Project, evt.context.id));
 					}
