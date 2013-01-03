@@ -1,5 +1,3 @@
-<a {{action "goToNewContributor" href="true"}}>Hinzufügen</a>
-<a {{action "goToEditContributors" href="true"}}>Bearbeiten</a>
 {{#if view.showSearch}}
 <p>Search {{view Ember.TextField valueBinding="controller.filterText"}}</p>
 {{/if}}
