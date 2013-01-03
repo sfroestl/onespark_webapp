@@ -38,8 +38,14 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 		var newtitle = this.get("title");
 		var newdesc = this.get("description");
 		var newowner = this.get("owner");
-		var newduedate = new Date(this.get("dueDate"));
+		var newduedate;
 
+		var date = Date.parse(this.get("dueDate"));
+		if(isNaN(date)){
+			newduedate=null;
+		}
+		else newduedate= new Date(this.get("dueDate"));
+		
 		var project = App.store.createRecord(App.Project,  { title: newtitle, desc: newdesc, owner: newowner, dueDate: newduedate});
 		showFlashMessageFor(project);
 		App.get('session.sessionUser.ownedProjects').addObject(project);
@@ -54,12 +60,6 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 			if(date!=null){
 				this.dueDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 			}
-	},
-
-	empty: function(){
-		this.title = null;
-		this.description = null;
-		this.dueDate= null;
 	},
 
 	update: function(projectToEdit){

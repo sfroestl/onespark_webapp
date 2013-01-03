@@ -1,4 +1,4 @@
-<h2>Tasks</h2>
+<h2>open tasks</h2>
 +add task<br/>
 <ul class="task-list">
 	{{#each tasks}}
