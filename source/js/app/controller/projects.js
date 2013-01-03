@@ -34,7 +34,6 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
     dueDate: null,
 
     create: function() {
-    	console.log(this.createFlag);
 		var newtitle = this.get("title");
 		var newdesc = this.get("description");
 		var newowner = this.get("owner");
@@ -66,8 +65,13 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 		var project = projectToEdit;
 		project.set("title", this.title);
 		project.set("desc", this.description);
-		var date = new Date(this.dueDate);
-		project.set("dueDate", date);
+		var newduedate;
+		var date = Date.parse(this.get("dueDate"));
+		if(isNaN(date)){
+			newduedate=null;
+		}
+		else newduedate= new Date(this.get("dueDate"));
+		project.set("dueDate", newduedate);
 		App.store.commit();
 
     	var fm = App.FlashMessage.create({

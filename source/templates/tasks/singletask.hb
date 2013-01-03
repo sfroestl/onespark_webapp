@@ -73,3 +73,5 @@
 
 </table>
 
+<button {{action goEdit content}} class="btn-submit">edit Task</button>
+

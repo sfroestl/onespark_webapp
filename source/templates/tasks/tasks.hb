@@ -1,5 +1,10 @@
+<a {{action goToNewTask href=true}} class="new-task-button task-elem clearfix">
+	<span class="add-img"><img src="/images/icon-add.png"></span>
+	<span class="add-txt">add task</span>
+</a>
+
 <h2>open tasks</h2>
-+add task<br/>
+
 <ul class="task-list">
 	{{#each tasks}}
 				<li {{bindAttr class="stateForCSS"}}>

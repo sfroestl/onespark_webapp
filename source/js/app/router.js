@@ -38,7 +38,6 @@ App.Router = Ember.Router.extend({
   	loggedIn: Ember.Route.extend({
 		
 		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
-		//showTask: Ember.Route.transitionTo('loggedIn.projects.singleproject.)
 		goToNewProject: Ember.Route.transitionTo('loggedIn.projects.newProject'),
 		goToUserProfile: Ember.Route.transitionTo('user.profile'),
 		goToUserContacts: Ember.Route.transitionTo('user.contacts'),
@@ -128,6 +127,8 @@ App.Router = Ember.Router.extend({
 				}),
 
 				projectTasks: Ember.Route.extend({
+					goToNewTask: Ember.Route.transitionTo('projectTasks.newTask'),
+
 					route: '/tasks',
 					toolName: 'tasks',
 
@@ -140,16 +141,85 @@ App.Router = Ember.Router.extend({
 							router.get('toolController').connectOutlet('tool-body', 'tasks');
 						}
 					}),
-					goToSingleTask: Ember.Route.transitionTo("projectTasks.singletask"),
+					goToSingleTask: Ember.Route.transitionTo('projectTasks.singletask'),
+
 
 					singletask: Ember.Route.extend({
-						route: '/:id',
-						toolName: 'Task',	//irgendwie Tasktitel einfügen					
+						route: '/:id',				
 						connectOutlets: function(router,task) {
-							//router.get('toolController').set('toolName', task);
 							router.get('toolController').connectOutlet('tool-body', 'singleTask',task);
+							router.get('singleTaskController').set('task', task);
 						}
-					})
+					}),
+
+					goEdit: Ember.Route.transitionTo('editTask'),
+
+					editTask: Ember.Route.extend({
+						route: '/edit',
+				        connectOutlets: function(router, task) {
+				        	aTask = router.get('singleTaskController').get('content');
+				        	console.log(aTask);
+				        	//Rechteabfrage ausbauen mit Rechtesystem vom Backend
+							if(App.get("session.sessionUserId")==aTask.get("creator.id")){
+								router.get('createUpdateTaskController').set("updateFlag", true);
+								router.get('createUpdateTaskController').set("createFlag", false);
+								router.get('createUpdateTaskController').fill(aTask);
+								router.get('applicationController').connectOutlet('body', 'createUpdateTask', aTask);
+							}
+							else{
+								var fm = App.FlashMessage.create({
+									text: "You have no permission to edit this task"
+								})
+							}
+						},
+						 exit: function(router){
+		      				router.get('createUpdateTaskController').set("title", null);
+		      				router.get('createUpdateTaskController').set("description", null);
+		      				router.get('createUpdateTaskController').set("creator", null);
+		      				router.get('createUpdateTaskController').set("dueDate", null);
+		      				router.get('createUpdateTaskController').set("project", null);
+		      				router.get('createUpdateTaskController').set("estimatedHours", null);
+		      				router.get('createUpdateTaskController').set("worker", null);
+
+		     			},
+
+						goUpdate: function(router, evt){
+							router.get('createUpdateTaskController').update(evt.context);
+						},
+					}),
+
+					goDelete: Ember.Route.transitionTo('deleteTask'),
+
+					deleteTask: Ember.Route.extend({
+						route: '/delete',
+					}),
+	
+
+
+					newTask: Ember.Route.extend({
+						route: '/new',
+						connectOutlets: function(router, context){
+							var aProject = router.get('topNaviController.content');
+							router.get('createUpdateTaskController').set("createFlag", true);
+							router.get('createUpdateTaskController').set("updateFlag", false);
+							router.get('createUpdateTaskController').set("project", aProject);
+							router.get('applicationController').connectOutlet('body', 'createUpdateTask');
+						},
+						exit: function(router){
+		      				router.get('createUpdateTaskController').set("title", null);
+		      				router.get('createUpdateTaskController').set("description", null);
+		      				router.get('createUpdateTaskController').set("creator", null);
+		      				router.get('createUpdateTaskController').set("dueDate", null);
+		      				router.get('createUpdateTaskController').set("project", null);
+		      				router.get('createUpdateTaskController').set("estimatedHours", null);
+		      				router.get('createUpdateTaskController').set("worker", null);
+		    			},
+
+		    			goCreate: function(router, evt) {
+		        			router.get('createUpdateTaskController').create();
+		        			router.transitionTo('projectTasks.index');
+		     			},
+					}),
 				}),
 
 				projectPostings: Ember.Route.extend({

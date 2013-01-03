@@ -7,3 +7,9 @@ App.SingleTaskView = Ember.View.extend({
 	templateName: 'singletask',
 	classNames: ['singletask']
 });
+
+App.CreateUpdateTaskView = Ember.View.extend({
+  tagName: "form",
+  templateName: 'createUpdateTask',
+  classNames: ['createUpdateTask']
+});
