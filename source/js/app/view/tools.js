@@ -1,7 +1,7 @@
 App.ToolView = Ember.View.extend({
   templateName: 'tool',
   classNames: ['tool'],
-  currentToolName: function() {
+  currentToolState: function() {
 	  var state = App.get('router.currentState');
 	  while (!state.get("toolName")) {	//find a state (searching up to root) with a toolName-Property
 	    var p = state.get("parentState");
@@ -10,8 +10,19 @@ App.ToolView = Ember.View.extend({
 		else
 			return null;
 	  }
-	  return state.get("toolName");
-  }.property('App.router.currentState')
+	  return state;	  
+  }.property('App.router.currentState'),
+  
+  currentToolName: function() {
+	  return this.get("currentToolState.toolName");
+  }.property('currentToolState'),
+  contextMenuStates: function() {
+	  var state = this.get("currentToolState");
+	  if (!state) return null;
+	  return state.get("childStates").filter(function(item){
+		  return !!item.get('contextMenu'); //TODO maybe add additional filtering (does an action makes sense?)
+	  });
+  }.property('currentToolState'),  
 });
 
 App.ToolsView = Ember.View.extend({
