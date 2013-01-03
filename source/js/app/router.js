@@ -147,7 +147,7 @@ App.Router = Ember.Router.extend({
 						route: '/',
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
-							router.get('applicationController').connectOutlet('body', 'tool');
+							router.get('applicationController').connectOutlet('body', 'tool',aProject);
 							router.get('tasksController').set('tasks', aProject.get("tasks"));
 							router.get('toolController').connectOutlet('tool-body', 'tasks');
 						}
@@ -177,6 +177,7 @@ App.Router = Ember.Router.extend({
 					toolName: 'Contributors',
 					
 					index: Ember.Route.extend({
+						contextMenu: 'view',
 						route: '/',
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
@@ -188,7 +189,7 @@ App.Router = Ember.Router.extend({
 					goToEditContributors: Ember.Route.transitionTo("projectContributors.editContributors"),
 					newContributor: Ember.Route.extend({
 						route: '/add',
-						contextMenu: 'add Contributor',
+						contextMenu: 'add',
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
@@ -202,7 +203,7 @@ App.Router = Ember.Router.extend({
 					}),
 					editContributors: Ember.Route.extend({
 						route: '/edit',
-						contextMenu: 'edit Contributors',
+						contextMenu: 'edit',
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);

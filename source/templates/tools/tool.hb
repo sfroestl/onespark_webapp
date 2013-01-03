@@ -6,5 +6,14 @@
 	<a class="context-button button-right" {{action goToContext}}>
 		<img src="/images/icon-context.png" alt="context" />
 	</a>
+
 </nav>
+
+	{{#if view.contextMenuStates}}
+	<ul class="context-menu">
+	  {{#each ctx in view.contextMenuStates}}
+	    <li {{action goToTool ctx content}}>{{ctx.contextMenu}}</li>
+	  {{/each}}
+	</ul>
+	{{/if}}
 {{outlet tool-body}}
