@@ -55,9 +55,8 @@ App.Router = Ember.Router.extend({
 		}),
 
 		goLoggedOut: function(router, evt) {
-			router.get('loginController').set('password', ""); //reset password		
+			router.get('loginController').logout();	
 			router.transitionTo('root.index');
-			App.session.logout();
 		},
 
 		projects: Ember.Route.extend({
