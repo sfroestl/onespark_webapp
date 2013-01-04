@@ -57,7 +57,15 @@ describe( "The session model", function () {
 		});
 
 		it("should be signed out again after logout", function(){
-			//to Do
+			loginController.logout();
+			
+			expect(App.get("session.username")).toEqual(null);
+			expect(App.get("session.password")).toEqual(null);
+			expect(App.get("session.sessionToken")).toEqual(null);
+			expect(App.get("session.sessionUser")).toEqual(null);
+			expect(App.get("session.sessionUserId")).toEqual(null);
+
+			expect(App.get("session.sessionUser.isLoaded")).toEqual(null);
 		});
 	});
 });
