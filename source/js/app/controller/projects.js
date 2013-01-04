@@ -1,6 +1,6 @@
 App.ProjectsController = Ember.Controller.extend({
-		ownedProjects: null,
-		collaboratedProjects: null
+		ownedProjectsBinding: "App.session.sessionUser.ownedProjects",
+		collaboratedProjectsBinding: "App.session.sessionUser.collaboratedProjects"
 });
 
 App.ProjectController =  Ember.ObjectController.extend({
