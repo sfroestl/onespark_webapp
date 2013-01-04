@@ -4,6 +4,7 @@ App.User = DS.Model.extend({
     email: DS.attr('string'),
     password: DS.attr('string'),
     password_confirmation: DS.attr('string'),
+    tasks: DS.hasMany('App.Task'),
     //Relations
     ownedProjects: DS.hasMany('App.Project'),
     profile: DS.belongsTo('App.Profile'),

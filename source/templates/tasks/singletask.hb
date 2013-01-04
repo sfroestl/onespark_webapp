@@ -68,7 +68,7 @@
 {{#if worker}}
 	<tr>
 		<td>worker:</td>
-		<td>{{worker.displayName}}</td>
+		<td>{{worker.username}}</td>
 	</tr>
 {{/if}}
 

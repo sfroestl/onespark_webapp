@@ -21,6 +21,16 @@
 	<label for="estimatedHours">estimated hours</label>
 	{{{view Ember.TextArea valueBinding="estimatedHours" id="estimatedHours"}}
 	</fieldset>
+
+	<fieldset>
+ 	{{view Ember.Select
+       contentBinding="possibleWorkers"
+       valueBinding="worker"
+       optionValuePath="content"
+       optionLabelPath="content.username"}}
+    </fieldset>
+
+	<fieldset>
 	<fieldset>
 	<button {{action cancel}} class="btn-cancel">cancel</button>
 	{{#if updateFlag}}

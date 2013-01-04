@@ -53,8 +53,8 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 	},
 
 	fill: function(projectToEdit){
-			this.title = projectToEdit.get("title");
-			this.description = projectToEdit.get("desc");
+			this.set("title", projectToEdit.get("title"));
+			this.set("description", projectToEdit.get("desc"));
 			var date = projectToEdit.get("dueDate");
 			if(date!=null){
 				this.dueDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();

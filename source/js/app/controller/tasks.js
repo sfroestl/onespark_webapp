@@ -19,6 +19,13 @@ App.CreateUpdateTaskController = Ember.Controller.extend({
 
     worker: null,
 
+    possibleWorkers: function(){
+    	var users = this.get('project.contributors').mapProperty("content");
+    	users.unshift(this.get('project.owner'));
+    	users.unshift(null);
+    	return users;
+    }.property("project.contributors", "project.owner"),
+
     create: function() {
 		var newtitle = this.get("title");
 		var newdesc = this.get("description");
@@ -31,9 +38,10 @@ App.CreateUpdateTaskController = Ember.Controller.extend({
 		else newduedate= new Date(this.get("dueDate"));
 		var newEstimatedHours= parseInt(this.get("estimatedHours"));
 		var newProject = this.get("project");
-		console.log(newProject);
-		
-		var task = App.store.createRecord(App.Task,  { title: newtitle, desc: newdesc, creator: newcreator, dueDate: newduedate, project: newProject, estimatedHours: newEstimatedHours});
+		var newWorker = this.get("worker");
+		console.log(newWorker);
+	
+		var task = App.store.createRecord(App.Task,  { title: newtitle, desc: newdesc, creator: newcreator, dueDate: newduedate, project: newProject, estimatedHours: newEstimatedHours, worker: newWorker});
 		showFlashMessageFor(task);
     
 		App.store.commit();
@@ -44,10 +52,11 @@ App.CreateUpdateTaskController = Ember.Controller.extend({
 			if(date!=null){
 				this.dueDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 			}
-			this.title = taskToEdit.get("title");
-			this.description = taskToEdit.get("desc");
-			this.estimatedHours = taskToEdit.get("estimatedHours");
-			this.worker = taskToEdit.get("worker");
+			this.set("title", taskToEdit.get("title"));
+			this.set("description", taskToEdit.get("desc"));
+			this.set("estimatedHours", taskToEdit.get("estimatedHours"));
+			this.set("project", taskToEdit.get("project"));
+			this.set("worker", taskToEdit.get("worker"));
 	},
 
 	update: function(taskToEdit){
@@ -63,12 +72,14 @@ App.CreateUpdateTaskController = Ember.Controller.extend({
 		task.set("dueDate", newduedate);
 		task.set("estimatedHours", this.estimatedHours);
 
+		task.set("worker", this.worker);
+
 		App.store.commit();
 
     	var fm = App.FlashMessage.create({
 			text: "Task was updated"
 		});
 
-    	App.router.transitionTo('projectTasks.singletask');
+		App.router.transitionTo('projectTasks.singletask', task);
 	}
 });

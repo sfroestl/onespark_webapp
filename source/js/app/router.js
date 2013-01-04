@@ -229,9 +229,10 @@ App.Router = Ember.Router.extend({
 			      				router.get('createUpdateTaskController').set("description", null);
 			      				router.get('createUpdateTaskController').set("creator", null);
 			      				router.get('createUpdateTaskController').set("dueDate", null);
-			      				router.get('createUpdateTaskController').set("project", null);
+			      				//router.get('createUpdateTaskController').set("project", null);
 			      				router.get('createUpdateTaskController').set("estimatedHours", null);
 			      				router.get('createUpdateTaskController').set("worker", null);
+			      				//router.get('singleTaskController').set("content", null);
 
 			     			},
 
@@ -247,10 +248,32 @@ App.Router = Ember.Router.extend({
 							contextMenu: 'delete',
 						}),
 
+
+				// //move to context-menu
+				// projectTrash: Ember.Route.extend({
+				// 	route: '/trash',
+				// 	toolName: 'trash',
+				// 	connectOutlets: function(router,project) {
+				// 		var aProject = router.get('topNaviController.content');
+				// 		if(App.get("session.sessionUserId")==aProject.get("owner.id")){
+				// 			router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
+				// 		}
+				// 		else{
+				// 			var fm = App.FlashMessage.create({
+				// 				text: "You have no permission to delete this project"
+				// 			})
+
+				// 		}
+				// 	}
+				// }),
+
 					}),
 
 					newTask: Ember.Route.extend({
 						route: '/new',
+						enter: function(router){
+							router.get('createUpdateTaskController').set("content", null);
+						},
 						connectOutlets: function(router, context){
 							var aProject = router.get('topNaviController.content');
 							router.get('createUpdateTaskController').set("createFlag", true);
@@ -260,11 +283,11 @@ App.Router = Ember.Router.extend({
 						},
 						cancel: Ember.Route.transitionTo("projectTasks.index"),
 						exit: function(router){
-		      				router.get('createUpdateTaskController').set("title", null);
+		      				router.get('createUpdateTaskController').setProperties("title", null);
 		      				router.get('createUpdateTaskController').set("description", null);
 		      				router.get('createUpdateTaskController').set("creator", null);
 		      				router.get('createUpdateTaskController').set("dueDate", null);
-		      				router.get('createUpdateTaskController').set("project", null);
+		      				//router.get('createUpdateTaskController').set("project", null);
 		      				router.get('createUpdateTaskController').set("estimatedHours", null);
 		      				router.get('createUpdateTaskController').set("worker", null);
 		    			},
@@ -326,24 +349,6 @@ App.Router = Ember.Router.extend({
 							router.get('editContributorsController').removeAsContributor(evt.contexts[0]); //no transition, so batch-adding is possible
 						},						
 					})
-				}),
-
-				//move to context-menu
-				projectTrash: Ember.Route.extend({
-					route: '/trash',
-					toolName: 'trash',
-					connectOutlets: function(router,project) {
-						var aProject = router.get('topNaviController.content');
-						if(App.get("session.sessionUserId")==aProject.get("owner.id")){
-							router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
-						}
-						else{
-							var fm = App.FlashMessage.create({
-								text: "You have no permission to delete this project"
-							})
-
-						}
-					}
 				}),
 
 				goToTool: function(router, context) {

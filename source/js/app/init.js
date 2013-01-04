@@ -1,4 +1,5 @@
 App = Ember.Application.create({
+
 	session:null,
 	store: null,
 	currentTime:moment(),
@@ -6,3 +7,4 @@ App = Ember.Application.create({
 	  this.set("store",this.get("session.store"));
 	}.observes("session.store")
 });
+
