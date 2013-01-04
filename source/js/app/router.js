@@ -66,8 +66,6 @@ App.Router = Ember.Router.extend({
 				route: '/',
 				connectOutlets: function(router, context){
 					router.get('applicationController').connectOutlet('topNavi', 'topNavi');
-					router.get('projectsController').set('ownedProjects', App.get("session.sessionUser.ownedProjects"));
-					router.get('projectsController').set('collaboratedProjects', App.get("session.sessionUser.collaboratedProjects"));
 					router.get('applicationController').connectOutlet('body', 'projects');
 					router.get('applicationController').connectOutlet('footer','account',App.session);
 
