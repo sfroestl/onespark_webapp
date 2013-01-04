@@ -17,12 +17,20 @@ App.ToolView = Ember.View.extend({
 	  return this.get("currentToolState.toolName");
   }.property('currentToolState'),
   contextMenuStates: function() {
-	  var state = this.get("currentToolState");
-	  if (!state) return null;
-	  return state.get("childStates").filter(function(item){
-		  return !!item.get('contextMenu'); //TODO maybe add additional filtering (does an action makes sense?)
-	  });
-  }.property('currentToolState'),  
+	  var exitState = this.get("currentToolState.parentState");
+	  var state = App.get('router.currentState');
+	  var result = [];
+	  
+	  while (state && state!=exitState) {
+		  var currentResult = [];
+		  state.get("childStates").forEach(function(item){
+			  if (item.get('contextMenu') && (!item.contextCondition||item.contextCondition(content))) currentResult.push(item); //add item if it has a contextMenu entry and evaluate the condition (if any) 
+		  });
+		  state = state.get("parentState");
+		  result = result.concat(currentResult); //TODO schachteln?
+	  };
+	  return result;
+  }.property("App.router.currentState",'currentToolState'),  
 });
 
 App.ToolsView = Ember.View.extend({
