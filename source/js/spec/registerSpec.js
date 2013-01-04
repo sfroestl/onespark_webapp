@@ -2,6 +2,7 @@ describe("The RegisterController", function(){
 
 	beforeEach(function(){
        registerController = App.RegisterController.create();
+       session = App.Session.create();
     });
 
 	it("should be defined", function(){

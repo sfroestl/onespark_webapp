@@ -1,8 +1,7 @@
 describe( "The session model", function () {  
 
-	var session = App.Session.create();
-
-    //App = Ember.Application.create();
+	session = App.Session.create();
+	loginController = App.LoginController.create();
 
 	it("should be defined", function(){
 		expect(session).toBeDefined();
@@ -36,23 +35,25 @@ describe( "The session model", function () {
 		expect(session._loadSessionUser).toBeDefined();
 	});
 
-	describe( "The logged out user", function () {  
-
-		it("should be signed out before login", function(){
-			expect(session.sessionUser).toEqual(null);
-			//expect(App.User.isSignedIn()).toEqual(false);
-		});
-	});
-
 	describe( "The logged in user", function () {  
 
-		beforeEach(function(){
-        	session.login("bob", "testbob");
-		});
-
 		it("should be signed in after login", function(){
-			console.log("SessionUser ist: " + session.sessionUser);
-			//to Do
+
+			loginController.set("username", "bob");
+			loginController.set("password", "testbob");
+			loginController.login();
+
+			waitsFor(function() {
+		      return App.get("session.sessionUser.isLoaded");
+		    }, "Session never completed", 10000);
+
+			runs(function() {
+				expect(App.get("session.sessionToken")).toEqual(encodeBase64("bob", "testbob"));
+				expect(App.get("session.sessionUser")).not.toBe(null);
+				expect(App.get("session.sessionUserId")).toEqual(1);
+				expect(App.get("session.sessionUser.username")).toEqual("bob");
+				expect(App.get("session.sessionUser.email")).toEqual("bob@testme.com");
+    		});
 		});
 
 		it("should be signed out again after logout", function(){
