@@ -3,7 +3,7 @@ App.TasksController = Ember.Controller.extend({
 });
 
 App.SingleTaskController = Ember.ObjectController.extend({
-	//task: null,
+	task: null,
 })
 
 App.CreateUpdateTaskController = Ember.Controller.extend({

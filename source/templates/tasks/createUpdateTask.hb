@@ -22,7 +22,7 @@
 	{{{view Ember.TextArea valueBinding="estimatedHours" id="estimatedHours"}}
 	</fieldset>
 	<fieldset>
-	<button {{action goBack}} class="btn-cancel">cancel</button>
+	<button {{action cancel}} class="btn-cancel">cancel</button>
 	{{#if updateFlag}}
 	<button {{action goUpdate content}} class="btn-submit">save Changes</button>
 	{{/if}}
