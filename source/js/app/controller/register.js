@@ -60,7 +60,7 @@ App.RegisterController = Ember.Controller.extend({
     return this.get("error");
   },
 
-  loginAfterregister: function() {
+  loginAfterRegister: function() {
     var complete = this.get("isComplete");
     if(complete) {
       var error = this.get("error");

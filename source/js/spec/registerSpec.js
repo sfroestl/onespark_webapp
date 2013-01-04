@@ -14,10 +14,13 @@ describe("The RegisterController", function(){
 	});
 
 	describe( "its registration as integration test", function () {  
+
+		afterEach(function(){
+			deleteTestUser();
+		});
+
 		it("should run for valid input", function(){
 			//spyOn($, "ajax");
-
-			deleteTestUser();
 
 			registerController.set("username", "deleteTestUser");
 			registerController.set("email", "deleteTestUser@gmx.de");
