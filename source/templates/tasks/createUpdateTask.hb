@@ -1,5 +1,5 @@
 {{#if updateFlag}}
-<h1>Edit task</h1>
+<h1>Edit "{{title}}"</h1>
 {{/if}}
 {{#if createFlag}}
 <h1>New task</h1>

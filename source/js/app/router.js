@@ -156,6 +156,7 @@ App.Router = Ember.Router.extend({
 
 					editTask: Ember.Route.extend({
 						route: '/edit',
+						contextMenu: 'edit',
 				        connectOutlets: function(router, task) {
 				        	aTask = router.get('singleTaskController').get('content');
 				        	console.log(aTask);
@@ -172,7 +173,8 @@ App.Router = Ember.Router.extend({
 								})
 							}
 						},
-						 exit: function(router){
+						cancel: Ember.Route.transitionTo("projectTasks.index"),			//how to route cancel?
+						exit: function(router){
 		      				router.get('createUpdateTaskController').set("title", null);
 		      				router.get('createUpdateTaskController').set("description", null);
 		      				router.get('createUpdateTaskController').set("creator", null);
@@ -192,6 +194,7 @@ App.Router = Ember.Router.extend({
 
 					deleteTask: Ember.Route.extend({
 						route: '/delete',
+						contextMenu: 'delete',
 					}),
 	
 

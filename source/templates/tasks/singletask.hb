@@ -1,3 +1,4 @@
+<hr/>
 <table>
 {{#if title}}
 	<tr>
@@ -72,6 +73,4 @@
 {{/if}}
 
 </table>
-
-<button {{action goEdit content}} class="btn-submit">edit Task</button>
 
