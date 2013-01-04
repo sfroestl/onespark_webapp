@@ -5,11 +5,26 @@ App.RegisterController = Ember.Controller.extend({
   email: '',
   password: '',
   password_confirmation: '',
+
+  isComplete: false,
+  error: false,
+
   register: function() {
+    
     var emptyArray = new Array(this.get("username"), this.get("email"), this.get("password"), this.get("password_confirmation"));
+    
     var pw = this.get("password");
     var username = this.get("username");
-    if(isEmptyValidation(emptyArray) && matchPwValidation(this.get("password"), this.get("password_confirmation")) && pwLengthValidation(this.get("password")) && isEmailValid(this.get("email")) && usernameLength(this.get("username"))) {  
+    
+    that = this;
+
+    this.set("isComplete", false);
+    this.set("error", false);
+
+    if( isEmptyValidation(emptyArray) && 
+        matchPwValidation(this.get("password"), this.get("password_confirmation")) && 
+        pwLengthValidation(this.get("password")) && isEmailValid(this.get("email")) && 
+        usernameLength(this.get("username"))) {  
       $.ajax({
             async: true,
             url: 'http://api.onespark.de/api/v1/users',
@@ -19,23 +34,45 @@ App.RegisterController = Ember.Controller.extend({
             data: {user: { username: this.get("username"), email: this.get("email"), password: this.get("password"), password_confirmation: this.get("password_confirmation") }},
 
             error: function(jqXHR, textStatus){
-
-              var dec = JSON.parse(jqXHR.responseText);
               console.log ("--> ERROR");
-              if(dec.errors!=null) {
-                error_msg = "Username and email have already been taken.";
-                App.FlashMessage.create({text:error_msg});
-              }
+              App.FlashMessage.create({text:"Username and email have already been taken."});
+              
+              that.set("error", true);
+              that.set("isComplete", true);
             },
 
             success: function(data) {
               console.log ("--> Success: 200");
               App.FlashMessage.create({text:"Your sign up was successfull."});
-              App.session.login(username,pw);
+              
+              that.set("error", false);
+              that.set("isComplete", true);
             }
           });
     }
   },
+
+  getComplete: function() {
+    return this.get("isComplete");
+  },
+
+  getError: function() {
+    return this.get("error");
+  },
+
+  loginAfterregister: function() {
+    var complete = this.get("isComplete");
+    if(complete) {
+      var error = this.get("error");
+      if(!error) {
+        console.log("Error " + error);
+        var pw = this.get("password");
+        var username = this.get("username");
+        App.session.login(username,pw);
+      }
+    }
+  }.observes("isComplete"),
+
   /*
   register: function() {
     var emptyArray = new Array(this.get("username"), this.get("email"), this.get("password"), this.get("password_confirmation"));
@@ -79,6 +116,7 @@ App.RegisterController = Ember.Controller.extend({
     this.set('password', '');
     this.set('password_confirmation', '');
 
-    this.set('registered', false);
+    this.set('isComplete', false);
+    this.set('error', false);
   }
 });

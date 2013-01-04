@@ -1,13 +1,4 @@
-function checkEmail(email) {
-    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-    if(reg.test(email) == false) {
-        return false;
-     } else {
-        return true;
-     }
-  }
-
-   /* ### Validation ### */
+ /* ### Validation ### */
 
   function isEmptyValidation(emptyArray) {
     for (i=0;i<emptyArray.length;++i) {
@@ -47,10 +38,11 @@ function checkEmail(email) {
   }
 
   function isEmailValid(email) {
-    if(checkEmail(email) == false) {
-      App.FlashMessage.create({text:"Invalid Email address."});
-      return false;
-    } else {
-      return true;
-    }
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if(reg.test(email) == false) {
+        App.FlashMessage.create({text:"Invalid Email address."});
+        return false;
+     } else {
+        return true;
+     }
   }
