@@ -126,8 +126,6 @@ App.Router = Ember.Router.extend({
 						},
 					}),
 
-					goToEditProject: Ember.Route.transitionTo("projectOverview.projectEdit"),
-
 					projectEdit: Ember.Route.extend({
 						route: '/edit',
 						contextMenu: 'edit',
@@ -158,6 +156,21 @@ App.Router = Ember.Router.extend({
 						}
 					}),
 
+					projectDelete: Ember.Route.extend({
+						route: '/delete',
+						contextMenu: 'delete',
+						connectOutlets: function(router,project) {
+							var aProject = router.get('topNaviController.content');
+							if(App.get("session.sessionUserId")==aProject.get("owner.id")){
+								router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
+							}
+							else{
+								var fm = App.FlashMessage.create({
+									text: "You have no permission to delete this project"
+								})
+							}
+						}
+					})
 				}),
 
 				projectTasks: Ember.Route.extend({
@@ -246,23 +259,6 @@ App.Router = Ember.Router.extend({
 						}),
 
 
-				// //move to context-menu
-				// projectTrash: Ember.Route.extend({
-				// 	route: '/trash',
-				// 	toolName: 'trash',
-				// 	connectOutlets: function(router,project) {
-				// 		var aProject = router.get('topNaviController.content');
-				// 		if(App.get("session.sessionUserId")==aProject.get("owner.id")){
-				// 			router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
-				// 		}
-				// 		else{
-				// 			var fm = App.FlashMessage.create({
-				// 				text: "You have no permission to delete this project"
-				// 			})
-
-				// 		}
-				// 	}
-				// }),
 
 					}),
 
