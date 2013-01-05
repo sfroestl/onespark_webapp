@@ -4,6 +4,21 @@ App.TasksController = Ember.Controller.extend({
 
 App.SingleTaskController = Ember.ObjectController.extend({
 	task: null,
+
+	deleteTask: function(taskToDelete) {
+		var confirmResult = confirm("Delete Task \""+taskToDelete.get('title')+"\" ?");
+		var task = taskToDelete;
+
+		if(confirmResult){
+			showFlashMessageFor(task);
+			task.deleteRecord();
+			App.store.commit();
+			App.router.transitionTo('projectTasks.index');
+		}
+		else{
+			App.router.transitionTo('projectTasks.singletask.index', task);
+		}
+	}
 })
 
 App.CreateUpdateTaskController = Ember.Controller.extend({
@@ -79,7 +94,5 @@ App.CreateUpdateTaskController = Ember.Controller.extend({
     	var fm = App.FlashMessage.create({
 			text: "Task was updated"
 		});
-
-		App.router.transitionTo('projectTasks.singletask', task);
 	}
 });
