@@ -131,13 +131,19 @@ App.Router = Ember.Router.extend({
 						contextMenu: 'edit',
 				        connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
-							if(App.get("session.sessionUserId")==aProject.get("owner.id")){
+							var sU = App.get("session.sessionUser");
+							var isOwner = false;
+							if(sU==aProject.get('owner')) isOwner = true;
+							var isAdmin = router.get('projectController').isUserProjectAdmin(sU, aProject);
+							//Check if SessionUser is Owner or an admin of the current project, only these 2 cases allow him to edit
+							if(isAdmin||isOwner){
 								router.get('applicationController').connectOutlet('body', 'tool',aProject);
 								router.get('createUpdateProjectController').set("updateFlag", true);
 								router.get('createUpdateProjectController').set("createFlag", false);
 								router.get('createUpdateProjectController').fill(aProject);
 								router.get('toolController').connectOutlet('tool-body', 'createUpdateProject',aProject);
 							}
+							//decline
 							else{
 								var fm = App.FlashMessage.create({
 									text: "You have no permission to edit this project"
