@@ -3,6 +3,7 @@ describe("The RegisterController", function(){
 	beforeEach(function(){
        registerController = App.RegisterController.create();
        session = App.Session.create();
+       loginController = App.LoginController.create();
     });
 
 	it("should be defined", function(){
@@ -13,11 +14,9 @@ describe("The RegisterController", function(){
 		expect(registerController.register).toBeDefined();
 	});
 
-	describe( "its registration as integration test", function () {  
+	/*** Integration Test ***/
 
-		afterEach(function(){
-			deleteTestUser();
-		});
+	describe( "its registration as integration test", function () {  
 
 		it("should run for valid input", function(){
 			//spyOn($, "ajax");
@@ -39,11 +38,30 @@ describe("The RegisterController", function(){
 
 			runs(function() {
 				expect(registerController.getError()).toEqual(false);
-       		});
+       		}); 
 		});
-	});
 
-	describe( "its registration as integration test", function () {  
+		it("should run login for new user", function(){
+			loginController.set("username", "deleteTestUser");
+			loginController.set("password", "asdasd");
+			loginController.login();
+
+			waitsFor(function() {
+				return App.get("session.sessionUser.isLoaded");
+			}, "Session never completed", 10000);
+
+			runs(function() {
+				expect(App.get("session.sessionToken")).toEqual(encodeBase64("deleteTestUser", "asdasd"));
+				expect(App.get("session.sessionUser")).not.toBe(null);
+				//still not case sensitive?
+				expect(App.get("session.sessionUser.username")).toEqual("deletetestuser");
+				expect(App.get("session.sessionUser.email")).toEqual("deletetestuser@gmx.de");
+
+				deleteTestUser();
+		    });
+		});
+		
+
 		it("should run for invalid input", function(){
 
 			registerController.set("username", "bob");

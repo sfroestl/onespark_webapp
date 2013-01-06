@@ -35,7 +35,9 @@ describe( "The session model", function () {
 		expect(session._loadSessionUser).toBeDefined();
 	});
 
-	describe( "The logged in user", function () {  
+	/*** Integration Test ***/
+
+	describe( "The logged in user as integration test", function () {  
 
 		it("should be signed in after login", function(){
 
