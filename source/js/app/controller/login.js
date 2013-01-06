@@ -12,5 +12,10 @@ App.LoginController = Ember.Controller.extend(
     this.set('password', '');
 
   	return this.get("oldPosition");
+  },
+
+  logout: function() {
+  	App.session.logout();
+  	this.set('password', '');
   }
 });

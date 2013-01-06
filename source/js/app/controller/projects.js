@@ -17,7 +17,22 @@ App.ProjectController =  Ember.ObjectController.extend({
 		else{
 			App.router.transitionTo('projects.singleproject');
 		}
-	}
+	},
+
+	isUserProjectAdmin: function(user, project){
+		var p = project;
+		var co = p.get("contributors");
+		var u = user;
+		//check if user is a Contributor
+	    var i = co.length;
+	    while (i--) {
+	        if (co[i].get("id") === u.get("id")){
+	        	//check if user is a projectAdmin
+	        	if(co[i].get("permission")==3) return true;	
+	        } 
+	    }
+    	return false;
+	},
 });
 
 App.ProjectOverviewController = Ember.ObjectController.extend({
