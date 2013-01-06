@@ -72,7 +72,11 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 			this.set("description", projectToEdit.get("desc"));
 			var date = projectToEdit.get("dueDate");
 			if(date!=null){
-				this.dueDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+				var month = (date.getMonth()+1);
+				if (month<10) month = "0"+(month);
+				var day = date.getDate();
+				if(day<10) day = "0"+day;
+				this.dueDate = date.getFullYear()+"-"+month+"-"+day;
 			}
 	},
 
@@ -93,6 +97,6 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 			text: "Project was updated"
 		});
 
-    	App.router.transitionTo('projects.singleproject.projectOverview');
+    	//App.router.transitionTo('projects.singleproject.projectOverview');
 	}
 });

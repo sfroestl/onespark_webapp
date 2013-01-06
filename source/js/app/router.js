@@ -158,7 +158,9 @@ App.Router = Ember.Router.extend({
 		    			},
 
 						goUpdate: function(router, evt){
-							router.get('createUpdateProjectController').update(App.store.find(App.Project, evt.context.id));
+							var aProject = evt.context;
+							router.get('createUpdateProjectController').update(App.store.find(App.Project, aProject.id));
+							router.transitionTo('projectOverview.index', aProject);
 						}
 					}),
 
