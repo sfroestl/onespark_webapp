@@ -80,13 +80,13 @@ App.Router = Ember.Router.extend({
 					router.get('applicationController').connectOutlet('body', 'createUpdateProject');
 				},
 				exit: function(router){
-      				router.get('createUpdateProjectController').set("title", null);
-      				router.get('createUpdateProjectController').set("description", null);
-      				router.get('createUpdateProjectController').set("owner", null);
-      				router.get('createUpdateProjectController').set("dueDate", null);
+					router.get('createUpdateProjectController').setProperties({
+						title: null,
+						description: null,
+						owner: null,
+						dueDate: null
+					})
     			},
-
-
 				goCreate: function(router, evt) {
         			router.get('createUpdateProjectController').create();
         			router.transitionTo('projects.index');
@@ -151,10 +151,12 @@ App.Router = Ember.Router.extend({
 							}
 						},
 						exit: function(router){
-		      				router.get('createUpdateProjectController').set("title", null);
-		      				router.get('createUpdateProjectController').set("description", null);
-		      				router.get('createUpdateProjectController').set("owner", null);
-		      				router.get('createUpdateProjectController').set("dueDate", null);
+							router.get('createUpdateProjectController').setProperties({
+								title: null,
+								description: null,
+								owner: null,
+								dueDate: null
+							})
 		    			},
 
 						goUpdate: function(router, evt){
@@ -225,12 +227,10 @@ App.Router = Ember.Router.extend({
 							contextMenu: 'edit',
 					        connectOutlets: function(router, task) {
 					        	aTask = router.get('singleTaskController').get('content');
-					        	//Rechteabfrage ausbauen mit Rechtesystem vom Backend
 								if(App.get("session.sessionUserId")==aTask.get("creator.id")){
 									router.get('createUpdateTaskController').set("updateFlag", true);
 									router.get('createUpdateTaskController').set("createFlag", false);
 									router.get('createUpdateTaskController').fill(aTask);
-									//router.get('applicationController').connectOutlet('body', 'createUpdateTask', aTask);
 									router.get('toolController').connectOutlet('tool-body', 'createUpdateTask',aTask);
 								}
 								else{
@@ -241,15 +241,14 @@ App.Router = Ember.Router.extend({
 							},
 							cancel: Ember.Route.transitionTo("projectTasks.index"),
 							exit: function(router){
-			      				router.get('createUpdateTaskController').set("title", null);
-			      				router.get('createUpdateTaskController').set("description", null);
-			      				router.get('createUpdateTaskController').set("creator", null);
-			      				router.get('createUpdateTaskController').set("dueDate", null);
-			      				//router.get('createUpdateTaskController').set("project", null);
-			      				router.get('createUpdateTaskController').set("estimatedHours", null);
-			      				router.get('createUpdateTaskController').set("worker", null);
-			      				//router.get('singleTaskController').set("content", null);
-
+								router.get('createUpdateTaskController').setProperties({
+									title: null, 
+									description: null,
+									creator: null,
+									dueDate: null,
+									estimatedHours: null,
+									worker: null
+								})
 			     			},
 
 							goUpdate: function(router, evt){
@@ -291,19 +290,18 @@ App.Router = Ember.Router.extend({
 							router.get('createUpdateTaskController').set("createFlag", true);
 							router.get('createUpdateTaskController').set("updateFlag", false);
 							router.get('createUpdateTaskController').set("project", aProject);
-							//router.get('applicationController').connectOutlet('body', 'createUpdateTask');
 							router.get('toolController').connectOutlet('tool-body', 'createUpdateTask');
 						},
 						cancel: Ember.Route.transitionTo("projectTasks.index"),
 						exit: function(router){
-		      				//router.get('createUpdateTaskController').setProperties("title", null);
-		      				router.get('createUpdateTaskController').set("title", null);
-		      				router.get('createUpdateTaskController').set("description", null);
-		      				router.get('createUpdateTaskController').set("creator", null);
-		      				router.get('createUpdateTaskController').set("dueDate", null);
-		      				//router.get('createUpdateTaskController').set("project", null);
-		      				router.get('createUpdateTaskController').set("estimatedHours", null);
-		      				router.get('createUpdateTaskController').set("worker", null);
+							router.get('createUpdateTaskController').setProperties({
+								title: null, 
+								description: null,
+								creator: null,
+								dueDate: null,
+								estimatedHours: null,
+								worker: null
+							})
 		    			},
 
 		    			goCreate: function(router, evt) {
