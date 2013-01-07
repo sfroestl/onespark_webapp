@@ -12,7 +12,7 @@
 	{{#if view.contextMenuStates}}
 	<ul class="context-menu">
 	  {{#each ctx in view.contextMenuStates}}
-	    <li {{action goToTool ctx content}}>{{ctx.contextMenu}}</li>
+	    <li><a {{action goToTool ctx content}} href="#">{{ctx.contextMenu}} </a></li>
 	  {{/each}}
 	</ul>
 	{{/if}}

@@ -3,7 +3,7 @@
 {{/if}}
 {{#if createFlag}}
 <h1>New task</h1>
-{{/if}}	
+{{/if}}
 <form>
 	<fieldset>
 	<label for="title">title</label>
@@ -34,10 +34,10 @@
 	<fieldset>
 	<button {{action cancel}} class="btn-cancel">cancel</button>
 	{{#if updateFlag}}
-	<button {{action goUpdate content}} class="btn-submit">save Changes</button>
+	<submit {{action goUpdate content}} class="btn-submit">save Changes</submit>
 	{{/if}}
 	{{#if createFlag}}
-	<button {{action goCreate}} class="btn-submit">create Task</button>
+	<submit {{action goCreate}} class="btn-submit">create Task</submit>
 	{{/if}}
 	</fieldset>
 </form>
