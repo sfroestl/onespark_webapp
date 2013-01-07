@@ -7,10 +7,12 @@ App.FlashMessage = Ember.Object.extend({
 	},
     buttonText:"ok",
     init: function() {
-		App.flashMessages.addObject(this);
+		//App.flashMessages.addObject(this);
+		App.set("flashMessage",this);
 	},
 	hide: function() {
-		App.flashMessages.removeObject(this);
+		//App.flashMessages.removeObject(this);
+		App.set("flashMessage",null);
 	}
 });
 App.ModelFlashMessage = App.FlashMessage.extend({
@@ -56,7 +58,7 @@ App.ModelFlashMessage = App.FlashMessage.extend({
 });
 
 function showFlashMessageFor(obj,additionalProperties) {
-		removeExistingFlashMessagesOf(obj);
+//		removeExistingFlashMessagesOf(obj);
 		x= App.ModelFlashMessage.create(additionalProperties || {});
 		x.set("content",obj);
 }
@@ -68,4 +70,13 @@ function removeExistingFlashMessagesOf(obj) {
 			return !cont || cont==obj;
 		}));
 }
-App.flashMessages = [];
+
+App.reopen({
+ flashMessage: null,
+ flashMessages: function () {
+	var m = this.get("flashMessage");
+	var fm = [];
+	if (m) fm.pushObject(m);
+	return fm;
+ }.property("flashMessage")
+});
