@@ -15,6 +15,29 @@ App.Task = DS.Model.extend({
 
     classForCSS: function(){
         return this._super()+" "+completed ? "complete":"incomplete";
+    },
+    canEditTask: function(user){
+        var aUser = user;
+        var out= false;
+        //check if user is project-contribiutor
+        var projectContributors = this.project.get("contributors");
+        console.log("projectcontributors: "+projectContributors);
+        var i = projectContributors.length;
+        while (i--) {
+            if (projectContributors[i].get("id") === aUser.get("id")){
+                console.log(aUser+" is project-contribiutor");
+                //check if user is a projectAdmin
+                if(projectContributors[i].get("permission")==3){
+                    out=true;
+                    console.log(aUser+" is projectAdmin");
+                } 
+            } 
+        };
+        //check if user is task creator
+        if(aUser.get("id")==this.creator.get("id")) out=true;
+        if(aUser.get('id')==this.worker.get('id')) out=true;
+
+        return out;
     }   
 });
 

@@ -166,16 +166,19 @@ App.Router = Ember.Router.extend({
 					projectDelete: Ember.Route.extend({
 						route: '/delete',
 						contextMenu: 'delete',
+						contextCondition: function() {
+							//only the project-owner and admins can delete projects
+							var aProject = App.router.get('topNaviController.content');
+							var sU = App.get("session.sessionUser");
+							var out = false;
+							if(sU==aProject.get('owner')) out = true;
+							if(App.router.get('projectController').isUserProjectAdmin(sU, aProject)) out = true;
+							return out;
+						},
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
-							if(App.get("session.sessionUserId")==aProject.get("owner.id")){
-								router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
-							}
-							else{
-								var fm = App.FlashMessage.create({
-									text: "You have no permission to delete this project"
-								})
-							}
+							router.get('projectController').deleteProject(App.store.find(App.Project, aProject.id));
+
 						}
 					})
 				}),
