@@ -337,6 +337,12 @@ App.Router = Ember.Router.extend({
 					newContributor: Ember.Route.extend({
 						route: '/add',
 						contextMenu: 'add',
+						contextCondition: function() {
+							var currentUser = App.get("session.sessionUser");
+							var project = App.router.get('topNaviController.content');
+							return project.canChangeContributors(currentUser);
+							
+						},
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
@@ -355,6 +361,12 @@ App.Router = Ember.Router.extend({
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
 							router.get('toolController').connectOutlet('tool-body', 'editContributors',aProject);
+						},
+						contextCondition: function() {
+							var currentUser = App.get("session.sessionUser");
+							var project = App.router.get('topNaviController.content');
+							return project.canChangeContributors(currentUser);
+							
 						},
 						cancel: Ember.Route.transitionTo("projectContributors.index"),
 						removeAsContributor: function(router, evt) {
