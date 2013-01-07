@@ -7,13 +7,21 @@ App.Project = DS.Model.extend({
     flashMessageName: function() {
 		return "project \""+this.get("title")+"\"";
 	}.property("title"),
+    canChangeContributors: function(user) {
+		user = user.get("originalModel");
+		var owner =  this.get("owner.originalModel");
+		if (user == owner) return true;
+		return !!this.get("coworkers").find(function(c){
+			return (c.get("permission") == 3) && (c.get("user") == user);
+		});
+	},
     contributors: function() {
 		return this.get('coworkers').map(function(item, index, self) {
 			return App.CoworkerOfProject.create({projectCoworker: item});
 		});
 	}.property('coworkers','coworkers.[]','coworkers.@each.user'),
     tasks: DS.hasMany('App.Task')
-
+	
 });
 DS.AuthenticatedRESTAdapter.map('App.Project', {
   owner: {key: 'owner_id'},

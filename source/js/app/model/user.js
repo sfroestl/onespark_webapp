@@ -4,7 +4,18 @@ App.User = DS.Model.extend({
     email: DS.attr('string'),
     password: DS.attr('string'),
     password_confirmation: DS.attr('string'),
+
     tasks: DS.hasMany('App.Task'),
+
+    // Contacts relationship
+    inContacts : DS.hasMany('App.Contact', {
+      inverse: 'contact'
+    }),
+    outContacts : DS.hasMany('App.Contact', {
+      inverse: 'user'
+    }),
+
+
     //Relations
     ownedProjects: DS.hasMany('App.Project'),
     profile: DS.belongsTo('App.Profile'),
@@ -16,9 +27,14 @@ App.User = DS.Model.extend({
 			return item.get("project");
 		}));
 	}.observes("projectCoworkers.@each.project"),
-	
+
 	//Computed Properties
-	
+  contactsByStatus: function() {
+    return this.get('outContacts').map(function(item, index, self) {
+      return App.ContactByStatus.create({contactModel: item});
+    });
+  }.property('outContacts','outContacts.[]','outContacts.@each.contact'),
+
 	//Displayed Name
     displayName: function() {
 	  var forename = this.get("profile.forename");
@@ -32,7 +48,7 @@ App.User = DS.Model.extend({
     displayAvatarUrl: function() {
 	  return this.get("profile.avatarUrl") || imagePath("noavatar.png");
 	}.property('profile.avatarUrl'),
-	
+
 	forenameOrUsername: function() {
 	  	var name= this.get("profile.forename") || this.get("username");
 	  	return name && name.toLowerCase();
@@ -40,11 +56,11 @@ App.User = DS.Model.extend({
 	surnameOrUsername: function() {
 	  	var name= this.get("profile.surname") || this.get("username");
 	  	return name && name.toLowerCase();
-	}.property('profile.surname','username'),	
+	}.property('profile.surname','username'),
 	//functions
 	matchesSearch: function(word) {
 		word = word.toLowerCase();
-		
+
 		var username = this.get("username");
 		var email = this.get("email");
 		var displayName = this.get("displayName");
@@ -60,6 +76,8 @@ App.User = DS.Model.extend({
 DS.AuthenticatedRESTAdapter.map('App.User', {
 	ownedProjects: { key: 'owned_project_ids' },
 	projectCoworkers: { key: 'project_coworker_ids' },
+  outContacts: { key: 'outContacts' },
+  inContacts: { key: 'inContacts' },
 	profile: {key: 'profile_id'}
 });
 

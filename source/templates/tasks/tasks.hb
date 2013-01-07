@@ -9,10 +9,10 @@
 	{{#each tasks}}
 				<li {{bindAttr class="stateForCSS"}}>
          			{{#if isLoaded}}
-						<a {{action goToSingleTask this}}>{{title}}{{#if dueDate}} (due {{view "App.FriendlyTimeView" timeBinding="dueDate"}}){{/if}}</a>
+						<a {{action goToSingleTask this}} href="#">{{title}}{{#if dueDate}} (due {{view "App.FriendlyTimeView" timeBinding="dueDate"}}){{/if}}</a>
          			{{else}}
 						Loading..
          			{{/if}}
-         		</li>      		
+         		</li>
 	{{/each}}
 </ul>

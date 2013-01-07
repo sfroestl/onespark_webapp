@@ -36,7 +36,7 @@ App.Router = Ember.Router.extend({
     }),
 
   	loggedIn: Ember.Route.extend({
-		
+
 		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
 		goToNewProject: Ember.Route.transitionTo('loggedIn.projects.newProject'),
 		goToUserProfile: Ember.Route.transitionTo('user.profile'),
@@ -55,7 +55,7 @@ App.Router = Ember.Router.extend({
 		}),
 
 		goLoggedOut: function(router, evt) {
-			router.get('loginController').logout();	
+			router.get('loginController').logout();
 			router.transitionTo('root.index');
 		},
 
@@ -92,9 +92,9 @@ App.Router = Ember.Router.extend({
         			router.transitionTo('projects.index');
      			},
 			}),
-	
+
 		 	singleproject: Ember.Route.extend({
-				
+
 				route: '/:project_id',
 				modelType: 'App.Project',
 				connectOutlets: function(router, context){
@@ -212,7 +212,7 @@ App.Router = Ember.Router.extend({
 						modelType: 'App.Task',
 						connectOutlets: function(router, context){
 							router.get('singleTaskController').set("task", context);
-						},		
+						},
 						index: Ember.Route.extend({
 							route: '/',	
 							contextMenu: 'view',	
@@ -242,7 +242,7 @@ App.Router = Ember.Router.extend({
 							cancel: Ember.Route.transitionTo("projectTasks.index"),
 							exit: function(router){
 								router.get('createUpdateTaskController').setProperties({
-									title: null, 
+									title: null,
 									description: null,
 									creator: null,
 									dueDate: null,
@@ -306,7 +306,7 @@ App.Router = Ember.Router.extend({
 						cancel: Ember.Route.transitionTo("projectTasks.index"),
 						exit: function(router){
 							router.get('createUpdateTaskController').setProperties({
-								title: null, 
+								title: null,
 								description: null,
 								creator: null,
 								dueDate: null,
@@ -333,7 +333,7 @@ App.Router = Ember.Router.extend({
 				projectContributors: Ember.Route.extend({
 					route: '/contributors',
 					toolName: 'Contributors',
-					
+
 					index: Ember.Route.extend({
 						contextMenu: 'view',
 						route: '/',
@@ -348,6 +348,12 @@ App.Router = Ember.Router.extend({
 					newContributor: Ember.Route.extend({
 						route: '/add',
 						contextMenu: 'add',
+						contextCondition: function() {
+							var currentUser = App.get("session.sessionUser");
+							var project = App.router.get('topNaviController.content');
+							return project.canChangeContributors(currentUser);
+							
+						},
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
@@ -357,7 +363,7 @@ App.Router = Ember.Router.extend({
 						cancel: Ember.Route.transitionTo("projectContributors.index"),
 						createContributor: function(router, evt) {
 							router.get('newContributorController').save(evt.contexts[0],evt.contexts[1]); //no transition, so batch-adding is possible
-						},						
+						},
 					}),
 					editContributors: Ember.Route.extend({
 						route: '/edit',
@@ -367,15 +373,21 @@ App.Router = Ember.Router.extend({
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
 							router.get('toolController').connectOutlet('tool-body', 'editContributors',aProject);
 						},
+						contextCondition: function() {
+							var currentUser = App.get("session.sessionUser");
+							var project = App.router.get('topNaviController.content');
+							return project.canChangeContributors(currentUser);
+							
+						},
 						cancel: Ember.Route.transitionTo("projectContributors.index"),
 						removeAsContributor: function(router, evt) {
 							router.get('editContributorsController').removeAsContributor(evt.contexts[0]); //no transition, so batch-adding is possible
-						},						
+						},
 					})
 				}),
 
 				goToTool: function(router, context) {
-					
+
 					var c = context.contexts;
 					c[0] = c[0].get('path') + (c[0].get("isLeaf") ? "" : ".index"); //the first object is the Route Object of the chosen tool
 					//if it's not a leaf, append .index to the path
@@ -421,7 +433,6 @@ App.Router = Ember.Router.extend({
 		    contacts: Ember.Route.extend({
 		    	route: '/contacts',
 		    	connectOutlets:function(router, context){
-		    		router.get('contactsController').set('contacts', App.get("session.sessionUser.contacts"));
 		    		router.get('userController').connectOutlet('maincontent', 'contacts');
 		    	}
 		    }),
@@ -459,8 +470,8 @@ App.Router = Ember.Router.extend({
 		  	connectOutlets: function(router, context){
 		  		router.get('applicationController').connectOutlet('body', 'login');
 			},
-		  	goLoggedIn: function(router, context) { 
-		  		router.get('loginController').login(); 
+		  	goLoggedIn: function(router, context) {
+		  		router.get('loginController').login();
 		  		//router.transitionTo('loggingIn');
 			},
 			goToRegister: Ember.Route.transitionTo('loggedOut.register')

@@ -24,13 +24,16 @@ App.ToolView = Ember.View.extend({
 	  while (state && state!=exitState) {
 		  var currentResult = [];
 		  state.get("childStates").forEach(function(item){
-			  if (item.get('contextMenu') && (!item.contextCondition||item.contextCondition(content))) currentResult.push(item); //add item if it has a contextMenu entry and evaluate the condition (if any) 
+			  if (item.get('contextMenu') && (!item.contextCondition||item.contextCondition())) currentResult.push(item); //add item if it has a contextMenu entry and evaluate the condition (if any) 
 		  });
 		  state = state.get("parentState");
 		  result = result.concat(currentResult); //TODO schachteln?
 	  };
 	  return result;
   }.property("App.router.currentState",'currentToolState'),  
+  showContextMenu: function() {
+	return this.get("contextMenuStates.length")>1;  
+  }.property("contextMenuStates.length")
 });
 
 App.ToolsView = Ember.View.extend({

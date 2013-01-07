@@ -6,7 +6,7 @@ App.Session = Ember.Object.extend({
     sessionUserId: null,
     adapter:null,
 	store: null,
-	
+
   signedIn: function() {
 	  return !!this.get("sessionUser.isLoaded");
   }.property('sessionUser.isLoaded'),
@@ -14,8 +14,8 @@ App.Session = Ember.Object.extend({
   sessionToken: function() {
 	  return encodeBase64(this.get("username"), this.get("password"));
   }.property('username','password'),
-  
-  
+
+
   // Helper methods to speed things up
   login: function(user,pw) {
     this.setProperties({username:user,password:pw});
@@ -24,15 +24,15 @@ App.Session = Ember.Object.extend({
 	this.setProperties({username:null,password:null});
   },
 
-  
+
   insertAuthenticationInRequest: function(data) {
 	token = this.get("sessionToken");
 	if (!token) return data;
 	data.headers || (data.headers = {});
     data.headers['Authorization'] = token;
     return data;
-  },  
-  
+  },
+
   recreateStore: function() {
 	var adapter = this.get("adapter");
 	if (!adapter) {
@@ -45,7 +45,7 @@ App.Session = Ember.Object.extend({
 		  adapter:adapter
 	}));
   }.observes("adapter","sessionToken"),
-  
+
   // creates a cookie with sessionToken
   _storeCredentialsAsCookie: function() {
     var token = this.get("sessionToken");
@@ -54,7 +54,7 @@ App.Session = Ember.Object.extend({
 	else
 		$.removeCookie("sessionToken")
   }.observes("sessionToken"),
-  
+
   _storeUserIdAsCookie: function() {
     var token = this.get("sessionUserId");
     if (token)
@@ -98,7 +98,7 @@ App.Session = Ember.Object.extend({
 	var store = this.get("store");
   	this.set("sessionUser",(id && store) ? store.find(App.User,id) : null);
   }.observes("sessionUserId","store"),
-  
+
 });
 App.set("session",App.Session.create());
 

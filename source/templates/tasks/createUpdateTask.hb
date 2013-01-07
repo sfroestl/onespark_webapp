@@ -3,7 +3,7 @@
 {{/if}}
 {{#if createFlag}}
 <h1>New task</h1>
-{{/if}}	
+{{/if}}
 <form>
 	<fieldset>
 	<label for="title">title</label>

@@ -17,7 +17,7 @@ html {
 	padding-left: 15.125%;
 	margin:0;
 }
-button{
+button, submit{
 	margin:0;
 	font-weight:bold;
 	text-transform:uppercase;
@@ -87,3 +87,9 @@ button{
 		background-color: $os-mediumgrey;
 	}
 }
+
+.user-list{
+	list-style-type:none;
+}
+
+
