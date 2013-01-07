@@ -215,7 +215,7 @@ App.Router = Ember.Router.extend({
 						},		
 						index: Ember.Route.extend({
 							route: '/',	
-							route: 'view',	
+							contextMenu: 'view',	
 							connectOutlets: function(router,task) {
 								var aTask = router.get('singleTaskController').get('task');
 								router.get('toolController').connectOutlet('tool-body', 'singleTask',aTask);
@@ -276,6 +276,17 @@ App.Router = Ember.Router.extend({
 						completeTask: Ember.Route.extend({
 							route: '/complete',
 							contextMenu: 'complete',
+							connectOutlets: function(router, task) {
+								aTask = router.get('singleTaskController').get('content');
+								if(App.get("session.sessionUserId")==aTask.get("creator.id")){
+									router.get('singleTaskController').completeTask(aTask);
+								}
+								else{
+									var fm = App.FlashMessage.create({
+										text: "You have no permission to complete this task"
+									})
+								}
+							}
 						})
 
 					}),

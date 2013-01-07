@@ -18,6 +18,21 @@ App.SingleTaskController = Ember.ObjectController.extend({
 		else{
 			App.router.transitionTo('projectTasks.singletask.index', task);
 		}
+	},
+
+	completeTask: function(taskToComplete){
+		var task = taskToComplete;
+
+		task.set("completedAt", new Date());
+		task.set("completedBy", App.get("session.sessionUser"));
+		task.set("completed", true);
+				showFlashMessageFor(task);
+    
+		App.store.commit();
+
+    	var fm = App.FlashMessage.create({
+			text: "Task completed"
+		});
 	}
 })
 
