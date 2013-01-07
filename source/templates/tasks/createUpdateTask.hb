@@ -34,10 +34,10 @@
 	<fieldset>
 	<button {{action cancel}} class="btn-cancel">cancel</button>
 	{{#if updateFlag}}
-	<submit {{action goUpdate content}} class="btn-submit">save Changes</submit>
+	<button {{action goUpdate content}} class="btn-submit">save Changes</button>
 	{{/if}}
 	{{#if createFlag}}
-	<submit {{action goCreate}} class="btn-submit">create Task</submit>
+	<button {{action goCreate}} class="btn-submit">create Task</button>
 	{{/if}}
 	</fieldset>
 </form>
