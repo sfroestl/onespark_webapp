@@ -37,7 +37,7 @@ describe( "The session model", function () {
 
 	/*** Integration Test ***/
 
-	describe( "The logged in user as integration test", function () {  
+	describe( "its logged in user as integration test", function () {  
 
 		it("should be signed in after login", function(){
 
