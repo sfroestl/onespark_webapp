@@ -31,6 +31,9 @@ App.ToolView = Ember.View.extend({
 	  };
 	  return result;
   }.property("App.router.currentState",'currentToolState'),  
+  showContextMenu: function() {
+	return this.get("contextMenuStates.length")>1;  
+  }.property("contextMenuStates.length")
 });
 
 App.ToolsView = Ember.View.extend({

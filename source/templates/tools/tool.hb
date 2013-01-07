@@ -3,10 +3,11 @@
 		<img src="/images/icon-back.png" alt="back" />
 	</a>
 	<a class="tools-button button-center" {{action goToTools href=true}}>{{view.currentToolName}}</a>
+	{{#if view.showContextMenu}}
 	<a class="context-button button-right" {{action goToContext}}>
 		<img src="/images/icon-context.png" alt="context" />
 	</a>
-
+    {{/if}}
 </nav>
 
 	{{#if view.contextMenuStates}}
