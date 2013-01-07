@@ -129,27 +129,24 @@ App.Router = Ember.Router.extend({
 					projectEdit: Ember.Route.extend({
 						route: '/edit',
 						contextMenu: 'edit',
+						contextCondition: function() {
+							//only the project-owner and admins can edit projects
+							var aProject = App.router.get('topNaviController.content');
+							var sU = App.get("session.sessionUser");
+							var out = false;
+							if(sU==aProject.get('owner')) out = true;
+							if(App.router.get('projectController').isUserProjectAdmin(sU, aProject)) out = true;
+							return out;
+						},
 				        connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
-							var sU = App.get("session.sessionUser");
-							var isOwner = false;
-							if(sU==aProject.get('owner')) isOwner = true;
-							var isAdmin = router.get('projectController').isUserProjectAdmin(sU, aProject);
-							//Check if SessionUser is Owner or an admin of the current project, only these 2 cases allow him to edit
-							if(isAdmin||isOwner){
-								router.get('applicationController').connectOutlet('body', 'tool',aProject);
-								router.get('createUpdateProjectController').set("updateFlag", true);
-								router.get('createUpdateProjectController').set("createFlag", false);
-								router.get('createUpdateProjectController').fill(aProject);
-								router.get('toolController').connectOutlet('tool-body', 'createUpdateProject',aProject);
-							}
-							//decline
-							else{
-								var fm = App.FlashMessage.create({
-									text: "You have no permission to edit this project"
-								})
-							}
+							router.get('applicationController').connectOutlet('body', 'tool',aProject);
+							router.get('createUpdateProjectController').set("updateFlag", true);
+							router.get('createUpdateProjectController').set("createFlag", false);
+							router.get('createUpdateProjectController').fill(aProject);
+							router.get('toolController').connectOutlet('tool-body', 'createUpdateProject',aProject);
 						},
+
 						exit: function(router){
 							router.get('createUpdateProjectController').setProperties({
 								title: null,
