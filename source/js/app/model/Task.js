@@ -18,27 +18,28 @@ App.Task = DS.Model.extend({
     },
     canEditTask: function(user){
         var aUser = user;
-        var aTask = this.get('originalModel');
-        console.log("TaskModel - orignalModel: ");
-        console.log(aTask);
+        var aTask = this;
         var out= false;
         //check if user is project-contribiutor
         var projectContributors = aTask.get("project.contributors");
-        console.log("projectcontributors: "+projectContributors);
         var i = projectContributors.length;
         while (i--) {
             if (projectContributors[i].get("id") === aUser.get("id")){
-                console.log(aUser+" is project-contribiutor");
                 //check if user is a projectAdmin
                 if(projectContributors[i].get("permission")==3){
                     out=true;
-                    console.log(aUser+" is projectAdmin");
                 } 
             } 
         };
+        //check if user is project owner
+        var prOwner = aTask.get("project.owner");
+        if(aUser.get("id")==prOwner.get('id')) out=true;
         //check if user is task creator
-        if(aUser.get("id")==aTask.creator.get("id")) out=true;
-        if(aUser.get('id')==aTask.worker.get('id')) out=true;
+        if(aUser.get("id")==aTask.get("creator.id")) out=true;
+        //check if user is task worker
+        if(aUser.get('id')==aTask.get("worker.id")) out=true;
+
+        if(out==false) console.log(aUser.get("username")+" has no permission to edit Task '"+aTask.get("title")+"'.");
 
         return out;
     }   
