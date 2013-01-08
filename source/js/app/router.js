@@ -227,7 +227,6 @@ App.Router = Ember.Router.extend({
 								var out = false;
 								var aTask = App.router.get('singleTaskController').get('task');
 								var aUser = App.get("session.sessionUser");
-								var editpermission = aTask.canEditTask(aUser);
 								out = aTask.canEditTask(aUser);
 								return out;
 							},
@@ -259,16 +258,25 @@ App.Router = Ember.Router.extend({
 						deleteTask: Ember.Route.extend({
 							route: '/delete',
 							contextMenu: 'delete',
+							contextCondition: function(router) {
+								//Project-Owner and Project-Admin can delete task
+								//look in Task-Model "canDeleteTask(user)"-function for more
+								var out = false;
+								var aTask = App.router.get('singleTaskController').get('task');
+								var aUser = App.get("session.sessionUser");
+								out = aTask.canDeleteTask(aUser);
+								return out;
+							},
 							connectOutlets: function(router, task) {
-								aTask = router.get('singleTaskController').get('content');
-								if(App.get("session.sessionUserId")==aTask.get("creator.id")){
+								aTask = App.router.get('singleTaskController').get('task');
+								// if(App.get("session.sessionUserId")==aTask.get("creator.id")){
 									router.get('singleTaskController').deleteTask(aTask);
-								}
-								else{
-									var fm = App.FlashMessage.create({
-										text: "You have no permission to delete this task"
-									})
-								}
+								// }
+								// else{
+								// 	var fm = App.FlashMessage.create({
+								// 		text: "You have no permission to delete this task"
+								// 	})
+								// }
 							}
 						}),
 
