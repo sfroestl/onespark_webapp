@@ -26,12 +26,27 @@ App.SingleTaskController = Ember.ObjectController.extend({
 		task.set("completedAt", new Date());
 		task.set("completedBy", App.get("session.sessionUser"));
 		task.set("completed", true);
-				showFlashMessageFor(task);
+		showFlashMessageFor(task);
     
 		App.store.commit();
 
     	var fm = App.FlashMessage.create({
 			text: "Task completed"
+		});
+	},
+
+	reopenTask: function(taskToReopen){
+		var task = taskToReopen;
+
+		task.set("completedAt", null);
+		task.set("completedBy", null);
+		task.set("completed", false);
+		showFlashMessageFor(task);
+    
+		App.store.commit();
+
+    	var fm = App.FlashMessage.create({
+			text: "Task reopend"
 		});
 	}
 })

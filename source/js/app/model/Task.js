@@ -39,7 +39,7 @@ App.Task = DS.Model.extend({
         //check if user is task worker
         if(aUser.get('id')==aTask.get("worker.id")) out=true;
 
-        if(out==false) console.log(aUser.get("username")+" has no permission to edit Task '"+aTask.get("title")+"'.");
+        // if(out==false) console.log(aUser.get("username")+" has no permission to edit Task '"+aTask.get("title")+"'.");
 
         return out;
     },
@@ -62,7 +62,7 @@ App.Task = DS.Model.extend({
         var prOwner = aTask.get("project.owner");
         if(aUser.get("id")==prOwner.get('id')) out=true;
 
-        if(out==false) console.log(aUser.get("username")+" has no permission to delete Task '"+aTask.get("title")+"'.");
+        // if(out==false) console.log(aUser.get("username")+" has no permission to delete Task '"+aTask.get("title")+"'.");
 
         return out;
     },
@@ -89,10 +89,33 @@ App.Task = DS.Model.extend({
         //check if user is task worker
         if(aUser.get('id')==aTask.get("worker.id")) out=true;
 
-        if(out==false) console.log(aUser.get("username")+" has no permission to complete Task '"+aTask.get("title")+"'.");
+        // if(out==false) console.log(aUser.get("username")+" has no permission to complete Task '"+aTask.get("title")+"'.");
 
         return out;
-    }   
+    },
+    canReopenTask: function(user){
+        var aUser = user;
+        var aTask = this;
+        var out= false;
+        //check if user is project-contribiutor
+        var projectContributors = aTask.get("project.contributors");
+        var i = projectContributors.length;
+        while (i--) {
+            if (projectContributors[i].get("id") === aUser.get("id")){
+                //check if user is a projectAdmin
+                if(projectContributors[i].get("permission")==3){
+                    out=true;
+                } 
+            } 
+        };
+        //check if user is project owner
+        var prOwner = aTask.get("project.owner");
+        if(aUser.get("id")==prOwner.get('id')) out=true;
+
+        // if(out==false) console.log(aUser.get("username")+" has no permission to reopen Task '"+aTask.get("title")+"'.");
+
+        return out;
+    } 
 });
 
 DS.AuthenticatedRESTAdapter.map('App.Task', {

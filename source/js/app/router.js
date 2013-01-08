@@ -278,16 +278,37 @@ App.Router = Ember.Router.extend({
 							contextMenu: 'complete',
 							contextCondition: function(){
 								//Project-Owner, Project-Admin, Task-Creator and Task-Worker can complete task
-								//look in Task-Model "canEditTask(user)"-function for more
+								//look in Task-Model "canCompleteTask(user)"-function for more
 								var out = false;
 								var aTask = App.router.get('singleTaskController').get('task');
 								var aUser = App.get("session.sessionUser");
 								out = aTask.canCompleteTask(aUser);
+								var alreadyCompleted = App.router.get('singleTaskController.task.completed');
+								if(alreadyCompleted) out = false;
 								return out;
 							},
 							connectOutlets: function(router, task) {
 								aTask = router.get('singleTaskController').get('content');
 								router.get('singleTaskController').completeTask(aTask);
+							}
+						}),
+
+						reopenTask: Ember.Route.extend({
+							route: '/reopen',
+							contextMenu: 'reopen',
+							contextCondition: function() {
+								//Project-Owner and Project-Admin can reopen task
+								//look in Task-Model "canReopenTask(user)"-function for more
+								var out = false;
+								var aTask = App.router.get('singleTaskController').get('task');
+								var aUser = App.get("session.sessionUser");
+								var alreadyCompleted = App.router.get('singleTaskController.task.completed');
+								if(alreadyCompleted) out = aTask.canReopenTask(aUser);
+								return out;
+							},
+							connectOutlets: function(router, task) {
+								aTask = App.router.get('singleTaskController').get('task');
+								router.get('singleTaskController').reopenTask(aTask);
 							}
 						})
 
