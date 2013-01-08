@@ -11,11 +11,11 @@ App.Task = DS.Model.extend({
     workedHours: DS.attr('number'),
     // comments: DS.hasMany('App.Comment');
     creator: DS.belongsTo('App.User'),
-    worker: DS.belongsTo('App.User'), 
+    worker: DS.belongsTo('App.User'),
 
     classForCSS: function(){
         return this._super()+" "+completed ? "complete":"incomplete";
-    }   
+    }
 });
 
 DS.AuthenticatedRESTAdapter.map('App.Task', {
@@ -26,5 +26,5 @@ DS.AuthenticatedRESTAdapter.map('App.Task', {
     // comments: {key: 'comment_ids'}
     creator: { key: 'creator_id'},
     worker: { key: 'worker_id'},
-    completedBy: { key: 'completed_by'},
+    completedBy: { key: 'completed_by'}
 });
