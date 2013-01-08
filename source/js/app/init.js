@@ -1,3 +1,4 @@
+$.support.cors = true;
 App = Ember.Application.create({
 
 	session:null,
