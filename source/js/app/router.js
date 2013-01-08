@@ -221,7 +221,7 @@ App.Router = Ember.Router.extend({
 						editTask: Ember.Route.extend({
 							route: '/edit',
 							contextMenu: 'edit',
-							contextCondition: function(router) {
+							contextCondition: function() {
 								//Project-Owner, Project-Admin, Task-Creator and Task-Worker can edit task
 								//look in Task-Model "canEditTask(user)"-function for more
 								var out = false;
@@ -258,7 +258,7 @@ App.Router = Ember.Router.extend({
 						deleteTask: Ember.Route.extend({
 							route: '/delete',
 							contextMenu: 'delete',
-							contextCondition: function(router) {
+							contextCondition: function() {
 								//Project-Owner and Project-Admin can delete task
 								//look in Task-Model "canDeleteTask(user)"-function for more
 								var out = false;
@@ -269,30 +269,25 @@ App.Router = Ember.Router.extend({
 							},
 							connectOutlets: function(router, task) {
 								aTask = App.router.get('singleTaskController').get('task');
-								// if(App.get("session.sessionUserId")==aTask.get("creator.id")){
-									router.get('singleTaskController').deleteTask(aTask);
-								// }
-								// else{
-								// 	var fm = App.FlashMessage.create({
-								// 		text: "You have no permission to delete this task"
-								// 	})
-								// }
+								router.get('singleTaskController').deleteTask(aTask);
 							}
 						}),
 
 						completeTask: Ember.Route.extend({
 							route: '/complete',
 							contextMenu: 'complete',
+							contextCondition: function(){
+								//Project-Owner, Project-Admin, Task-Creator and Task-Worker can complete task
+								//look in Task-Model "canEditTask(user)"-function for more
+								var out = false;
+								var aTask = App.router.get('singleTaskController').get('task');
+								var aUser = App.get("session.sessionUser");
+								out = aTask.canCompleteTask(aUser);
+								return out;
+							},
 							connectOutlets: function(router, task) {
 								aTask = router.get('singleTaskController').get('content');
-								if(App.get("session.sessionUserId")==aTask.get("creator.id")){
-									router.get('singleTaskController').completeTask(aTask);
-								}
-								else{
-									var fm = App.FlashMessage.create({
-										text: "You have no permission to complete this task"
-									})
-								}
+								router.get('singleTaskController').completeTask(aTask);
 							}
 						})
 
