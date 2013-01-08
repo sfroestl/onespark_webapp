@@ -18,9 +18,12 @@ App.Task = DS.Model.extend({
     },
     canEditTask: function(user){
         var aUser = user;
+        var aTask = this.get('originalModel');
+        console.log("TaskModel - orignalModel: ");
+        console.log(aTask);
         var out= false;
         //check if user is project-contribiutor
-        var projectContributors = this.project.get("contributors");
+        var projectContributors = aTask.get("project.contributors");
         console.log("projectcontributors: "+projectContributors);
         var i = projectContributors.length;
         while (i--) {
@@ -34,8 +37,8 @@ App.Task = DS.Model.extend({
             } 
         };
         //check if user is task creator
-        if(aUser.get("id")==this.creator.get("id")) out=true;
-        if(aUser.get('id')==this.worker.get('id')) out=true;
+        if(aUser.get("id")==aTask.creator.get("id")) out=true;
+        if(aUser.get('id')==aTask.worker.get('id')) out=true;
 
         return out;
     }   

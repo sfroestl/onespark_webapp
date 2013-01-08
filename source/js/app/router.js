@@ -200,44 +200,88 @@ App.Router = Ember.Router.extend({
 					}),
 
 					goToSingleTask: function (router, event) {
+						console.log("event:");
 							console.log(event);
 						  var task = event.context;
+						  console.log("task:");
 						  console.log(task);
+						  // router.transitionTo('singletask.index', task.get("project"), task);
 						  router.transitionTo('singletask.index', task.get("project"), task);
 					},
 
 
 					singletask: Ember.Route.extend({
-						route: '/:id',
+						// route: '/:id',
+						route: '/:task_id',
 						modelType: 'App.Task',
 						connectOutlets: function(router, context){
 							router.get('singleTaskController').set("task", context);
 						},
 						index: Ember.Route.extend({
 							route: '/',	
-							contextMenu: 'view',	
+							contextMenu: 'view',
+							// contextCondition: function(router){
+							// 	var out = false;
+							// 	var aTask = this.router.get('singleTaskController').get('task');
+							// 	if(aTask!=null) out = true;
+
+							// 	console.log("index-out: ");
+							// 	console.log(out);
+							// 	return out;
+							// },	
 							connectOutlets: function(router,task) {
 								var aTask = router.get('singleTaskController').get('task');
+								// var aTask = this.get("task");
+								console.log("Task in singletask.index:");
+								console.log(aTask);
 								router.get('toolController').connectOutlet('tool-body', 'singleTask',aTask);
-							}
+							},
 						}),
 
 						editTask: Ember.Route.extend({
 							route: '/edit',
 							contextMenu: 'edit',
+							enter: function(router, task){
+								console.log("enter:");
+								console.log(task);
+							},
+							contextCondition: function(router) {
+								// var ms = 2000;
+								// ms += new Date().getTime();
+								// while (new Date() < ms){
+								// 	console.log("pause");
+								// };
+								var out = false;
+
+								var aTask = this.router.get('singleTaskController').get('task');
+								//if(aTask!=null){
+									var aUser = App.get("session.sessionUser");
+									console.log("Task in Condition:");
+									console.log(aTask);
+									var editpermission = aTask.canEditTask(aUser);
+									console.log("editpermission: ");
+									console.log(editpermission);
+
+									out = aTask.canEditTask(aUser);
+								//}
+
+								return out;
+							},
 					        connectOutlets: function(router, task) {
-					        	aTask = router.get('singleTaskController').get('content');
-								if(App.get("session.sessionUserId")==aTask.get("creator.id")){
+					        	var aTask = router.get('singleTaskController').get('content');
+					        	console.log("Task in editTask:");
+					        	console.log(aTask);
+								//if(App.get("session.sessionUserId")==aTask.get("creator.id")){
 									router.get('createUpdateTaskController').set("updateFlag", true);
 									router.get('createUpdateTaskController').set("createFlag", false);
 									router.get('createUpdateTaskController').fill(aTask);
 									router.get('toolController').connectOutlet('tool-body', 'createUpdateTask',aTask);
-								}
-								else{
-									var fm = App.FlashMessage.create({
-										text: "You have no permission to edit this task"
-									})
-								}
+								// }
+								// else{
+								// 	var fm = App.FlashMessage.create({
+								// 		text: "You have no permission to edit this task"
+								// 	})
+								// }
 							},
 							cancel: Ember.Route.transitionTo("projectTasks.index"),
 							exit: function(router){
