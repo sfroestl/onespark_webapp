@@ -1,11 +1,16 @@
 App.ProfileController = Ember.Controller.extend({
 	user: null,
-
-	//delete account
+	
 	password_conf: '',
 
 	isDeleteAccount: false,
     isDisabled: true,	
+
+    isComplete: false,
+
+    getComplete: function() {
+    	return this.get("isComplete");
+  	},
 
 	update: function() {
 		var user = App.get("session.sessionUser");
@@ -27,6 +32,8 @@ App.ProfileController = Ember.Controller.extend({
 		*/
 
 		var base64 = encodeBase64(App.get("session.sessionUser.username"), this.password_conf);
+		that = this;
+		this.set("isComplete", false);
 
 		//old fashioned
 		$.ajax({
@@ -42,6 +49,7 @@ App.ProfileController = Ember.Controller.extend({
 	      	this.set('password_conf', '');
 	      	App.FlashMessage.create({text:"Invalid password."});     	
 	        console.log ("--> ERROR");
+	        that.set("isComplete", true);
 	      },
 
 	      success: function(data) {
@@ -49,6 +57,7 @@ App.ProfileController = Ember.Controller.extend({
 	        console.log ("--> Success: 200");
 	        App.session.logout();
 	        App.FlashMessage.create({text:"Account successfully deleted."});  
+	        that.set("isComplete", true);
 	        App.router.send("afterDelete");
 	      }
 	    });
@@ -69,5 +78,6 @@ App.ProfileController = Ember.Controller.extend({
         this.set('password_conf', '');
         this.set('isDisabled', true);
         this.set('isDeleteAccount', false);
+        this.set("isComplete", false);
     }
 });

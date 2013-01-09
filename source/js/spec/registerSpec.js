@@ -2,8 +2,6 @@ describe("The RegisterController", function(){
 
 	beforeEach(function(){
        registerController = App.RegisterController.create();
-       session = App.Session.create();
-       loginController = App.LoginController.create();
     });
 
 	it("should be defined", function(){
@@ -18,10 +16,7 @@ describe("The RegisterController", function(){
 
 	describe( "its registration as integration test", function () {  
 
-		//afterEach(function(){
-		//	deleteTestUser();
-		//});
-
+		/* registers a valid user */
 		it("should run for valid input", function(){
 			//spyOn($, "ajax");
 
@@ -29,64 +24,87 @@ describe("The RegisterController", function(){
 			registerController.set("email", "delete@gmx.de");
 			registerController.set("password", "asdasd");
 			registerController.set("password_confirmation", "asdasd");
-
 			registerController.register();
 
+			/* waits for async registration */
 			waitsFor(function() {
 		      return registerController.getComplete();
 		    }, "Registration never completed", 10000);
-		    
+
     		//expect($.ajax.mostRecentCall.args[0]["url"]).toEqual("http://api.onespark.de/api/v1/users");
     		//expect($.ajax.mostRecentCall.args[0]["type"]).toEqual("POST");
     		//expect($.ajax.mostRecentCall.args[0]["dataType"]).toEqual("json");
 
+    		/* no errors expected */
 			runs(function() {
 				expect(registerController.getError()).toEqual(false);
        		}); 
 		});
 
-		it("should run login for new user", function(){
-			loginController.set("username", "delete");
-			loginController.set("password", "asdasd");
-			loginController.login();
+		/* deletes the fresh registered user */
+		it("should delete a new user", function(){
 
+			profileController = App.ProfileController.create();
+
+			/* waits for async session user after login */
 			waitsFor(function() {
 				return App.get("session.sessionUser.isLoaded");
 			}, "Session never completed", 10000);
 
+			/* deltes user */
 			runs(function() {
-				expect(App.get("session.sessionToken")).toEqual(encodeBase64("delete", "asdasd"));
-				expect(App.get("session.sessionUser")).not.toBe(null);
-				//still not case
-				expect(App.get("session.sessionUser.username")).toEqual("delete");
-				expect(App.get("session.sessionUser.email")).toEqual("delete@gmx.de");
+				profileController.set('password_conf', 'asdasd');
+				profileController.deleteMe();
 		    });
-		});
-		
 
+			/* waits for asyn delete */
+			waitsFor(function() {
+			    return profileController.getComplete();
+			}, "Delete user never completed", 10000);
+
+			/* tries to login */
+			runs(function() {
+				loginController.set("username", "delete");
+				loginController.set("password", "asdasd");
+				loginController.login();
+			});
+
+			/* expects error in session */
+			waitsFor(function() {
+				return App.get("session.isError");
+			}, "Session never completed", 10000);
+
+			/* expects no session user = user deleted successful*/
+		   	runs(function() {
+				expect(App.get("session.sessionUser")).toEqual(null);
+				expect(App.get("session.sessionUserId")).toEqual(null);
+	    	});
+		});
+	
+		/* tries to register a invalid user */
 		it("should run for invalid input", function(){
 
 			registerController.set("username", "bob");
 			registerController.set("email", "testbob@gmx.de");
 			registerController.set("password", "asdasd");
 			registerController.set("password_confirmation", "asdasd");
-
 			registerController.register();
 
+			/* waits for async registration */
 			waitsFor(function() {
 		      return registerController.getComplete();
 		    }, "Registration never completed", 10000);
 
+			/* errors expected */
 			runs(function() {
 				expect(registerController.getError()).toEqual(true);
-				deleteTestUser();
     		});
 		});
 	});
 });
 
 /*** Remove user afterwards ***/
-
+//unused
 function deleteTestUser() {
 	var base64 = encodeBase64("delete", "asdasd");
 

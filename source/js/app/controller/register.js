@@ -47,6 +47,7 @@ App.RegisterController = Ember.Controller.extend({
               
               that.set("error", false);
               that.set("isComplete", true);
+              that.loginAfterRegister();
             }
           });
     }
@@ -61,18 +62,10 @@ App.RegisterController = Ember.Controller.extend({
   },
 
   loginAfterRegister: function() {
-    var complete = this.get("isComplete");
-    if(complete) {
-      var error = this.get("error");
-      if(!error) {
-        console.log("Error " + error);
         var pw = this.get("password");
         var username = this.get("username");
         App.session.login(username,pw);
-      }
-    }
-  }.observes("isComplete"),
-
+  },
   /*
   register: function() {
     var emptyArray = new Array(this.get("username"), this.get("email"), this.get("password"), this.get("password_confirmation"));

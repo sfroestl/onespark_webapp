@@ -6,6 +6,7 @@ App.Session = Ember.Object.extend({
     sessionUserId: null,
     adapter:null,
 	store: null,
+	isError: false,
 
   signedIn: function() {
 	  return !!this.get("sessionUser.isLoaded");
@@ -67,6 +68,7 @@ App.Session = Ember.Object.extend({
 
   _findUserId: function() {
 	ses = this;
+	ses.set("isError", false);
 	ses.set("sessionUserId",null);
 	if (!ses.get("adapter")) return; //don't request without adapter
 	if (!ses.get("sessionToken")) return; //don't request when not logged in
@@ -81,11 +83,13 @@ App.Session = Ember.Object.extend({
 
 		  error: function(jqXHR, textStatus){
 			console.log ("--> ERROR");
+			ses.set("isError", true);
 			App.router.send("unauthorizedRequest");
 		  },
 
 		  success: function(data) {
 			// store session
+			ses.set("isError", false);
 			ses.set("sessionUserId",data.auth_user.id);
 			var id = data.auth_user.id;
 			App.router.send("loginComplete");
