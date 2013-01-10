@@ -21,19 +21,18 @@ App.User = DS.Model.extend({
     profile: DS.belongsTo('App.Profile'),
     projectCoworkers:DS.hasMany('App.ProjectCoworker'),
     //computed Relation
-    collaboratedProjects: null,
-    _updateCollaboratedProjects: function() {
-		this.set("collaboratedProjects.[]",this.get("projectCoworkers").map(function(item){
+    collaboratedProjects: function() {
+		return this.get("projectCoworkers").map(function(item){
 			return item.get("project");
-		}));
-	}.observes("projectCoworkers.@each.project"),
+		});
+	}.arrayProperty("projectCoworkers.@each.project"),
 
 	//Computed Properties
   contactsByStatus: function() {
     return this.get('outContacts').map(function(item, index, self) {
       return App.ContactByStatus.create({contactModel: item});
     });
-  }.property('outContacts','outContacts.[]','outContacts.@each.contact'),
+  }.arrayProperty('outContacts.@each.contact'),
 
 	//Displayed Name
     displayName: function() {
