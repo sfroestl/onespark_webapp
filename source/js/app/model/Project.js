@@ -16,10 +16,10 @@ App.Project = DS.Model.extend({
 		});
 	},
     contributors: function() {
-		return this.get('coworkers').map(function(item, index, self) {
+		return this.get('coworkers').map(function(item) {
 			return App.CoworkerOfProject.create({projectCoworker: item});
 		});
-	}.property('coworkers','coworkers.[]','coworkers.@each.user'),
+	}.arrayProperty('coworkers.@each.user'),
     tasks: DS.hasMany('App.Task')
 	
 });
