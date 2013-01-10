@@ -1,4 +1,8 @@
 App.ContactsView = Ember.View.extend({
-	tagName: "div",
 	templateName: 'contacts'
+});
+
+App.RemoveContactView = Ember.View.extend({
+  templateName: 'removeContact',
+  user: null,
 });

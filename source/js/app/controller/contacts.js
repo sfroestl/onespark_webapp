@@ -8,5 +8,11 @@ App.ContactsController =  Ember.Controller.extend({
   }.property("allContactsBinding.@each.status"), // refreshes if a status is changed
   requestedContacts: function() {
     return this.get("allContacts").filterProperty("status","requested")
-  }.property("allContactsBinding.@each.status") // refreshes if a status is changed
+  }.property("allContactsBinding.@each.status"), // refreshes if a status is changed
+
+  deleteContact: function(user) {
+    var contact = user;
+    contact.deleteRecord();
+    App.store.commit();
+  }
 });

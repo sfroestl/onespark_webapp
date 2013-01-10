@@ -457,7 +457,10 @@ App.Router = Ember.Router.extend({
 		    	route: '/contacts',
 		    	connectOutlets:function(router, context){
 		    		router.get('userController').connectOutlet('maincontent', 'contacts');
-		    	}
+		    	},
+		    	removeContact: function(router, evt) {
+					router.get('contactsController').deleteContact(evt.contexts[0]);
+				}
 		    }),
 		    //Messages
 		    messages: Ember.Route.extend({
