@@ -1,5 +1,4 @@
 var arrayProperties=0;
-Ember.LOG_BINDINGS=true;
 Function.prototype.arrayProperty = function() {
 	var name = "arrayProperty"+(arrayProperties++);
 	var realProperty = this;
