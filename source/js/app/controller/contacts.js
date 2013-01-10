@@ -12,11 +12,12 @@ App.ContactsController =  Ember.Controller.extend({
 
   deleteContact: function(user) {
     var contact = user;
-    contact.get("contactModel").deleteRecord();
-    App.store.commit();
     this.get("allContacts").removeObject(contact);
-    contact.get("user.outContacts").removeObject(c);
-    contact.get("contact.inContacts").removeObject(c);
+    contact = contact.get("contactModel");
+    contact.get("user.outContacts").removeObject(contact);
+    //contact.get("contact.inContacts").removeObject(contact);
+    contact.deleteRecord();
+    App.store.commit();
   }
 });
 
