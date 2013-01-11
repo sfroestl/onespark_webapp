@@ -1,4 +1,5 @@
 App.ContactsController =  Ember.Controller.extend({
+  username: '',
 	allContactsBinding: Ember.Binding.oneWay("App.session.sessionUser.contactsByStatus"),
   contacts: function() {
     return this.get("allContacts").filterProperty("status","accepted");
@@ -24,5 +25,12 @@ App.ContactsController =  Ember.Controller.extend({
     contact.set("status", "accepted");
     App.store.commit();
     showFlashMessageFor(contact);
+  },
+  addContact: function() {
+    var contact = this.get("username");
+    var contact = App.store.createRecord(App.Contact,  { contact: user, status: "pending"});
+   // App.get('session.sessionUser').addObject(contact);
+    showFlashMessageFor(contact);
+    App.store.commit();
   }
 });

@@ -1,3 +1,13 @@
+<form>
+	<fieldset>
+	<label>New Contact</label>
+		{{view Ember.TextField valueBinding="username" id="username"}}
+	</fieldset>
+	<fieldset>
+		<button {{action goAddContact}} class="btn-submit">Add</button>
+	</fieldset>
+</form>
+
 {{view App.UserListView
   title="Contacts"
   usersBinding="controller.contacts"
