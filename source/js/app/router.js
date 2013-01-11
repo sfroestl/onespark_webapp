@@ -460,6 +460,9 @@ App.Router = Ember.Router.extend({
 		    	},
 		    	removeContact: function(router, evt) {
 					router.get('contactsController').deleteContact(evt.contexts[0]);
+				},
+				goAccept: function(router, evt) {
+					router.get('contactsController').acceptContact(evt.contexts[0]);
 				}
 		    }),
 		    //Messages
