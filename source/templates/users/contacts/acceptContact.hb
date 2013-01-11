@@ -1,1 +1,1 @@
-<button {{action goAccept view.user}}>accept</button>
+<button {{action goAccept view.record}}>accept</button>
