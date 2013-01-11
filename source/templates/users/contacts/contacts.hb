@@ -8,6 +8,7 @@
 {{view App.UserListView
 title="PendingContacts"
 usersBinding="controller.pendingContacts"
+controlsBinding="App.CancelContactView"
 noUsers="You don't have any pending contacts yet."
 noFilteredUsers="Your search didn't match any contact."}}
 
