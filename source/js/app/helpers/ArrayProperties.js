@@ -11,11 +11,7 @@ Function.prototype.arrayProperty = function() {
 		meta = Ember.meta(this); //get the meta object of current object
 		if (!(name in meta)) meta[name] = []; 
 		var array = meta[name];
-		console.log(this);
-		console.log(name);
-		console.log(result);
 		var r = result.compact();
-		console.log(realProperty);
 		array.set("[]",r);
 		return array;
 	};

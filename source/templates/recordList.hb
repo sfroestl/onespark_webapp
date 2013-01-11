@@ -26,13 +26,8 @@
 			<li {{!bindAttr class="stateForCSS"}} class="tool-elem clearfix">
 				{{#if isLoaded}}
 					<a {{action clickedRecord this target="view"}}> 
-					<span class="elem-image">
-						{{view view.image recordBinding="record"}}
-								  <img {{bindAttr src="displayAvatarUrl"}} >
-					</span>
-					<span class="elem-desc">
-					  {{view view.desc recordBinding="record"}}
-					</span>
+					{{view view.image recordBinding="record"}}
+					{{view view.desc recordBinding="record"}}
 					</a>
 					{{#if view.controls}}
 					{{view view.controls recordBinding="record"}}

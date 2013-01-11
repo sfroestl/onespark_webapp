@@ -462,6 +462,9 @@ App.Router = Ember.Router.extend({
 		    	connectOutlets:function(router, context){
 		    		router.get('userController').connectOutlet('maincontent', 'contacts');
 		    	},
+		    	goAddContact: function(router, evt) {
+					router.get('contactsController').addContact();
+				},
 		    	goRemove: function(router, evt) {
 					router.get('contactsController').removeContact(evt.contexts[0]);
 				},

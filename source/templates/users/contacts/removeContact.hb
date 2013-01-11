@@ -1,1 +1,1 @@
-<button {{action goRemove view.user}}>remove</button>
+<button {{action goRemove view.record}}>remove</button>

@@ -1,1 +1,1 @@
-<button {{action removeContact view.user}}>cancel</button>
+<button {{action removeContact view.record}}>cancel</button>
