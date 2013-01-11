@@ -5,7 +5,7 @@
 {{#if controller.admins}}
 {{view App.UserListView
   title="Admins"
-  usersBinding="controller.admins"
+  recordsBinding="controller.admins"
   filterBinding="controller.filterText"
   showFilter=false
   noUsers="This project doesn't have any admins."
@@ -14,7 +14,7 @@
 {{#if controller.writers}}
 {{view App.UserListView
   title="Writers"
-  usersBinding="controller.writers"
+  recordsBinding="controller.writers"
   filterBinding="controller.filterText"
   showFilter=false
   noUsers="This project doesn't have any worker."
@@ -23,7 +23,7 @@
 {{#if controller.readers}}
 {{view App.UserListView
   title="Viewers"
-  usersBinding="controller.readers"
+  recordsBinding="controller.readers"
   filterBinding="controller.filterText"
   showFilter=false
   noUsers="This project doesn't have any viewer."

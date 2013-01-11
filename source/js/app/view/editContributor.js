@@ -5,15 +5,12 @@ App.EditContributorsView = Ember.View.extend({
 });
 App.EditContributorsControlsView = Ember.View.extend({
   templateName: 'editContributorsControls',
-  permissionBinding: "user.projectCoworker.permission",
-  user: null,
+  permissionBinding: "record.projectCoworker.permission",
+  record: null,
   updatePermission: function() {
-//	var current = this.get("user.projectCoworker.permission");
 	var newValue = this.get("permission");
-//	if (current!=newValue) {
-		this.set("user.projectCoworker.permission",newValue);
-		showFlashMessageFor(this.get("user.projectCoworker"));
+		this.set("record.projectCoworker.permission",newValue);
+		showFlashMessageFor(this.get("record.projectCoworker"));
 		App.store.commit();
-//	}
   }.observes("permission"),
 });
