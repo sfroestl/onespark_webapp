@@ -4,5 +4,5 @@
 </a>
 
 
-{{view App.ProjectListView title="Your own Projects" projectsBinding="controller.ownedProjects"}}
-{{view App.ProjectListView title="Projects you contribute to" projectsBinding="controller.collaboratedProjects"}}
+{{view App.ProjectListView title="Your own Projects" recordsBinding="controller.ownedProjects"}}
+{{view App.ProjectListView title="Projects you contribute to" recordsBinding="controller.collaboratedProjects"}}

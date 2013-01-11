@@ -1,0 +1,1 @@
+<button {{action removeContact view.user}}>cancel</button>

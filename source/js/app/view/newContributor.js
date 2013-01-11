@@ -5,5 +5,5 @@ App.NewContributorView = Ember.View.extend({
 App.NewContributorControlsView = Ember.View.extend({
   templateName: 'newContributorControls',
   permission: 2,
-  user: null,
+  record: null,
 });

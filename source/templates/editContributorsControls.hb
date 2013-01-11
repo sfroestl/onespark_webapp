@@ -3,4 +3,4 @@
        valueBinding="view.permission"
        optionValuePath="content.id"
        optionLabelPath="content.name"}}
-<button {{action removeAsContributor user}}>remove</button>
+<button {{action removeAsContributor record}}>remove</button>
