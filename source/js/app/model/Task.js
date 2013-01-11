@@ -115,7 +115,12 @@ App.Task = DS.Model.extend({
         // if(out==false) console.log(aUser.get("username")+" has no permission to reopen Task '"+aTask.get("title")+"'.");
 
         return out;
-    } 
+    },
+	matchesSearch: function(word) {
+		word = word.toLowerCase();
+		var title = this.get("title");
+		return (!!title && (title.toLowerCase().indexOf(word)!=-1));
+	},    
 });
 
 DS.AuthenticatedRESTAdapter.map('App.Task', {
