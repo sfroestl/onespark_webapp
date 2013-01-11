@@ -14,10 +14,29 @@ App.ProfileController = Ember.Controller.extend({
 
 	update: function() {
 		var user = App.get("session.sessionUser");
-
 		var profile = App.get("session.sessionUser.profile");
+
+		user.addObserver('isDirty', function() {
+	        if (user.get('isDirty')) {
+	        	console.log("User IS dirty");
+	        	showFlashMessageFor(user);
+	        } else {
+	            console.log("User is NOT dirty");
+	        }
+      	});
+
+      	profile.addObserver('isDirty', function() {
+	        if (profile.get('isDirty')) {
+	        	console.log("Profile IS dirty");
+	        	showFlashMessageFor(profile);
+	        } else {
+	            console.log("Profile is NOT dirty");
+	        }
+      	});
+
     	App.store.commit();
     	App.FlashMessage.create({text:"Profile successfully updated."});
+    	
     	this.set('isDisabled', true);
 	},
 	deleteMe: function() {
