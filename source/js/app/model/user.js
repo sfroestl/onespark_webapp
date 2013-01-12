@@ -32,7 +32,7 @@ App.User = DS.Model.extend({
     return this.get('outContacts').map(function(item, index, self) {
       return App.ContactByStatus.create({contactModel: item});
     });
-  }.arrayProperty('outContacts.@each.contact'),
+  }.arrayProperty('outContacts.[]'),
 
 	//Displayed Name
     displayName: function() {

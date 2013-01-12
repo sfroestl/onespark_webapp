@@ -4,12 +4,12 @@ Function.prototype.arrayProperty = function() {
 	var realProperty = this;
 	wrapper =  function() {
 		//"this" is the object having the property
-		
+
 		var result = realProperty.apply(this,arguments);
 		if (!result) return null;
-		
+		console.log(this);
 		meta = Ember.meta(this); //get the meta object of current object
-		if (!(name in meta)) meta[name] = []; 
+		if (!(name in meta)) meta[name] = [];
 		var array = meta[name];
 		var r = result.compact();
 		array.set("[]",r);

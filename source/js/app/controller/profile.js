@@ -1,10 +1,10 @@
 App.ProfileController = Ember.Controller.extend({
 	user: null,
-	
+
 	password_conf: '',
 
 	isDeleteAccount: false,
-    isDisabled: true,	
+    isDisabled: true,
 
     isComplete: false,
 
@@ -25,7 +25,7 @@ App.ProfileController = Ember.Controller.extend({
 	        }
       	});
 
-      	profile.addObserver('isDirty', function() {
+      	var profileObserver = profile.addObserver('isDirty', function() {
 	        if (profile.get('isDirty')) {
 	        	console.log("Profile IS dirty");
 	        	showFlashMessageFor(profile);
@@ -36,13 +36,13 @@ App.ProfileController = Ember.Controller.extend({
 
     	App.store.commit();
     	App.FlashMessage.create({text:"Profile successfully updated."});
-    	
+
     	this.set('isDisabled', true);
 	},
 	deleteMe: function() {
-		
+
 		//Ember-Data my ass
-		
+
 		/*
 		var user = App.get("session.sessionUser");
 		console.log(user.get("id"));
@@ -66,7 +66,7 @@ App.ProfileController = Ember.Controller.extend({
 
 	      error: function(jqXHR, textStatus){
 	      	this.set('password_conf', '');
-	      	App.FlashMessage.create({text:"Invalid password."});     	
+	      	App.FlashMessage.create({text:"Invalid password."});
 	        console.log ("--> ERROR");
 	        that.set("isComplete", true);
 	      },
@@ -75,22 +75,22 @@ App.ProfileController = Ember.Controller.extend({
 	      	this.set('password_conf', '');
 	        console.log ("--> Success: 200");
 	        App.session.logout();
-	        App.FlashMessage.create({text:"Account successfully deleted."});  
+	        App.FlashMessage.create({text:"Account successfully deleted."});
 	        that.set("isComplete", true);
 	        App.router.send("afterDelete");
 	      }
 	    });
 	},
 	goToDeleteMe: function() {
-        this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
+        this.set('isDeleteAccount', !this.get('isDeleteAccount'));
         if(!this.isDisabled){
-        	this.set('isDisabled', !this.get('isDisabled')); 
+        	this.set('isDisabled', !this.get('isDisabled'));
     	}
     },
     edit: function() {
         this.toggleProperty('isDisabled');
         if(this.isDeleteAccount){
-        	this.set('isDeleteAccount', !this.get('isDeleteAccount')); 
+        	this.set('isDeleteAccount', !this.get('isDeleteAccount'));
         }
     },
     resetFields: function() {
