@@ -37,7 +37,7 @@ App.Router = Ember.Router.extend({
 
   	loggedIn: Ember.Route.extend({
 
-		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'), //TODO: change to Overview when available
+		showProject:  Ember.Route.transitionTo('loggedIn.projects.singleproject.tools'),
 		goToNewProject: Ember.Route.transitionTo('loggedIn.projects.newProject'),
 		goToUserProfile: Ember.Route.transitionTo('user.profile'),
 		goToUserContacts: Ember.Route.transitionTo('user.contacts.index'),
@@ -62,6 +62,14 @@ App.Router = Ember.Router.extend({
 			router.get('loginController').logout();
 			router.get('applicationController').disconnectOutlet('footer', 'account');
 			router.transitionTo('root.index');
+		},
+
+		goToSingleTask: function (router, event) {
+			var task = event.context;
+			console.log(task);
+			App.router.get('singleTaskController').set("task", task);
+			router.get('applicationController').connectOutlet('body', 'tool',task.get('project'));
+			router.transitionTo('loggedIn.projects.singleproject.projectTasks.singletask.index', task.get("project"), task);
 		},
 
 		projects: Ember.Route.extend({
@@ -204,13 +212,6 @@ App.Router = Ember.Router.extend({
 						}
 					}),
 
-					goToSingleTask: function (router, event) {
-						var task = event.context;
-						App.router.get('singleTaskController').set("task", task);
-						router.transitionTo('singletask.index', task.get("project"), task);
-					},
-
-
 					singletask: Ember.Route.extend({
 						route: '/:task_id',
 						modelType: 'App.Task',
@@ -233,6 +234,8 @@ App.Router = Ember.Router.extend({
 								var aTask = App.router.get('singleTaskController').get('task');
 								var aUser = App.get("session.sessionUser");
 								out = aTask.canEditTask(aUser);
+								var alreadyCompleted = App.router.get('singleTaskController.task.completed');
+								if(alreadyCompleted) out = false;
 								return out;
 							},
 					        connectOutlets: function(router, task) {

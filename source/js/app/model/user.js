@@ -33,7 +33,11 @@ App.User = DS.Model.extend({
       return App.ContactByStatus.create({contactModel: item});
     });
   }.arrayProperty('outContacts.@each.contact'),
-
+  acceptedContacts: function() {
+    return this.get('contactsByStatus').filter(function(item) {
+      return item.get("isAccepted");
+    });
+  }.arrayProperty('contactsByStatus.[]'),
 	//Displayed Name
     displayName: function() {
 	  var forename = this.get("profile.forename");
