@@ -1,20 +1,19 @@
-<h2>My Profile:</h2>
-
-{{#if isDisabled}}  
-	<table>
-	  <tr><td><img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile"></td></tr>
-	  <tr><td>Username:</td><td>{{user.username}}</td></tr>
-	  <tr><td>Email:</td><td>{{user.email}}</td></tr>
-	  <tr><td>Forename:</td><td>{{user.profile.forename}}</td></tr>
-	  <tr><td>Surname:</td><td>{{user.profile.surname}}</td></tr>
-	  <tr><td>City:</td><td>{{user.profile.city}}</td></tr>
-	  <tr><td>About:</td><td>{{user.profile.about}}</td></tr>
-	</table>
-	<br />
-{{#unless isDeleteAccount}}  
-	<a href="#"{{action edit target="controller"}}>edit</a> 
-	<a href="#"{{action goToDeleteMe target="controller"}}>delete account</a>
-{{/unless}}
+{{#if isOwn}}  
+	{{#if isDisabled}}  
+		<table>
+		  <tr><td><img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile"></td></tr>
+		  <tr><td>Username:</td><td>{{user.username}}</td></tr>
+		  <tr><td>Email:</td><td>{{user.email}}</td></tr>
+		  <tr><td>Forename:</td><td>{{user.profile.forename}}</td></tr>
+		  <tr><td>Surname:</td><td>{{user.profile.surname}}</td></tr>
+		  <tr><td>City:</td><td>{{user.profile.city}}</td></tr>
+		  <tr><td>About:</td><td>{{user.profile.about}}</td></tr>
+		</table>
+		<br />
+	{{#unless isDeleteAccount}}  
+		<a href="#"{{action edit target="controller"}}>edit</a> 
+		<a href="#"{{action goToDeleteMe target="controller"}}>delete account</a>
+	{{/unless}}
 {{else}}
     <table>
 	  	<tr><td><img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile"></td></tr>
@@ -41,3 +40,15 @@
 		<button {{action goToDeleteMe target="controller"}} class="btn-cancel">Cancel</button>
     {{/view}}   
 {{/if}}
+{{/if}}
+{{#unless isOwn}}
+	<table>
+	  	<tr><td><img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile"></td></tr>
+	  	<tr><td>Username:</td><td>{{user.username}}</td></tr>
+	  	<tr><td>Email:</td><td>{{user.email}}</td></tr>
+	  	<tr><td>Forename:</td><td>{{user.profile.forename}}</td></tr>
+	  	<tr><td>Surname:</td><td>{{user.profile.surname}}</td></tr>
+	  	<tr><td>City:</td><td>{{user.profile.city}}</td></tr>
+	  	<tr><td>About:</td><td>{{user.profile.about}}</td></tr>
+	</table>
+{{/unless}}

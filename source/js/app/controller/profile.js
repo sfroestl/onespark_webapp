@@ -7,7 +7,9 @@ App.ProfileController = Ember.Controller.extend({
     isDisabled: true,	
 
     isComplete: false,
-
+    isOwn: function() {
+    	return this.user==App.get("session.sessionUser");
+	}.property("user"),
     getComplete: function() {
     	return this.get("isComplete");
   	},
