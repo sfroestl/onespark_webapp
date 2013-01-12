@@ -4,4 +4,5 @@
 </a>
 
 
-{{view App.TaskListView title="open tasks" recordsBinding="tasks"}}
+{{view App.TaskListView title="open tasks" recordsBinding="openTasks"}}
+{{view App.TaskListView title="completed tasks" recordsBinding="completedTasks"}}
