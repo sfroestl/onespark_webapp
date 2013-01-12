@@ -17,7 +17,15 @@ App.ContactByStatus = Ember.ObjectProxy.extend({
   status: null,
   contentBinding: "contactModel.contact",
   statusBinding: "contactModel.status",
-
+  isAccepted: function() {
+    return this.get("contactModel.status")=="accepted";
+  }.property("contactModel.status"),
+  isPending: function() {
+    return this.get("contactModel.status")=="pending";
+  }.property("contactModel.status"),
+  isRequested: function() {
+    return this.get("contactModel.status")=="requested";
+  }.property("contactModel.status"),
   stateForCSS: function() {
   var p = this.get("contactModel.status");
   return this.get("content.stateForCSS") + " " + p;

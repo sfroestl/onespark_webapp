@@ -10,6 +10,11 @@
 	  <tr><td>City:</td><td>{{user.profile.city}}</td></tr>
 	  <tr><td>About:</td><td>{{user.profile.about}}</td></tr>
 	</table>
+	<br />
+{{#unless isDeleteAccount}}  
+	<a href="#"{{action edit target="controller"}}>edit</a> 
+	<a href="#"{{action goToDeleteMe target="controller"}}>delete account</a>
+{{/unless}}
 {{else}}
     <table>
 	  	<tr><td><img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile"></td></tr>
@@ -21,13 +26,9 @@
 	  	<tr><td>City:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.city"}}</td>
 	  	<tr><td>About:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.about"}}</td></tr>
 	</table>
-	<button {{action goUpdate}}>Send</button>
+	<button {{action goUpdate}} class="btn-submit">Send</button>
+	<button {{action edit target="controller"}} class="btn-cancel">Cancel</button>
 {{/if}}
-
-<br />
-
-<a href="#"{{action edit target="controller"}}>edit</a> 
-<a href="#"{{action goToDeleteMe target="controller"}}>delete account</a>
 
 {{#if isDeleteAccount}}   
    	{{#view App.DeleteAccountView}}   
@@ -37,7 +38,6 @@
 		<p>{{view Ember.TextField valueBinding="password_conf" type="password"}}</p>
 
 		<button {{action goDelete}}>Send</button>
-
-		<br /><br /><br />
+		<button {{action goToDeleteMe target="controller"}} class="btn-cancel">Cancel</button>
     {{/view}}   
 {{/if}}

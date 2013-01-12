@@ -28,8 +28,11 @@ App.ContactsController =  Ember.Controller.extend({
   },
   addContact: function() {
     var contact = this.get("username");
+
+    //do API call to get contact via username
+
     var contact = App.store.createRecord(App.Contact,  { contact: user, status: "pending"});
-   // App.get('session.sessionUser').addObject(contact);
+
     showFlashMessageFor(contact);
     App.store.commit();
   }
