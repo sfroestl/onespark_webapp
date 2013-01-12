@@ -1,1 +1,0 @@
-<button {{action goRemove view.user}}>remove</button>
