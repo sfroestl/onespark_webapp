@@ -44,10 +44,6 @@ App.Router = Ember.Router.extend({
 		goToUserMessages: Ember.Route.transitionTo('user.messages'),
 		search: Ember.Route.extend({
 			route: '/search',
-			connectOutlets: function(router, context){
-					router.get('applicationController').connectOutlet('topNavi', 'topNavi');
-					router.get('applicationController').connectOutlet('body', 'search');
-			},
 		}),
 
 		account: Ember.Route.extend({
@@ -60,6 +56,7 @@ App.Router = Ember.Router.extend({
 
 		goLoggedOut: function(router, evt) {
 			router.get('loginController').logout();
+			router.get('applicationController').disconnectOutlet('footer', 'account');
 			router.transitionTo('root.index');
 		},
 
