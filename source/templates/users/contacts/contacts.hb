@@ -10,21 +10,21 @@
 
 {{view App.UserListView
   title="Contacts"
-  recordsBinding="controller.contacts"
-  controlsBinding="App.RemoveContactView"
-  noRecords="You don't have any contacts yet."
-  noFilteredRecords="Your search didn't match any contact."}}
+  usersBinding="controller.contacts"
+  controlsBinding="App.ControlContactView"
+  noUsers="You don't have any contacts yet."
+  noFilteredUsers="Your search didn't match any contact."}}
 
 {{view App.UserListView
 title="PendingContacts"
-recordsBinding="controller.pendingContacts"
-controlsBinding="App.CancelContactView"
-noRecords="You don't have any pending contacts yet."
-noFilteredRecords="Your search didn't match any contact."}}
+usersBinding="controller.pendingContacts"
+controlsBinding="App.ControlContactView"
+noUsers="You don't have any pending contacts yet."
+noFilteredUsers="Your search didn't match any contact."}}
 
 {{view App.UserListView
 title="RequestedContacts"
-recordsBinding="controller.requestedContacts"
-controlsBinding="App.AcceptContactView"
-noRecords="You don't have any requested contacts yet."
-noFilteredRecords="Your search didn't match any contact."}}
+usersBinding="controller.requestedContacts"
+controlsBinding="App.ControlContactView"
+noUsers="You don't have any requested contacts yet."
+noFilteredUsers="Your search didn't match any contact."}}
