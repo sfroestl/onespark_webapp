@@ -1,9 +1,9 @@
-{{#if view.user.isAccepted}}
+{{#if view.record.isAccepted}}
 <button {{action goRemove view.record}}>remove</button>
 {{/if}}
-{{#if view.user.isPending}}
+{{#if view.record.isPending}}
 <button {{action goRemove view.record}}>cancel</button>
 {{/if}}
-{{#if view.user.isRequested}}
+{{#if view.record.isRequested}}
 <button {{action goAccept view.record}}>accept</button>
 {{/if}}
