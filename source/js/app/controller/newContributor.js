@@ -4,14 +4,14 @@ App.NewContributorController = Ember.Controller.extend({
 	possibleUsers: function() {
 		var coworkers = this.get('project.coworkers');
 		var owner = this.get('project.owner');
-		var people =  App.get("session.sessionUser.contactsByStatus");
+		var people =  App.get("session.sessionUser.acceptedContacts");
 		return people.filter(function(item) {
 			item = item.get('originalModel');
 			if (item == owner.get('originalModel'))  return false;
 			var isAlreadyContributor = coworkers && coworkers.find(function(contr){return contr.get('user') == item;});
 			return  !isAlreadyContributor;
 		});
-	}.property("project.contributors.@each.user","App.session.sessionUser.contactsByStatus.[]"),
+	}.property("project.contributors.@each.user","App.session.sessionUser.acceptedContacts.[]"),
     save: function(user,permission) {
 		var coworker = App.store.createRecord(App.ProjectCoworker,  { project: this.get("project"), user: user, permission: permission});
 		showFlashMessageFor(coworker);
