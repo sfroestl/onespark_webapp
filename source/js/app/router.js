@@ -234,6 +234,8 @@ App.Router = Ember.Router.extend({
 								var aTask = App.router.get('singleTaskController').get('task');
 								var aUser = App.get("session.sessionUser");
 								out = aTask.canEditTask(aUser);
+								var alreadyCompleted = App.router.get('singleTaskController.task.completed');
+								if(alreadyCompleted) out = false;
 								return out;
 							},
 					        connectOutlets: function(router, task) {
