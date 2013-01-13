@@ -1,6 +1,6 @@
 App.ContactsController =  Ember.Controller.extend({
   username: '',
-	allContactsBinding: Ember.Binding.oneWay("App.session.sessionUser.contactsByStatus.[]"),
+	allContactsBinding: Ember.Binding.oneWay("App.session.sessionUser.contactsByStatus"),
   contacts: function() {
     return this.get("allContacts").filterProperty("status","accepted");
   }.arrayProperty("allContacts.@each.status"), // refreshes if a status is changed
@@ -38,7 +38,7 @@ App.ContactsController =  Ember.Controller.extend({
         var contact = App.store.createRecord(App.Contact,  { contact: newContact.get("firstObject"), status:"pending" });
         showFlashMessageFor(contact);
         App.store.commit();
-        self.get("allContacts").addObject(contact.get("contact"));
+        self.get("allContacts").addObject(App.ContactByStatus.create({contactModel:contact}));
 
         console.log("User is loaded", contact.get("status"));
       } else {
