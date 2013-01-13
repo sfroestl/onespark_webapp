@@ -489,6 +489,9 @@ App.Router = Ember.Router.extend({
 				        },
 				       	serialize: function(router, user){
 							return {user_id: user.get("id")}
+						},
+						deserialize: function(router, urlParams){
+						   	return App.store.find(App.User, urlParams.user_id);
 						}
 					})
 			   	})
