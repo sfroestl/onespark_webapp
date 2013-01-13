@@ -32,12 +32,16 @@ App.User = DS.Model.extend({
     return this.get('outContacts').map(function(item, index, self) {
       return App.ContactByStatus.create({contactModel: item});
     });
-  }.arrayProperty('outContacts.@each.contact'),
+  }.arrayProperty('outContacts.[]'),
+
   acceptedContacts: function() {
     return this.get('contactsByStatus').filter(function(item) {
       return item.get("isAccepted");
     });
   }.arrayProperty('contactsByStatus.[]'),
+
+
+
 	//Displayed Name
     displayName: function() {
 	  var forename = this.get("profile.forename");
