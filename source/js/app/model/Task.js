@@ -12,7 +12,6 @@ App.Task = DS.Model.extend({
     // comments: DS.hasMany('App.Comment');
     creator: DS.belongsTo('App.User'),
     worker: DS.belongsTo('App.User'),
-    opentimesessions: DS.hasMany('App.Time_session'),
     timesessions: DS.hasMany('App.Time_session'),
 
     classForCSS: function(){
@@ -134,6 +133,5 @@ DS.AuthenticatedRESTAdapter.map('App.Task', {
     creator: { key: 'creator_id'},
     worker: { key: 'worker_id'},
     completedBy: { key: 'completed_by'},
-    opentimesessions: { key: 'open_time_session_ids'},
     timesessions: {key: 'time_session_ids'}
 });
