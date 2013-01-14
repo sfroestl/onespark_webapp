@@ -90,7 +90,7 @@ App.Session = Ember.Object.extend({
 		  success: function(data) {
 			// store session
 			ses.set("isError", false);
-			ses.set("sessionUserId",data.auth_user.id);
+			ses.set("sessionUserId",data.user.id);
 			var id = data.auth_user.id;
 			App.router.send("loginComplete");
 		  }
