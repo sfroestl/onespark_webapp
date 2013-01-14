@@ -25,6 +25,7 @@
   </head>
 
   <body class="<%= page_classes %>">
+
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
@@ -32,10 +33,15 @@
 
 <%= partial 'templates' %>
 
+   <%= javascript_include_tag  "libs/jquery/jquery-1.7.2.min.js" %>
+    <%= javascript_include_tag  "libs/jquery.mobile-1.2.0/jquery.mobile-1.2.0.min.js" %>
 
-    <%= javascript_include_tag  "libs/jquery/jquery-1.7.2.js" %>
+    
+    
+
     <%= javascript_include_tag  "libs/handlebars/handlebars-1.0.0.beta.6" %>
     <%= javascript_include_tag  "app" %>
+
     <script type="text/javascript">
 		App.set("session.adapter", DS.AuthenticatedRESTAdapter.create({
 			url: '<%= data.page.app_url || 'http://api.onespark.de/api/v1'%>',
@@ -43,6 +49,8 @@
 			session: App.session
 		  }));
 	</script>
+
+
     <%= yield %>
 
   </body>

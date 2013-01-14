@@ -1,4 +1,10 @@
-{{outlet topNavi}}
-{{outlet body}}
-{{outlet footer}}
-{{view App.FlashMessagesView}}
+
+	{{outlet topNavi}}
+
+		{{outlet body}}
+
+
+		{{outlet footer}}
+
+	{{view App.FlashMessagesView}}
+
