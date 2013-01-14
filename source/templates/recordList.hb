@@ -20,12 +20,12 @@
   {{view Ember.TextField valueBinding="view.filter"}}
 {{/if}}
 {{#if view.filteredRecords}}
-<ul class="user-list">
+<ul class="record-list">
 	{{#each record in view.sortedRecords}}
 		{{#with record}}
 			<li {{!bindAttr class="stateForCSS"}} class="tool-elem clearfix">
 				{{#if isLoaded}}
-					<a {{action clickedRecord this target="view"}}> 
+					<a href="#" {{action clickedRecord this target="view"}}>
 					{{view view.image recordBinding="record"}}
 					{{view view.desc recordBinding="record"}}
 					</a>
@@ -35,14 +35,14 @@
 				{{else}}
 					<a>
 					  <span class="elem-image">
-						<img src="/images/icon-load.gif">
+						<img src="images/icon-load.gif">
 					  </span>
 					  <span class="elem-desc">
 						loading
 					  </span>
 					</a>
 				{{/if}}
-         	</li>      		
+         	</li>
 		{{/with}}
 	{{/each}}
 </ul>
