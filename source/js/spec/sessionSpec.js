@@ -1,6 +1,6 @@
 describe( "The session model", function () {  
 
-	session = App.Session.create();
+	session = App.get("session");
 	loginController = App.LoginController.create();
 
 	it("should be defined", function(){
