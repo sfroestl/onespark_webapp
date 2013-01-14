@@ -1,8 +1,10 @@
-xdescribe("fake server", function() {
+describe("fake server", function() {
+
  var server;
 
+
  beforeEach(function() {
-    this.server = sinon.fakeServer.create();
+    this.server = serverMock();
   });
 
   afterEach(function() {
@@ -11,11 +13,8 @@ xdescribe("fake server", function() {
 
  it("calls callback with deserialized data", function () {
     var callback = sinon.spy();
+	
 
-    this.server.respondWith("POST", "http://api.onespark.de/api/v1/users",
-    [200, {"Content-Type": "application/json"},
-      '{"user":{"id":17,"username":"awegawegwe","email":"awegwge@gmx.de","profile_id":17}}']);
-    
 
 //{"errors":{"username":["hasalreadybeentaken"]}}
     registerController = App.RegisterController.create();
