@@ -8,8 +8,18 @@ App.TasksController = Ember.Controller.extend({
 	}.arrayProperty("tasks.@each.completed"),
 });
 
+App.TimeSessionsController = Ember.Controller.extend({
+	timesessions: [],
+	opentimesessions: [],
+	// timeSessions: [],
+	// openTimeSessions: function(){
+	// 	return this.get('timeSessions')
+	// }
+});
+
 App.SingleTaskController = Ember.ObjectController.extend({
 	task: null,
+
 
 	deleteTask: function(taskToDelete) {
 		var confirmResult = confirm("Delete Task \""+taskToDelete.get('title')+"\" ?");
