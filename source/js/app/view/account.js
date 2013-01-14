@@ -8,7 +8,7 @@ App.AccountView = Ember.View.extend({
   	that = this;
   	duration = 250;
   	if(!that.get('fullyVisible')){
-  		$('.account').animate({right: '0'}, duration, 'swing', function() {
+  		$('.account').animate({right: '0%'}, duration, 'swing', function() {
         $('.account-button').animate({ width: '22%'});
   			that.set('fullyVisible', !that.get('fullyVisible'));
   		});

@@ -1,9 +1,8 @@
 /* Navbar General*/
 .nav-bar{
 	width:100%;
-	text-transform: lowercase;
 	height: 47px;
-	//@include shadow (0px, 3px);
+	@include shadow (1px, 1px);
 	* {	
 		padding: 8px 0;
 		cursor: pointer;
@@ -77,19 +76,7 @@
 .project-nav {
 	position:fixed;
 	top:0px;
-	color: $os-red;
 	background-color: $os-white;
-	// @include shadow(1px, 3px);
-	// @include gradient($os-black, $os-darkblack);
-	*{
-		&:hover{
-			//background-color: black;
-		}
-		&:active{
-			//background-color: $os-red;
-		}
-	}
-
 	.home-button{
 		outline-right: solid 1px $os-darkblack;
 		img {

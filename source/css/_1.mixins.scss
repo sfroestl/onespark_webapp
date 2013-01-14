@@ -17,8 +17,8 @@
 	background: -o-linear-gradient(top, $from, $to); }
 
 @mixin shadow($y, $spread){
-	-webkit-box-shadow:  0px $y $spread 0px rgba(0, 0, 0, 0.4);
-            box-shadow:  0px $y $spread 0px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow:  0px $y $spread 0px rgba(0, 0, 0, 0.25);
+            box-shadow:  0px $y $spread 0px rgba(0, 0, 0, 0.25);
 }
 
 @mixin insetshadow($y, $spread){

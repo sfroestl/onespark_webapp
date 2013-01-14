@@ -42,9 +42,7 @@
 		padding-left: 3%;
 		padding-right: 1.5%;
 		img {
-			@include rounded(200px);
-			background-color: $os-mediumgrey;
-			height:31px;
+			height:24px;
 		}
 	}
 	.add-txt{
@@ -60,7 +58,7 @@
 
 .project-list-head{
 	overflow:hidden;
-	background-color: $os-grey;
+	background-color: $os-mediumgrey;
 	margin:0;
 	padding: 8px 0 8px 15.125%;
 	color: $os-red;
