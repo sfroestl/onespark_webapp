@@ -34,10 +34,12 @@ var authenticated_response = function(response) {
 server.respond("GET", "http://api.onespark.de/api/v1/user",authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(user_1)]));
 server.respond("GET", "http://api.onespark.de/api/v1/users/1",authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(user_1)]));
 server.respond("PUT", "http://api.onespark.de/api/v1/users/1",authenticated_response(function(xhr) {
-		var username = xhr.requestBody.match("user%5Busername%5D=([^&]+)(&|$)");
-		var email = xhr.requestBody.match("user%5Bemail%5D=([^&]+)(&|$)");
+		var username = xhr.requestBody.match("user%5Busername%5D=([^&]+)(&|$)")[1];
+		var email = xhr.requestBody.match("user%5Bemail%5D=([^&]+)(&|$)")[1];
 		var newUser = {};
 		$.extend(newUser, user_1);
+		newUser[username]=username;
+		newUser[email]=email;
 		return [200,{ "Content-Type": "application/json" },JSON.stringify(newUser)];
 }));
 server.respond("DELETE", "http://api.onespark.de/api/v1/users/1",authenticated_response(function(xhr) {
