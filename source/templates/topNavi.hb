@@ -1,5 +1,5 @@
 <a class="home-button button-left" {{action goToProjects href=true}}>
-	<img src="/images/icon-os.png" alt="Home" />
+	<img src="images/icon-os.png" alt="Home" />
 </a>
 
 {{#if content}}
@@ -10,6 +10,6 @@
 
 
 <a class="search-button button-right"{{action goToSearch href=true}}>
-	<img src="/images/icon-search.png" alt="Search" />
+	<img src="images/icon-search.png" alt="Search" />
 </a>
 {{!outlet search}}

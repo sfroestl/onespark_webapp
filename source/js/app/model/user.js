@@ -6,6 +6,7 @@ App.User = DS.Model.extend({
     password_confirmation: DS.attr('string'),
 
     tasks: DS.hasMany('App.Task'),
+    time_sessions: DS.hasMany('App.Time_session'),
 
     // Contacts relationship
     inContacts : DS.hasMany('App.Contact', {

@@ -7,19 +7,19 @@
 <form>
 	<fieldset>
 	<label for="title">title</label>
-	{{view Ember.TextField valueBinding="title" id="title"}}
+	{{view Ember.TextField valueBinding="title" id="title" placeholder="title"}}
 	</fieldset>
 	<fieldset>
 	<label for="description">description</label>
-	{{{view Ember.TextArea valueBinding="description" id="description"}}
+	{{{view Ember.TextArea valueBinding="description" id="description" placeholder="description"}}
 	</fieldset>
 	<fieldset>
-	<label for="due-date">due date (YYYY-MM-DD):</label>
-	{{view Ember.TextField valueBinding="dueDate" type="date" id="due-date"}}
+	<label for="due-date">due date:</label>
+	{{view Ember.TextField valueBinding="dueDate" type="date" id="due-date" placeholder="YYYY-MM-DD"}}
 	</fieldset>
 	<fieldset>
 	<label for="estimatedHours">estimated hours</label>
-	{{{view Ember.TextArea valueBinding="estimatedHours" id="estimatedHours"}}
+	{{{view Ember.TextArea valueBinding="estimatedHours" id="estimatedHours" placeholder="0"}}
 	</fieldset>
 
 	<fieldset>

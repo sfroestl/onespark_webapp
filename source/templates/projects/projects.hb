@@ -1,5 +1,6 @@
+
 <a {{action goToNewProject href=true}} class="new-project-button list-elem clearfix">
-	<span class="add-img"><img src="/images/icon-add.png"></span>
+	<span class="add-img"><img src="images/icon-add.png"></span>
 	<span class="add-txt">add project</span>
 </a>
 

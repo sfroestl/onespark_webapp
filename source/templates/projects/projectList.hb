@@ -8,14 +8,14 @@
 				<li {{! bindAttr class="stateForCSS"}} class="project-elem">
          			{{#if isLoaded}}
 						<a {{action showProject this href=true}}>{{title}}
-							{{#if dueDate}} 
+							{{#if dueDate}}
 							<span class="project-due-date">due {{view "App.FriendlyTimeView" timeBinding="dueDate"}}</span>
 							{{/if}}
 						</a>
          			{{else}}
-						<a><img src="/images/icon-load.gif"> loading</a>
+						<a><img src="images/icon-load.gif"> loading</a>
          			{{/if}}
-         		</li>      		
+         		</li>
 		{{/with}}
 	{{/each}}
 </ul>

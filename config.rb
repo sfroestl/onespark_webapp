@@ -10,7 +10,7 @@ module HandlebarSupport
   end
 end
 
-::Middleman::Extensions.register(:handlebar_support, HandlebarSupport) 
+::Middleman::Extensions.register(:handlebar_support, HandlebarSupport)
 
 
 activate :handlebar_support
@@ -85,7 +85,7 @@ configure :build do
   # activate :cache_buster
 
   # Use relative URLs
-  # activate :relative_assets
+  activate :relative_assets
 
   # Compress PNGs after build
   # First: gem install middleman-smusher
@@ -94,5 +94,5 @@ configure :build do
 
   # Or use a different image path
   # set :http_path, "/Content/images/"
-  
+
 end
