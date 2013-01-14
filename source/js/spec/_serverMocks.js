@@ -7,7 +7,7 @@ var user_1 =  '{"user": \
     "username":"bob",\
     "email":"bob@testme.com",\
     "profile_id":1,\
-    "owned_project_ids":[76, 6, 61, 82, 92, 123, 120, 119, 78, 85],"collaborated_project_ids":[124,8],"project_coworker_ids":[55, 7],"contact_ids":[4, 9]\
+    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"contact_ids":[]\
   }\
 }';
 var authenticated_response = function(response) {
