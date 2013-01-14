@@ -73,4 +73,4 @@
 {{/if}}
 </table>
 
-{{view App.TimeSessionListView title="Time Session History" recordsBinding="timeSessions"}}
+{{!view App.TimeSessionListView title="Time Session History" recordsBinding="timeSessions"}}
