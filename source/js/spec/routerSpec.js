@@ -77,7 +77,50 @@ describe("The router", function(){
 
                     it ("should have route of /profile", function(){
                         expect(profileRoute.get("route")).toEqual("/profile");
-                    });   
+                    });  
+
+                    it("should have an update function", function(){
+                        expect(profileRoute.goUpdate).toBeDefined();
+                    });
+
+                    it("should have a delete function", function(){
+                        expect(profileRoute.goDelete).toBeDefined();
+                    });
+                });
+
+                describe("its contacts route", function(){
+                    var contactsRoute = null;
+                    beforeEach(function(){
+                        contactsRoute = userRoute.get("contacts").create();
+                    });
+
+                    it ("should have route of /contacts", function(){
+                        expect(contactsRoute.get("route")).toEqual("/contacts");
+                    });
+
+                    describe("its contacts index route", function(){
+
+                        var contactsIndexRoute = null;
+                        beforeEach(function(){
+                            contactIndexRoute = contactsRoute.get("index").create();
+                        });
+
+                        it ("should have route of /", function(){
+                            expect(contactIndexRoute.get("route")).toEqual("/");
+                        });
+
+                        it("should have a add function", function(){
+                            expect(contactIndexRoute.goAddContact).toBeDefined();
+                        });   
+
+                        it("should have a remove function", function(){
+                            expect(contactIndexRoute.goRemove).toBeDefined();
+                        });  
+
+                        it("should have a accept function", function(){
+                            expect(contactIndexRoute.goAccept).toBeDefined();
+                        });  
+                    });    
                 });
 
         	});
