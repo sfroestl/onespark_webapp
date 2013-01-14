@@ -57,17 +57,5 @@ describe( "The session model", function () {
 				expect(App.get("session.sessionUser.email")).toEqual("bob@testme.com");
     		});
 		});
-
-		it("should be signed out again after logout", function(){
-			loginController.logout();
-			
-			expect(App.get("session.username")).toEqual(null);
-			expect(App.get("session.password")).toEqual(null);
-			expect(App.get("session.sessionToken")).toEqual(null);
-			expect(App.get("session.sessionUser")).toEqual(null);
-			expect(App.get("session.sessionUserId")).toEqual(null);
-
-			expect(App.get("session.sessionUser.isLoaded")).toEqual(null);
-		});
 	});
 });
