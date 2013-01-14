@@ -5,7 +5,7 @@ App.ProjectListView = App.RecordListView.extend({
 	  classNames: ["elem-image"],
 	  tagName: "span"
   }),
-  desc: Ember.View.extend({template: Ember.Handlebars.compile('{{title}}{{#if dueDate}} <span class="project-due-date"> (due {{view "App.FriendlyTimeView" timeBinding="dueDate"}})</span>{{/if}}'),
+  desc: Ember.View.extend({template: Ember.Handlebars.compile('{{title}}{{#if dueDate}} <span class="project-due-date"> due {{view "App.FriendlyTimeView" timeBinding="dueDate"}}</span>{{/if}}'),
 	  classNames: ["elem-desc"],
 	  tagName: "span"
   }),

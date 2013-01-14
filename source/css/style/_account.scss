@@ -7,7 +7,6 @@
 	right: -86.375%;
 	background-color:$os-grey;
 	.account-button{
-		width:20%;
 		cursor: pointer;
 		background-color: $os-red;
 		img{
@@ -19,7 +18,7 @@
 			margin-right:auto;
 			//border: 2px solid $os-white;
 		}
-		padding: 0 1.5%;
+		padding: 0 3% 0 1.5%;
 		display:block;
 		height: 47px;
 		width: 9.125%;
@@ -30,7 +29,10 @@
 		padding: 0 1.5%;
 		width: 22%;
 		height:47px;
-		color: $os-black;
+		line-height: 47px;
+		background-color: $os-black;
+		color: $os-white;
+		text-decoration: none;
 		display:block;
 		float:left;
 	}

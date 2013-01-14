@@ -15,9 +15,13 @@
 		text-decoration:none;
 
 		.project-due-date{
+			height:26px;
+			line-height: 26px;
+			// @include rounded(100px);
+			// background-color: $os-mediumgrey;
 			float: right;
-			padding:4px 8px;
-			margin: 2px 1.5% 2px 0px;
+			padding:0px 8px;
+			margin-right: 1.5%;
 			font-family: $os-sans;
 			color: $os-darkgrey;
 			font-size: .6em;
@@ -56,30 +60,7 @@
 	}
 }
 
-.project-list-head{
-	overflow:hidden;
-	background-color: $os-mediumgrey;
-	margin:0;
-	padding: 8px 0 8px 15.125%;
-	color: $os-red;
-	border-bottom: 1px solid $os-red;
-	font-weight:normal;
-	font-size: .9em;
 
-	.project-list-sort-btn{
-		max-width: 35%;
-		text-decoration:none;
-		display:block;
-		float:right;
-		margin: -8px 0 -8px 0;
-		height:31px;
-		padding:4px 1.5% 4px 8px;
-		line-height: 31px;
-		font-family: $os-sans;
-		font-size: .8em;
-		color: $os-darkgrey;
-	}
-}
 ul{
 	margin:0;
 	padding:0;

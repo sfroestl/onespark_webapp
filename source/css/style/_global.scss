@@ -36,21 +36,25 @@ button, submit{
 }
 .list-head{
 	border-bottom: 1px solid $os-mediumgrey;
-	background-color: $os-lightgrey;
+	background-color: $os-grey;
 	color: $os-darkgrey;
-	height: 47px;
-	line-height: 47px;
+	height: 31px;
+	line-height: 31px;
 	overflow:hidden;
 	margin:0;
-	padding: 0 0 0 15.125%;
+	padding: 8px 0 8px 15.125%;
 	font-weight:normal;
 	font-size: .8em;
 
 	.sort-btn{
-		text-align: right;
+		max-width:40%;
+		height:31px;
+		line-height: 31px;
+		color: $os-darkgrey;
 		text-decoration:none;
 		display:block;
 		float:right;
+		margin-right: 1.5%;
 		font-family: $os-sans;
 	}
 }

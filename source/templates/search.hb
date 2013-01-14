@@ -1,4 +1,4 @@
-<p>Search {{view Ember.TextField valueBinding="controller.query"}}</p>
+<nav class="search-nav nav-bar">{{view Ember.TextField valueBinding="controller.query" placeholder="search"}}</nav>
 {{view App.UserListView
   title="Matching Users"
   recordsBinding="controller.allUsers"
