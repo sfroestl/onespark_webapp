@@ -1,4 +1,4 @@
-describe("fake server", function() {
+xdescribe("fake server", function() {
  var server;
 
  beforeEach(function() {
