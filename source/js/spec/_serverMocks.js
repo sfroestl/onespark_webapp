@@ -1,15 +1,15 @@
 function serverMock() {
 	var server =  sinon.fakeServer.create();
 	
-var user_1 =  '{"user": \
-  {\
-    "id":1,\
-    "username":"bob",\
-    "email":"bob@testme.com",\
-    "profile_id":1,\
-    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"contact_ids":[]\
-  }\
-}';
+var user_1 ={"user": 
+  {
+    "id":1,
+    "username":"bob",
+    "email":"bob@testme.com",
+    "profile_id":1,
+    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"contact_ids":[]
+  }
+};
 var authenticated_response = function(response) {
 	return function (xhr) {
 	  if (xhr.username!="bob" && xhr.password!="testbob") 
@@ -22,7 +22,15 @@ var authenticated_response = function(response) {
 	};
 };
 
-server.respond("GET", "http://api.onespark.de/api/v1/user",authenticated_response([200,{ "Content-Type": "application/json" },user_1]));
+server.respond("GET", "http://api.onespark.de/api/v1/user",authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(user_1)]));
+server.respond("GET", "http://api.onespark.de/api/v1/users/1",authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(user_1)]));
+server.respond("PUT", "http://api.onespark.de/api/v1/users/1",authenticated_response(function(xhr) {
+		var username = xhr.requestBody.match("user%5Busername%5D=([^&]+)(&|$)");
+		var email = xhr.requestBody.match("user%5Bemail%5D=([^&]+)(&|$)");
+		var newUser = {};
+		$.extend(newUser, user_1);
+		return [200,{ "Content-Type": "application/json" },JSON.stringify(newUser)];
+}));
 server.respond("POST", "http://api.onespark.de/api/v1/users",function(xhr) {
   if (xhr.requestBody.match(/username%5D=bob/)) 
     xhr.respond(422, { "Content-Type": "application/json" }, '{"errors":{"username":["hasalreadybeentaken"]}}');
