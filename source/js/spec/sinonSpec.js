@@ -1,7 +1,5 @@
-
-
-
 describe("fake server", function() {
+
  var server;
 
 
