@@ -1,4 +1,4 @@
-	describe( "The LoginController as blackbox test", function () {  
+	xdescribe( "The LoginController as blackbox test", function () {  
 
 		var server;
 
