@@ -66,10 +66,16 @@ App.Router = Ember.Router.extend({
 
 		goToSingleTask: function (router, event) {
 			var task = event.context;
-			console.log(task);
+			// console.log(task);
 			App.router.get('singleTaskController').set("task", task);
 			router.get('applicationController').connectOutlet('body', 'tool',task.get('project'));
 			router.transitionTo('loggedIn.projects.singleproject.projectTasks.singletask.index', task.get("project"), task);
+		},
+
+		goToSingleTimeSession: function(router, event){
+			var timeSession = event.context;
+			console.log(timeSession);
+			//TODO: implement
 		},
 
 		projects: Ember.Route.extend({

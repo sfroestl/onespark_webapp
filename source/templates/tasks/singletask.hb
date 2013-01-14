@@ -71,6 +71,6 @@
 		<td>{{worker.username}}</td>
 	</tr>
 {{/if}}
-
 </table>
 
+{{view App.TimeSessionListView title="Time Session History" recordsBinding="timeSessions"}}
