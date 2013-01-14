@@ -1,12 +1,11 @@
 /* Navbar General*/
 .nav-bar{
 	width:100%;
-	text-transform: lowercase;
 	height: 47px;
+	@include shadow (1px, 1px);
 	* {	
 		padding: 8px 0;
 		cursor: pointer;
-		overflow: hidden;
 		img{
 			margin-top: -8px;
 			display:block;
@@ -16,6 +15,7 @@
 		}
 	}
 	.button-left{
+		border-right: 1px solid $os-grey;
 		text-align:center;
 		display: block;
 		float:left;
@@ -25,18 +25,20 @@
 		padding-right: 1.5%;
 	}
 	.button-center{
-		font-family: $os-serif;
+		font-family: $os-sans;
 		font-size: $nav-head;
 		text-decoration:none;
 		display: block;
 		float: left;
 		height:31px;
+		line-height: 31px;
 		padding-left: 1.5%;
 		padding-right: 1.5%;
-		width: 69.75%;
+		//width: 69.75%;
 
 	}
 	.button-right{
+		border-left: 1px solid $os-grey;
 		text-align:center;
 		display: block;
 		float: right;
@@ -51,23 +53,17 @@
 .tool-nav{
 	position:fixed;
 	top:47px;
-	background-color: $os-grey;
+	background-color: $os-lightgrey;
 	color: $os-black;
-	*{
-		&:hover{
-			background-color: $os-darkgrey;
-		}
-		&:active{
-			background-color: $os-red;
-		}
-	}
+
 	.back-button{
-		// border-right: solid 1px $os-darkblack;
+		border-color: $os-mediumgrey;
 	}
 	.tools-button {
 		color: $os-black;
 	}
 	.context-button{
+		border-color: $os-mediumgrey;
 	}
 }
 
@@ -75,32 +71,14 @@
 .project-nav {
 	position:fixed;
 	top:0px;
-	color: $os-white;
-	background-color: $os-black;
-	// @include shadow(1px, 3px);
-	// @include gradient($os-black, $os-darkblack);
-	*{
-		&:hover{
-			background-color: black;
-		}
-		&:active{
-			background-color: $os-red;
-		}
-	}
-
+	background-color: $os-white;
 	.home-button{
-		outline-right: solid 1px $os-darkblack;
 		img {
-			
+			margin-top: -11px;
 		}
 
 	}
 	.projects-button {
-		color: $os-white;
-	}
-	.search-button{
-		img{
-			// border-left: solid 1px $os-darkblack;
-		}
+		color: $os-red;
 	}
 }

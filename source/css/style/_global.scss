@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
 	color: $os-black;
-	background-color: $os-white;
+	background-color: $os-lightgrey;
 	overflow-y: scroll;
 	position:absolute;
 	width:100%;
@@ -11,7 +11,7 @@ html {
 	font-family: $os-sans;
 }
 .headline{
-	font-family:$os-serif;
+	font-family:$os-sans;
 	font-size: $nav-head;
 	font-weight:normal;
 	padding-left: 15.125%;
@@ -35,58 +35,30 @@ button, submit{
 	}
 }
 .list-head{
-		overflow:hidden;
-		margin:0;
-		padding: 8px 0 8px 15.125%;
-		color: $os-darkgrey;
-		background-color: $os-lightgrey;
-		font-weight:normal;
-		font-size: .9em;
-
-		.list-sort-btn{
-			max-width: 35%;
-			text-decoration:none;
-			display:block;
-			float:right;
-			margin: -8px 0 -8px 0;
-			height:31px;
-			padding:4px 1.5% 4px 8px;
-			line-height: 31px;
-			font-family: $os-sans;
-			font-size: .8em;
-			color: $os-darkgrey;
-			background-color: $os-grey;
-			&:hover{
-				background-image:none;
-				background-color: $os-mediumgrey;
-			}
-			&:active{
-				background-image:none;
-				background-color: $os-mediumgrey;
-			}
-		}
-	}
-.sort-btn{
-	text-decoration:none;
-	display:block;
-	float:right;
-	margin: -8px 0 -8px 0;
-	height:31px;
-	padding:4px 1.5% 4px 8px;
-	line-height: 31px;
-	font-family: $os-sans;
-	font-size: .8em;
-	color: $os-darkgrey;
+	border-bottom: 1px solid $os-mediumgrey;
 	background-color: $os-grey;
-	&:hover{
-		background-image:none;
-		background-color: $os-mediumgrey;
-	}
-	&:active{
-		background-image:none;
-		background-color: $os-mediumgrey;
+	color: $os-darkgrey;
+	height: 31px;
+	line-height: 31px;
+	overflow:hidden;
+	margin:0;
+	padding: 8px 0 8px 15.125%;
+	font-weight:normal;
+	font-size: .8em;
+
+	.sort-btn{
+		max-width:40%;
+		height:31px;
+		line-height: 31px;
+		color: $os-darkgrey;
+		text-decoration:none;
+		display:block;
+		float:right;
+		margin-right: 1.5%;
+		font-family: $os-sans;
 	}
 }
+
 
 .user-list{
 	list-style-type:none;

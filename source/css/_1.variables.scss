@@ -1,18 +1,87 @@
+/* Webfonts */
+/* --------------------------------------------------------------------------
+   Fonts
+   -------------------------------------------------------------------------- */
+
+/* Webfonts */
+/* first for Internet Explorer < 9 */
+@font-face {
+	font-family: UnitSlab;
+	src: url("../fonts/UnitSlabWeb.eot");
+}
+/* then for WOFF-capable browsers */
+@font-face {
+	font-family: UnitSlab;
+	src: url("../fonts/UnitSlabWeb.woff") format("woff");
+}
+
+/* Kievit Regular */
+@font-face {
+   font-family: Kievit;
+   src: url("../fonts/KievitWeb.eot");
+}
+@font-face {
+   font-family: Kievit;
+   src: url("../fonts/KievitWeb.woff") format("woff");
+}
+
+/* Kievit Bold */
+@font-face {
+   font-family: Kievit;
+   src: url("../fonts/KievitWeb-Bold.eot");
+   font-weight: bold;
+}
+@font-face {
+   font-family: Kievit;
+   src: url("../fonts/KievitWeb-Bold.woff") format("woff");
+   font-weight: bold;
+}
+
+/* Kievit italic*/
+@font-face {
+   font-family: Kievit;
+   src: url("../fonts/KievitWeb-Ita.eot");
+   font-style: italic;
+}
+@font-face {
+   font-family: Kievit;
+   src: url("../fonts/KievitWeb-Ita.woff") format("woff");
+   font-style: italic;
+}
+
+/* Kievit bold italic*/
+@font-face {
+   font-family: Kievit;
+   src: url("../fonts/KievitWeb-BoldIta.eot");
+   font-weight: bold;
+   font-style: italic;
+}
+@font-face {
+   font-family: Kievit;
+   src: url("../fonts/KievitWeb-BoldIta.woff") format("woff");
+   font-weight: bold;
+   font-style: italic;
+}
+
+
 /* Farben */
 $os-white: #fefefe;
+$os-mediumblack: #333338;
 $os-black: #222226;
 $os-darkblack: #121214;
 $os-blacktransparent: rgba(25, 25, 28, .9);
+$os-lightestgrey: #f5f5f5;
 $os-lightgrey: #efefef;
 $os-grey: #e8e8e8;
-$os-mediumgrey: #d0d0d1;
+$os-mediumgrey: #e0e0e1;
 $os-darkgrey: #838385;
 $os-red: #ff0040;
 $os-darkred:  #cc0033;
 $os-blue: #009cff;
+
 /* Fontstacks */
-$os-sans: "Lucida Grande", "Lucida Sans Unicode", Verdana, Tahoma, Trebuchet MS, sans-serif;
+$os-sans: Kievit, "Lucida Grande", "Lucida Sans Unicode", Verdana, Tahoma, Trebuchet MS, sans-serif;
 $os-serif: "ITC Officina Serif", Georgia;
 
 /* Größen */
-$nav-head: 1.4em;
+$nav-head: 1.2em;

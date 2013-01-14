@@ -1,7 +1,7 @@
 <h2 class="list-head">
 {{view.title}}
 {{#if view.sortingRelevant}}
- <span class="sort-btn">sorted by
+ <span class="sort-btn">sort by
  {{#if view.sortingChangable}}
  {{view Ember.Select
        contentBinding="view.sortings"
@@ -23,7 +23,7 @@
 <ul class="record-list">
 	{{#each record in view.sortedRecords}}
 		{{#with record}}
-			<li {{!bindAttr class="stateForCSS"}} class="tool-elem clearfix">
+			<li {{!bindAttr class="stateForCSS"}} class="list-elem clearfix">
 				{{#if isLoaded}}
 					<a href="#" {{action clickedRecord this target="view"}}>
 					{{view view.image recordBinding="record"}}

@@ -5,7 +5,7 @@
 </a>
 <a class="account-tool" {{action goToUserProfile}} href="#">Settings</a>
 <a class="account-tool" {{action goToUserContacts}} href="#">Contacts</a>
-<a class="account-tool" {{action goToUserMessages}} href="#">Messages</a>
+<!--<a class="account-tool" {{action goToUserMessages}} href="#">Messages</a> -->
 <a class="account-tool" {{action goLoggedOut}} href="#">Logout</a>
 
 {{/if}}

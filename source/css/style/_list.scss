@@ -1,0 +1,72 @@
+
+.list-elem{
+	background-color:$os-lightgrey;
+	border-bottom: 1px solid $os-mediumgrey;
+	font-family: $os-sans;
+	font-size: $nav-head;
+	cursor: pointer;
+	a {
+		display:block;
+		overflow:hidden;
+		height:31px;
+		line-height:31px;
+		padding: 8px 0 8px 15.125%;
+		color: $os-black;
+		text-decoration:none;
+
+		.project-due-date{
+			height:26px;
+			line-height: 26px;
+			// @include rounded(100px);
+			// background-color: $os-mediumgrey;
+			float: right;
+			padding:0px 8px;
+			margin-right: 1.5%;
+			font-family: $os-sans;
+			color: $os-darkgrey;
+			font-size: .6em;
+		}
+	}
+
+}
+.new-project-button{
+	width:100%;
+	color: $os-black;
+	line-height:31px;
+	text-decoration:none;
+	display:block;
+	padding: 8px 0px;
+	.add-img{
+
+		text-align:center;
+		display: block;
+		float:left;
+		height: 31px;
+		width: 9.125%;
+		padding-left: 3%;
+		padding-right: 1.5%;
+		img {
+			height:24px;
+		}
+	}
+	.add-txt{
+		text-decoration:none;
+		display: block;
+		float: left;
+		height:31px;
+		padding-left: 1.5%;
+		padding-right: 1.5%;
+		width: 69.75%;
+	}
+}
+
+
+ul{
+	margin:0;
+	padding:0;
+	li {
+		padding:0;
+		margin:0;
+		list-style-type:none;
+	}
+}
