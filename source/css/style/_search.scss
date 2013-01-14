@@ -1,0 +1,22 @@
+.search {
+	padding-top: 47px;
+}
+.search-nav{
+	position: fixed;
+	top: 47px;
+	background-color: $os-white;
+	width: 97%;
+	padding: 8px 1.5%;
+	height: 31px;
+	input[type=text]{
+		font-family: $os-sans;
+		font-style:italic;
+		color: $os-black;
+		width: 97%;
+		padding: 8px 1.5%;
+		border: none;
+		border-bottom: 1px solid $os-white;
+		height: 15px;
+		background-color: $os-grey;
+	}
+}

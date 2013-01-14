@@ -10,9 +10,10 @@
 	li{
 		text-transform: lowercase;
 		height: 31px;
+		line-height:31px;
 		padding: 8px 0 8px 15.125%;
 		border-bottom: 1px solid /*$os-mediumgrey*/ $os-grey;
-		font-family: $os-serif;
+		font-family: $os-sans;
 		font-size: $nav-head;
 		cursor: pointer;
 		&:hover{

@@ -1,3 +1,4 @@
 App.SearchView = Ember.View.extend({
-  templateName: 'search',	
+  templateName: 'search',
+  classNames: ['search']	
 });
