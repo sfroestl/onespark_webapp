@@ -3,6 +3,7 @@
 	width:100%;
 	text-transform: lowercase;
 	height: 47px;
+	//@include shadow (0px, 3px);
 	* {	
 		padding: 8px 0;
 		cursor: pointer;
@@ -25,12 +26,13 @@
 		padding-right: 1.5%;
 	}
 	.button-center{
-		font-family: $os-serif;
+		font-family: $os-sans;
 		font-size: $nav-head;
 		text-decoration:none;
 		display: block;
 		float: left;
 		height:31px;
+		line-height: 31px;
 		padding-left: 1.5%;
 		padding-right: 1.5%;
 		width: 69.75%;
@@ -55,10 +57,10 @@
 	color: $os-black;
 	*{
 		&:hover{
-			background-color: $os-darkgrey;
+			//background-color: $os-darkgrey;
 		}
 		&:active{
-			background-color: $os-red;
+			//background-color: $os-red;
 		}
 	}
 	.back-button{
@@ -75,16 +77,16 @@
 .project-nav {
 	position:fixed;
 	top:0px;
-	color: $os-white;
-	background-color: $os-black;
+	color: $os-red;
+	background-color: $os-white;
 	// @include shadow(1px, 3px);
 	// @include gradient($os-black, $os-darkblack);
 	*{
 		&:hover{
-			background-color: black;
+			//background-color: black;
 		}
 		&:active{
-			background-color: $os-red;
+			//background-color: $os-red;
 		}
 	}
 
@@ -96,7 +98,7 @@
 
 	}
 	.projects-button {
-		color: $os-white;
+		color: $os-red;
 	}
 	.search-button{
 		img{

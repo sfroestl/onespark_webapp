@@ -6,43 +6,32 @@
 	bottom: 0;
 	right: -86.375%;
 	background-color:$os-grey;
-	@include shadow(0px, 3px);
-	@include gradient($os-lightgrey, $os-grey);
 	.account-button{
+		width:20%;
 		cursor: pointer;
-		border-right: 1px solid $os-mediumgrey;
-		&:hover{
-			background-color: $os-mediumgrey;
-		}
-		&:active{
-			background-color: $os-darkgrey;
-		}
+		background-color: $os-red;
 		img{
-			
 			display:block;
 			height: 31px;
-			margin: 6px 0;
+			margin: 8px 0;
 			padding: 0;
 			margin-left: auto;
 			margin-right:auto;
-			border: 2px solid $os-white;
+			//border: 2px solid $os-white;
 		}
-		padding: 0 1.5% 0 1.5%;
+		padding: 0 1.5%;
 		display:block;
 		height: 47px;
 		width: 9.125%;
 		float:left;
 	}
 	.account-tool{
+		text-align:center;
 		padding: 0 1.5%;
+		width: 22%;
 		height:47px;
 		color: $os-black;
-		border-right: 1px solid $os-mediumgrey;
 		display:block;
-		height:47px;
 		float:left;
-		&:hover{
-			background-color:$os-mediumgrey;
-		}
 	}
 }

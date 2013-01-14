@@ -8,11 +8,13 @@ App.AccountView = Ember.View.extend({
   	that = this;
   	duration = 250;
   	if(!that.get('fullyVisible')){
-  		$('.account').animate({right: '-1.5%', paddingLeft: '1.5%'}, duration, 'swing', function() {
+  		$('.account').animate({right: '0'}, duration, 'swing', function() {
+        $('.account-button').animate({ width: '22%'});
   			that.set('fullyVisible', !that.get('fullyVisible'));
   		});
   	} else if (that.get('fullyVisible')){
-  		$('.account').animate({right: '-86.375%', paddingLeft: '0%'}, duration, 'swing', function() {
+  		$('.account').animate({right: '-86.375%'}, duration, 'swing', function() {
+        $('.account-button').animate({ width: '9.125%'});
   			that.set('fullyVisible', !that.get('fullyVisible'));
         App.router.send("goToProjects");
   		});
