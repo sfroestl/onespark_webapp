@@ -18,7 +18,7 @@ var user_1 ={"user":
     "username":"bob",
     "email":"bob@testme.com",
     "profile_id":1,
-    "owned_project_ids":[],
+    "owned_project_ids":[1],
     "collaborated_project_ids":[],
     "project_coworker_ids":[],
     "outContacts":[1,3],
@@ -156,5 +156,34 @@ server.respond("GET", new RegExp("/api/v1/contacts/2$"),authenticated_response([
 server.respond("GET", new RegExp("/api/v1/contacts/3$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(contact_3)]));
 server.respond("GET", new RegExp("/api/v1/contacts/4$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(contact_4)]));
 
+//////////////////////////////////////////////////////////////
+///////////Projects //////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+project_1 ={
+  "project": {
+      "id": 1,
+      "desc": "Bobs new project",
+      "due_date": null,
+      "title": "Test Project",
+      "owner_id": 1,
+      "project_coworker_ids": [1],
+      "task_ids": []
+  }
+};
+server.respond("GET", new RegExp("/api/v1/projects/1$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(project_1)]));
+
+
+//////////////////////////////////////////////////////////////
+///////////Coworkers /////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+coworker_1={
+    "project_coworker": {
+        "id": 1,
+        "user_id": 3,
+        "project_id": 1,
+        "permission": 2
+    }
+}
+server.respond("GET", new RegExp("/api/v1/project_coworkers/1$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(coworker_1)]));
 return server
 };
