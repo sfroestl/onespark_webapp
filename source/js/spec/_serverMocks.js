@@ -39,7 +39,7 @@ var user_3 ={"user":
     "id":3,
     "username":"carol",
     "email":"carol@testme.com",
-    "profile_id":3,
+    "profile_id":null,
     "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"outContacts":[4],
   }
 };
