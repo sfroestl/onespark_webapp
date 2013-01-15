@@ -8,4 +8,3 @@
 //=require_tree ./controller
 //=require_tree ./view
 //=require ./router
-App.initialize();
