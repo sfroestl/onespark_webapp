@@ -6,7 +6,7 @@ DS.AuthenticatedRESTAdapter = DS.RESTAdapter.extend({
     if (handlingSession) handlingSession.insertAuthenticationInRequest(hash); //if we have a handling session, use it to include authentication information
 
     var errorCallback = function(jqXHR, textStatus, errorThrown) {
-		console.log(jqXHR);
+		console.log("error at",url,":",jqXHR);
 		if (textStatus=="error" && handlingSession)  {//Seems like an authentication Problem
 			//App.router.send("unauthorizedRequest");
 		}
