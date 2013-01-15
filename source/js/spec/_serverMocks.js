@@ -31,7 +31,16 @@ var user_2 ={"user":
     "username":"alice",
     "email":"alice@testme.com",
     "profile_id":2,
-    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"contact_ids":[]
+    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"outContacts":[2],
+  }
+};
+var user_3 ={"user": 
+  {
+    "id":3,
+    "username":"carol",
+    "email":"carol@testme.com",
+    "profile_id":3,
+    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"outContacts":[4],
   }
 };
 
@@ -54,6 +63,7 @@ var authenticated_response = function(response) {
 server.respond("GET", new RegExp("/api/v1/user$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(user_1)]));
 server.respond("GET", new RegExp("/api/v1/users/1$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(user_1)]));
 server.respond("GET", new RegExp("/api/v1/users/2$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(user_2)]));
+server.respond("GET", new RegExp("/api/v1/users/3$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(user_3)]));
 server.respond("PUT", new RegExp("/api/v1/users/1$"),authenticated_response(function(xhr) {
 		var username = xhr.requestBody.match("user%5Busername%5D=([^&]+)(&|$)")[1];
 		var email = xhr.requestBody.match("user%5Bemail%5D=([^&]+)(&|$)")[1];
