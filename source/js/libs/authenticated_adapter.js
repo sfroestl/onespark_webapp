@@ -1,6 +1,6 @@
 //create a subclass of a RESTAdapter which also handles authentication
 DS.AuthenticatedRESTAdapter = DS.RESTAdapter.extend({
-
+  noFindMany:false,
   ajax: function(url, type, hash) {
 	var handlingSession = this.get("session");
     if (handlingSession) handlingSession.insertAuthenticationInRequest(hash); //if we have a handling session, use it to include authentication information
@@ -22,7 +22,17 @@ DS.AuthenticatedRESTAdapter = DS.RESTAdapter.extend({
 	}
 		
     return DS.RESTAdapter.prototype.ajax.call(this,url, type, hash);
+  },
+   
+  findMany: function(store, type, ids) { //temporary fix using the single request model
+	  if (this.get("noFindMany")) {
+	    DS.Adapter.prototype.findMany.call(this,store, type, ids);
+	  } else {
+		return this._super(store,type,ids);  
+	  }
   }
+  
+  
 });
 
 
