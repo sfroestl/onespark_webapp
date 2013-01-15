@@ -23,7 +23,7 @@ var user_2 ={"user":
 
 var authenticated_response = function(response) {
 	return function (xhr) {
-	  if (xhr.username!="bob" && xhr.password!="testbob") 
+	  if ((xhr.username!="bob" && xhr.password!="testbob")||(xhr.username!="alice" && xhr.password!="asdasd")) 
 		xhr.respond(401,{ "Content-Type": "application/json" },"HTTP BASIC: Access denied");
 	  else
 		if ("function" == typeof response)
