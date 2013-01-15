@@ -9,3 +9,6 @@ title: Mockspark
   console.log(server);
 </script>
 <% end %>
+<% content_for :pre_init_js do%>
+  App.set("session.adapter.noFindMany",true);
+<% end %>
