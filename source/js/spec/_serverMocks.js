@@ -9,13 +9,20 @@ function serverMock() {
 	});*/
 	
 	
+//////////////////////////////////////////////////////////////
+///////////Users /////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 var user_1 ={"user": 
   {
     "id":1,
     "username":"bob",
     "email":"bob@testme.com",
     "profile_id":1,
-    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"contact_ids":[]
+    "owned_project_ids":[],
+    "collaborated_project_ids":[],
+    "project_coworker_ids":[],
+    "outContacts":[1,3],
+    "inContacts":[2,4]
   }
 };
 var user_2 ={"user": 
@@ -38,6 +45,7 @@ var authenticated_response = function(response) {
 		else
 		  xhr.respond.apply(xhr,response);
 	   } else {
+		console.log("blocking access to",xhr.method,xhr.url);
 		xhr.respond(401,{ "Content-Type": "application/json" },"HTTP BASIC: Access denied");
 	   }
 	};
@@ -66,7 +74,77 @@ server.respond("POST", new RegExp("/api/v1/users$"),function(xhr) {
     xhr.respond(201, { "Content-Type": "application/json" }, JSON.stringify(user_2));
 });
 
+//////////////////////////////////////////////////////////////
+///////////Profiles///////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+var profile_1 ={
+    "profile": {
+        "id": 1,
+        "forename": "Bob",
+        "surname": "the Builder",
+        "city": "Dresden",
+        "about": "x",
+        "avatar_url": null,
+        "user_id": 1
+    }
+};
+var profile_2 ={
+    "profile": {
+        "id": 2,
+        "forename": "Alice",
+        "surname": "Sampletester",
+        "city": "Hamburg",
+        "about": "Just another Test",
+        "avatar_url": null,
+        "user_id": 2
+    }
+};
+server.respond("GET", new RegExp("/api/v1/profiles/1$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(profile_1)]));
+server.respond("GET", new RegExp("/api/v1/profiles/2$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(profile_2)]));
 
+//////////////////////////////////////////////////////////////
+///////////Contacts //////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+contact_1 ={
+    "contact":
+    {
+        "id": 1,
+        "user_id": 1,
+        "contact_id": 2,
+        "status": "pending"
+    }
+};
+contact_2 ={
+    "contact":
+    {
+        "id": 2,
+        "user_id": 2,
+        "contact_id": 1,
+        "status": "requested"
+    }
+};
+contact_3 ={
+    "contact":
+    {
+        "id": 3,
+        "user_id": 1,
+        "contact_id": 3,
+        "status": "accepted"
+    }
+};
+contact_4 ={
+    "contact":
+    {
+        "id": 4,
+        "user_id": 3,
+        "contact_id": 1,
+        "status": "accepted"
+    }
+};
+server.respond("GET", new RegExp("/api/v1/contacts/1$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(contact_1)]));
+server.respond("GET", new RegExp("/api/v1/contacts/2$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(contact_2)]));
+server.respond("GET", new RegExp("/api/v1/contacts/3$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(contact_3)]));
+server.respond("GET", new RegExp("/api/v1/contacts/4$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(contact_4)]));
 
 return server
 };
