@@ -1,0 +1,11 @@
+---
+title: Mockspark
+---
+<% content_for :pre_init do%>
+<%= javascript_include_tag  "libs/sinon-1.5.2.js" %>
+<%= javascript_include_tag  "spec/_serverMocks.js" %>
+<script type="text/javascript">
+  var server=serverMock();
+  console.log(server);
+</script>
+<% end %>
