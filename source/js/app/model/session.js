@@ -22,7 +22,7 @@ App.Session = Ember.Object.extend({
     this.setProperties({username:user,password:pw});
   },
   logout: function() {
-	this.setProperties({username:null,password:null});
+	this.setProperties({username:null,password:null,sessionUserId:null});
   },
 
 
