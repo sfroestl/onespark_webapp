@@ -9,6 +9,7 @@ stylesheets: [jasmine]
   <div id="hiddenApp">
 <% end %>
 <% content_for :pre_init_js do %>
+  App.set("session.adapter.noFindMany",true);
   App.rootElement = "#hiddenApp";
 <% end%>
 
