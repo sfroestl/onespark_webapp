@@ -15,7 +15,6 @@
 		/* login a valid user */
 		it("should run for valid input", function(){
 			
-			console.log("wurst");
 			//this.server.respondWith("GET", "http://api.onespark.de/api/v1/user",
     		//	[200, {"Content-Type": "application/json"},
       		//	'{"user":{"id":2,"username":"bob","email":"bob@testme.com","profile":{"id":2,"forename":"foo","surname":"bar","city":"foobar","about":"here","avatar_url":null,"user_id":2},"owned_project_ids":[4,5,10,11],"collaborated_project_ids":[1,3],"contact_ids":[67,76,54,60,65,63]}}']);
@@ -31,8 +30,7 @@
 			waitsFor(function() {
 				return App.get("session.signedIn");
 			}, "login", 5000);
-		    runs(function() {
-				console.log("wurst2");			
+		    runs(function() {		
 				expect(App.get("session.sessionToken")).toEqual(encodeBase64("bob", "testbob"));
 				expect(App.get("session.sessionUser")).not.toBe(null);
 				expect(App.get("session.sessionUserId")).toEqual(1);
