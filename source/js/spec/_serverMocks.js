@@ -20,7 +20,6 @@ var user_1 ={"user":
     "profile_id":1,
     "owned_project_ids":[1],
     "collaborated_project_ids":[],
-    "project_coworker_ids":[],
     "outContacts":[1,3],
     "inContacts":[2,4]
   }
@@ -179,11 +178,15 @@ server.respond("GET", new RegExp("/api/v1/projects/1$"),authenticated_response([
 coworker_1={
     "project_coworker": {
         "id": 1,
-        "user_id": 3,
+        "user_id": 2,
         "project_id": 1,
         "permission": 2
     }
 }
 server.respond("GET", new RegExp("/api/v1/project_coworkers/1$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(coworker_1)]));
+server.respond("POST", new RegExp("/api/v1/project_coworkers$"),function(xhr) {
+    xhr.respond(201, { "Content-Type": "application/json" }, xhr.requestBody);
+});
+
 return server
 };
