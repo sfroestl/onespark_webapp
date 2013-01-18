@@ -469,10 +469,13 @@ App.Router = Ember.Router.extend({
 		    }),
 		    //Contacts
 		    contacts: Ember.Route.extend({
+		    	index: Em.Route.extend({
+	    			route: '/',
+	    			connectOutlets:function(router, context){
+				    	router.get('userController').connectOutlet('maincontent', 'contacts');
+				    }
+    			}),
 		    	route: '/contacts',	    	
-			    connectOutlets:function(router, context){
-			    	router.get('userController').connectOutlet('maincontent', 'contacts');
-			    },
 			    goAddContact: function(router, evt) {
 					router.get('contactsController').addContact();
 				},
@@ -485,9 +488,6 @@ App.Router = Ember.Router.extend({
 				goToContactsProfile: function (router, evt) {
 					router.transitionTo('contactsprofile', evt.contexts[0]);
 				},
-				index: Em.Route.extend({
-    			route: '/'
-    			}),
 			    //profile of contact
 				contactsprofile:  Ember.Route.extend({
 			        route: '/:user_id',

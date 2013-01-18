@@ -28,10 +28,16 @@ App.ContactsController =  Ember.Controller.extend({
   },
   addContact: function() {
     var self = this;
-    var textInput = this.get("newUserField");
-    //do API call to get contact via username
-    var newContact = App.store.findQuery(App.User, { username: textInput });
 
+    //differ username and email
+    var textInput = this.get("newUserField");
+    if(isEmailValid(textInput)) {
+      var newContact = App.store.findQuery(App.User, { email: textInput });
+    } else {
+      var newContact = App.store.findQuery(App.User, { username: textInput });
+    }
+
+    //do API call to get contact via username
     newContact.addObserver('isLoaded', function() {
       if (newContact.get('isLoaded')) {
         console.log("User is loaded", newContact.get("firstObject"));
@@ -39,7 +45,7 @@ App.ContactsController =  Ember.Controller.extend({
         showFlashMessageFor(contact);
         App.store.commit();
         self.get("allContacts").addObject(App.ContactByStatus.create({contactModel:contact}));
-
+        this.get("username", "");
         console.log("User is loaded", contact.get("status"));
       } else {
           console.log("User is NOT loaded");
