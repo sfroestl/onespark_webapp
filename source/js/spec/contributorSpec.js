@@ -96,28 +96,32 @@ describe("The NewContributorController for a sample Project", function(){
 			expect(newContributorController.get("possibleUsers.0.id")).toEqual("3");
 			expect(newContributorController.get("possibleUsers.length")).toEqual(1);
 		});
-		it("removes a user when added", function(){
-			var contributor;
-			var user;
-			var coworker;
-			var coworkers;
-			runs(function() {
-				user = App.get("session.sessionUser.acceptedContacts.firstObject");
-			});
-			waitsFor(function() {
-				return user.get("isLoaded");
-			}, "loading user", 5000);				
-			runs(function(){
-				expect(newContributorController.get("possibleUsers.length")).toEqual(1);
-				contributor = newContributorController.save(user,3);
-			});
-			waitsFor(function() {
-				return contributor.get("stateManager.currentPath")=="rootState.loaded.saved";
-			}, "saving contributor", 5000);
+	});
+	describe("when adding a user", function(){
+		var user;
+		runs(function() {
+			user = App.get("session.sessionUser.acceptedContacts.firstObject");
+		});
+		waitsFor(function() {
+			return user.get("isLoaded");
+		}, "loading user", 5000);
+		runs(function(){
+			expect(newContributorController.get("possibleUsers.length")).toEqual(1);
+			contributor = newContributorController.save(user,3);
+		});
+		waitsFor(function() {
+			return contributor.get("stateManager.currentPath")=="rootState.loaded.saved";
+		}, "saving contributor", 5000);
+		it("the candidate list is empty", function(){
 			runs(function(){
 				expect(newContributorController.get("possibleUsers.length")).toEqual(0);
 			});			
 		});
-	});
-	
+		it("he is visible in admins list", function(){
+			runs(function(){
+				var contributorsController  = App.ContributorsController.create({content: project});
+				expect(contributorsController.get("admins.length")).toEqual(1);
+			});			
+		});		
+	})
 });
