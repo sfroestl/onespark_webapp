@@ -106,11 +106,4 @@ App.Session = Ember.Object.extend({
 });
 App.set("session",App.Session.create());
 
-var restoreLogin =Ember.Object.create({
-	username: null,
-	password: null,
-	sessionUserId: null
-});
-restoreLogin.setProperties(decodeBase64Credentials($.cookie("sessionToken")));
-restoreLogin.set("sessionUserId",$.cookie("sessionUserId"));
-App.session.setProperties(restoreLogin);
+

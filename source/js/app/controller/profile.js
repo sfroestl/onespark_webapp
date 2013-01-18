@@ -55,11 +55,12 @@ App.ProfileController = Ember.Controller.extend({
 		var base64 = encodeBase64(App.get("session.sessionUser.username"), this.password_conf);
 		that = this;
 		this.set("isComplete", false);
+		var url = App.get("session.adapter.url") + "/user";
 
 		//old fashioned
 		$.ajax({
 	      async: true,
-	      url: 'http://api.onespark.de/api/v1/user',
+	      url: url,
 	      type: 'DELETE',
 	      dataType: 'json',
 	      accept: 'json',

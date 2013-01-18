@@ -91,38 +91,25 @@ describe("The router", function(){
                 describe("its contacts route", function(){
                     var contactsRoute = null;
                     beforeEach(function(){
-                        contactsRoute = userRoute.get("contacts").create();
+                        contactsRoute = userRoute.get("contacts.index").create();
                     });
 
                     it ("should have route of /contacts", function(){
                         expect(contactsRoute.get("route")).toEqual("/contacts");
                     });
 
-                    describe("its contacts index route", function(){
+                    it("should have a add function", function(){
+                        expect(contactsRoute.goAddContact).toBeDefined();
+                    });   
 
-                        var contactsIndexRoute = null;
-                        beforeEach(function(){
-                            contactIndexRoute = contactsRoute.get("index").create();
-                        });
+                    it("should have a remove function", function(){
+                        expect(contactsRoute.goRemove).toBeDefined();
+                    });  
 
-                        it ("should have route of /", function(){
-                            expect(contactIndexRoute.get("route")).toEqual("/");
-                        });
-
-                        it("should have a add function", function(){
-                            expect(contactIndexRoute.goAddContact).toBeDefined();
-                        });   
-
-                        it("should have a remove function", function(){
-                            expect(contactIndexRoute.goRemove).toBeDefined();
-                        });  
-
-                        it("should have a accept function", function(){
-                            expect(contactIndexRoute.goAccept).toBeDefined();
-                        });  
+                    it("should have a accept function", function(){
+                        expect(contactsRoute.goAccept).toBeDefined();
                     });    
                 });
-
         	});
         });
 

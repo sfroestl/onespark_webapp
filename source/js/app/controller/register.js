@@ -25,9 +25,12 @@ App.RegisterController = Ember.Controller.extend({
         matchPwValidation(this.get("password"), this.get("password_confirmation")) && 
         pwLengthValidation(this.get("password")) && isEmailValid(this.get("email")) && 
         usernameLength(this.get("username"))) {  
+
+      var url = App.get("session.adapter.url") + "/users";
+
       $.ajax({
             async: true,
-            url: 'http://api.onespark.de/api/v1/users',
+            url: url,
             type: 'POST',
             dataType: 'json',
             accept: 'json',

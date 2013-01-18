@@ -7,3 +7,14 @@ app_url: http://api.onespark.de:81/api/v1
 # app_url: http://onespark.lupus.uberspace.de/api/v1
 
 ---
+<script type="text/javascript">
+var restoreLogin =Ember.Object.create({
+	username: null,
+	password: null,
+	sessionUserId: null
+});
+
+restoreLogin.setProperties(decodeBase64Credentials($.cookie("sessionToken")));
+restoreLogin.set("sessionUserId",$.cookie("sessionUserId"));
+App.session.setProperties(restoreLogin);
+</script>
