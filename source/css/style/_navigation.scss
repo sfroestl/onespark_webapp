@@ -15,7 +15,7 @@
 		}
 	}
 	.button-left{
-		border-right: 1px solid $os-grey;
+		border-right: 1px solid $os-mediumgrey;
 		text-align:center;
 		display: block;
 		float:left;
@@ -38,7 +38,7 @@
 
 	}
 	.button-right{
-		border-left: 1px solid $os-grey;
+		border-left: 1px solid $os-mediumgrey;
 		text-align:center;
 		display: block;
 		float: right;
@@ -53,17 +53,18 @@
 .tool-nav{
 	position:fixed;
 	top:47px;
-	background-color: $os-lightgrey;
+	//border-top: 1px solid $os-mediumgrey;
+	background-color: $os-white;
 	color: $os-black;
 
 	.back-button{
-		border-color: $os-mediumgrey;
+		border-color: $os-lightgrey;
 	}
 	.tools-button {
 		color: $os-black;
 	}
 	.context-button{
-		border-color: $os-mediumgrey;
+		border-color: $os-lightgrey;
 	}
 }
 
@@ -71,7 +72,7 @@
 .project-nav {
 	position:fixed;
 	top:0px;
-	background-color: $os-white;
+	background-color: $os-lightgrey;
 	.home-button{
 		img {
 			margin-top: -11px;

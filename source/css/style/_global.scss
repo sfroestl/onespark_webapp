@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
 	color: $os-black;
-	background-color: $os-lightgrey;
+	background-color: $os-white;
 	overflow-y: scroll;
 	position:absolute;
 	width:100%;
@@ -35,8 +35,8 @@ button, submit{
 	}
 }
 .list-head{
-	border-bottom: 1px solid $os-mediumgrey;
-	background-color: $os-grey;
+	border-bottom: 1px solid $os-lightgrey;
+	background-color: $os-lightestgrey;
 	color: $os-darkgrey;
 	height: 31px;
 	line-height: 31px;
