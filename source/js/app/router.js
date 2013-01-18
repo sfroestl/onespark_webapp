@@ -469,39 +469,39 @@ App.Router = Ember.Router.extend({
 		    }),
 		    //Contacts
 		    contacts: Ember.Route.extend({
-		    	route: '/contacts',
-		    	index: Em.Route.extend({
-        			route: '/',
-				    connectOutlets:function(router, context){
-				    	router.get('userController').connectOutlet('maincontent', 'contacts');
-				    },
-				    goAddContact: function(router, evt) {
-						router.get('contactsController').addContact();
+		    	route: '/contacts',	    	
+			    connectOutlets:function(router, context){
+			    	router.get('userController').connectOutlet('maincontent', 'contacts');
+			    },
+			    goAddContact: function(router, evt) {
+					router.get('contactsController').addContact();
+				},
+			    goRemove: function(router, evt) {
+					router.get('contactsController').removeContact(evt.contexts[0]);
+				},
+				goAccept: function(router, evt) {
+					router.get('contactsController').acceptContact(evt.contexts[0]);
+				},
+				goToContactsProfile: function (router, evt) {
+					router.transitionTo('contactsprofile', evt.contexts[0]);
+				},
+				index: Em.Route.extend({
+    			route: '/'
+    			}),
+			    //profile of contact
+				contactsprofile:  Ember.Route.extend({
+			        route: '/:user_id',
+			        connectOutlets: function(router, user){
+			           	router.get('userController').connectOutlet('maincontent', 'profile');
+			            router.set('profileController.user', user);
+			        },
+			       	serialize: function(router, user){
+						return {user_id: user.get("id")}
 					},
-				    goRemove: function(router, evt) {
-						router.get('contactsController').removeContact(evt.contexts[0]);
-					},
-					goAccept: function(router, evt) {
-						router.get('contactsController').acceptContact(evt.contexts[0]);
-					},
-					goToContactsProfile: function (router, evt) {
-						router.transitionTo('contactsprofile', evt.contexts[0]);
-					},
-				    //profile of contact
-					contactsprofile:  Ember.Route.extend({
-				        route: '/:user_id',
-				        connectOutlets: function(router, user){
-				           	router.get('userController').connectOutlet('maincontent', 'profile');
-				            router.set('profileController.user', user);
-				        },
-				       	serialize: function(router, user){
-							return {user_id: user.get("id")}
-						},
-						deserialize: function(router, urlParams){
-						   	return App.store.find(App.User, urlParams.user_id);
-						}
-					})
-			   	})
+					deserialize: function(router, urlParams){
+					   	return App.store.find(App.User, urlParams.user_id);
+					}
+				})		   	
 		    }),
 		    //Messages
 		    messages: Ember.Route.extend({
