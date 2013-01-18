@@ -30,7 +30,7 @@ var user_2 ={"user":
     "username":"alice",
     "email":"alice@testme.com",
     "profile_id":2,
-    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"outContacts":[2],
+    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[1],"outContacts":[2],
   }
 };
 var user_3 ={"user": 
@@ -49,7 +49,7 @@ var authenticated_response = function(response) {
 	  if ((xhr.username!="bob" && xhr.password!="testbob")||(xhr.username!="alice" && xhr.password!="asdasd")) {
 	    console.log("allowing access to",xhr.method,xhr.url);
 	    if ("function" == typeof response)
-		  response.appy(this,arguments);
+		  response.apply(this,arguments);
 		else
 		  xhr.respond.apply(xhr,response);
 	   } else {
@@ -184,9 +184,20 @@ coworker_1={
     }
 }
 server.respond("GET", new RegExp("/api/v1/project_coworkers/1$"),authenticated_response([200,{ "Content-Type": "application/json" },JSON.stringify(coworker_1)]));
+var coworker_id = 2;
 server.respond("POST", new RegExp("/api/v1/project_coworkers$"),function(xhr) {
-    xhr.respond(201, { "Content-Type": "application/json" }, xhr.requestBody);
+	var obj = JSON.parse(xhr.requestBody);
+	obj.project_coworker.id = coworker_id++;
+    xhr.respond(201, { "Content-Type": "application/json" },JSON.stringify(obj) );
 });
+server.respond("PUT", new RegExp("/api/v1/project_coworkers/(.+)$"),authenticated_response(function(xhr,id) {
+		var obj = JSON.parse(xhr.requestBody);
+		obj.project_coworker.id = id;
+		xhr.respond(200,{ "Content-Type": "application/json" },JSON.stringify(obj) );
+}));
+server.respond("DELETE", new RegExp("/api/v1/project_coworkers/(.+)$"),authenticated_response(function(xhr) {
+		xhr.respond(204,{ "Content-Type": "application/json" },"");
+}));
 
 return server
 };
