@@ -31,13 +31,14 @@
 }
 .new-project-button{
 	width:100%;
-	color: $os-black;
+	background-color: $os-blue;
+	// border-bottom: 1px solid $os-lightgrey;
+	color: $os-blue;
 	line-height:31px;
 	text-decoration:none;
 	display:block;
 	padding: 8px 0px;
 	.add-img{
-
 		text-align:center;
 		display: block;
 		float:left;
@@ -46,10 +47,14 @@
 		padding-left: 3%;
 		padding-right: 1.5%;
 		img {
-			height:24px;
+			// padding: 2px;
+			// @include rounded (31px);
+			// background-color: $os-blue;
+			height:15px;
 		}
 	}
 	.add-txt{
+		color: $os-lightestgrey;
 		text-decoration:none;
 		display: block;
 		float: left;
@@ -63,10 +68,43 @@
 
 ul{
 	margin:0;
-	padding:0;
+	padding: 0;
+	padding-bottom: 47px;
+	border-bottom: 1px solid $os-grey;
 	li {
 		padding:0;
 		margin:0;
 		list-style-type:none;
+		&:last-child{
+		
 	}
+	}
+}
+.list-head{
+	border-bottom: 1px dotted $os-lightgrey;
+	background-color: $os-lightgrey;
+	color: $os-darkgrey;
+	height: 31px;
+	line-height: 31px;
+	overflow:hidden;
+	margin:0;
+	padding: 8px 0 8px 15.125%;
+	font-weight:normal;
+	font-size: .8em;
+	.sort-btn{
+		max-width:40%;
+		height:31px;
+		line-height: 31px;
+		color: $os-darkgrey;
+		text-decoration:none;
+		display:block;
+		float:right;
+		margin-right: 1.5%;
+		font-family: $os-sans;
+	}
+}
+
+
+.user-list{
+	list-style-type:none;
 }
