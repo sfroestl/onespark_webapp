@@ -2,6 +2,17 @@
 title: Onesparks Jasmine Spec Runner
 stylesheets: [jasmine]
 ---
+<% content_for :pre_init do%>
+  <style type="text/css">
+    #hiddenApp {display:none !important;}
+  </style>
+  <div id="hiddenApp">
+<% end %>
+<% content_for :pre_init_js do %>
+  App.set("session.adapter.noFindMany",true);
+  App.rootElement = "#hiddenApp";
+<% end%>
+
   <%= javascript_include_tag  "specs.js" %>
 
   <script type="text/javascript">

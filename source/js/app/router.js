@@ -226,6 +226,7 @@ App.Router = Ember.Router.extend({
 							contextMenu: 'view',
 							connectOutlets: function(router,task) {
 								var aTask = App.router.get('singleTaskController').get('task');
+								App.router.get('singleTaskController').set("timesessions", aTask.get("timesessions"));
 								router.get('toolController').connectOutlet('tool-body', 'singleTask',aTask);
 							},
 						}),
