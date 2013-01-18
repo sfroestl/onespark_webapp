@@ -15,8 +15,9 @@ App.NewContributorController = Ember.Controller.extend({
     save: function(user,permission) {
 		var coworker = App.store.createRecord(App.ProjectCoworker,  { project: this.get("project"), user: user, permission: permission});
 		showFlashMessageFor(coworker);
-		this.get('project.coworkers').addObject(coworker);
+		//this.get('project.coworkers').addObject(coworker);
 		App.store.commit();
+		return coworker;
 	}
 });
 App.EditContributorsController = Ember.ObjectController.extend({
