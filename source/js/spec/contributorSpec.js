@@ -125,3 +125,78 @@ describe("The NewContributorController for a sample Project", function(){
 		});		
 	})
 });
+describe("The EditContributorController for a sample Project", function(){
+    var server;
+    var project;
+    var editContributorsController;
+    var contributorsController;
+	var login= function() {
+		if (App.get("session.SessionUserId")==1) return;
+		runs(function () {
+			App.get("session").login("bob","testbob");
+		});
+		
+		waitsFor(function() {
+			return App.get("session.signedIn");
+		}, "login didn't work", 5000);
+
+	};
+	beforeEach(function(){
+	   var server = serverMock();
+       
+       login();
+       runs(function(){
+	        project = App.get("session.sessionUser.ownedProjects.firstObject");
+	   });
+		waitsFor(function() {
+			return project.get("isLoaded");
+		}, "loading project", 5000);
+	   
+	   runs(function() {
+		   editContributorsController = App.EditContributorsController.create({project: project});
+       });
+    });
+
+	it("should be defined", function(){
+        expect(editContributorsController).toBeDefined();
+    });
+	it("should have a list of three possible Permissions", function(){
+        expect(editContributorsController.get("possiblePermissions")).toBeDefined();
+        expect(editContributorsController.get("possiblePermissions.length")).toEqual(3);
+    });
+    
+	describe("when making a writer a reader", function(){
+		var coworker;
+		var view;
+		
+		runs(function() {
+			coworker = project.get("contributors.firstObject");
+			contributorsController = App.ContributorsController.create({content: project});
+			view = App.EditContributorsControlsView.create({record: coworker});
+		});
+		waitsFor(function() {
+				return coworker.get("isLoaded");
+		}, "loading coworker", 5000);
+
+		it("has a list of one writer initially", function() {
+			expect(contributorsController.get("writers.length")).toEqual(1);
+		});
+			
+		runs(function(){
+			view.set("permission",1);
+		});
+		waitsFor(function() {
+			return coworker.get("projectCoworker.stateManager.currentPath")=="rootState.loaded.saved";
+		}, "saving coworker", 5000);
+		it("the writer list is empty", function(){
+			runs(function(){
+				expect(contributorsController.get("writers.length")).toEqual(0);
+			});			
+		});
+		it("the readerslist was filled", function(){
+			runs(function(){
+				expect(contributorsController.get("readers.length")).toEqual(1);
+			});			
+		});		
+	});
+});
