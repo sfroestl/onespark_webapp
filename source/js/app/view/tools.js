@@ -32,9 +32,11 @@ App.ToolView = Ember.View.extend({
 	  return result;
   }.property("App.router.currentState",'currentToolState'), 
   toolCaptionState: function() {
+	console.log("search caption state");
 	var exitState = this.get("currentToolState.parentState");
 	var state = App.get('router.currentState');
 	while (state != exitState) {
+		console.log("  checking state",state.get("path"));
 		if(state.get("toolCaption")) return state;
 		state = state.get("parentState");
 	}
@@ -43,10 +45,11 @@ App.ToolView = Ember.View.extend({
   
   currentToolCaption: function() {
 	var tc = this.get("toolCaptionState.toolCaption");
+	console.log("found caption:",tc);
 	if (!tc) return this.get("currentToolName");
 	if (typeof tc=="function") return tc();
 	else return tc;
-  }.property("toolCaptionState.toolCaption","currentToolName"),
+  }.property("toolCaptionState","toolCaptionState.toolCaption","currentToolName"),
    
   showContextMenu: function() {
 	return this.get("contextMenuStates.length")>1;  
