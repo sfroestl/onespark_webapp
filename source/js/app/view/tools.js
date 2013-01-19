@@ -1,3 +1,5 @@
+//=require ../../libs/jquery/jquery.scrollTo-1.4.3.1.js
+
 App.ToolView = Ember.View.extend({
   templateName: 'tool',
   classNames: ['tool'],
@@ -32,16 +34,24 @@ App.ToolView = Ember.View.extend({
 	  return result;
   }.property("App.router.currentState",'currentToolState'), 
   toolCaptionState: function() {
-	console.log("search caption state");
 	var exitState = this.get("currentToolState.parentState");
 	var state = App.get('router.currentState');
 	while (state != exitState) {
-		console.log("  checking state",state.get("path"));
 		if(state.get("toolCaption")) return state;
 		state = state.get("parentState");
 	}
 	return null;
-  }.property("App.router.currentState"),
+  }.property("App.router.currentState","currentToolState"),
+
+  mainPath: function() {
+	var exitState = this.get("currentToolState.parentState");
+	var state = App.get('router.currentState');
+	while (state != exitState) {
+		if(state.get("toolMain")) return state.get("path")+"."+state.get("toolMain"),
+		state = state.get("parentState");
+	}
+	return null;
+  }.property("App.router.currentState","currentToolState"),
   
   currentToolCaption: function() {
 	var tc = this.get("toolCaptionState.toolCaption");
@@ -53,7 +63,16 @@ App.ToolView = Ember.View.extend({
    
   showContextMenu: function() {
 	return this.get("contextMenuStates.length")>1;  
-  }.property("contextMenuStates.length")
+  }.property("contextMenuStates.length"),
+  
+
+  goToMain: function() {
+	  var path = this.get("mainState");
+	  if (!path || App.get("router.currentState.path")==path) 
+		$.scrollTo(0) //scroll to top
+	  else
+	    App.router.transitionTo(path); //go to main page
+  }
 });
 
 App.ToolsView = Ember.View.extend({
