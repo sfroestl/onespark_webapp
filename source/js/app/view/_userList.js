@@ -12,5 +12,9 @@ App.UserListView = App.RecordListView.extend({
   sortings: [
     Ember.Object.create({name:"forename",sortProperties:["forenameOrUsername"]}),
     Ember.Object.create({name:"surname",sortProperties:["surnameOrUsername"]}),
-  ]
+  ],
+  
+  clickedRecord: function(record){
+    App.router.send("goToContactsProfile", record);
+  }
 });
