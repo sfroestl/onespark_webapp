@@ -19,7 +19,7 @@
 	</fieldset>
 	<fieldset>
 	<label for="estimatedHours">estimated hours</label>
-	{{{view Ember.TextArea valueBinding="estimatedHours" id="estimatedHours" placeholder="0"}}
+	{{{view Ember.TextField valueBinding="estimatedHours" id="estimatedHours" placeholder="0"}}
 	</fieldset>
 
 	<fieldset>

@@ -51,10 +51,10 @@
 	</tr>
 {{/if}}
 
-{{#if workedHours}}
+{{#if workedSessionTime}}
 	<tr>
-		<td>worked Hours:</td>
-		<td>{{workedHours}}</td>
+		<td>workedTime:</td>
+		<td>{{workedSessionTime}}</td>
 	</tr>
 {{/if}}
 
@@ -73,6 +73,11 @@
 {{/if}}
 </table>
 
+{{#if isWorker}}
+{{#unless completed}}
+<button {{action goStartTimeSession}} class="btn-submit">start TimeSession</button>
+{{/unless}}
+{{/if}}
 
 {{view App.TimeSessionListView title="Open Time Sessions" recordsBinding="openTimesessions"}}
 {{view App.TimeSessionListView title="Time Session History" recordsBinding="historyTimesessions"}}
