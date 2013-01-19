@@ -29,6 +29,11 @@ App.Task = DS.Model.extend({
         return moment.duration(totalTime);
     }.property("timesessions.@each.workedTime"),
 
+    aktiveTimeSession: function(){
+        var sessions = this.get("timesessions");
+        return sessions.findProperty("end", null);
+    }.property("timesessions.@each.end"),
+
 
     classForCSS: function(){
         return this._super()+" "+completed ? "complete":"incomplete";
