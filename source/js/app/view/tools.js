@@ -30,7 +30,24 @@ App.ToolView = Ember.View.extend({
 		  result = result.concat(currentResult); //TODO schachteln?
 	  };
 	  return result;
-  }.property("App.router.currentState",'currentToolState'),  
+  }.property("App.router.currentState",'currentToolState'), 
+  toolCaptionState: function() {
+	var exitState = this.get("currentToolState.parentState");
+	var state = App.get('router.currentState');
+	while (state != exitState) {
+		if(state.get("toolCaption")) return state;
+		state = state.get("parentState");
+	}
+	return null;
+  }.property("App.router.currentState"),
+  
+  currentToolCaption: function() {
+	var tc = this.get("toolCaptionState.toolCaption");
+	if (!tc) return this.get("currentToolName");
+	if (typeof tc=="function") return tc();
+	else return tc;
+  }.property("toolCaptionState.toolCaption","currentToolName"),
+   
   showContextMenu: function() {
 	return this.get("contextMenuStates.length")>1;  
   }.property("contextMenuStates.length")
