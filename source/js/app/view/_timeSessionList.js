@@ -1,5 +1,6 @@
 App.TimeSessionListView = App.RecordListView.extend({
   title: "Time Sessions",
+  showFilter: false,
   image: Ember.View.extend({template: Ember.Handlebars.compile('')}),
   desc: Ember.View.extend({template: Ember.Handlebars.compile('{{view "App.DateTimeView" timeBinding="start"}}{{#if this.end}} <b>to</b> {{view "App.DateTimeView" timeBinding="end"}} <i>({{this.duration}})</i>{{else}} <button {{action goStopTimeSession this}} class="btn-submit">stop</button>{{/if}}')}),
   sortings: [
