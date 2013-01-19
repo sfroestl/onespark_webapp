@@ -13,6 +13,22 @@ App.Task = DS.Model.extend({
     creator: DS.belongsTo('App.User'),
     worker: DS.belongsTo('App.User'),
     timesessions: DS.hasMany('App.Time_session'),
+    flashMessageName: function(){
+        return "Task '"+this.get('title')+"' ";
+    }.property("title"),
+
+    workedSessionTime: function(){
+        var sessions = this.get("timesessions");
+        var totalTime = 0;
+        sessions.forEach(function(session){
+            if(session.get("end")!=null){
+                totalTime = totalTime + session.get("workedTime");
+                console.log(totalTime);
+            }
+        });
+        return moment.duration(totalTime);
+    }.property("timesessions.@each.workedTime"),
+
 
     classForCSS: function(){
         return this._super()+" "+completed ? "complete":"incomplete";

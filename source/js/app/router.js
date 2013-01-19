@@ -72,11 +72,11 @@ App.Router = Ember.Router.extend({
 			router.transitionTo('loggedIn.projects.singleproject.projectTasks.singletask.index', task.get("project"), task);
 		},
 
-		goToSingleTimeSession: function(router, event){
-			var timeSession = event.context;
-			console.log(timeSession);
-			//TODO: implement
-		},
+		// goToSingleTimeSession: function(router, event){
+		// 	var timeSession = event.context;
+		// 	console.log(timeSession);
+		// 	//TODO: implement
+		// },
 
 		projects: Ember.Route.extend({
 
@@ -325,8 +325,58 @@ App.Router = Ember.Router.extend({
 								aTask = App.router.get('singleTaskController').get('task');
 								router.get('singleTaskController').reopenTask(aTask);
 							}
-						})
+						}),
+						addTimesession: Ember.Route.extend({
+							route: '/addTimeSession',
+							contextMenu: 'add TimeSession',
+							contextCondition: function() {
+								//only Task-Worker is permitted to add his TimeSessions
+								var out = false
+								var aTask = App.router.get('singleTaskController.task');
+								if(App.get("session.sessionUser")==aTask.get('worker')) out = true;
+								var alreadyCompleted = aTask.get("completed");
+								if(alreadyCompleted) out = false;
+								return out;
+							},
+					        connectOutlets: function(router, task) {
+					        	var aTask = App.router.get('singleTaskController').get('task');
+								router.get('toolController').connectOutlet('tool-body', 'createTimesession',aTask);
+							},
+							cancel: Ember.Route.transitionTo("projectTasks.singletask.index"),
+							exit: function(router){
+								router.get('createTimesessionController').setProperties({
+									startDate: null,
+									startTime: null,
+									endDate: null,
+									endTime: null,
+								})
+							},
+							goCreate: function(router, evt){
+								var aTask = App.router.get('singleTaskController').get('task');
+								console.log(aTask);
+								var aUser = App.get("session.sessionUser");
+								console.log(aUser);
+								router.get('createTimesessionController').create(aTask, aUser);
+								router.transitionTo('projectTasks.singletask.index', evt.context);
+							},
+						}),
 
+						goStartTimeSession: function(router, event){
+							App.router.get('singleTaskController').startTimesession();
+						},
+
+						goStopTimeSession: function(router, event){
+							var sUser = App.get("session.sessionUser");
+							var ts = event.context;
+							if(ts.canStop(sUser)){
+								App.router.get('singleTaskController').stopTimesession(ts);
+							}
+							else{
+								var fm = App.FlashMessage.create({
+									text: "Permission denied"
+								});
+							}
+						}
 					}),
 
 					newTask: Ember.Route.extend({

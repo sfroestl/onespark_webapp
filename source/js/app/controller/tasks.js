@@ -11,11 +11,22 @@ App.TasksController = Ember.Controller.extend({
 App.SingleTaskController = Ember.ObjectController.extend({
 	task: null,
 	timesessions: null,
+
+	workedSessionTime: function () {
+		return this.get("task.workedSessionTime").humanize();
+	}.property("task.workedSessionTime"),
+
+	isWorker: function(){
+		var sU = App.get("session.sessionUser");
+		var worker = this.task.get("worker");
+		return (sU==worker);
+	}.property("worker", "App.session.sessionUser"),
+
 	openTimesessions: function() {
 	    return this.get("timesessions").filterProperty("end", null);
 	  }.arrayProperty("timesessions.@each.end"),
 	historyTimesessions: function() {
-	    return this.get("timesessions").filter(function(x){return x.get("end")!=null;});
+	    return this.get("timesessions").filterProperty("end");
 	  }.arrayProperty("timesessions.@each.end"),
 
 	deleteTask: function(taskToDelete) {
@@ -35,10 +46,18 @@ App.SingleTaskController = Ember.ObjectController.extend({
 
 	completeTask: function(taskToComplete){
 		var task = taskToComplete;
-
+		var endDate = new Date();
+		var openSessions = this.get("openTimesessions");
+		openSessions.forEach(function(session){
+			session.set("end", endDate);
+			App.store.commit();
+		});
 		task.set("completedAt", new Date());
 		task.set("completedBy", App.get("session.sessionUser"));
 		task.set("completed", true);
+		console.log(task.get("workedSessionTime").asHours());
+		task.set("workedHours", task.get("workedSessionTime").asHours());
+
 		showFlashMessageFor(task);
     
 		App.store.commit();
@@ -61,7 +80,26 @@ App.SingleTaskController = Ember.ObjectController.extend({
     	var fm = App.FlashMessage.create({
 			text: "Task reopend"
 		});
-	}
+	},
+
+	startTimesession: function(){
+		var sU = App.get("session.sessionUser");
+		var aTask = this.get("task");
+		var newStart = new Date();
+
+		var timesession = App.store.createRecord(App.Time_session,  {start: newStart, user: sU, task: aTask});
+		showFlashMessageFor(timesession);
+    
+		App.store.commit();
+
+	},
+
+	stopTimesession: function(timesession){
+		var ts = timesession;
+		ts.set("end", new Date());
+		showFlashMessageFor(ts);
+		App.store.commit();
+	},
 })
 
 App.CreateUpdateTaskController = Ember.Controller.extend({
@@ -135,7 +173,8 @@ App.CreateUpdateTaskController = Ember.Controller.extend({
 		App.store.commit();
 
     	var fm = App.FlashMessage.create({
-			text: "Task was updated"
+			text: "Task was updated",
+			// TODO implement edit: console.log("editTest")
 		});
 	}
 });
