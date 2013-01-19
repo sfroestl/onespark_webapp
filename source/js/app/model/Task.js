@@ -23,7 +23,6 @@ App.Task = DS.Model.extend({
         sessions.forEach(function(session){
             if(session.get("end")!=null){
                 totalTime = totalTime + session.get("workedTime");
-                console.log(totalTime);
             }
         });
         return moment.duration(totalTime);
