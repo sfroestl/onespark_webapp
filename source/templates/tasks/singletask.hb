@@ -76,12 +76,12 @@
 {{#if isWorker}}
 {{#unless completed}}
 {{#unless aktiveTimeSession}}
-{{#isLoaded}}
+{{#if timesessions.isLoaded}}
 <button {{action goStartTimeSession}} class="btn-submit">start TimeSession</button>
-{{/isLoaded}}
+{{/if}}
 {{/unless}}
 {{/unless}}
 {{/if}}
 
-{{view App.TimeSessionListView title="Active TimeSession" recordsBinding="openTimesessions"}}
-{{view App.TimeSessionListView title="Time Session History" recordsBinding="historyTimesessions"}}
+{{view App.TimeSessionListView title="Active TimeSession" recordsBinding="openTimesessions" noRecords="no active session."}}
+{{view App.TimeSessionListView title="Time Session History" recordsBinding="historyTimesessions" noRecords="no completed sessions."}}

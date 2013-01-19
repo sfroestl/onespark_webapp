@@ -42,6 +42,10 @@ App.Router = Ember.Router.extend({
 		goToUserProfile: Ember.Route.transitionTo('user.profile'),
 		goToUserContacts: Ember.Route.transitionTo('user.contacts.index'),
 		goToUserMessages: Ember.Route.transitionTo('user.messages'),
+		goToContactsProfile: function (router, evt) {
+			router.transitionTo('loggedIn.user.contacts.contactsprofile', evt.contexts[0]);
+		},
+				
 		search: Ember.Route.extend({
 			route: '/search',
 			connectOutlets: function(router, context){
@@ -221,6 +225,7 @@ App.Router = Ember.Router.extend({
 					singletask: Ember.Route.extend({
 						route: '/:task_id',
 						modelType: 'App.Task',
+						toolCaption: function() { return App.get("router.singleTaskController.task.title");},
 						index: Ember.Route.extend({
 							route: '/',	
 							contextMenu: 'view',
@@ -531,9 +536,6 @@ App.Router = Ember.Router.extend({
 				},
 				goAccept: function(router, evt) {
 					router.get('contactsController').acceptContact(evt.contexts[0]);
-				},
-				goToContactsProfile: function (router, evt) {
-					router.transitionTo('contactsprofile', evt.contexts[0]);
 				},
 			    //profile of contact
 				contactsprofile:  Ember.Route.extend({
