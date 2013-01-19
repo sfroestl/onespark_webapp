@@ -1,26 +1,18 @@
 .tools{
 	width: 100%;
-	color: $os-black;
-	// background-color: $os-grey;
 	ul {
 		list-style-type: none;
 		margin: 0;
 		padding:0;
+		border: none;
 	}
 	li{
 		text-transform: lowercase;
 		height: 31px;
 		line-height:31px;
 		padding: 8px 0 8px 15.125%;
-		border-bottom: 1px solid /*$os-mediumgrey*/ $os-grey;
 		font-family: $os-sans;
 		font-size: $nav-head;
 		cursor: pointer;
-		&:hover{
-			background-color: $os-mediumgrey;
-		}
-		&:active{
-			background-color: $os-red;
-		}
 	}
 }

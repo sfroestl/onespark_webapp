@@ -22,6 +22,6 @@
 }
 
 @mixin insetshadow($y, $spread){
-	-webkit-box-shadow: inset 0px $y $spread 0px rgba(0, 0, 0, 0.2);
-            box-shadow: inset 0px $y $spread 0px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: inset 0px $y $spread 0px rgba(0, 0, 0, 0.25);
+            box-shadow: inset 0px $y $spread 0px rgba(0, 0, 0, 0.25);
 }

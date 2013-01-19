@@ -48,6 +48,6 @@
 </ul>
 {{/if}}
 {{#unless view.filteredRecords}}
-  {{#if view.records}}<p>{{view.noFilteredRecords}}</p>{{/if}}
-  {{#unless view.records}}<p>{{view.noRecords}}</p>{{/unless}}
+  {{#if view.records}}<p class="list-elem">{{view.noFilteredRecords}}</p>{{/if}}
+  {{#unless view.records}}<p class="list-elem">{{view.noRecords}}</p>{{/unless}}
 {{/unless}}
