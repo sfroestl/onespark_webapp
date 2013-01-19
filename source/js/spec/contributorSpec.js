@@ -42,6 +42,84 @@ describe("The ContributorsController for a sample Project", function(){
         expect(contributorsController.get("admins")).toBeDefined();
     });
 });
+
+describe("The permission check in a project", function(){
+    var server;
+    var project;
+    var newContributorController;
+	var login= function() {
+		if (App.get("session.SessionUserId")==1) return;
+		runs(function () {
+			App.get("session").login("bob","testbob");
+		});
+		
+		waitsFor(function() {
+			return App.get("session.signedIn");
+		}, "login didn't work", 5000);
+
+	};
+	beforeEach(function(){
+	   var server = serverMock();
+       
+       login();
+       runs(function(){
+	        project = App.get("session.sessionUser.ownedProjects.firstObject");
+	   });
+		waitsFor(function() {
+			return project.get("isLoaded");
+		}, "loading project", 5000);
+    });
+
+	it("should be defined", function(){
+        expect(project.canChangeContributors).toBeDefined();
+    });
+    
+	it("should return true for the owner", function(){
+        expect(project.canChangeContributors(App.get("session.sessionUser"))).toEqual(true);
+    });
+    describe("for a contributor",function() {
+		var coworker;
+		
+		runs(function() {
+			coworker = project.get("contributors.firstObject");
+		});
+		waitsFor(function() {
+				return coworker.get("isLoaded");
+		}, "loading coworker", 5000);
+
+		it("should return false for a writer", function(){
+			expect(project.canChangeContributors(coworker)).toEqual(false);
+		});
+		it("should return false for a reader", function(){
+			runs(function() {
+			coworker.set("projectCoworker.permission",1);
+			App.store.commit();
+			});
+			waitsFor(function() {
+				return coworker.get("projectCoworker.stateManager.currentPath")=="rootState.loaded.saved";
+			}, "saving coworker", 5000);
+			runs(function() {
+				expect(project.canChangeContributors(coworker)).toEqual(false);
+			});
+		});
+		it("should return true for an admin", function(){
+			runs(function() {
+				coworker.set("projectCoworker.permission",3);
+				App.store.commit();
+				this.after(function() { coworker.set("projectCoworker.permission",2); });
+			});
+			waitsFor(function() {
+				return coworker.get("projectCoworker.stateManager.currentPath")=="rootState.loaded.saved";
+			}, "saving coworker", 5000);
+			runs(function() {
+				expect(project.canChangeContributors(coworker)).toEqual(true);
+			});
+		});
+            		
+	});
+});
+
+
 describe("The NewContributorController for a sample Project", function(){
     var server;
     var project;
@@ -199,4 +277,31 @@ describe("The EditContributorController for a sample Project", function(){
 			});			
 		});		
 	});
+	describe("when removing a contributor", function(){
+		var coworker;
+		var view;
+		var count;
+		runs(function() {
+			coworker = project.get("contributors.firstObject");
+			count = project.get("contributors.length");
+		});
+		waitsFor(function() {
+				return coworker.get("isLoaded");
+		}, "loading coworker", 5000);
+			
+		runs(function(){
+			editContributorsController.removeAsContributor(coworker);
+		});
+		waitsFor(function() {
+			return !coworker.get("projectCoworker.isSaving");
+		}, "deleting coworker", 5000);
+		it("the one contributor count is one less", function(){
+			runs(function(){
+				expect(project.get("contributors.length")).toEqual(count-1);
+			});			
+		});
+		it("the contributor is not in the list anymore", function(){
+				expect(project.get("contributors")).toNotContain(coworker);	
+		});	
+	});	
 });
