@@ -142,7 +142,12 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 				if (month<10) month = "0"+(month);
 				var day = date.getDate();
 				if(day<10) day = "0"+day;
-				this.dueDate = date.getFullYear()+"-"+month+"-"+day;
+				this.set("dueDate", date.getFullYear()+"-"+month+"-"+day);
+				var hours = date.getHours().toString();
+				if(hours.length<2) hours = "0"+hours.toString();
+				var minutes = date.getMinutes().toString();
+				if(minutes.length<2) minutes = "0"+minutes;
+				this.set("dueTime", hours+":"+minutes);
 			}
 	},
 

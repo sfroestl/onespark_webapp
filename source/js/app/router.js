@@ -107,7 +107,8 @@ App.Router = Ember.Router.extend({
 						title: null,
 						description: null,
 						owner: null,
-						dueDate: null
+						dueDate: null,
+						dueTime: null,
 					})
     			},
 				goCreate: function(router, evt) {
@@ -177,7 +178,8 @@ App.Router = Ember.Router.extend({
 								title: null,
 								description: null,
 								owner: null,
-								dueDate: null
+								dueDate: null,
+								dueTime: null,
 							})
 		    			},
 
