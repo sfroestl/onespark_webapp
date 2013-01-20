@@ -9,15 +9,13 @@
 	width: 83.375%;
 	padding: 7px 0 8px 13.625%;
 	height: 31px;
-	background-image: url(../images/icon-search.png);
-	background-repeat: no-repeat;
-	background-position: 4% center;
 	input[type=text]{
+		width: 97%;
 		font-family: $os-sans;
 		color: $os-black;
 		border: none;
 		
-		padding: 8px 0 4px 0;
+		padding: 8px 1.5%;
 		margin-bottom: 4px;
 		height: 15px;
 		background-color: $os-mediumgrey;

@@ -1,6 +1,7 @@
 /* Navbar General*/
 .nav-bar{
-	width:100%;
+	width:97%;
+	margin: 0 1.5%;
 	height: 47px;
 	* {	
 		padding: 8px 0;
@@ -47,6 +48,9 @@
 		padding-right: 3%;
 		padding-left: 1.5%;
 	}
+	.active {
+		background-color: $os-mediumgrey;
+	}
 }
 
 /* Tool Nav */
@@ -54,7 +58,9 @@
 	position:fixed;
 	top:47px;
 	border-top: 1px solid $os-mediumgrey;
-	// background-color: $os-mediumblack;
+	border-left: none;
+	border-right: none;
+	background-color: $os-lightgrey;
 	color: $os-lightgrey;
 
 	.back-button{
@@ -74,6 +80,10 @@
 	}
 	.context-button{
 		border-color: $os-black;
+		img {
+			padding: 8px 0;
+			height: 15px;
+		}
 		&:active{
 			background-color: $os-blue;
 		}
@@ -98,4 +108,5 @@
 	.search-button {
 		border-color: $os-lightgrey;
 	}
+
 }
