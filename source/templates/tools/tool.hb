@@ -2,7 +2,7 @@
 	<a class="back-button button-left" {{action goBack}}>
 		<img src="images/icon-back.png" alt="back" />
 	</a>
-	<a class="tools-button button-center" {{action goToTools href=true}}>{{view.currentToolCaption}}</a>
+	<a class="tools-button button-center" href="#"{{action goToMain target="view"}}>{{view.currentToolCaption}}</a>
 	{{#if view.showContextMenu}}
 	<a class="context-button button-right" {{action goToContext}}>
 		<img src="images/icon-context.png" alt="context" />
@@ -17,4 +17,5 @@
 	  {{/each}}
 	</ul>
 	{{/if}}
+<div id="top">
 {{outlet tool-body}}

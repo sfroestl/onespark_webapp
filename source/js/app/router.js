@@ -139,6 +139,7 @@ App.Router = Ember.Router.extend({
 				projectOverview: Ember.Route.extend({
 					route: '/overview',
 					toolName: 'overview',
+					goToMain: Ember.Route.transitionTo('projectOverview.index'),
 					index: Ember.Route.extend({
 						route: '/',
 						contextMenu: 'view',
@@ -208,7 +209,7 @@ App.Router = Ember.Router.extend({
 
 				projectTasks: Ember.Route.extend({
 					goToNewTask: Ember.Route.transitionTo('projectTasks.newTask'),
-
+					goToMain: Ember.Route.transitionTo('projectTasks.index'),
 					route: '/tasks',
 					toolName: 'tasks',
 
@@ -225,6 +226,7 @@ App.Router = Ember.Router.extend({
 					singletask: Ember.Route.extend({
 						route: '/:task_id',
 						modelType: 'App.Task',
+						goToMain: Ember.Route.transitionTo('singletask.index'),
 						toolCaption: function() { return App.get("router.singleTaskController.task.title");},
 						index: Ember.Route.extend({
 							route: '/',	
@@ -423,7 +425,7 @@ App.Router = Ember.Router.extend({
 				projectContributors: Ember.Route.extend({
 					route: '/contributors',
 					toolName: 'Contributors',
-
+					goToMain: Ember.Route.transitionTo('projectContributors.index'),
 					index: Ember.Route.extend({
 						contextMenu: 'view',
 						route: '/',
