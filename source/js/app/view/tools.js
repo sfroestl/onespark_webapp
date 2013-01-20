@@ -42,16 +42,6 @@ App.ToolView = Ember.View.extend({
 	}
 	return null;
   }.property("App.router.currentState","currentToolState"),
-
-  mainPath: function() {
-	var exitState = this.get("currentToolState.parentState");
-	var state = App.get('router.currentState');
-	while (state != exitState) {
-		if(state.get("toolMain")) return state.get("path")+"."+state.get("toolMain"),
-		state = state.get("parentState");
-	}
-	return null;
-  }.property("App.router.currentState","currentToolState"),
   
   currentToolCaption: function() {
 	var tc = this.get("toolCaptionState.toolCaption");
@@ -67,11 +57,8 @@ App.ToolView = Ember.View.extend({
   
 
   goToMain: function() {
-	  var path = this.get("mainState");
-	  if (!path || App.get("router.currentState.path")==path) 
-		$.scrollTo(0) //scroll to top
-	  else
-	    App.router.transitionTo(path); //go to main page
+	  App.router.send("goToMain"); //go to main page
+	  $.scrollTo(0,100) //scroll to top	    
   }
 });
 
