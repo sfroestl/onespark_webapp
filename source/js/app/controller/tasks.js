@@ -1,5 +1,7 @@
 App.TasksController = Ember.Controller.extend({
-	tasks: [],
+	tasks: null,
+	tasksBinding: "project.tasks",
+	project: null,
 	openTasks: function(){
 		return this.get("tasks").filterProperty("completed", false)
 	}.arrayProperty("tasks.@each.completed"),
@@ -10,33 +12,13 @@ App.TasksController = Ember.Controller.extend({
 	canAddTasks: function(){
 		// only users who are project owner/ admin / writer should create tasks
 		var out = false;
-		var aUser = App.get("session.sessionUser");
+		var aUser = App.get("session.sessionUser.originalModel");
 		console.log(aUser);
-		// var aProject = App.get("");
-
-		var admins = aProject.get('router.topNaviController.content.contributors').filterProperty("permission", 3);
-		console.log(admins);
-		var writers = aProject.get('router.topNaviController.content.contributors').filterProperty("permission", 2);
-		console.log(writers);
-
-		admins.forEach(function(admin){
-			if(admin==aUser) out = true;
-		});
-
-		writers.forEach(function(writer){
-			if(writer==aUser) out = true;
-		});
-
-		//is user project owner?
-		if(aUser== aProject.get("router.topNaviController.content.owner")){
-			out = true;
-			console.log("user is project owner");
-		};
-
-		console.log(out);
-		return out;
-
-	}.property("session.sessionUser", "router.topNaviController.content.contributors.@each.permission", "router.topNaviController.content.owner"),
+		//owner can always add tasks
+		if(aUser== this.get("project.owner")) return true;
+		//must be admin/writer as contributor
+		return !!(this.get('project.contributors').find(function(contributor){return contributor.get("originalModel")==aUser && contributor.get("permission")> 1;}));
+	}.property("App.session.sessionUser", "project.contributors.@each.permission", "project.owner"),
 
 });
 

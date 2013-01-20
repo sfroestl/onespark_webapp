@@ -218,7 +218,7 @@ App.Router = Ember.Router.extend({
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
-							router.get('tasksController').set('tasks', aProject.get("tasks"));
+							router.get('tasksController').set('project', aProject);
 							router.get('toolController').connectOutlet('tool-body', 'tasks');
 						}
 					}),
