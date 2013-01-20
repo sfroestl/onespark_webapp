@@ -225,6 +225,7 @@ App.Router = Ember.Router.extend({
 					singletask: Ember.Route.extend({
 						route: '/:task_id',
 						modelType: 'App.Task',
+						goToMain: Ember.Route.transitionTo('singletask.index'),
 						toolCaption: function() { return App.get("router.singleTaskController.task.title");},
 						index: Ember.Route.extend({
 							route: '/',	
