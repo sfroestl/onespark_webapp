@@ -54,6 +54,7 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
     	var wrongtime =false;
     	var wrongdate = false;
     	var newDate = null;
+    	committed = false;
 
     	if((this.get("title")==null)||(this.get("title")=="")){
     		errorMessageText = "title required";
@@ -85,6 +86,7 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 							});
 							wrongtime = false;
 							wrongdate = false;
+							committed = true;
 							App.router.transitionTo('projects.index');
 						}
 						else{
@@ -102,7 +104,7 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
     				console.log("wrong dateformat");
     			}
     		};
-    		if((!wrongtime)&&(!wrongdate)){
+    		if((!wrongtime)&&(!wrongdate)&&(!committed)){
 				var project = App.store.createRecord(App.Project,  { title: this.get("title"), desc: this.get("description"), owner: this.get("owner"), dueDate: newDate});
 				showFlashMessageFor(project);
 				App.get('session.sessionUser.ownedProjects').addObject(project);
@@ -116,6 +118,7 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 				});
 				wrongtime = false;
 				wrongdate = false;
+				committed = true;
 				App.router.transitionTo('projects.index');
 			}
     	};
@@ -127,6 +130,7 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 		};
 		wrongtime = false;
 		wrongdate = false;
+		committed = false;
 	},
 
 	fill: function(projectToEdit){
@@ -138,7 +142,12 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
 				if (month<10) month = "0"+(month);
 				var day = date.getDate();
 				if(day<10) day = "0"+day;
-				this.dueDate = date.getFullYear()+"-"+month+"-"+day;
+				this.set("dueDate", date.getFullYear()+"-"+month+"-"+day);
+				var hours = date.getHours().toString();
+				if(hours.length<2) hours = "0"+hours.toString();
+				var minutes = date.getMinutes().toString();
+				if(minutes.length<2) minutes = "0"+minutes;
+				this.set("dueTime", hours+":"+minutes);
 			}
 	},
 
