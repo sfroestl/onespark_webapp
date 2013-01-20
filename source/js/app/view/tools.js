@@ -1,3 +1,5 @@
+//=require ../../libs/jquery/jquery.scrollTo-1.4.3.1.js
+
 App.ToolView = Ember.View.extend({
   templateName: 'tool',
   classNames: ['tool'],
@@ -30,10 +32,34 @@ App.ToolView = Ember.View.extend({
 		  result = result.concat(currentResult); //TODO schachteln?
 	  };
 	  return result;
-  }.property("App.router.currentState",'currentToolState'),  
+  }.property("App.router.currentState",'currentToolState'), 
+  toolCaptionState: function() {
+	var exitState = this.get("currentToolState.parentState");
+	var state = App.get('router.currentState');
+	while (state != exitState) {
+		if(state.get("toolCaption")) return state;
+		state = state.get("parentState");
+	}
+	return null;
+  }.property("App.router.currentState","currentToolState"),
+  
+  currentToolCaption: function() {
+	var tc = this.get("toolCaptionState.toolCaption");
+	console.log("found caption:",tc);
+	if (!tc) return this.get("currentToolName");
+	if (typeof tc=="function") return tc();
+	else return tc;
+  }.property("toolCaptionState","toolCaptionState.toolCaption","currentToolName"),
+   
   showContextMenu: function() {
 	return this.get("contextMenuStates.length")>1;  
-  }.property("contextMenuStates.length")
+  }.property("contextMenuStates.length"),
+  
+
+  goToMain: function() {
+	  App.router.send("goToMain"); //go to main page
+	  $.scrollTo(0,100) //scroll to top	    
+  }
 });
 
 App.ToolsView = Ember.View.extend({

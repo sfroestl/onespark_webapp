@@ -1,11 +1,25 @@
 App.TasksController = Ember.Controller.extend({
-	tasks: [],
+	tasks: null,
+	tasksBinding: "project.tasks",
+	project: null,
 	openTasks: function(){
 		return this.get("tasks").filterProperty("completed", false)
 	}.arrayProperty("tasks.@each.completed"),
 	completedTasks: function(){
 		return this.get("tasks").filterProperty("completed", true)
 	}.arrayProperty("tasks.@each.completed"),
+
+	canAddTasks: function(){
+		// only users who are project owner/ admin / writer should create tasks
+		var out = false;
+		var aUser = App.get("session.sessionUser.originalModel");
+		console.log(aUser);
+		//owner can always add tasks
+		if(aUser== this.get("project.owner")) return true;
+		//must be admin/writer as contributor
+		return !!(this.get('project.contributors').find(function(contributor){return contributor.get("originalModel")==aUser && contributor.get("permission")> 1;}));
+	}.property("App.session.sessionUser", "project.contributors.@each.permission", "project.owner"),
+
 });
 
 App.SingleTaskController = Ember.ObjectController.extend({

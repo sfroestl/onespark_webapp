@@ -49,6 +49,18 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
     dueDate: null,
 
     create: function() {
+    	// var errorMessageText ="";
+    	// var new title = null;
+
+    	// if(this.get("title")==""){
+    	// 	console.log("title required");
+    	// }
+    	// else {
+    		
+    	// }
+
+
+
 		var newtitle = this.get("title");
 		var newdesc = this.get("description");
 		var newowner = this.get("owner");

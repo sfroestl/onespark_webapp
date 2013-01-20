@@ -2,7 +2,7 @@
 <form>
 	<fieldset>
 	<label for="startdate">start-date</label>
-	{{view Ember.TextField valueBinding="startDate" id="startdate" placeholder="YYYY-MM-DD"}}
+	{{view Ember.TextField valueBinding="startDate" id="startdate" type="date" placeholder="YYYY-MM-DD"}}
 	</fieldset>
 	<fieldset>
 	<label for="starttime">start-time</label>
@@ -10,7 +10,7 @@
 	</fieldset>
 	<fieldset>
 	<label for="enddate">end-date</label>
-	{{view Ember.TextField valueBinding="endDate" id="enddate" placeholder="YYYY-MM-DD"}}
+	{{view Ember.TextField valueBinding="endDate" id="enddate" type="date" placeholder="YYYY-MM-DD"}}
 	</fieldset>
 	<fieldset>
 	<label for="starttime">end-time</label>

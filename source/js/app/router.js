@@ -42,6 +42,10 @@ App.Router = Ember.Router.extend({
 		goToUserProfile: Ember.Route.transitionTo('user.profile'),
 		goToUserContacts: Ember.Route.transitionTo('user.contacts.index'),
 		goToUserMessages: Ember.Route.transitionTo('user.messages'),
+		goToContactsProfile: function (router, evt) {
+			router.transitionTo('loggedIn.user.contacts.contactsprofile', evt.contexts[0]);
+		},
+				
 		search: Ember.Route.extend({
 			route: '/search',
 			connectOutlets: function(router, context){
@@ -135,6 +139,7 @@ App.Router = Ember.Router.extend({
 				projectOverview: Ember.Route.extend({
 					route: '/overview',
 					toolName: 'overview',
+					goToMain: Ember.Route.transitionTo('projectOverview.index'),
 					index: Ember.Route.extend({
 						route: '/',
 						contextMenu: 'view',
@@ -204,7 +209,7 @@ App.Router = Ember.Router.extend({
 
 				projectTasks: Ember.Route.extend({
 					goToNewTask: Ember.Route.transitionTo('projectTasks.newTask'),
-
+					goToMain: Ember.Route.transitionTo('projectTasks.index'),
 					route: '/tasks',
 					toolName: 'tasks',
 
@@ -213,7 +218,7 @@ App.Router = Ember.Router.extend({
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
-							router.get('tasksController').set('tasks', aProject.get("tasks"));
+							router.get('tasksController').set('project', aProject);
 							router.get('toolController').connectOutlet('tool-body', 'tasks');
 						}
 					}),
@@ -221,6 +226,8 @@ App.Router = Ember.Router.extend({
 					singletask: Ember.Route.extend({
 						route: '/:task_id',
 						modelType: 'App.Task',
+						goToMain: Ember.Route.transitionTo('singletask.index'),
+						toolCaption: function() { return App.get("router.singleTaskController.task.title");},
 						index: Ember.Route.extend({
 							route: '/',	
 							contextMenu: 'view',
@@ -353,11 +360,8 @@ App.Router = Ember.Router.extend({
 							},
 							goCreate: function(router, evt){
 								var aTask = App.router.get('singleTaskController').get('task');
-								console.log(aTask);
 								var aUser = App.get("session.sessionUser");
-								console.log(aUser);
 								router.get('createTimesessionController').create(aTask, aUser);
-								router.transitionTo('projectTasks.singletask.index', evt.context);
 							},
 						}),
 
@@ -421,7 +425,7 @@ App.Router = Ember.Router.extend({
 				projectContributors: Ember.Route.extend({
 					route: '/contributors',
 					toolName: 'Contributors',
-
+					goToMain: Ember.Route.transitionTo('projectContributors.index'),
 					index: Ember.Route.extend({
 						contextMenu: 'view',
 						route: '/',
@@ -534,9 +538,6 @@ App.Router = Ember.Router.extend({
 				},
 				goAccept: function(router, evt) {
 					router.get('contactsController').acceptContact(evt.contexts[0]);
-				},
-				goToContactsProfile: function (router, evt) {
-					router.transitionTo('contactsprofile', evt.contexts[0]);
 				},
 			    //profile of contact
 				contactsprofile:  Ember.Route.extend({

@@ -23,11 +23,15 @@ App.Task = DS.Model.extend({
         sessions.forEach(function(session){
             if(session.get("end")!=null){
                 totalTime = totalTime + session.get("workedTime");
-                console.log(totalTime);
             }
         });
         return moment.duration(totalTime);
     }.property("timesessions.@each.workedTime"),
+
+    aktiveTimeSession: function(){
+        var sessions = this.get("timesessions");
+        return sessions.findProperty("end", null);
+    }.property("timesessions.@each.end"),
 
 
     classForCSS: function(){
