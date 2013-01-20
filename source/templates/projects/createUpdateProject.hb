@@ -18,6 +18,10 @@
 	{{view Ember.TextField valueBinding="dueDate" type="date" id="due-date" placeholder="YYYY-MM-DD"}}
 	</fieldset>
 	<fieldset>
+	<label for="due-time">due time:</label>
+	{{view Ember.TextField valueBinding="dueTime"  id="due-time" placeholder="HH:mm"}}
+	</fieldset>
+	<fieldset>
 	<button {{action goBack}} class="btn-cancel">cancel</button>
 	{{#if updateFlag}}
 	<button {{action goUpdate content}} class="btn-submit">save Changes</button>
