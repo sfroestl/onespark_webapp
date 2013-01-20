@@ -2,22 +2,22 @@
 	padding-top: 47px;
 }
 .search-nav{
-	border-top: 1px solid $os-grey;
+	margin: 0 1.5%;
+	background-color: $os-mediumgrey;
 	position: fixed;
 	top: 47px;
-	background-color: $os-mediumblack;
-	width: 97%;
-	padding: 7px 1.5% 8px 1.5%;
+	width: 83.375%;
+	padding: 7px 0 8px 13.625%;
 	height: 31px;
 	input[type=text]{
-		font-family: $os-sans;
-		font-style:italic;
-		color: $os-lightgrey;
-		border: none;
 		width: 97%;
-		padding: 8px 1.5% 4px 1.5%;
+		font-family: $os-sans;
+		color: $os-black;
+		border: none;
+		
+		padding: 8px 1.5%;
 		margin-bottom: 4px;
 		height: 15px;
-		background-color: $os-mediumblack;
+		background-color: $os-mediumgrey;
 	}
 }

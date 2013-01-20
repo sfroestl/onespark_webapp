@@ -1,55 +1,40 @@
-
-.list-elem{
-	background-color:$os-white;
-	border-bottom: 1px solid $os-lightestgrey;
-	font-family: $os-sans;
-	font-size: $nav-head;
-	cursor: pointer;
-	a {
-		display:block;
-		overflow:hidden;
-		height:31px;
-		line-height:31px;
-		padding: 8px 0 8px 15.125%;
-		color: $os-black;
-		text-decoration:none;
-
-		.project-due-date{
-			height:26px;
-			line-height: 26px;
-			// @include rounded(100px);
-			// background-color: $os-mediumgrey;
-			float: right;
-			padding:0px 8px;
-			margin-right: 1.5%;
-			font-family: $os-sans;
-			color: $os-darkgrey;
-			font-size: .6em;
-		}
+ul{
+	margin: 0;
+	padding: 0;
+	li {
+		padding:0;
+		margin:0;
+		list-style-type:none;
 	}
-
 }
+
+
+
+
+
+.user-list{
+	list-style-type:none;
+}
+
 .new-project-button{
-	width:100%;
+	width:97%;
+	margin: 0 1.5%;
+	padding: 8px 0px;
+	// @include rounded(5px);
 	background-color: $os-blue;
-	// border-bottom: 1px solid $os-lightgrey;
-	color: $os-blue;
+	color: $os-white;
 	line-height:31px;
 	text-decoration:none;
 	display:block;
-	padding: 8px 0px;
 	.add-img{
 		text-align:center;
 		display: block;
 		float:left;
 		height: 31px;
 		width: 9.125%;
-		padding-left: 3%;
+		padding-left: 1.5%;
 		padding-right: 1.5%;
 		img {
-			// padding: 2px;
-			// @include rounded (31px);
-			// background-color: $os-blue;
 			height:15px;
 		}
 	}
@@ -65,46 +50,91 @@
 	}
 }
 
-
-ul{
-	margin:0;
+.list {
+	margin: .5em 1.5%;
 	padding: 0;
-	padding-bottom: 47px;
-	border-bottom: 1px solid $os-grey;
-	li {
-		padding:0;
+
+	/* Blendet Sortierfunktionalität weg */
+	input {
+		display: none;
+	}
+
+	/* Kopfzeile der Liste */
+	.list-head{
+		// @include rounded-differently (5px, 5px, 0, 0);
 		margin:0;
-		list-style-type:none;
-		&:last-child{
-		
-	}
-	}
-}
-.list-head{
-	border-bottom: 1px dotted $os-lightgrey;
-	background-color: $os-lightgrey;
-	color: $os-darkgrey;
-	height: 31px;
-	line-height: 31px;
-	overflow:hidden;
-	margin:0;
-	padding: 8px 0 8px 15.125%;
-	font-weight:normal;
-	font-size: .8em;
-	.sort-btn{
-		max-width:40%;
-		height:31px;
+		border-bottom: 1px solid $os-lightgrey;
+		background-color: $os-white;
+		color: $os-blue;
+		height: 31px;
 		line-height: 31px;
-		color: $os-darkgrey;
-		text-decoration:none;
-		display:block;
-		float:right;
-		margin-right: 1.5%;
-		font-family: $os-sans;
+		overflow:hidden;
+		padding: 8px 0 8px 13.625%;
+		font-weight:normal;
+		font-size: .8em;
+		.sort-btn{		
+			height:31px;
+			line-height: 31px;
+			color: $os-darkgrey;
+			text-decoration:none;
+			display:block;
+			float:right;
+			margin-right: 1.5%;
+			font-family: $os-sans;
+		}
 	}
+
+	/* ein einzelnes Listenelement */
+	.list-elem{
+		font-family: $os-sans;
+		font-size: $nav-head;
+		cursor: pointer;
+		a {
+			display:block;
+			overflow:hidden;
+			height:31px;
+			line-height:31px;
+			padding: 8px 0 8px 13.625%;
+			color: $os-black;
+			text-decoration:none;
+
+			.project-due-date{
+				height:26px;
+				line-height: 26px;
+				// float: right;
+				padding:0px 8px;
+				margin-right: 1.5%;
+				font-family: $os-sans;
+				color: $os-darkgrey;
+				font-size: .6em;
+			}
+		}
+		&:active{
+			a{
+				color: $os-white;
+			}
+			background-color: $os-blue;
+		}
+	}
+	.empty {
+		a{
+			color: $os-darkgrey;
+		}
+	}
+
 }
-
-
-.user-list{
-	list-style-type:none;
+.record-list {
+	background-color: $os-white;
+	// @include rounded-differently (0, 0, 5px, 5px);
+	li {
+		&:last-child{
+			background-color: red;
+		}
+	}
+	li:last-child{
+		a{
+			background-color: red;
+			color: red;
+		}
+	}
 }

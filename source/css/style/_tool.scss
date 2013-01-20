@@ -10,6 +10,19 @@
 			list-style-type:none;
 		}
 	}
+	.context-menu {
+		overflow: hidden;
+		margin: 0 1.5%;
+		padding: 0;
+		background-color: $os-mediumgrey;
+		display: none;
+		li {
+			width: 22%;
+			padding: 8px 1.5%;
+			height: 31px;
+			float: left;
+		}
+	}
 
 	.tool-elem{
 		cursor:pointer;

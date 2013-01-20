@@ -3,6 +3,7 @@
 App.ToolView = Ember.View.extend({
   templateName: 'tool',
   classNames: ['tool'],
+
   currentToolState: function() {
 	  var state = App.get('router.currentState');
 	  while (!state.get("toolName")) {	//find a state (searching up to root) with a toolName-Property
@@ -18,6 +19,7 @@ App.ToolView = Ember.View.extend({
   currentToolName: function() {
 	  return this.get("currentToolState.toolName");
   }.property('currentToolState'),
+
   contextMenuStates: function() {
 	  var exitState = this.get("currentToolState.parentState");
 	  var state = App.get('router.currentState');
@@ -33,6 +35,7 @@ App.ToolView = Ember.View.extend({
 	  };
 	  return result;
   }.property("App.router.currentState",'currentToolState'), 
+
   toolCaptionState: function() {
 	var exitState = this.get("currentToolState.parentState");
 	var state = App.get('router.currentState');
@@ -59,12 +62,31 @@ App.ToolView = Ember.View.extend({
   goToMain: function() {
 	  App.router.send("goToMain"); //go to main page
 	  $.scrollTo(0,100) //scroll to top	    
+  },
+
+  showSearch: function() {
+      return true;
+	  return this.get("controller.content.contributors.length")>1;
+  }.property("controller.content.contributors.length"),
+
+  fadeContext: function(){
+  	context = $('.context-menu');
+	contextVisible = context.css('display');
+  	duration = 100;
+  	$('.context-button').toggleClass('active');
+  	
+  	if(contextVisible === 'none'){
+  		console.log('invisible');
+  		context.slideDown(duration);
+  	}  else if (contextVisible === 'block'){
+  		context.slideUp(duration);
+  	}
   }
 });
 
 App.ToolsView = Ember.View.extend({
   templateName: 'tools',
-  classNames: ['tools'],
+  classNames: ['tools', 'list', 'record-list'],
   availableTools: function() {
 	  var state = App.get('router.currentState');
 	  while (!state.get("goToTool")) {	//find a state (searching up to root) with a toolName-Property

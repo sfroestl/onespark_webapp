@@ -47,36 +47,86 @@ App.CreateUpdateProjectController = Ember.Controller.extend({
     description: null,
     owner: App.get('session.sessionUser'),
     dueDate: null,
+    dueTime: null,
 
     create: function() {
-    	// var errorMessageText ="";
-    	// var new title = null;
+    	var errorMessageText =null;
+    	var wrongtime =false;
+    	var wrongdate = false;
+    	var newDate = null;
 
-    	// if(this.get("title")==""){
-    	// 	console.log("title required");
-    	// }
-    	// else {
-    		
-    	// }
+    	if((this.get("title")==null)||(this.get("title")=="")){
+    		errorMessageText = "title required";
 
-
-
-		var newtitle = this.get("title");
-		var newdesc = this.get("description");
-		var newowner = this.get("owner");
-		var newduedate;
-
-		var date = Date.parse(this.get("dueDate"));
-		if(isNaN(date)){
-			newduedate=null;
-		}
-		else newduedate= new Date(this.get("dueDate"));
-		
-		var project = App.store.createRecord(App.Project,  { title: newtitle, desc: newdesc, owner: newowner, dueDate: newduedate});
-		showFlashMessageFor(project);
-		App.get('session.sessionUser.ownedProjects').addObject(project);
-    
-		App.store.commit();
+    		console.log("title required");
+    	}
+    	else {
+    		if(this.get("dueDate")!=null){
+    			var regexDate = "^((?:(?:[1]{1}\\d{1}\\d{1}\\d{1})|(?:[2]{1}\\d{3}))[-:\\/.](?:[0]?[1-9]|[1][012])[-:\\/.](?:(?:[0-2]?\\d{1})|(?:[3][01]{1})))(?![\\d])$";
+    			var validDate = this.get("dueDate").match(regexDate);
+    			if(validDate){
+    				newDate = new Date(this.get("dueDate"));
+    				console.log(newDate);
+    				if(this.get("dueTime")!=null){
+    					var timefield = this.get('dueTime').match(/^([01]?\d|2[0-3]):([0-5]\d)$/);
+    					if(timefield){
+							newDate.setHours(timefield[1]);
+							newDate.setMinutes(timefield[2]);
+							var project = App.store.createRecord(App.Project,  { title: this.get("title"), desc: this.get("description"), owner: this.get("owner"), dueDate: newDate});
+							showFlashMessageFor(project);
+							App.get('session.sessionUser.ownedProjects').addObject(project);
+							App.store.commit();
+							this.setProperties({
+								title: null,
+								description: null,
+								owner: null,
+								dueDate: null,
+								dueTime: null,
+							});
+							wrongtime = false;
+							wrongdate = false;
+							App.router.transitionTo('projects.index');
+						}
+						else{
+							errorMessageText = "wrong timeformat";
+							console.log("wrong timeformat");
+							wrongtime = true;
+							this.set("dueTime", null);
+						}
+    				}
+    			}
+    			else{
+    				errorMessageText = "wrong dateformat";
+    				this.set("dueDate", null);
+    				wrongdate = true;
+    				console.log("wrong dateformat");
+    			}
+    		};
+    		if((!wrongtime)&&(!wrongdate)){
+				var project = App.store.createRecord(App.Project,  { title: this.get("title"), desc: this.get("description"), owner: this.get("owner"), dueDate: newDate});
+				showFlashMessageFor(project);
+				App.get('session.sessionUser.ownedProjects').addObject(project);
+				App.store.commit();
+				this.setProperties({
+					title: null,
+					description: null,
+					owner: null,
+					dueDate: null,
+					dueTime: null,
+				});
+				wrongtime = false;
+				wrongdate = false;
+				App.router.transitionTo('projects.index');
+			}
+    	};
+		if(errorMessageText!=null){
+			var fm = App.FlashMessage.create({
+				text: errorMessageText
+			});
+			errorMessageText = null;
+		};
+		wrongtime = false;
+		wrongdate = false;
 	},
 
 	fill: function(projectToEdit){

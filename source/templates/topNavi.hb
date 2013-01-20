@@ -8,13 +8,13 @@
 <a class="projects-button button-center" {{action goToProjects href=true}}>all projects</a>
 {{/if}}
 
-{{#if view.searchAction}}
-<a class="search-button button-right"{{action goToSearch href=true}}>
+{{#if view.searchActive}}
+<a class="search-button button-right active"{{action goToSearch href=true}}>
 	<img src="images/icon-search.png" alt="Search" />
 </a>
 {{/if}}
-{{#unless view.searchAction}}
-<a class="search-button button-right active"{{action goToSearch href=true}}>
+{{#unless view.searchActive}}
+<a class="search-button button-right"{{action goToSearch href=true}}>
 	<img src="images/icon-search.png" alt="Search" />
 </a>
 {{/unless}}
