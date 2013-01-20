@@ -1,5 +1,6 @@
 App.RecordListView = Ember.View.extend({
   templateName: 'recordList',
+  classNames: ['list'],
   title: "List",
   controls: null,
   image: null,

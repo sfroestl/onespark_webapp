@@ -3,8 +3,8 @@ App.AccountView = Ember.View.extend({
   classNames:[ 'account' ],
   fullyVisible: false,
   fadeAccount: function( ){
-  	console.log('animation');
-  	console.log(this.get('fullyVisible'));
+  	// console.log('animation');
+  	// console.log(this.get('fullyVisible'));
   	that = this;
   	duration = 250;
   	if(!that.get('fullyVisible')){

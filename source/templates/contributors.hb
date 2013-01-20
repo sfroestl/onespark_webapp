@@ -1,6 +1,3 @@
-{{#if view.showSearch}}
-<p>Search {{view Ember.TextField valueBinding="controller.filterText"}}</p>
-{{/if}}
 
 {{#if controller.admins}}
 {{view App.UserListView

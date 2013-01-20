@@ -8,6 +8,12 @@
 	-moz-border-radius: $radius; 
 	border-radius: $radius; }
 	
+@mixin rounded-differently($a, $b, $c, $d){
+	-webkit-border-radius: $a $b $c $d;
+	border-radius: $a $b $c $d;
+}
+
+	
 @mixin gradient($from, $to){
 	background: $from;
 	background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));

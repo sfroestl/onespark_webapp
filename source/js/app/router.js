@@ -139,9 +139,11 @@ App.Router = Ember.Router.extend({
 					route: '/overview',
 					toolName: 'overview',
 					goToMain: Ember.Route.transitionTo('projectOverview.index'),
+					goBack: Ember.Route.transitionTo('projectOverview.index'),
 					index: Ember.Route.extend({
 						route: '/',
 						contextMenu: 'view',
+						goBack: Ember.Route.transitionTo('singleproject.tools'),
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
@@ -209,11 +211,13 @@ App.Router = Ember.Router.extend({
 				projectTasks: Ember.Route.extend({
 					goToNewTask: Ember.Route.transitionTo('projectTasks.newTask'),
 					goToMain: Ember.Route.transitionTo('projectTasks.index'),
+					goBack: Ember.Route.transitionTo('projectTasks.index'),
 					route: '/tasks',
 					toolName: 'tasks',
 
 					index: Ember.Route.extend({
 						route: '/',
+						goBack: Ember.Route.transitionTo('singleproject.tools'),
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
@@ -225,10 +229,12 @@ App.Router = Ember.Router.extend({
 					singletask: Ember.Route.extend({
 						route: '/:task_id',
 						modelType: 'App.Task',
+						goBack: Ember.Route.transitionTo('singletask.index'),
 						goToMain: Ember.Route.transitionTo('singletask.index'),
 						toolCaption: function() { return App.get("router.singleTaskController.task.title");},
 						index: Ember.Route.extend({
 							route: '/',	
+							goBack: Ember.Route.transitionTo('projectTasks.index'),
 							contextMenu: 'view',
 							connectOutlets: function(router,task) {
 								var aTask = App.router.get('singleTaskController').get('task');
@@ -424,10 +430,12 @@ App.Router = Ember.Router.extend({
 				projectContributors: Ember.Route.extend({
 					route: '/contributors',
 					toolName: 'Contributors',
+					goBack: Ember.Route.transitionTo('projectContributors.index'),
 					goToMain: Ember.Route.transitionTo('projectContributors.index'),
 					index: Ember.Route.extend({
 						contextMenu: 'view',
 						route: '/',
+						goBack: Ember.Route.transitionTo('singleproject.tools'),
 						connectOutlets: function(router,project) {
 							var aProject = router.get('topNaviController.content');
 							router.get('applicationController').connectOutlet('body', 'tool',aProject);
