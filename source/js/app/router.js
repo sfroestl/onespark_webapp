@@ -139,6 +139,7 @@ App.Router = Ember.Router.extend({
 				projectOverview: Ember.Route.extend({
 					route: '/overview',
 					toolName: 'overview',
+					goToMain: Ember.Route.transitionTo('projectOverview.index'),
 					index: Ember.Route.extend({
 						route: '/',
 						contextMenu: 'view',
@@ -208,7 +209,7 @@ App.Router = Ember.Router.extend({
 
 				projectTasks: Ember.Route.extend({
 					goToNewTask: Ember.Route.transitionTo('projectTasks.newTask'),
-
+					goToMain: Ember.Route.transitionTo('projectTasks.index'),
 					route: '/tasks',
 					toolName: 'tasks',
 
