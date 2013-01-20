@@ -20,12 +20,10 @@ App.Time_session = DS.Model.extend({
         	var now = new Date();
         	if(end!=null){
 	        	var duration = end-start;
-	        	// console.log("session-duration (mS): "+ duration.toString());
 	        	return duration;
 	        }
 	        else{
 	       		var duration = now-start;
-	        	// console.log("session-duration (without end) (mS): "+ duration.toString());
 	        	return duration;
 	        } 
 

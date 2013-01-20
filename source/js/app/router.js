@@ -360,11 +360,8 @@ App.Router = Ember.Router.extend({
 							},
 							goCreate: function(router, evt){
 								var aTask = App.router.get('singleTaskController').get('task');
-								console.log(aTask);
 								var aUser = App.get("session.sessionUser");
-								console.log(aUser);
 								router.get('createTimesessionController').create(aTask, aUser);
-								router.transitionTo('projectTasks.singletask.index', evt.context);
 							},
 						}),
 
