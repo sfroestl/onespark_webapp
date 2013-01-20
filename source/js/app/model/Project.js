@@ -38,20 +38,6 @@ App.Project = DS.Model.extend({
 		return (!!title && (title.toLowerCase().indexOf(word)!=-1)) ||
 		(!!desc && desc.toLowerCase().indexOf(word)!=-1);
 	},
-
-	canAddTasks: function(){
-		// only users who are project owner/ admin / writer should create tasks
-		var out=true;
-		var aUser = App.get("session.sessionUser");
-		var projectContributors = this.get("contributors");
-		projectContributors.forEach(function(contributor){
-			if(contributor==aUser){
-				if(contributor.get('permission')==1) out = false;
-			}
-		});
-		console.log(out);
-		return out;
-	}.property("contributors.@each.permission", "App.session.sessionUser"),
 });
 DS.AuthenticatedRESTAdapter.map('App.Project', {
   owner: {key: 'owner_id'},
