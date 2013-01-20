@@ -2,22 +2,24 @@
 	padding-top: 47px;
 }
 .search-nav{
-	border-top: 1px solid $os-grey;
+	margin: 0 1.5%;
+	background-color: $os-mediumgrey;
 	position: fixed;
 	top: 47px;
-	background-color: $os-mediumblack;
-	width: 97%;
-	padding: 7px 1.5% 8px 1.5%;
+	width: 83.375%;
+	padding: 7px 0 8px 13.625%;
 	height: 31px;
+	background-image: url(../images/icon-search.png);
+	background-repeat: no-repeat;
+	background-position: 4% center;
 	input[type=text]{
 		font-family: $os-sans;
-		font-style:italic;
-		color: $os-lightgrey;
+		color: $os-black;
 		border: none;
-		width: 97%;
-		padding: 8px 1.5% 4px 1.5%;
+		
+		padding: 8px 0 4px 0;
 		margin-bottom: 4px;
 		height: 15px;
-		background-color: $os-mediumblack;
+		background-color: $os-mediumgrey;
 	}
 }
