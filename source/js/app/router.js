@@ -428,7 +428,7 @@ App.Router = Ember.Router.extend({
 				projectContributors: Ember.Route.extend({
 					route: '/contributors',
 					toolName: 'Contributors',
-
+					goToMain: Ember.Route.transitionTo('projectContributors.index'),
 					index: Ember.Route.extend({
 						contextMenu: 'view',
 						route: '/',
