@@ -1,5 +1,6 @@
 .flash{
-	z-index: 2;
+	z-index: 3;
+	width: 100%;
 	margin:0;
 	padding:0;
 	position: fixed;
@@ -7,20 +8,34 @@
 	left:0;
 	list-style: none;
 	li{
-		background-color: $os-white;
-		border: 1px solid $os-black;
+		color: $os-white;
+		width: 97%;
+		background-color: $os-blue;
 		margin: 0;
-		margin-right: 15.125%;
 		min-height: 31px;
-		padding: 8px;
+		padding: 8px 1.5%;
+	}
+	.loaded-saved {
+		background-color: $os-blue;
+		button {
+			background-color: $os-white;
+			color: $os-black;
+		}
 	}
 	.error{
-		border: 1px solid $os-red;
+		background-color: $os-red;
 		color: $os-red;
+		button {
+			color: $os-black;
+		}
 	}
 	button{
-		padding: 5px;
+		height: 31px;
+		line-height: 31px;
+		float: right;
+		padding: 0 10px;
 		margin: 0;
-		background-color: $os-black;
+		color: $os-black;
+		background-color: $os-white;
 	}
 }
