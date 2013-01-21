@@ -434,6 +434,9 @@ App.Router = Ember.Router.extend({
 					toolName: 'Contributors',
 					goBack: Ember.Route.transitionTo('projectContributors.index'),
 					goToMain: Ember.Route.transitionTo('projectContributors.index'),
+					goToContactsProfile: function (router, evt) {
+						router.transitionTo('projectContributors.contactsprofile', evt.contexts[0]);
+					},
 					index: Ember.Route.extend({
 						contextMenu: 'view',
 						route: '/',
@@ -444,6 +447,7 @@ App.Router = Ember.Router.extend({
 							router.get('toolController').connectOutlet('tool-body', 'contributors',aProject);
 						},
 					}),
+
 					goToNewContributor: Ember.Route.transitionTo("projectContributors.newContributor"),
 					goToEditContributors: Ember.Route.transitionTo("projectContributors.editContributors"),
 					newContributor: Ember.Route.extend({
@@ -484,7 +488,19 @@ App.Router = Ember.Router.extend({
 						removeAsContributor: function(router, evt) {
 							router.get('editContributorsController').removeAsContributor(evt.contexts[0]); //no transition, so batch-adding is possible
 						},
-					})
+					}),
+					contactsprofile:  Ember.Route.extend({
+						route: '/:user_id',
+						modelType: "App.User",
+						toolCaption: function() { return App.get("router.profileController.user.displayName");},
+						connectOutlets: function(router, user){
+							var aProject = router.get('topNaviController.content');
+							router.get('applicationController').connectOutlet('body', 'tool',aProject);
+							router.get('toolController').connectOutlet('tool-body', 'profile');
+							router.set('profileController.user', user);
+						},
+			     
+					})	
 				}),
 
 				goToTool: function(router, context) {
