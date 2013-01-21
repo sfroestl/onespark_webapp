@@ -1,77 +1,76 @@
-<hr/>
-<table>
+<div class="task-details">
 {{#if title}}
-	<tr>
-		<td>title:</td>
-		<td>{{title}}</td>
-	</tr>
+	<p>
+		<span>title:</span>
+		<span>{{title}}</span>
+	</p>
 {{/if}}
 
 {{#if project}}
-	<tr>
-		<td>parent-project:</td>
-		<td>{{project.title}}</td>
-	</tr>
+	<p>
+		<span>parent-project:</span>
+		<span>{{project.title}}</span>
+	</p>
 {{/if}}
 
 {{#if desc}}
-	<tr>
-		<td>description:</td>
-		<td>{{desc}}</td>
-	</tr>
+	<p>
+		<span>description:</span>
+		<span>{{desc}}</span>
+	</p>
 {{/if}}
 
 {{#if dueDate}}
-	<tr>
-		<td>due:</td>
-		<td>{{view "App.FriendlyTimeView" timeBinding="dueDate"}}</td>
-	</tr>
+	<p>
+		<span>due:</span>
+		<span>{{view "App.FriendlyTimeView" timeBinding="dueDate"}}</span>
+	</p>
 {{/if}}
 
 {{#if completed}}
-	<tr>
-		<td>completed by:</td>
-		<td>{{completedBy.displayName}}</td>
-	</tr>
-	<tr>
-		<td>completed at:</td>
-		<td>{{view "App.FriendlyTimeView" timeBinding="completedAt"}}</td>
-	</tr>
+	<p>
+		<span>completed by:</span>
+		<span>{{completedBy.displayName}}</span>
+	</p>
+	<p>
+		<span>completed at:</span>
+		<span>{{view "App.FriendlyTimeView" timeBinding="completedAt"}}</span>
+	</p>
 {{else}}
-	<tr>
-		<td>completed:</td>
-		<td>false</td>
-	</tr>
+	<p>
+		<span>completed:</span>
+		<span>false</span>
+	</p>
 {{/if}}
 
 {{#if estimatedHours}}
-	<tr>
-		<td>estimated Hours:</td>
-		<td>{{estimatedHours}}</td>
-	</tr>
+	<p>
+		<span>estimated Hours:</span>
+		<span>{{estimatedHours}}</span>
+	</p>
 {{/if}}
 
 {{#if workedSessionTime}}
-	<tr>
-		<td>workedTime:</td>
-		<td>{{workedSessionTime}}</td>
-	</tr>
+	<p>
+		<span>workedTime:</span>
+		<span>{{workedSessionTime}}</span>
+	</p>
 {{/if}}
 
 {{#if creator}}
-	<tr>
-		<td>creator:</td>
-		<td>{{creator.displayName}}</td>
-	</tr>
+	<p>
+		<span>creator:</span>
+		<span>{{creator.displayName}}</span>
+	</p>
 {{/if}}
 
 {{#if worker}}
-	<tr>
-		<td>worker:</td>
-		<td>{{worker.username}}</td>
-	</tr>
+	<p>
+		<span>worker:</span>
+		<span>{{worker.username}}</span>
+	</p>
 {{/if}}
-</table>
+
 
 {{#if isWorker}}
 {{#unless completed}}
@@ -82,6 +81,6 @@
 {{/unless}}
 {{/unless}}
 {{/if}}
-
+</div>
 {{view App.TimeSessionListView title="Active TimeSession" recordsBinding="openTimesessions" noRecords="no active session."}}
 {{view App.TimeSessionListView title="Time Session History" recordsBinding="historyTimesessions" noRecords="no completed sessions."}}

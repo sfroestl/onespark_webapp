@@ -1,0 +1,49 @@
+
+.createUpdate {
+	@include rounded(2px);
+	margin: .5em 1.5%;
+	padding: 1.5%;
+	background-color: $os-white;
+	h1 {
+		font-size: $nav-head;
+		font-weight: normal;
+	}
+	label, input {
+		display: block;
+	}
+	fieldset {
+		margin-bottom: 1em;
+	}
+	input[type="text"], input[type="date"], textarea {
+		background-color: $os-lightgrey;
+		// border: 1px solid $os-mediumgrey;
+		border: none;
+		width: 97%;
+		padding: 8px 1.5%;
+		height: 31px;
+	}
+	.duedate, .hours {
+		width: 48.5%;
+		float: left;
+	}
+	.duedate {
+		margin-right: 3%;
+	}
+	button {
+		text-transform: lowercase;
+		font-weight: normal;
+		font-family: $os-sans;
+		padding: 8px 2em 8px 1em;
+		font-size: 1em;
+		img{
+			margin-right: 1em;
+		}
+		@include rounded(2px);
+	}
+	.btn-cancel {
+		background-color: $os-red;
+	}
+	.btn-submit {
+		background-color: $os-blue;
+	}
+}

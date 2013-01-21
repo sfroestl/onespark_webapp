@@ -1,5 +1,7 @@
 .tools{
-	// width: 100%;
+	@include rounded(2px);
+	padding: 0;
+	margin: 0 1.5%;
 	ul {
 		list-style-type: none;
 		margin: 0;
@@ -10,7 +12,7 @@
 		text-transform: lowercase;
 		height: 31px;
 		line-height:31px;
-		padding: 8px 0 8px 15.125%;
+		padding: 8px 0 8px 13.625%;
 		font-family: $os-sans;
 		font-size: $nav-head;
 		cursor: pointer;

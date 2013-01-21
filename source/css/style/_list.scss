@@ -20,7 +20,7 @@ ul{
 	width:97%;
 	margin: 0 1.5%;
 	padding: 8px 0px;
-	// @include rounded(5px);
+	@include rounded(2px);
 	background-color: $os-blue;
 	color: $os-white;
 	line-height:31px;
@@ -48,6 +48,9 @@ ul{
 		padding-right: 1.5%;
 		width: 69.75%;
 	}
+	&:active{
+		background-color: $os-mediumblack;
+	}
 }
 
 .list {
@@ -61,8 +64,9 @@ ul{
 
 	/* Kopfzeile der Liste */
 	.list-head{
-		// @include rounded-differently (5px, 5px, 0, 0);
+		@include rounded-differently (2px, 2px, 0, 0);
 		margin:0;
+		// border: 1px solid $os-mediumgrey;
 		border-bottom: 1px solid $os-lightgrey;
 		background-color: $os-white;
 		color: $os-blue;
@@ -126,7 +130,9 @@ ul{
 .record-list {
 	padding: 8px 0;
 	background-color: $os-white;
-	// @include rounded-differently (0, 0, 5px, 5px);
+	@include rounded-differently (0, 0, 2px, 2px);
+	// border: 1px solid $os-mediumgrey;
+	// border-top: none;
 	li {
 		&:last-child{
 			background-color: red;

@@ -2,22 +2,18 @@
 	padding-top: 47px;
 }
 .search-nav{
+	opacity: .9;
 	margin: 0 1.5%;
-	background-color: $os-mediumgrey;
 	position: fixed;
 	top: 47px;
-	width: 83.375%;
-	padding: 7px 0 8px 13.625%;
-	height: 31px;
 	input[type=text]{
-		width: 97%;
+		@include rounded(2px);
+		width: 86.375%;
+		padding: 7px 0 8px 13.625%;
+		height: 31px;
 		font-family: $os-sans;
 		color: $os-black;
 		border: none;
-		
-		padding: 8px 1.5%;
-		margin-bottom: 4px;
-		height: 15px;
 		background-color: $os-mediumgrey;
 	}
 }

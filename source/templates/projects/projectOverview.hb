@@ -1,23 +1,22 @@
-<div>
-<table>
-	<tr>
-		<td>title:</td>
-		<td>{{title}}</td>
-	</tr>
-	<tr>
-		<td>description:</td>
-		<td>{{desc}}</td>
-	</tr>
-	<tr>
-		<td>owner:</td>
-		<td>{{owner.displayName}}</td>
-	</tr>
-	<tr>
-		<td>due:</td>
-		<td>{{view "App.FriendlyTimeView" timeBinding="dueDate"}}</td>
-	</tr>
-</table>
-{{view App.UserListView title="Contributors" usersBinding="controller.content.contributors"}}
+<div class="project-details">
+
+	<p>
+		<span>title:</span>
+		<span>{{title}}</span>
+	</p>
+	<p>
+		<span>description:</span>
+		<span>{{desc}}</span>
+	</p>
+	<p>
+		<span>owner:</span>
+		<span>{{owner.displayName}}</span>
+	</p>
+	<p>
+		<span>due:</span>
+		<span>{{view "App.FriendlyTimeView" timeBinding="dueDate"}}</span>
+	</p>
 
 </div>
 
+{{view App.UserListView title="Contributors" usersBinding="controller.content.contributors"}}

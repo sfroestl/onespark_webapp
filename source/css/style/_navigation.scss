@@ -15,14 +15,17 @@
 		}
 	}
 	.button-left{
-		// border-right: 1px solid $os-lightgrey;
+		// border-right: 1px solid $os-mediumgrey;
 		text-align:center;
 		display: block;
 		float:left;
 		height: 31px;
 		width: 9.125%;
-		padding-left: 3%;
+		padding-left: 1.5%;
 		padding-right: 1.5%;
+		&:active{
+			background-color: $os-mediumgrey;
+		}
 	}
 	.button-center{
 		font-family: $os-sans;
@@ -35,21 +38,29 @@
 		line-height: 31px;
 		padding-left: 1.5%;
 		padding-right: 1.5%;
-		//width: 69.75%;
+		&:active{
+			background-color: $os-mediumgrey;
+		}
 
 	}
 	.button-right{
-		// border-left: 1px solid $os-lightgrey;
+		// border-left: 1px solid $os-mediumgrey;
 		text-align:center;
 		display: block;
 		float: right;
 		height: 31px;
 		width: 9.125%;
-		padding-right: 3%;
+		padding-right: 1.5%;
 		padding-left: 1.5%;
+		&:active{
+			background-color: $os-mediumgrey;
+		}
 	}
 	.active {
-		background-color: $os-mediumgrey;
+		background-image: url(../images/active.png);
+		background-repeat: no-repeat;
+		background-position: 50% 100%;
+		background-color: $os-lightgrey;
 	}
 }
 
@@ -68,24 +79,14 @@
 			padding: 8px 0;
 			height: 15px;
 		}
-		&:active{
-			background-color: $os-blue;
-		}
 	}
 	.tools-button {
 		color: $os-black;
-		&:active{
-			background-color: $os-blue;
-		}
 	}
 	.context-button{
-		border-color: $os-black;
 		img {
 			padding: 8px 0;
 			height: 15px;
-		}
-		&:active{
-			background-color: $os-blue;
 		}
 	}
 }
@@ -96,7 +97,6 @@
 	top:0px;
 	background-color: $os-lightgrey;
 	.home-button{
-		border-color: $os-lightgrey;
 		img {
 			margin-top: -2px;
 		}
@@ -106,7 +106,6 @@
 		color: $os-red;
 	}
 	.search-button {
-		border-color: $os-lightgrey;
 	}
 
 }
