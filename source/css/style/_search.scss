@@ -7,6 +7,7 @@
 	position: fixed;
 	top: 47px;
 	input[type=text]{
+		// @include insetshadow(1px, 2px);
 		@include rounded(2px);
 		width: 86.375%;
 		padding: 7px 0 8px 13.625%;
