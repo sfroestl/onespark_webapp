@@ -8,7 +8,6 @@
   noUsers="This project doesn't have any admins."
   noFilteredUsers="Your search didn't match any contributor."}}
 {{/if}}
-{{#if controller.writers}}
 {{view App.UserListView
   title="Writers"
   recordsBinding="controller.writers"
@@ -16,7 +15,6 @@
   showFilter=false
   noUsers="This project doesn't have any worker."
   noFilteredUsers="Your search didn't match any contributor."}}
-{{/if}}
 {{#if controller.readers}}
 {{view App.UserListView
   title="Viewers"
