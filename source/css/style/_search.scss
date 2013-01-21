@@ -7,14 +7,14 @@
 	position: fixed;
 	top: 47px;
 	input[type=text]{
-		// @include insetshadow(1px, 2px);
+		@include shadow(1px, 2px);
 		@include rounded(2px);
 		width: 86.375%;
 		padding: 7px 0 8px 13.625%;
 		height: 31px;
 		font-family: $os-sans;
-		color: $os-black;
+		color: $os-white;
 		border: none;
-		background-color: $os-mediumgrey;
+		background-color: $os-mediumblack;
 	}
 }
