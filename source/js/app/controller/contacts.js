@@ -40,13 +40,15 @@ App.ContactsController =  Ember.Controller.extend({
     //do API call to get contact via username
     newContact.addObserver('isLoaded', function() {
       if (newContact.get('isLoaded')) {
-        console.log("User is loaded", newContact.get("firstObject"));
-        var contact = App.store.createRecord(App.Contact,  { contact: newContact.get("firstObject"), status:"pending" });
-        showFlashMessageFor(contact);
-        App.store.commit();
-        self.get("allContacts").addObject(App.ContactByStatus.create({contactModel:contact}));
-        this.get("username", "");
-        console.log("User is loaded", contact.get("status"));
+        Ember.run(function() {
+			console.log("User is loaded", newContact.get("firstObject"));
+			var contact = App.store.createRecord(App.Contact,  { contact: newContact.get("firstObject"), status:"pending" });
+			showFlashMessageFor(contact);
+			App.store.commit();
+			self.get("allContacts").addObject(App.ContactByStatus.create({contactModel:contact}));
+			self.set("username", "");
+			console.log("User is loaded", contact.get("status"));
+		});
       } else {
           console.log("User is NOT loaded");
           showFlashMessageFor(newContact);
