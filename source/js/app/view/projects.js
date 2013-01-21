@@ -10,5 +10,5 @@ App.ProjectOverviewView = Ember.View.extend({
 App.CreateUpdateProjectView = Ember.View.extend({
   tagName: "form",
   templateName: 'createUpdateProject',
-  classNames: ['new-project']
+  classNames: ['new-project', 'createUpdate']
 });
