@@ -26,18 +26,18 @@ App.ModelFlashMessage = App.FlashMessage.extend({
 	}.property("content.flashMessageName"),
     buttonAction: function() {
 	  if (!this.get("content.isValid")) App.router.send(this.get("editAction"),this.get("content"));
-	  if (this.get("content.isError")) {
+	  /*if (this.get("content.isError")) {
 		App.store.commit();
 		return; //don't hide the box  
-	  };
+	  };*/
 	  this.hide();
 	},		
     buttonText: function() {
 	  if (!this.get("content.isValid")) return "edit";
-	  if (this.get("content.isError")) return "retry";
+	  //if (this.get("content.isError")) return "retry";
 	  if (this.get("content.isSaving")) return null;
 	  return "ok";
-	}.property("content.isValid","content.isError","content.isSaving"),
+	}.property("content.isValid","content.isSaving"),
     actionName: function() {
 		return this.get("content.isDeleted") ? "deleting" : this.get("content.isNew") ? "adding" : "saving";
 	}.property("content.isDeleted","content.isNew"), 
