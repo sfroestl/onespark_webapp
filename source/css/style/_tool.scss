@@ -11,14 +11,30 @@
 		}
 	}
 	.context-menu {
+		top: 93px;
+		position: fixed;
+		width: 97%;
+		@include rounded(2px);
+		@include shadow(1px, 2px);
 		overflow: hidden;
 		margin: 0 1.5%;
+		margin-top: 1px;
 		padding: 0;
-		background-color: $os-mediumgrey;
+		opacity: .9 ;
+		background-color: $os-mediumblack;
 		display: none;
 		li {
-			width: 22%;
-			padding: 8px 1.5%;
+			text-align: center;
+			a{	
+				display: block;
+				height: 31px;
+				line-height: 31px;
+				text-decoration: none;
+				color: $os-lightgrey;
+				border-right: 1px solid $os-black;
+			}
+			width: 25%;
+			padding: 8px 0;
 			height: 31px;
 			float: left;
 		}

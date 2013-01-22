@@ -67,6 +67,7 @@
 /* Tool Nav */
 .tool-nav{
 	position:fixed;
+	height: 46px;
 	top:47px;
 	border-top: 1px solid $os-mediumgrey;
 	border-left: none;
@@ -75,15 +76,18 @@
 	color: $os-lightgrey;
 
 	.back-button{
+		height: 30px;
 		img{
 			padding: 8px 0;
 			height: 15px;
 		}
 	}
 	.tools-button {
+		height: 30px;
 		color: $os-black;
 	}
 	.context-button{
+		height: 30px;
 		img {
 			padding: 8px 0;
 			height: 15px;

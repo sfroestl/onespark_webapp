@@ -72,7 +72,7 @@ App.ToolView = Ember.View.extend({
   fadeContext: function(){
   	context = $('.context-menu');
 	contextVisible = context.css('display');
-  	duration = 100;
+  	duration = 75;
   	$('.context-button').toggleClass('active');
   	
   	if(contextVisible === 'none'){
