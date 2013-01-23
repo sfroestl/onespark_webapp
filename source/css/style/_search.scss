@@ -2,8 +2,9 @@
 	padding-top: 47px;
 }
 .search-nav{
-	opacity: .9;
+	opacity: .95;
 	margin: 0 1.5%;
+	z-index: 1;
 	position: fixed;
 	top: 47px;
 	input[type=text]{

@@ -12,6 +12,7 @@
 	}
 	.context-menu {
 		top: 93px;
+		z-index: 1;
 		position: fixed;
 		width: 97%;
 		@include rounded(2px);
@@ -20,7 +21,7 @@
 		margin: 0 1.5%;
 		margin-top: 1px;
 		padding: 0;
-		opacity: .9 ;
+		opacity: .95 ;
 		background-color: $os-mediumblack;
 		display: none;
 		li {

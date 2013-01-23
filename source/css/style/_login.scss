@@ -1,36 +1,57 @@
 .brand {
-	padding: 1em 0 1em 15.125%;
+	text-align: center;
+	padding: 1em;
 	margin:0;
 	margin-top: -47px;
-	background-color: $os-white;
+	background-color: $os-red;
 	h1 {
-		font-family: $os-serif;
+		font-family: $os-sans;
 		font-size: $nav-head;
 		font-weight: normal;
-		color: $os-red;
-		margin: 0;
+		color: $os-white;
+		font-style: italic;
+		font-size: 1.2em;
+		margin-top: 2em;
 	}
 	border-bottom: 1px solid $os-lightgrey;
 }
 .login-form, .register-form{
+	padding-top: 2em;
+	padding-bottom: 3em;
+	width: 100%;
 	background-color: $os-white;
 	fieldset{
-		margin: 1em 3% 1em 15.125%;
-	}
-	button, label, input, input[type="text"], input[type="date"], textarea{
-		display:block;
-		width: 96.46539%;
+		width: 88%;
+		margin: 1em 6%;
+		input[type="text"], input[type="password"], input[type="date"], textarea {
+			@include rounded(2px);
+			display: block;
+			margin: 0;
+			padding: .75em 3%;
+			width: 94%;
+		}
 	}
 	input[type="text"], input[type="date"], input, textarea{
 		padding: 8px;
-		background-color: $os-lightgrey;
-		border:none;
+		background-color: $os-white;
+		border: 1px solid $os-mediumgrey;
 		// @include insetshadow( 1px, 2px);
 	}
 	label {
 		font-size: .9em;
 	}
+	.headline {
+		font-size: 1.4em;
+		padding:0;
+		margin: 1em 6%;
+	}
 	.btn-login, .btn-register{
+		margin-left: auto;
+		margin-right: auto;
+		@include rounded(2px);
+		height: 47px;
+		line-height: 47px;
+		padding: 0 3em;
 		background-color: $os-blue;
 		&:hover{
 			background-color: $os-black;
@@ -39,10 +60,13 @@
 			background-color: $os-black;
 		}
 	}
+	h1 {
+		margin: 0;
+	}
 	a{
+		margin-top:2em;
+		margin-left: 6%;
 		display: block;
 		color: $os-darkgrey;
-		margin-left:15.125%;
 	}
-	padding: 2em 0;
 }
