@@ -19,7 +19,6 @@
 	  	<tr><td><img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile"></td></tr>
 	  	<tr><td>Username:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.username"}}</td></tr>
 	  	<tr><td>Email:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.email"}}</td></tr>
-
 	  	<tr><td>Forename:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.forename"}}</td></tr>
 	  	<tr><td>Surname:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.surname"}}</td></tr>
 	  	<tr><td>City:</td><td>{{view Ember.TextField disabledBinding="isDisabled" valueBinding="user.profile.city"}}</td>
@@ -42,13 +41,19 @@
 {{/if}}
 {{/if}}
 {{#unless isOwn}}
-	<table>
-	  	<tr><td><img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile"></td></tr>
-	  	<tr><td>Username:</td><td>{{user.username}}</td></tr>
-	  	<tr><td>Email:</td><td>{{user.email}}</td></tr>
-	  	<tr><td>Forename:</td><td>{{user.profile.forename}}</td></tr>
-	  	<tr><td>Surname:</td><td>{{user.profile.surname}}</td></tr>
-	  	<tr><td>City:</td><td>{{user.profile.city}}</td></tr>
-	  	<tr><td>About:</td><td>{{user.profile.about}}</td></tr>
-	</table>
+	<div class="contributor">
+		<header>
+			<img {{bindAttr src="user.displayAvatarUrl"}} alt="Profile" />
+	  	</header>
+	  	<section class="details">
+	  		<ul>
+	  			<li>Username: {{user.username}}</li>
+	  			<li>Email: {{user.email}}</li>
+	  			<li>Forename: {{user.profile.forename}}</li>
+	  			<li>Surname: {{user.profile.surname}}</li>
+	  			<li>City: {{user.profile.city}}</li>
+	  			<li>About: {{user.profile.about}}</li>
+			</ul>
+		</section>
+	</div>
 {{/unless}}

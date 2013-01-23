@@ -18,3 +18,8 @@
 
 #DS-Store
 *.DS_Store
+
+#ignore fonts
+*.eot
+*.woff
+

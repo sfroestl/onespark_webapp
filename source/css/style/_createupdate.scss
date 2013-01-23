@@ -3,6 +3,7 @@
 	@include rounded(2px);
 	margin: 0 1.5%;
 	padding: 1.5%;
+	width: 94%;
 	background-color: $os-white;
 	h1 {
 		font-size: $nav-head;
@@ -11,13 +12,17 @@
 	label, input {
 		display: block;
 	}
+	label {
+		color: $os-black;
+	}
 	fieldset {
 		margin-bottom: 1em;
 	}
 	input[type="text"], input[type="date"], textarea {
-		background-color: $os-lightgrey;
-		// border: 1px solid $os-mediumgrey;
-		border: none;
+		background-color: $os-white;
+		border: 1px solid $os-mediumgrey;
+		// border: none;
+		// @include insetshadow(1px, 2px);
 		width: 97%;
 		padding: 8px 1.5%;
 		height: 31px;
@@ -30,20 +35,31 @@
 		margin-right: 3%;
 	}
 	button {
+		float: left;
+		width: 48.5%;
+		height: 47px;
+		padding: 8px 0;
+		border: 1px solid $os-black;
+		@include rounded(2px);
+		display: block;
 		text-transform: lowercase;
 		font-weight: normal;
 		font-family: $os-sans;
-		padding: 8px 2em 8px 1em;
 		font-size: 1em;
+		text-align: center;
 		img{
+			margin: 0;
+			padding: 0;
 			margin-right: 1em;
 		}
-		@include rounded(2px);
 	}
 	.btn-cancel {
+		border-color: $os-red;
 		background-color: $os-red;
+		margin-right: 3%;
 	}
 	.btn-submit {
+		border-color: $os-blue;
 		background-color: $os-blue;
 	}
 }
