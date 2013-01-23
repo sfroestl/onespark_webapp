@@ -91,7 +91,7 @@ describe("The router", function(){
                 describe("its contacts route", function(){
                     var contactsRoute = null;
                     beforeEach(function(){
-                        contactsRoute = userRoute.get("contacts.index").create();
+                        contactsRoute = userRoute.get("contacts").create();
                     });
 
                     it ("should have route of /contacts", function(){
@@ -108,7 +108,25 @@ describe("The router", function(){
 
                     it("should have a accept function", function(){
                         expect(contactsRoute.goAccept).toBeDefined();
-                    });    
+                    });
+                    describe("its contacts profile route", function(){
+                        var profileCRoute = null;
+                        beforeEach(function(){
+                            profileCRoute = contactsRoute.get("contactsprofile").create();
+                        });
+
+                        it ("should have route of /:user_id", function(){
+                            expect(profileCRoute.get("route")).toEqual("/:user_id");
+                        });  
+
+                        it("should have an serialize: function", function(){
+                            expect(profileCRoute.serialize).toBeDefined();
+                        });
+
+                        it("should have a deserialize: function", function(){
+                            expect(profileCRoute.deserialize).toBeDefined();
+                        });
+                    });
                 });
         	});
         });
