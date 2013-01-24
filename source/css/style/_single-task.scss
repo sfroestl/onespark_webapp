@@ -1,7 +1,58 @@
-.singletask {
-	.task-details {
-		background-color: $os-white;
-		margin: .5em 1.5%;
-		padding: 1.5%;
+.task-details {
+	background-color: $os-white;
+	margin: .5em 1.5%;
+	padding: 1.5%;
+	span {
+		display: block;
+		float: left;
+	}
+	li {
+		clear:left;
+	}
+	.label {
+		min-width: 35%;
+		color: $os-darkgrey;
+	}
+	button {
+		font-family: $os-sans;
+		font-size: 1em;
+		font-weight: normal;
+		text-transform: lowercase;
+		width: 100%;
+		@include rounded (2px);
+		background-color: $os-blue;
+	}
+	ul {
+		margin: 1em 0;
+	}
+}
+
+.time-session {
+	.record-list {
+		.list-elem {
+			a {
+				font-size: 1em;
+				.duration {
+					float: left;
+				}
+				.details {
+					float: left;
+					display: block;
+					height:26px;
+					line-height: 1.2em;
+					padding: 2px 8px;
+					margin-right: 1.5%;
+					font-family: $os-sans;
+					color: $os-darkgrey;
+					font-size: .6em;
+				}
+				button {
+					float: right;
+					background-color: $os-blue;
+					@include rounded (2px);
+					margin-right: 1.5%;
+				}
+			}
+		}
 	}
 }

@@ -1,82 +1,82 @@
 <div class="task-details">
 {{#if title}}
-	<p>
-		<span>title:</span>
+<ul class="clearfix">
+	<li>
+		<span class="label">title:</span>
 		<span>{{title}}</span>
-	</p>
+	</li>
 {{/if}}
 
 {{#if project}}
-	<p>
-		<span>parent-project:</span>
+	<li>
+		<span class="label">parent-project:</span>
 		<span>{{project.title}}</span>
-	</p>
+	</li>
 {{/if}}
 
 {{#if desc}}
-	<p>
-		<span>description:</span>
+	<li>
+		<span class="label">description:</span>
 		<span>{{desc}}</span>
-	</p>
+	</li>
 {{/if}}
 
 {{#if dueDate}}
-	<p>
-		<span>due:</span>
+	<li>
+		<span class="label">due:</span>
 		<span>{{view "App.FriendlyTimeView" timeBinding="dueDate"}}</span>
-	</p>
+	</li>
 {{/if}}
 
 {{#if completed}}
-	<p>
-		<span>completed by:</span>
+	<li>
+		<span class="label">completed by:</span>
 		<span>{{completedBy.displayName}}</span>
-	</p>
-	<p>
-		<span>completed at:</span>
+	</li>
+	<li>
+		<span class="label">completed at:</span>
 		<span>{{view "App.FriendlyTimeView" timeBinding="completedAt"}}</span>
-	</p>
+	</li>
 {{else}}
-	<p>
-		<span>completed:</span>
+	<li>
+		<span class="label">completed:</span>
 		<span>false</span>
-	</p>
+	</li>
 {{/if}}
 
 {{#if estimatedHours}}
-	<p>
-		<span>estimated Hours:</span>
+	<li>
+		<span class="label">estimated Hours:</span>
 		<span>{{estimatedHours}}</span>
-	</p>
+	</li>
 {{/if}}
 
 {{#if workedSessionTime}}
-	<p>
-		<span>workedTime:</span>
+	<li>
+		<span class="label">workedTime:</span>
 		<span>{{workedSessionTime}}</span>
-	</p>
+	</li>
 {{/if}}
 
 {{#if creator}}
-	<p>
-		<span>creator:</span>
+	<li>
+		<span class="label">creator:</span>
 		<span>{{creator.displayName}}</span>
-	</p>
+	</li>
 {{/if}}
 
 {{#if worker}}
-	<p>
-		<span>worker:</span>
+	<li>
+		<span class="label">worker:</span>
 		<span>{{worker.username}}</span>
-	</p>
+	</li>
 {{/if}}
-
-
+</ul>
 {{#if isWorker}}
 {{#unless completed}}
 {{#unless aktiveTimeSession}}
 {{#if timesessions.isLoaded}}
-<button {{action goStartTimeSession}} class="btn-submit">start TimeSession</button>
+<button {{action goStartTimeSession}} class="btn-submit">start working & count time</button>
 {{/if}}
 {{/unless}}
 {{/unless}}
