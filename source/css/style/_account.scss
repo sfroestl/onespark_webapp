@@ -1,11 +1,11 @@
 .account{
 	z-index: 2;
-	width:100%;
+	width:110%;
 	position:fixed;
 	padding-left:0%;
 	bottom: 0;
-	right: -86.375%;
-	background-color:$os-grey;
+	right: -96.375%;
+	background-color:$os-black;
 	.account-button{
 		cursor: pointer;
 		background-color: $os-red;
@@ -27,7 +27,7 @@
 	.account-tool{
 		text-align:center;
 		padding: 0 1.5%;
-		width: 22%;
+		width: 19.5%;
 		height:47px;
 		line-height: 47px;
 		background-color: $os-black;
@@ -37,3 +37,106 @@
 		float:left;
 	}
 }
+
+.profile {
+	padding: 1em 3%;
+	margin-top: -47px;
+	width: 94%;
+	min-height: 640px;
+	background-color: $os-white;
+	.profile-head {
+		margin: 1em 0;
+		min-height: 2em;
+		img {
+			margin: 0 0 1em 0;
+			display: block;
+		}
+		h1 {
+			color: $os-blue;
+			font-weight: normal;
+			margin: 0;
+		}	
+	}
+	.profile-desc {
+		clear: both;
+		.label {
+			text-align: right;
+			min-width: 35%;
+			display: block;
+			float: left;
+			color: $os-blue;
+		}
+		span {
+			float: left;
+		}
+		li {
+			clear: left;
+		}
+		input {
+			font-family: $os-sans;
+			border: 1px solid $os-mediumgrey;
+		}
+	}
+	.profile-act {
+		margin-top: 1.5em;
+		clear: both;
+		a {
+			@include rounded (2px);
+			display: block;
+			float: left;
+			padding: 8px 2em;
+			background-color: $os-grey;
+			color: $os-black;
+			text-decoration: none;
+		}
+		.delete-btn {
+			/*background-color: $os-red;*/
+		}
+		.edit-btn {
+			margin-right: 8px;
+		}
+	}
+	.delete {
+		@include rounded (2px);
+		margin-top: 1.5em;
+		color: $os-white;
+		padding: 3%;
+		background-color: $os-red;
+		h2 {
+			font-weight: normal;
+			margin-top: 0;
+		}
+		button {
+			font-size: 1em;
+			font-weight: normal;
+			text-transform: lowercase; 
+			font-family: $os-sans;
+			@include rounded (2px);
+		}
+		input {
+			padding: 8px 2em;
+			@include rounded (2px);
+			border: none;
+		}
+		.btn-cancel {
+			background-color: $os-blue;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

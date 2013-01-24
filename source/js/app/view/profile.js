@@ -1,6 +1,7 @@
 App.ProfileView = Ember.View.extend({
   templateName: 'profile',
-    tagName: "form",
+    tagName: "div",
+    classNames: ['profile'],
 });
 
 App.DeleteAccountView= Ember.View.extend({
