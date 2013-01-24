@@ -20,8 +20,8 @@ var user_1 ={"user":
     "profile_id":1,
     "owned_project_ids":[1],
     "collaborated_project_ids":[],
-    "outContacts":[1,3],
-    "inContacts":[2,4]
+    "out_contact_ids":[1,3],
+    "in_contacts_ids":[2,4]
   }
 };
 var user_2 ={"user": 
@@ -30,7 +30,7 @@ var user_2 ={"user":
     "username":"alice",
     "email":"alice@testme.com",
     "profile_id":2,
-    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[1],"outContacts":[2],
+    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[1],"out_contact_ids":[2],
   }
 };
 var user_3 ={"user": 
@@ -39,7 +39,7 @@ var user_3 ={"user":
     "username":"carol",
     "email":"carol@testme.com",
     "profile_id":null,
-    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"outContacts":[4],
+    "owned_project_ids":[],"collaborated_project_ids":[],"project_coworker_ids":[],"out_contact_ids":[4],
   }
 };
 
