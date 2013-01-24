@@ -72,15 +72,19 @@
 	</li>
 {{/if}}
 </ul>
+</div>
 {{#if isWorker}}
 {{#unless completed}}
 {{#unless aktiveTimeSession}}
 {{#if timesessions.isLoaded}}
-<button {{action goStartTimeSession}} class="btn-submit">start working & count time</button>
+<a {{action goStartTimeSession}} class="btn-timer list-elem clearfix">
+	<span class="add-img"><img src="images/icon-timer.png"></span>
+	<span class="add-txt">start working & count time</span>
+</a>
 {{/if}}
 {{/unless}}
 {{/unless}}
 {{/if}}
-</div>
+
 {{view App.TimeSessionListView title="Active TimeSession" recordsBinding="openTimesessions" noRecords="no active session."}}
 {{view App.TimeSessionListView title="Time Session History" recordsBinding="historyTimesessions" noRecords="no completed sessions."}}
