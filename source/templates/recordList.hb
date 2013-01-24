@@ -1,7 +1,7 @@
 <h2 class="list-head">
 {{view.title}}
 {{#if view.sortingRelevant}}
- <span class="sort-btn">sort by
+ <span class="sort-btn"><span class="sort-desc">sort by</span>
  {{#if view.sortingChangable}}
  {{view Ember.Select
        contentBinding="view.sortings"

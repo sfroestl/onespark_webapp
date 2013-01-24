@@ -82,6 +82,11 @@ ul{
 			float:right;
 			margin-right: 1.5%;
 			font-family: $os-sans;
+			@media screen and  (max-width: 320px){
+				.sort-desc {
+					display: none;
+				}
+			}
 		}
 	}
 
@@ -94,7 +99,7 @@ ul{
 		a {
 			display:block;
 			overflow:hidden;
-			height:31px;
+			min-height:31px;
 			line-height:31px;
 			padding: 8px 0 8px 13.625%;
 			color: $os-black;
@@ -127,6 +132,28 @@ ul{
 			width: 86.375%;
 			left: 13.625%;
 		}
+		.add-contrib, .edit-contrib {
+			line-height: 31px;
+			font-size: .8em;
+			padding: 8px 1.5%;
+			position: absolute;
+			top: 0%;
+			right: 0%;
+			select{
+				height: 20px;
+			}
+			button{
+				background-color: $os-blue;
+				height: 31px;
+				padding: 0 1em;
+				margin: 0;
+			}
+		}
+		.edit-contrib{
+			button {
+				background-color: $os-red;
+			}
+		}
 		&:active{
 			a{
 				color: $os-darkblack;
@@ -135,7 +162,7 @@ ul{
 		}
 	}
 	.empty {
-		height: 31px;
+		min-height: 31px;
 		line-height: 31px;
 		padding: 8px 0 8px 13.625%;
 		color: $os-darkgrey;

@@ -6,6 +6,8 @@ App.EditContributorsView = Ember.View.extend({
 App.EditContributorsControlsView = Ember.View.extend({
   templateName: 'editContributorsControls',
   permissionBinding: "record.projectCoworker.permission",
+  classNames: ['edit-contrib'],
+  tagName: 'span',
   record: null,
   updatePermission: function() {
 	var newValue = this.get("permission");
