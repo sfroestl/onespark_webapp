@@ -39,11 +39,15 @@
 }
 
 .profile {
+	.own {
+	margin: 1.5%;
 	padding: 1em 3%;
-	margin-top: -47px;
-	width: 94%;
-	min-height: 640px;
+	margin-top: -39px;
+	width: 91%;
 	background-color: $os-white;
+	a {
+		cursor: pointer;
+	}
 	.profile-head {
 		margin: 1em 0;
 		min-height: 2em;
@@ -85,8 +89,8 @@
 			display: block;
 			float: left;
 			padding: 8px 2em;
-			background-color: $os-grey;
-			color: $os-black;
+			border: 1px solid $os-grey;
+			color: $os-darkgrey;
 			text-decoration: none;
 		}
 		.delete-btn {
@@ -123,7 +127,77 @@
 		}
 	}
 }
+}
 
+.contacts {
+	margin-top: -47px;
+	h1 {
+		margin: 8px 1.5%;
+		padding: 1em 1.5% .25em 1.5%;
+		background-color: $os-white;
+		color: $os-blue;
+		font-weight: normal;
+	}	
+	.contact-add {
+		@include shadow (1px, 2px);
+		padding: 1.5%;
+		margin: 8px 1.5% 8px 1.5%;
+		width: 94%;
+		background-color: $os-blue;
+		@include rounded (2px);
+		h1 {
+			margin: 0;
+			color: $os-white;
+			font-weight: normal;
+			font-size: $nav-head;
+		}
+		input {
+			width: 57%;
+			padding: 8px 1.5%;
+			height: 26px;
+			border: none;
+			background-color: #90cefd;
+			@include rounded (2px);
+			margin-right: 0;
+		} button {
+			font-weight: normal;
+			font-family: $os-sans;
+			text-transform: lowercase;
+			font-size: 1em;
+			background-color: $os-blue;
+			@include rounded (0);
+			width: 37%;
+			margin:0;
+			margin-right: 1.5%;
+			padding: 8px 0;
+			height: 41px;
+		}
+	}
+	.contact-ctrl {
+		width: 50%;
+		display: block;
+		position: absolute;
+		width: auto;
+		top: 0;
+		right: 1.5%;
+		button {
+
+			height:31px;
+			line-height: 31px;
+			font-size: .8em;
+			font-weight: normal;
+			text-transform: lowercase; 
+			font-family: $os-sans;
+			@include rounded (2px);
+			margin: 6px 0;
+			padding: 2px .5em;
+			border: 1px solid $os-grey;
+			background-color: $os-white;
+			color: $os-darkgrey;
+			text-decoration: none;
+		}
+	}
+}
 
 
 

@@ -1,6 +1,6 @@
 {{#if view.record.isAccepted}}
 <button {{action goRemove view.record}}>remove</button>
-<button {{action goToContactsProfile view.record}}>show profile</button>
+<button {{action goToContactsProfile view.record}}>profile</button>
 {{/if}}
 {{#if view.record.isPending}}
 <button {{action goRemove view.record}}>cancel</button>
