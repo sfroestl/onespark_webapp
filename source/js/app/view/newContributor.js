@@ -4,6 +4,8 @@ App.NewContributorView = Ember.View.extend({
 });
 App.NewContributorControlsView = Ember.View.extend({
   templateName: 'newContributorControls',
+  classNames: ['add-contrib'],
+  tagName: 'span',
   permission: 2,
   record: null,
 });

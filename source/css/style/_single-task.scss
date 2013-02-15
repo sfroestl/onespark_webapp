@@ -1,7 +1,99 @@
-.singletask {
-	.task-details {
-		background-color: $os-white;
-		margin: .5em 1.5%;
-		padding: 1.5%;
+.task-details {
+	background-color: $os-white;
+	margin: .5em 1.5%;
+	padding: 1.5%;
+	span {
+		display: block;
+		float: left;
+	}
+	li {
+		clear:left;
+	}
+	.label {
+		min-width: 35%;
+		color: $os-darkgrey;
+	}
+	ul {
+		margin: 1em 0;
+	}
+}
+.btn-timer {
+	cursor:pointer;
+	width:97%;
+	margin: 0 1.5%;
+	padding: 8px 0px;
+	@include rounded(2px);
+	@include shadow(1px, 2px);
+	background-color: $os-blue;
+	color: $os-white;
+	line-height:31px;
+	text-decoration:none;
+	display:block;
+	.add-img{
+		text-align:center;
+		display: block;
+		float:left;
+		height: 31px;
+		width: 9.125%;
+		padding-left: 1.5%;
+		padding-right: 1.5%;
+		img {
+			height:15px;
+		}
+	}
+	.add-txt{
+		color: $os-lightestgrey;
+		text-decoration:none;
+		display: block;
+		float: left;
+		height:31px;
+		padding-left: 1.5%;
+		padding-right: 1.5%;
+		width: 69.75%;
+	}
+	&:active{
+		background-color: $os-mediumblack;
+	}
+	}
+.btn-timer {
+	width:97%;
+	margin: 0 1.5%;
+	padding: 8px 0px;
+	@include rounded(2px);
+	@include shadow(1px, 2px);
+	background-color: $os-blue;
+	color: $os-white;
+	line-height:31px;
+	text-decoration:none;
+	display:block;
+
+}
+.time-session {
+	.record-list {
+		.list-elem {
+			a {
+				font-size: 1em;
+				.duration {
+					float: left;
+				}
+				.details {
+					float: left;
+					display: block;
+					height:26px;
+					line-height: 1.2em;
+					padding: 2px 8px;
+					margin-right: 1.5%;
+					font-family: $os-sans;
+					color: $os-darkgrey;
+					font-size: .6em;
+				}
+				button {
+					float: right;
+					background-color: $os-blue;
+					@include rounded (2px);
+					margin-right: 1.5%;
+				}
+			}
+		}
 	}
 }
