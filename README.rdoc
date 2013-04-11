@@ -1,7 +1,9 @@
-# One Spark Ember Webapp
+== One Spark Ember Webapp
 
 This is the html5 JavaScript Webapp for the One Spark collaboration plattform. It is basend on the [ember-js](http://emberjs.com/) framework as well as the [ember-data](https://github.com/emberjs/data) persistence framework  This webapp was developed during the practical course of "Service and Cloud Computing" at Chair for Computer Networks at Dresden University of Technology.
 See for API Server: https://github.com/sfroestl/onespark_backend
+
+== Getting Started
 
 1. Clone repository
        $ git clone https://github.com/sfroestl/onespark_backend.git
