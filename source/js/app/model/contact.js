@@ -8,7 +8,7 @@ App.Contact = DS.Model.extend({
   status : DS.attr('string')
 });
 
-DS.AuthenticatedRESTAdapter.map('App.User', {
+DS.AuthenticatedRESTAdapter.map('App.Contact', {
   contact: { key: 'contact_id' },
   user: { key: 'user_id' }
 });
